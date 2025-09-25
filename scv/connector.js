@@ -1,2 +1,9278 @@
-(()=>{var t={3059:t=>{function e(t){t=t||{},this.ms=t.min||100,this.max=t.max||1e4,this.factor=t.factor||2,this.jitter=t.jitter>0&&t.jitter<=1?t.jitter:0,this.attempts=0}t.exports=e,e.prototype.duration=function(){var t=this.ms*Math.pow(this.factor,this.attempts++);if(this.jitter){var e=Math.random(),n=Math.floor(e*this.jitter*t);t=1&Math.floor(10*e)?t+n:t-n}return 0|Math.min(t,this.max)},e.prototype.reset=function(){this.attempts=0},e.prototype.setMin=function(t){this.ms=t},e.prototype.setMax=function(t){this.max=t},e.prototype.setJitter=function(t){this.jitter=t}},3371:(t,e)=>{!function(t){"use strict";e.encode=function(e){var n,a=new Uint8Array(e),s=a.length,r="";for(n=0;n<s;n+=3)r+=t[a[n]>>2],r+=t[(3&a[n])<<4|a[n+1]>>4],r+=t[(15&a[n+1])<<2|a[n+2]>>6],r+=t[63&a[n+2]];return s%3==2?r=r.substring(0,r.length-1)+"=":s%3==1&&(r=r.substring(0,r.length-2)+"=="),r},e.decode=function(e){var n,a,s,r,i,o=.75*e.length,l=e.length,c=0;"="===e[e.length-1]&&(o--,"="===e[e.length-2]&&o--);var E=new ArrayBuffer(o),T=new Uint8Array(E);for(n=0;n<l;n+=4)a=t.indexOf(e[n]),s=t.indexOf(e[n+1]),r=t.indexOf(e[n+2]),i=t.indexOf(e[n+3]),T[c++]=a<<2|s>>4,T[c++]=(15&s)<<4|r>>2,T[c++]=(3&r)<<6|63&i;return E}}("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/")},5971:t=>{function e(t){if(t)return function(t){for(var n in e.prototype)t[n]=e.prototype[n];return t}(t)}t.exports=e,e.prototype.on=e.prototype.addEventListener=function(t,e){return this._callbacks=this._callbacks||{},(this._callbacks["$"+t]=this._callbacks["$"+t]||[]).push(e),this},e.prototype.once=function(t,e){function n(){this.off(t,n),e.apply(this,arguments)}return n.fn=e,this.on(t,n),this},e.prototype.off=e.prototype.removeListener=e.prototype.removeAllListeners=e.prototype.removeEventListener=function(t,e){if(this._callbacks=this._callbacks||{},0==arguments.length)return this._callbacks={},this;var n,a=this._callbacks["$"+t];if(!a)return this;if(1==arguments.length)return delete this._callbacks["$"+t],this;for(var s=0;s<a.length;s++)if((n=a[s])===e||n.fn===e){a.splice(s,1);break}return 0===a.length&&delete this._callbacks["$"+t],this},e.prototype.emit=function(t){this._callbacks=this._callbacks||{};for(var e=new Array(arguments.length-1),n=this._callbacks["$"+t],a=1;a<arguments.length;a++)e[a-1]=arguments[a];if(n){a=0;for(var s=(n=n.slice(0)).length;a<s;++a)n[a].apply(this,e)}return this},e.prototype.listeners=function(t){return this._callbacks=this._callbacks||{},this._callbacks["$"+t]||[]},e.prototype.hasListeners=function(t){return!!this.listeners(t).length}},7833:(t,e,n)=>{e.formatArgs=function(e){if(e[0]=(this.useColors?"%c":"")+this.namespace+(this.useColors?" %c":" ")+e[0]+(this.useColors?"%c ":" ")+"+"+t.exports.humanize(this.diff),!this.useColors)return;const n="color: "+this.color;e.splice(1,0,n,"color: inherit");let a=0,s=0;e[0].replace(/%[a-zA-Z%]/g,(t=>{"%%"!==t&&(a++,"%c"===t&&(s=a))})),e.splice(s,0,n)},e.save=function(t){try{t?e.storage.setItem("debug",t):e.storage.removeItem("debug")}catch(t){}},e.load=function(){let t;try{t=e.storage.getItem("debug")}catch(t){}return!t&&"undefined"!=typeof process&&"env"in process&&(t=process.env.DEBUG),t},e.useColors=function(){if("undefined"!=typeof window&&window.process&&("renderer"===window.process.type||window.process.__nwjs))return!0;if("undefined"!=typeof navigator&&navigator.userAgent&&navigator.userAgent.toLowerCase().match(/(edge|trident)\/(\d+)/))return!1;let t;return"undefined"!=typeof document&&document.documentElement&&document.documentElement.style&&document.documentElement.style.WebkitAppearance||"undefined"!=typeof window&&window.console&&(window.console.firebug||window.console.exception&&window.console.table)||"undefined"!=typeof navigator&&navigator.userAgent&&(t=navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/))&&parseInt(t[1],10)>=31||"undefined"!=typeof navigator&&navigator.userAgent&&navigator.userAgent.toLowerCase().match(/applewebkit\/(\d+)/)},e.storage=function(){try{return localStorage}catch(t){}}(),e.destroy=(()=>{let t=!1;return()=>{t||(t=!0,console.warn("Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`."))}})(),e.colors=["#0000CC","#0000FF","#0033CC","#0033FF","#0066CC","#0066FF","#0099CC","#0099FF","#00CC00","#00CC33","#00CC66","#00CC99","#00CCCC","#00CCFF","#3300CC","#3300FF","#3333CC","#3333FF","#3366CC","#3366FF","#3399CC","#3399FF","#33CC00","#33CC33","#33CC66","#33CC99","#33CCCC","#33CCFF","#6600CC","#6600FF","#6633CC","#6633FF","#66CC00","#66CC33","#9900CC","#9900FF","#9933CC","#9933FF","#99CC00","#99CC33","#CC0000","#CC0033","#CC0066","#CC0099","#CC00CC","#CC00FF","#CC3300","#CC3333","#CC3366","#CC3399","#CC33CC","#CC33FF","#CC6600","#CC6633","#CC9900","#CC9933","#CCCC00","#CCCC33","#FF0000","#FF0033","#FF0066","#FF0099","#FF00CC","#FF00FF","#FF3300","#FF3333","#FF3366","#FF3399","#FF33CC","#FF33FF","#FF6600","#FF6633","#FF9900","#FF9933","#FFCC00","#FFCC33"],e.log=console.debug||console.log||(()=>{}),t.exports=n(736)(e);const{formatters:a}=t.exports;a.j=function(t){try{return JSON.stringify(t)}catch(t){return"[UnexpectedJSONParseError]: "+t.message}}},736:(t,e,n)=>{t.exports=function(t){function e(t){let n,s,r,i=null;function o(...t){if(!o.enabled)return;const a=o,s=Number(new Date),r=s-(n||s);a.diff=r,a.prev=n,a.curr=s,n=s,t[0]=e.coerce(t[0]),"string"!=typeof t[0]&&t.unshift("%O");let i=0;t[0]=t[0].replace(/%([a-zA-Z%])/g,((n,s)=>{if("%%"===n)return"%";i++;const r=e.formatters[s];if("function"==typeof r){const e=t[i];n=r.call(a,e),t.splice(i,1),i--}return n})),e.formatArgs.call(a,t),(a.log||e.log).apply(a,t)}return o.namespace=t,o.useColors=e.useColors(),o.color=e.selectColor(t),o.extend=a,o.destroy=e.destroy,Object.defineProperty(o,"enabled",{enumerable:!0,configurable:!1,get:()=>null!==i?i:(s!==e.namespaces&&(s=e.namespaces,r=e.enabled(t)),r),set:t=>{i=t}}),"function"==typeof e.init&&e.init(o),o}function a(t,n){const a=e(this.namespace+(void 0===n?":":n)+t);return a.log=this.log,a}function s(t){return t.toString().substring(2,t.toString().length-2).replace(/\.\*\?$/,"*")}return e.debug=e,e.default=e,e.coerce=function(t){return t instanceof Error?t.stack||t.message:t},e.disable=function(){const t=[...e.names.map(s),...e.skips.map(s).map((t=>"-"+t))].join(",");return e.enable(""),t},e.enable=function(t){let n;e.save(t),e.namespaces=t,e.names=[],e.skips=[];const a=("string"==typeof t?t:"").split(/[\s,]+/),s=a.length;for(n=0;n<s;n++)a[n]&&("-"===(t=a[n].replace(/\*/g,".*?"))[0]?e.skips.push(new RegExp("^"+t.slice(1)+"$")):e.names.push(new RegExp("^"+t+"$")))},e.enabled=function(t){if("*"===t[t.length-1])return!0;let n,a;for(n=0,a=e.skips.length;n<a;n++)if(e.skips[n].test(t))return!1;for(n=0,a=e.names.length;n<a;n++)if(e.names[n].test(t))return!0;return!1},e.humanize=n(6585),e.destroy=function(){console.warn("Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.")},Object.keys(t).forEach((n=>{e[n]=t[n]})),e.names=[],e.skips=[],e.formatters={},e.selectColor=function(t){let n=0;for(let e=0;e<t.length;e++)n=(n<<5)-n+t.charCodeAt(e),n|=0;return e.colors[Math.abs(n)%e.colors.length]},e.enable(e.load()),e}},104:t=>{t.exports="undefined"!=typeof self?self:"undefined"!=typeof window?window:Function("return this")()},3357:(t,e,n)=>{const a=n(7292);t.exports=(t,e)=>new a(t,e),t.exports.Socket=a,t.exports.protocol=a.protocol,t.exports.Transport=n(2672),t.exports.transports=n(8520),t.exports.parser=n(6809)},7292:(t,e,n)=>{const a=n(8520),s=n(5971),r=n(7833)("engine.io-client:socket"),i=n(6809),o=n(4258),l=n(9140),{installTimerFunctions:c}=n(9773);class E extends s{constructor(t,e={}){super(),t&&"object"==typeof t&&(e=t,t=null),t?(t=o(t),e.hostname=t.host,e.secure="https"===t.protocol||"wss"===t.protocol,e.port=t.port,t.query&&(e.query=t.query)):e.host&&(e.hostname=o(e.host).host),c(this,e),this.secure=null!=e.secure?e.secure:"undefined"!=typeof location&&"https:"===location.protocol,e.hostname&&!e.port&&(e.port=this.secure?"443":"80"),this.hostname=e.hostname||("undefined"!=typeof location?location.hostname:"localhost"),this.port=e.port||("undefined"!=typeof location&&location.port?location.port:this.secure?443:80),this.transports=e.transports||["polling","websocket"],this.readyState="",this.writeBuffer=[],this.prevBufferLen=0,this.opts=Object.assign({path:"/engine.io",agent:!1,withCredentials:!1,upgrade:!0,jsonp:!0,timestampParam:"t",rememberUpgrade:!1,rejectUnauthorized:!0,perMessageDeflate:{threshold:1024},transportOptions:{},closeOnBeforeunload:!0},e),this.opts.path=this.opts.path.replace(/\/$/,"")+"/","string"==typeof this.opts.query&&(this.opts.query=l.decode(this.opts.query)),this.id=null,this.upgrades=null,this.pingInterval=null,this.pingTimeout=null,this.pingTimeoutTimer=null,"function"==typeof addEventListener&&(this.opts.closeOnBeforeunload&&addEventListener("beforeunload",(()=>{this.transport&&(this.transport.removeAllListeners(),this.transport.close())}),!1),"localhost"!==this.hostname&&(this.offlineEventListener=()=>{this.onClose("transport close")},addEventListener("offline",this.offlineEventListener,!1))),this.open()}createTransport(t){r('creating transport "%s"',t);const e=function(t){const e={};for(let n in t)t.hasOwnProperty(n)&&(e[n]=t[n]);return e}(this.opts.query);e.EIO=i.protocol,e.transport=t,this.id&&(e.sid=this.id);const n=Object.assign({},this.opts.transportOptions[t],this.opts,{query:e,socket:this,hostname:this.hostname,secure:this.secure,port:this.port});return r("options: %j",n),new a[t](n)}open(){let t;if(this.opts.rememberUpgrade&&E.priorWebsocketSuccess&&-1!==this.transports.indexOf("websocket"))t="websocket";else{if(0===this.transports.length)return void this.setTimeoutFn((()=>{this.emit("error","No transports available")}),0);t=this.transports[0]}this.readyState="opening";try{t=this.createTransport(t)}catch(t){return r("error while creating transport: %s",t),this.transports.shift(),void this.open()}t.open(),this.setTransport(t)}setTransport(t){r("setting transport %s",t.name),this.transport&&(r("clearing existing transport %s",this.transport.name),this.transport.removeAllListeners()),this.transport=t,t.on("drain",this.onDrain.bind(this)).on("packet",this.onPacket.bind(this)).on("error",this.onError.bind(this)).on("close",(()=>{this.onClose("transport close")}))}probe(t){r('probing transport "%s"',t);let e=this.createTransport(t,{probe:1}),n=!1;E.priorWebsocketSuccess=!1;const a=()=>{n||(r('probe transport "%s" opened',t),e.send([{type:"ping",data:"probe"}]),e.once("packet",(a=>{if(!n)if("pong"===a.type&&"probe"===a.data){if(r('probe transport "%s" pong',t),this.upgrading=!0,this.emit("upgrading",e),!e)return;E.priorWebsocketSuccess="websocket"===e.name,r('pausing current transport "%s"',this.transport.name),this.transport.pause((()=>{n||"closed"!==this.readyState&&(r("changing transport and sending upgrade packet"),T(),this.setTransport(e),e.send([{type:"upgrade"}]),this.emit("upgrade",e),e=null,this.upgrading=!1,this.flush())}))}else{r('probe transport "%s" failed',t);const n=new Error("probe error");n.transport=e.name,this.emit("upgradeError",n)}})))};function s(){n||(n=!0,T(),e.close(),e=null)}const i=n=>{const a=new Error("probe error: "+n);a.transport=e.name,s(),r('probe transport "%s" failed because of error: %s',t,n),this.emit("upgradeError",a)};function o(){i("transport closed")}function l(){i("socket closed")}function c(t){e&&t.name!==e.name&&(r('"%s" works - aborting "%s"',t.name,e.name),s())}const T=()=>{e.removeListener("open",a),e.removeListener("error",i),e.removeListener("close",o),this.removeListener("close",l),this.removeListener("upgrading",c)};e.once("open",a),e.once("error",i),e.once("close",o),this.once("close",l),this.once("upgrading",c),e.open()}onOpen(){if(r("socket open"),this.readyState="open",E.priorWebsocketSuccess="websocket"===this.transport.name,this.emit("open"),this.flush(),"open"===this.readyState&&this.opts.upgrade&&this.transport.pause){r("starting upgrade probes");let t=0;const e=this.upgrades.length;for(;t<e;t++)this.probe(this.upgrades[t])}}onPacket(t){if("opening"===this.readyState||"open"===this.readyState||"closing"===this.readyState)switch(r('socket receive: type "%s", data "%s"',t.type,t.data),this.emit("packet",t),this.emit("heartbeat"),t.type){case"open":this.onHandshake(JSON.parse(t.data));break;case"ping":this.resetPingTimeout(),this.sendPacket("pong"),this.emit("ping"),this.emit("pong");break;case"error":const e=new Error("server error");e.code=t.data,this.onError(e);break;case"message":this.emit("data",t.data),this.emit("message",t.data)}else r('packet received with socket readyState "%s"',this.readyState)}onHandshake(t){this.emit("handshake",t),this.id=t.sid,this.transport.query.sid=t.sid,this.upgrades=this.filterUpgrades(t.upgrades),this.pingInterval=t.pingInterval,this.pingTimeout=t.pingTimeout,this.onOpen(),"closed"!==this.readyState&&this.resetPingTimeout()}resetPingTimeout(){this.clearTimeoutFn(this.pingTimeoutTimer),this.pingTimeoutTimer=this.setTimeoutFn((()=>{this.onClose("ping timeout")}),this.pingInterval+this.pingTimeout),this.opts.autoUnref&&this.pingTimeoutTimer.unref()}onDrain(){this.writeBuffer.splice(0,this.prevBufferLen),this.prevBufferLen=0,0===this.writeBuffer.length?this.emit("drain"):this.flush()}flush(){"closed"!==this.readyState&&this.transport.writable&&!this.upgrading&&this.writeBuffer.length&&(r("flushing %d packets in socket",this.writeBuffer.length),this.transport.send(this.writeBuffer),this.prevBufferLen=this.writeBuffer.length,this.emit("flush"))}write(t,e,n){return this.sendPacket("message",t,e,n),this}send(t,e,n){return this.sendPacket("message",t,e,n),this}sendPacket(t,e,n,a){if("function"==typeof e&&(a=e,e=void 0),"function"==typeof n&&(a=n,n=null),"closing"===this.readyState||"closed"===this.readyState)return;(n=n||{}).compress=!1!==n.compress;const s={type:t,data:e,options:n};this.emit("packetCreate",s),this.writeBuffer.push(s),a&&this.once("flush",a),this.flush()}close(){const t=()=>{this.onClose("forced close"),r("socket closing - telling transport to close"),this.transport.close()},e=()=>{this.removeListener("upgrade",e),this.removeListener("upgradeError",e),t()},n=()=>{this.once("upgrade",e),this.once("upgradeError",e)};return"opening"!==this.readyState&&"open"!==this.readyState||(this.readyState="closing",this.writeBuffer.length?this.once("drain",(()=>{this.upgrading?n():t()})):this.upgrading?n():t()),this}onError(t){r("socket error %j",t),E.priorWebsocketSuccess=!1,this.emit("error",t),this.onClose("transport error",t)}onClose(t,e){"opening"!==this.readyState&&"open"!==this.readyState&&"closing"!==this.readyState||(r('socket close with reason: "%s"',t),this.clearTimeoutFn(this.pingIntervalTimer),this.clearTimeoutFn(this.pingTimeoutTimer),this.transport.removeAllListeners("close"),this.transport.close(),this.transport.removeAllListeners(),"function"==typeof removeEventListener&&removeEventListener("offline",this.offlineEventListener,!1),this.readyState="closed",this.id=null,this.emit("close",t,e),this.writeBuffer=[],this.prevBufferLen=0)}filterUpgrades(t){const e=[];let n=0;const a=t.length;for(;n<a;n++)~this.transports.indexOf(t[n])&&e.push(t[n]);return e}}E.priorWebsocketSuccess=!1,E.protocol=i.protocol,t.exports=E},2672:(t,e,n)=>{const a=n(6809),s=n(5971),{installTimerFunctions:r}=n(9773),i=n(7833)("engine.io-client:transport");t.exports=class extends s{constructor(t){super(),r(this,t),this.opts=t,this.query=t.query,this.readyState="",this.socket=t.socket}onError(t,e){const n=new Error(t);return n.type="TransportError",n.description=e,this.emit("error",n),this}open(){return"closed"!==this.readyState&&""!==this.readyState||(this.readyState="opening",this.doOpen()),this}close(){return"opening"!==this.readyState&&"open"!==this.readyState||(this.doClose(),this.onClose()),this}send(t){"open"===this.readyState?this.write(t):i("transport is not open, discarding packets")}onOpen(){this.readyState="open",this.writable=!0,this.emit("open")}onData(t){const e=a.decodePacket(t,this.socket.binaryType);this.onPacket(e)}onPacket(t){this.emit("packet",t)}onClose(){this.readyState="closed",this.emit("close")}}},8520:(t,e,n)=>{const a=n(3051),s=n(9332),r=n(2252),i=n(6855);e.polling=function(t){let e,n=!1,i=!1;const o=!1!==t.jsonp;if("undefined"!=typeof location){const e="https:"===location.protocol;let a=location.port;a||(a=e?443:80),n=t.hostname!==location.hostname||a!==t.port,i=t.secure!==e}if(t.xdomain=n,t.xscheme=i,e=new a(t),"open"in e&&!t.forceJSONP)return new s(t);if(!o)throw new Error("JSONP disabled");return new r(t)},e.websocket=i},2252:(t,e,n)=>{const a=n(5911),s=n(104),r=/\n/g,i=/\\n/g;let o;t.exports=class extends a{constructor(t){super(t),this.query=this.query||{},o||(o=s.___eio=s.___eio||[]),this.index=o.length,o.push(this.onData.bind(this)),this.query.j=this.index}get supportsBinary(){return!1}doClose(){this.script&&(this.script.onerror=()=>{},this.script.parentNode.removeChild(this.script),this.script=null),this.form&&(this.form.parentNode.removeChild(this.form),this.form=null,this.iframe=null),super.doClose()}doPoll(){const t=document.createElement("script");this.script&&(this.script.parentNode.removeChild(this.script),this.script=null),t.async=!0,t.src=this.uri(),t.onerror=t=>{this.onError("jsonp poll error",t)};const e=document.getElementsByTagName("script")[0];e?e.parentNode.insertBefore(t,e):(document.head||document.body).appendChild(t),this.script=t,"undefined"!=typeof navigator&&/gecko/i.test(navigator.userAgent)&&this.setTimeoutFn((function(){const t=document.createElement("iframe");document.body.appendChild(t),document.body.removeChild(t)}),100)}doWrite(t,e){let n;if(!this.form){const t=document.createElement("form"),e=document.createElement("textarea"),n=this.iframeId="eio_iframe_"+this.index;t.className="socketio",t.style.position="absolute",t.style.top="-1000px",t.style.left="-1000px",t.target=n,t.method="POST",t.setAttribute("accept-charset","utf-8"),e.name="d",t.appendChild(e),document.body.appendChild(t),this.form=t,this.area=e}function a(){s(),e()}this.form.action=this.uri();const s=()=>{if(this.iframe)try{this.form.removeChild(this.iframe)}catch(t){this.onError("jsonp polling iframe removal error",t)}try{const t='<iframe src="javascript:0" name="'+this.iframeId+'">';n=document.createElement(t)}catch(t){n=document.createElement("iframe"),n.name=this.iframeId,n.src="javascript:0"}n.id=this.iframeId,this.form.appendChild(n),this.iframe=n};s(),t=t.replace(i,"\\\n"),this.area.value=t.replace(r,"\\n");try{this.form.submit()}catch(t){}this.iframe.attachEvent?this.iframe.onreadystatechange=()=>{"complete"===this.iframe.readyState&&a()}:this.iframe.onload=a}}},9332:(t,e,n)=>{const a=n(3051),s=n(5911),r=n(5971),{pick:i,installTimerFunctions:o}=n(9773),l=n(104),c=n(7833)("engine.io-client:polling-xhr");function E(){}const T=null!=new a({xdomain:!1}).responseType;class u extends r{constructor(t,e){super(),o(this,e),this.opts=e,this.method=e.method||"GET",this.uri=t,this.async=!1!==e.async,this.data=void 0!==e.data?e.data:null,this.create()}create(){const t=i(this.opts,"agent","enablesXDR","pfx","key","passphrase","cert","ca","ciphers","rejectUnauthorized","autoUnref");t.xdomain=!!this.opts.xd,t.xscheme=!!this.opts.xs;const e=this.xhr=new a(t);try{c("xhr open %s: %s",this.method,this.uri),e.open(this.method,this.uri,this.async);try{if(this.opts.extraHeaders){e.setDisableHeaderCheck&&e.setDisableHeaderCheck(!0);for(let t in this.opts.extraHeaders)this.opts.extraHeaders.hasOwnProperty(t)&&e.setRequestHeader(t,this.opts.extraHeaders[t])}}catch(t){}if("POST"===this.method)try{e.setRequestHeader("Content-type","text/plain;charset=UTF-8")}catch(t){}try{e.setRequestHeader("Accept","*/*")}catch(t){}"withCredentials"in e&&(e.withCredentials=this.opts.withCredentials),this.opts.requestTimeout&&(e.timeout=this.opts.requestTimeout),this.hasXDR()?(e.onload=()=>{this.onLoad()},e.onerror=()=>{this.onError(e.responseText)}):e.onreadystatechange=()=>{4===e.readyState&&(200===e.status||1223===e.status?this.onLoad():this.setTimeoutFn((()=>{this.onError("number"==typeof e.status?e.status:0)}),0))},c("xhr data %s",this.data),e.send(this.data)}catch(t){return void this.setTimeoutFn((()=>{this.onError(t)}),0)}"undefined"!=typeof document&&(this.index=u.requestsCount++,u.requests[this.index]=this)}onSuccess(){this.emit("success"),this.cleanup()}onData(t){this.emit("data",t),this.onSuccess()}onError(t){this.emit("error",t),this.cleanup(!0)}cleanup(t){if(void 0!==this.xhr&&null!==this.xhr){if(this.hasXDR()?this.xhr.onload=this.xhr.onerror=E:this.xhr.onreadystatechange=E,t)try{this.xhr.abort()}catch(t){}"undefined"!=typeof document&&delete u.requests[this.index],this.xhr=null}}onLoad(){const t=this.xhr.responseText;null!==t&&this.onData(t)}hasXDR(){return"undefined"!=typeof XDomainRequest&&!this.xs&&this.enablesXDR}abort(){this.cleanup()}}function C(){for(let t in u.requests)u.requests.hasOwnProperty(t)&&u.requests[t].abort()}u.requestsCount=0,u.requests={},"undefined"!=typeof document&&("function"==typeof attachEvent?attachEvent("onunload",C):"function"==typeof addEventListener&&addEventListener("onpagehide"in l?"pagehide":"unload",C,!1)),t.exports=class extends s{constructor(t){if(super(t),"undefined"!=typeof location){const e="https:"===location.protocol;let n=location.port;n||(n=e?443:80),this.xd="undefined"!=typeof location&&t.hostname!==location.hostname||n!==t.port,this.xs=t.secure!==e}const e=t&&t.forceBase64;this.supportsBinary=T&&!e}request(t={}){return Object.assign(t,{xd:this.xd,xs:this.xs},this.opts),new u(this.uri(),t)}doWrite(t,e){const n=this.request({method:"POST",data:t});n.on("success",e),n.on("error",(t=>{this.onError("xhr post error",t)}))}doPoll(){c("xhr poll");const t=this.request();t.on("data",this.onData.bind(this)),t.on("error",(t=>{this.onError("xhr poll error",t)})),this.pollXhr=t}},t.exports.Request=u},5911:(t,e,n)=>{const a=n(2672),s=n(9140),r=n(6809),i=n(2121),o=n(7833)("engine.io-client:polling");t.exports=class extends a{get name(){return"polling"}doOpen(){this.poll()}pause(t){this.readyState="pausing";const e=()=>{o("paused"),this.readyState="paused",t()};if(this.polling||!this.writable){let t=0;this.polling&&(o("we are currently polling - waiting to pause"),t++,this.once("pollComplete",(function(){o("pre-pause polling complete"),--t||e()}))),this.writable||(o("we are currently writing - waiting to pause"),t++,this.once("drain",(function(){o("pre-pause writing complete"),--t||e()})))}else e()}poll(){o("polling"),this.polling=!0,this.doPoll(),this.emit("poll")}onData(t){o("polling got data %s",t),r.decodePayload(t,this.socket.binaryType).forEach((t=>{if("opening"===this.readyState&&"open"===t.type&&this.onOpen(),"close"===t.type)return this.onClose(),!1;this.onPacket(t)})),"closed"!==this.readyState&&(this.polling=!1,this.emit("pollComplete"),"open"===this.readyState?this.poll():o('ignoring poll - transport state "%s"',this.readyState))}doClose(){const t=()=>{o("writing close packet"),this.write([{type:"close"}])};"open"===this.readyState?(o("transport open - closing"),t()):(o("transport not open - deferring close"),this.once("open",t))}write(t){this.writable=!1,r.encodePayload(t,(t=>{this.doWrite(t,(()=>{this.writable=!0,this.emit("drain")}))}))}uri(){let t=this.query||{};const e=this.opts.secure?"https":"http";let n="";return!1!==this.opts.timestampRequests&&(t[this.opts.timestampParam]=i()),this.supportsBinary||t.sid||(t.b64=1),t=s.encode(t),this.opts.port&&("https"===e&&443!==Number(this.opts.port)||"http"===e&&80!==Number(this.opts.port))&&(n=":"+this.opts.port),t.length&&(t="?"+t),e+"://"+(-1!==this.opts.hostname.indexOf(":")?"["+this.opts.hostname+"]":this.opts.hostname)+n+this.opts.path+t}}},6024:(t,e,n)=>{const a=n(104),s="function"==typeof Promise&&"function"==typeof Promise.resolve?t=>Promise.resolve().then(t):(t,e)=>e(t,0);t.exports={WebSocket:a.WebSocket||a.MozWebSocket,usingBrowserWebSocket:!0,defaultBinaryType:"arraybuffer",nextTick:s}},6855:(t,e,n)=>{const a=n(2672),s=n(6809),r=n(9140),i=n(2121),{pick:o}=n(9773),{WebSocket:l,usingBrowserWebSocket:c,defaultBinaryType:E,nextTick:T}=n(6024),u=n(7833)("engine.io-client:websocket"),C="undefined"!=typeof navigator&&"string"==typeof navigator.product&&"reactnative"===navigator.product.toLowerCase();class h extends a{constructor(t){super(t),this.supportsBinary=!t.forceBase64}get name(){return"websocket"}doOpen(){if(!this.check())return;const t=this.uri(),e=this.opts.protocols,n=C?{}:o(this.opts,"agent","perMessageDeflate","pfx","key","passphrase","cert","ca","ciphers","rejectUnauthorized","localAddress","protocolVersion","origin","maxPayload","family","checkServerIdentity");this.opts.extraHeaders&&(n.headers=this.opts.extraHeaders);try{this.ws=c&&!C?e?new l(t,e):new l(t):new l(t,e,n)}catch(t){return this.emit("error",t)}this.ws.binaryType=this.socket.binaryType||E,this.addEventListeners()}addEventListeners(){this.ws.onopen=()=>{this.opts.autoUnref&&this.ws._socket.unref(),this.onOpen()},this.ws.onclose=this.onClose.bind(this),this.ws.onmessage=t=>this.onData(t.data),this.ws.onerror=t=>this.onError("websocket error",t)}write(t){this.writable=!1;for(let e=0;e<t.length;e++){const n=t[e],a=e===t.length-1;s.encodePacket(n,this.supportsBinary,(t=>{const e={};!c&&(n.options&&(e.compress=n.options.compress),this.opts.perMessageDeflate)&&("string"==typeof t?Buffer.byteLength(t):t.length)<this.opts.perMessageDeflate.threshold&&(e.compress=!1);try{c?this.ws.send(t):this.ws.send(t,e)}catch(t){u("websocket closed before onclose event")}a&&T((()=>{this.writable=!0,this.emit("drain")}),this.setTimeoutFn)}))}}onClose(){a.prototype.onClose.call(this)}doClose(){void 0!==this.ws&&(this.ws.close(),this.ws=null)}uri(){let t=this.query||{};const e=this.opts.secure?"wss":"ws";let n="";return this.opts.port&&("wss"===e&&443!==Number(this.opts.port)||"ws"===e&&80!==Number(this.opts.port))&&(n=":"+this.opts.port),this.opts.timestampRequests&&(t[this.opts.timestampParam]=i()),this.supportsBinary||(t.b64=1),t=r.encode(t),t.length&&(t="?"+t),e+"://"+(-1!==this.opts.hostname.indexOf(":")?"["+this.opts.hostname+"]":this.opts.hostname)+n+this.opts.path+t}check(){return!(!l||"__initialize"in l&&this.name===h.prototype.name)}}t.exports=h},9773:(t,e,n)=>{const a=n(104);t.exports.pick=(t,...e)=>e.reduce(((e,n)=>(t.hasOwnProperty(n)&&(e[n]=t[n]),e)),{});const s=setTimeout,r=clearTimeout;t.exports.installTimerFunctions=(t,e)=>{e.useNativeTimers?(t.setTimeoutFn=s.bind(a),t.clearTimeoutFn=r.bind(a)):(t.setTimeoutFn=setTimeout.bind(a),t.clearTimeoutFn=clearTimeout.bind(a))}},3051:(t,e,n)=>{const a=n(8383),s=n(104);t.exports=function(t){const e=t.xdomain,n=t.xscheme,r=t.enablesXDR;try{if("undefined"!=typeof XMLHttpRequest&&(!e||a))return new XMLHttpRequest}catch(t){}try{if("undefined"!=typeof XDomainRequest&&!n&&r)return new XDomainRequest}catch(t){}if(!e)try{return new(s[["Active"].concat("Object").join("X")])("Microsoft.XMLHTTP")}catch(t){}}},7247:t=>{const e=Object.create(null);e.open="0",e.close="1",e.ping="2",e.pong="3",e.message="4",e.upgrade="5",e.noop="6";const n=Object.create(null);Object.keys(e).forEach((t=>{n[e[t]]=t})),t.exports={PACKET_TYPES:e,PACKET_TYPES_REVERSE:n,ERROR_PACKET:{type:"error",data:"parser error"}}},8893:(t,e,n)=>{const{PACKET_TYPES_REVERSE:a,ERROR_PACKET:s}=n(7247);let r;"function"==typeof ArrayBuffer&&(r=n(3371));const i=(t,e)=>{if(r){const n=r.decode(t);return o(n,e)}return{base64:!0,data:t}},o=(t,e)=>"blob"===e&&t instanceof ArrayBuffer?new Blob([t]):t;t.exports=(t,e)=>{if("string"!=typeof t)return{type:"message",data:o(t,e)};const n=t.charAt(0);return"b"===n?{type:"message",data:i(t.substring(1),e)}:a[n]?t.length>1?{type:a[n],data:t.substring(1)}:{type:a[n]}:s}},2233:(t,e,n)=>{const{PACKET_TYPES:a}=n(7247),s="function"==typeof Blob||"undefined"!=typeof Blob&&"[object BlobConstructor]"===Object.prototype.toString.call(Blob),r="function"==typeof ArrayBuffer,i=(t,e)=>{const n=new FileReader;return n.onload=function(){const t=n.result.split(",")[1];e("b"+t)},n.readAsDataURL(t)};t.exports=({type:t,data:e},n,o)=>{return s&&e instanceof Blob?n?o(e):i(e,o):r&&(e instanceof ArrayBuffer||(l=e,"function"==typeof ArrayBuffer.isView?ArrayBuffer.isView(l):l&&l.buffer instanceof ArrayBuffer))?n?o(e):i(new Blob([e]),o):o(a[t]+(e||""));var l}},6809:(t,e,n)=>{const a=n(2233),s=n(8893),r=String.fromCharCode(30);t.exports={protocol:4,encodePacket:a,encodePayload:(t,e)=>{const n=t.length,s=new Array(n);let i=0;t.forEach(((t,o)=>{a(t,!1,(t=>{s[o]=t,++i===n&&e(s.join(r))}))}))},decodePacket:s,decodePayload:(t,e)=>{const n=t.split(r),a=[];for(let t=0;t<n.length;t++){const r=s(n[t],e);if(a.push(r),"error"===r.type)break}return a}}},7007:t=>{"use strict";var e,n="object"==typeof Reflect?Reflect:null,a=n&&"function"==typeof n.apply?n.apply:function(t,e,n){return Function.prototype.apply.call(t,e,n)};e=n&&"function"==typeof n.ownKeys?n.ownKeys:Object.getOwnPropertySymbols?function(t){return Object.getOwnPropertyNames(t).concat(Object.getOwnPropertySymbols(t))}:function(t){return Object.getOwnPropertyNames(t)};var s=Number.isNaN||function(t){return t!=t};function r(){r.init.call(this)}t.exports=r,t.exports.once=function(t,e){return new Promise((function(n,a){function s(n){t.removeListener(e,r),a(n)}function r(){"function"==typeof t.removeListener&&t.removeListener("error",s),n([].slice.call(arguments))}_(t,e,r,{once:!0}),"error"!==e&&function(t,e){"function"==typeof t.on&&_(t,"error",e,{once:!0})}(t,s)}))},r.EventEmitter=r,r.prototype._events=void 0,r.prototype._eventsCount=0,r.prototype._maxListeners=void 0;var i=10;function o(t){if("function"!=typeof t)throw new TypeError('The "listener" argument must be of type Function. Received type '+typeof t)}function l(t){return void 0===t._maxListeners?r.defaultMaxListeners:t._maxListeners}function c(t,e,n,a){var s,r,i,c;if(o(n),void 0===(r=t._events)?(r=t._events=Object.create(null),t._eventsCount=0):(void 0!==r.newListener&&(t.emit("newListener",e,n.listener?n.listener:n),r=t._events),i=r[e]),void 0===i)i=r[e]=n,++t._eventsCount;else if("function"==typeof i?i=r[e]=a?[n,i]:[i,n]:a?i.unshift(n):i.push(n),(s=l(t))>0&&i.length>s&&!i.warned){i.warned=!0;var E=new Error("Possible EventEmitter memory leak detected. "+i.length+" "+String(e)+" listeners added. Use emitter.setMaxListeners() to increase limit");E.name="MaxListenersExceededWarning",E.emitter=t,E.type=e,E.count=i.length,c=E,console&&console.warn&&console.warn(c)}return t}function E(){if(!this.fired)return this.target.removeListener(this.type,this.wrapFn),this.fired=!0,0===arguments.length?this.listener.call(this.target):this.listener.apply(this.target,arguments)}function T(t,e,n){var a={fired:!1,wrapFn:void 0,target:t,type:e,listener:n},s=E.bind(a);return s.listener=n,a.wrapFn=s,s}function u(t,e,n){var a=t._events;if(void 0===a)return[];var s=a[e];return void 0===s?[]:"function"==typeof s?n?[s.listener||s]:[s]:n?function(t){for(var e=new Array(t.length),n=0;n<e.length;++n)e[n]=t[n].listener||t[n];return e}(s):h(s,s.length)}function C(t){var e=this._events;if(void 0!==e){var n=e[t];if("function"==typeof n)return 1;if(void 0!==n)return n.length}return 0}function h(t,e){for(var n=new Array(e),a=0;a<e;++a)n[a]=t[a];return n}function _(t,e,n,a){if("function"==typeof t.on)a.once?t.once(e,n):t.on(e,n);else{if("function"!=typeof t.addEventListener)throw new TypeError('The "emitter" argument must be of type EventEmitter. Received type '+typeof t);t.addEventListener(e,(function s(r){a.once&&t.removeEventListener(e,s),n(r)}))}}Object.defineProperty(r,"defaultMaxListeners",{enumerable:!0,get:function(){return i},set:function(t){if("number"!=typeof t||t<0||s(t))throw new RangeError('The value of "defaultMaxListeners" is out of range. It must be a non-negative number. Received '+t+".");i=t}}),r.init=function(){void 0!==this._events&&this._events!==Object.getPrototypeOf(this)._events||(this._events=Object.create(null),this._eventsCount=0),this._maxListeners=this._maxListeners||void 0},r.prototype.setMaxListeners=function(t){if("number"!=typeof t||t<0||s(t))throw new RangeError('The value of "n" is out of range. It must be a non-negative number. Received '+t+".");return this._maxListeners=t,this},r.prototype.getMaxListeners=function(){return l(this)},r.prototype.emit=function(t){for(var e=[],n=1;n<arguments.length;n++)e.push(arguments[n]);var s="error"===t,r=this._events;if(void 0!==r)s=s&&void 0===r.error;else if(!s)return!1;if(s){var i;if(e.length>0&&(i=e[0]),i instanceof Error)throw i;var o=new Error("Unhandled error."+(i?" ("+i.message+")":""));throw o.context=i,o}var l=r[t];if(void 0===l)return!1;if("function"==typeof l)a(l,this,e);else{var c=l.length,E=h(l,c);for(n=0;n<c;++n)a(E[n],this,e)}return!0},r.prototype.addListener=function(t,e){return c(this,t,e,!1)},r.prototype.on=r.prototype.addListener,r.prototype.prependListener=function(t,e){return c(this,t,e,!0)},r.prototype.once=function(t,e){return o(e),this.on(t,T(this,t,e)),this},r.prototype.prependOnceListener=function(t,e){return o(e),this.prependListener(t,T(this,t,e)),this},r.prototype.removeListener=function(t,e){var n,a,s,r,i;if(o(e),void 0===(a=this._events))return this;if(void 0===(n=a[t]))return this;if(n===e||n.listener===e)0==--this._eventsCount?this._events=Object.create(null):(delete a[t],a.removeListener&&this.emit("removeListener",t,n.listener||e));else if("function"!=typeof n){for(s=-1,r=n.length-1;r>=0;r--)if(n[r]===e||n[r].listener===e){i=n[r].listener,s=r;break}if(s<0)return this;0===s?n.shift():function(t,e){for(;e+1<t.length;e++)t[e]=t[e+1];t.pop()}(n,s),1===n.length&&(a[t]=n[0]),void 0!==a.removeListener&&this.emit("removeListener",t,i||e)}return this},r.prototype.off=r.prototype.removeListener,r.prototype.removeAllListeners=function(t){var e,n,a;if(void 0===(n=this._events))return this;if(void 0===n.removeListener)return 0===arguments.length?(this._events=Object.create(null),this._eventsCount=0):void 0!==n[t]&&(0==--this._eventsCount?this._events=Object.create(null):delete n[t]),this;if(0===arguments.length){var s,r=Object.keys(n);for(a=0;a<r.length;++a)"removeListener"!==(s=r[a])&&this.removeAllListeners(s);return this.removeAllListeners("removeListener"),this._events=Object.create(null),this._eventsCount=0,this}if("function"==typeof(e=n[t]))this.removeListener(t,e);else if(void 0!==e)for(a=e.length-1;a>=0;a--)this.removeListener(t,e[a]);return this},r.prototype.listeners=function(t){return u(this,t,!0)},r.prototype.rawListeners=function(t){return u(this,t,!1)},r.listenerCount=function(t,e){return"function"==typeof t.listenerCount?t.listenerCount(e):C.call(t,e)},r.prototype.listenerCount=C,r.prototype.eventNames=function(){return this._eventsCount>0?e(this._events):[]}},8383:t=>{try{t.exports="undefined"!=typeof XMLHttpRequest&&"withCredentials"in new XMLHttpRequest}catch(e){t.exports=!1}},6585:t=>{var e=1e3,n=60*e,a=60*n,s=24*a,r=7*s;function i(t,e,n,a){var s=e>=1.5*n;return Math.round(t/n)+" "+a+(s?"s":"")}t.exports=function(t,o){o=o||{};var l,c,E=typeof t;if("string"===E&&t.length>0)return function(t){if(!((t=String(t)).length>100)){var i=/^(-?(?:\d+)?\.?\d+) *(milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|years?|yrs?|y)?$/i.exec(t);if(i){var o=parseFloat(i[1]);switch((i[2]||"ms").toLowerCase()){case"years":case"year":case"yrs":case"yr":case"y":return 315576e5*o;case"weeks":case"week":case"w":return o*r;case"days":case"day":case"d":return o*s;case"hours":case"hour":case"hrs":case"hr":case"h":return o*a;case"minutes":case"minute":case"mins":case"min":case"m":return o*n;case"seconds":case"second":case"secs":case"sec":case"s":return o*e;case"milliseconds":case"millisecond":case"msecs":case"msec":case"ms":return o;default:return}}}}(t);if("number"===E&&isFinite(t))return o.long?(l=t,(c=Math.abs(l))>=s?i(l,c,s,"day"):c>=a?i(l,c,a,"hour"):c>=n?i(l,c,n,"minute"):c>=e?i(l,c,e,"second"):l+" ms"):function(t){var r=Math.abs(t);return r>=s?Math.round(t/s)+"d":r>=a?Math.round(t/a)+"h":r>=n?Math.round(t/n)+"m":r>=e?Math.round(t/e)+"s":t+"ms"}(t);throw new Error("val is not a non-empty string or a valid number. val="+JSON.stringify(t))}},9140:(t,e)=>{e.encode=function(t){var e="";for(var n in t)t.hasOwnProperty(n)&&(e.length&&(e+="&"),e+=encodeURIComponent(n)+"="+encodeURIComponent(t[n]));return e},e.decode=function(t){for(var e={},n=t.split("&"),a=0,s=n.length;a<s;a++){var r=n[a].split("=");e[decodeURIComponent(r[0])]=decodeURIComponent(r[1])}return e}},4258:t=>{var e=/^(?:(?![^:@]+:[^:@\/]*@)(http|https|ws|wss):\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?((?:[a-f0-9]{0,4}:){2,7}[a-f0-9]{0,4}|[^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/,n=["source","protocol","authority","userInfo","user","password","host","port","relative","path","directory","file","query","anchor"];t.exports=function(t){var a,s,r=t,i=t.indexOf("["),o=t.indexOf("]");-1!=i&&-1!=o&&(t=t.substring(0,i)+t.substring(i,o).replace(/:/g,";")+t.substring(o,t.length));for(var l,c,E=e.exec(t||""),T={},u=14;u--;)T[n[u]]=E[u]||"";return-1!=i&&-1!=o&&(T.source=r,T.host=T.host.substring(1,T.host.length-1).replace(/;/g,":"),T.authority=T.authority.replace("[","").replace("]","").replace(/;/g,":"),T.ipv6uri=!0),T.pathNames=(a=T.path,s=a.replace(/\/{2,9}/g,"/").split("/"),"/"!=a.substr(0,1)&&0!==a.length||s.splice(0,1),"/"==a.substr(a.length-1,1)&&s.splice(s.length-1,1),s),T.queryKey=(l=T.query,c={},l.replace(/(?:^|&)([^&=]*)=?([^&]*)/g,(function(t,e,n){e&&(c[e]=n)})),c),T}},4252:function(t){var e;e=()=>(()=>{var t={633:(t,e,n)=>{var a=n(738).default;function s(){"use strict";t.exports=s=function(){return n},t.exports.__esModule=!0,t.exports.default=t.exports;var e,n={},r=Object.prototype,i=r.hasOwnProperty,o=Object.defineProperty||function(t,e,n){t[e]=n.value},l="function"==typeof Symbol?Symbol:{},c=l.iterator||"@@iterator",E=l.asyncIterator||"@@asyncIterator",T=l.toStringTag||"@@toStringTag";function u(t,e,n){return Object.defineProperty(t,e,{value:n,enumerable:!0,configurable:!0,writable:!0}),t[e]}try{u({},"")}catch(e){u=function(t,e,n){return t[e]=n}}function C(t,e,n,a){var s=e&&e.prototype instanceof I?e:I,r=Object.create(s.prototype),i=new V(a||[]);return o(r,"_invoke",{value:b(t,n,i)}),r}function h(t,e,n){try{return{type:"normal",arg:t.call(e,n)}}catch(t){return{type:"throw",arg:t}}}n.wrap=C;var _="suspendedStart",d="suspendedYield",p="executing",A="completed",N={};function I(){}function O(){}function S(){}var R={};u(R,c,(function(){return this}));var f=Object.getPrototypeOf,P=f&&f(f(w([])));P&&P!==r&&i.call(P,c)&&(R=P);var g=S.prototype=I.prototype=Object.create(R);function v(t){["next","throw","return"].forEach((function(e){u(t,e,(function(t){return this._invoke(e,t)}))}))}function L(t,e){function n(s,r,o,l){var c=h(t[s],t,r);if("throw"!==c.type){var E=c.arg,T=E.value;return T&&"object"==a(T)&&i.call(T,"__await")?e.resolve(T.__await).then((function(t){n("next",t,o,l)}),(function(t){n("throw",t,o,l)})):e.resolve(T).then((function(t){E.value=t,o(E)}),(function(t){return n("throw",t,o,l)}))}l(c.arg)}var s;o(this,"_invoke",{value:function(t,a){function r(){return new e((function(e,s){n(t,a,e,s)}))}return s=s?s.then(r,r):r()}})}function b(t,n,a){var s=_;return function(r,i){if(s===p)throw Error("Generator is already running");if(s===A){if("throw"===r)throw i;return{value:e,done:!0}}for(a.method=r,a.arg=i;;){var o=a.delegate;if(o){var l=m(o,a);if(l){if(l===N)continue;return l}}if("next"===a.method)a.sent=a._sent=a.arg;else if("throw"===a.method){if(s===_)throw s=A,a.arg;a.dispatchException(a.arg)}else"return"===a.method&&a.abrupt("return",a.arg);s=p;var c=h(t,n,a);if("normal"===c.type){if(s=a.done?A:d,c.arg===N)continue;return{value:c.arg,done:a.done}}"throw"===c.type&&(s=A,a.method="throw",a.arg=c.arg)}}}function m(t,n){var a=n.method,s=t.iterator[a];if(s===e)return n.delegate=null,"throw"===a&&t.iterator.return&&(n.method="return",n.arg=e,m(t,n),"throw"===n.method)||"return"!==a&&(n.method="throw",n.arg=new TypeError("The iterator does not provide a '"+a+"' method")),N;var r=h(s,t.iterator,n.arg);if("throw"===r.type)return n.method="throw",n.arg=r.arg,n.delegate=null,N;var i=r.arg;return i?i.done?(n[t.resultName]=i.value,n.next=t.nextLoc,"return"!==n.method&&(n.method="next",n.arg=e),n.delegate=null,N):i:(n.method="throw",n.arg=new TypeError("iterator result is not an object"),n.delegate=null,N)}function y(t){var e={tryLoc:t[0]};1 in t&&(e.catchLoc=t[1]),2 in t&&(e.finallyLoc=t[2],e.afterLoc=t[3]),this.tryEntries.push(e)}function D(t){var e=t.completion||{};e.type="normal",delete e.arg,t.completion=e}function V(t){this.tryEntries=[{tryLoc:"root"}],t.forEach(y,this),this.reset(!0)}function w(t){if(t||""===t){var n=t[c];if(n)return n.call(t);if("function"==typeof t.next)return t;if(!isNaN(t.length)){var s=-1,r=function n(){for(;++s<t.length;)if(i.call(t,s))return n.value=t[s],n.done=!1,n;return n.value=e,n.done=!0,n};return r.next=r}}throw new TypeError(a(t)+" is not iterable")}return O.prototype=S,o(g,"constructor",{value:S,configurable:!0}),o(S,"constructor",{value:O,configurable:!0}),O.displayName=u(S,T,"GeneratorFunction"),n.isGeneratorFunction=function(t){var e="function"==typeof t&&t.constructor;return!!e&&(e===O||"GeneratorFunction"===(e.displayName||e.name))},n.mark=function(t){return Object.setPrototypeOf?Object.setPrototypeOf(t,S):(t.__proto__=S,u(t,T,"GeneratorFunction")),t.prototype=Object.create(g),t},n.awrap=function(t){return{__await:t}},v(L.prototype),u(L.prototype,E,(function(){return this})),n.AsyncIterator=L,n.async=function(t,e,a,s,r){void 0===r&&(r=Promise);var i=new L(C(t,e,a,s),r);return n.isGeneratorFunction(e)?i:i.next().then((function(t){return t.done?t.value:i.next()}))},v(g),u(g,T,"Generator"),u(g,c,(function(){return this})),u(g,"toString",(function(){return"[object Generator]"})),n.keys=function(t){var e=Object(t),n=[];for(var a in e)n.push(a);return n.reverse(),function t(){for(;n.length;){var a=n.pop();if(a in e)return t.value=a,t.done=!1,t}return t.done=!0,t}},n.values=w,V.prototype={constructor:V,reset:function(t){if(this.prev=0,this.next=0,this.sent=this._sent=e,this.done=!1,this.delegate=null,this.method="next",this.arg=e,this.tryEntries.forEach(D),!t)for(var n in this)"t"===n.charAt(0)&&i.call(this,n)&&!isNaN(+n.slice(1))&&(this[n]=e)},stop:function(){this.done=!0;var t=this.tryEntries[0].completion;if("throw"===t.type)throw t.arg;return this.rval},dispatchException:function(t){if(this.done)throw t;var n=this;function a(a,s){return o.type="throw",o.arg=t,n.next=a,s&&(n.method="next",n.arg=e),!!s}for(var s=this.tryEntries.length-1;s>=0;--s){var r=this.tryEntries[s],o=r.completion;if("root"===r.tryLoc)return a("end");if(r.tryLoc<=this.prev){var l=i.call(r,"catchLoc"),c=i.call(r,"finallyLoc");if(l&&c){if(this.prev<r.catchLoc)return a(r.catchLoc,!0);if(this.prev<r.finallyLoc)return a(r.finallyLoc)}else if(l){if(this.prev<r.catchLoc)return a(r.catchLoc,!0)}else{if(!c)throw Error("try statement without catch or finally");if(this.prev<r.finallyLoc)return a(r.finallyLoc)}}}},abrupt:function(t,e){for(var n=this.tryEntries.length-1;n>=0;--n){var a=this.tryEntries[n];if(a.tryLoc<=this.prev&&i.call(a,"finallyLoc")&&this.prev<a.finallyLoc){var s=a;break}}s&&("break"===t||"continue"===t)&&s.tryLoc<=e&&e<=s.finallyLoc&&(s=null);var r=s?s.completion:{};return r.type=t,r.arg=e,s?(this.method="next",this.next=s.finallyLoc,N):this.complete(r)},complete:function(t,e){if("throw"===t.type)throw t.arg;return"break"===t.type||"continue"===t.type?this.next=t.arg:"return"===t.type?(this.rval=this.arg=t.arg,this.method="return",this.next="end"):"normal"===t.type&&e&&(this.next=e),N},finish:function(t){for(var e=this.tryEntries.length-1;e>=0;--e){var n=this.tryEntries[e];if(n.finallyLoc===t)return this.complete(n.completion,n.afterLoc),D(n),N}},catch:function(t){for(var e=this.tryEntries.length-1;e>=0;--e){var n=this.tryEntries[e];if(n.tryLoc===t){var a=n.completion;if("throw"===a.type){var s=a.arg;D(n)}return s}}throw Error("illegal catch attempt")},delegateYield:function(t,n,a){return this.delegate={iterator:w(t),resultName:n,nextLoc:a},"next"===this.method&&(this.arg=e),N}},n}t.exports=s,t.exports.__esModule=!0,t.exports.default=t.exports},738:t=>{function e(n){return t.exports=e="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t},t.exports.__esModule=!0,t.exports.default=t.exports,e(n)}t.exports=e,t.exports.__esModule=!0,t.exports.default=t.exports},756:(t,e,n)=>{var a=n(633)();t.exports=a;try{regeneratorRuntime=a}catch(t){"object"==typeof globalThis?globalThis.regeneratorRuntime=a:Function("r","regeneratorRuntime = r")(a)}}},e={};function n(a){var s=e[a];if(void 0!==s)return s.exports;var r=e[a]={exports:{}};return t[a](r,r.exports,n),r.exports}n.n=t=>{var e=t&&t.__esModule?()=>t.default:()=>t;return n.d(e,{a:e}),e},n.d=(t,e)=>{for(var a in e)n.o(e,a)&&!n.o(t,a)&&Object.defineProperty(t,a,{enumerable:!0,get:e[a]})},n.o=(t,e)=>Object.prototype.hasOwnProperty.call(t,e),n.r=t=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})};var a={};return(()=>{"use strict";function t(e){return(t="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t})(e)}function e(e){var n=function(e){if("object"!=t(e)||!e)return e;var n=e[Symbol.toPrimitive];if(void 0!==n){var a=n.call(e,"string");if("object"!=t(a))return a;throw new TypeError("@@toPrimitive must return a primitive value.")}return String(e)}(e);return"symbol"==t(n)?n:n+""}function s(t,n,a){return(n=e(n))in t?Object.defineProperty(t,n,{value:a,enumerable:!0,configurable:!0,writable:!0}):t[n]=a,t}function r(t,e,n,a,s,r,i){try{var o=t[r](i),l=o.value}catch(t){return void n(t)}o.done?e(l):Promise.resolve(l).then(a,s)}function i(t){return function(){var e=this,n=arguments;return new Promise((function(a,s){var i=t.apply(e,n);function o(t){r(i,a,s,o,l,"next",t)}function l(t){r(i,a,s,o,l,"throw",t)}o(void 0)}))}}n.r(a),n.d(a,{ACWInfo:()=>Pt,ActiveCallsResult:()=>M,AgentConfig:()=>W,AgentConfigResult:()=>j,AgentStatusInfo:()=>ht,AgentVendorStatusInfo:()=>_t,AgentWork:()=>Ct,AudioDevicesResult:()=>x,AudioStats:()=>At,AudioStatsElement:()=>Nt,CallInfo:()=>it,CallResult:()=>$,Constants:()=>G,Contact:()=>ot,ContactsFilter:()=>ft,ContactsResult:()=>J,CustomError:()=>U,DialOptions:()=>et,GenericResult:()=>nt,HangupResult:()=>X,HidDevice:()=>Y,HoldToggleResult:()=>z,InitResult:()=>tt,LogoutResult:()=>rt,MuteToggleResult:()=>H,ParticipantResult:()=>q,Phone:()=>k,PhoneCall:()=>ct,PhoneCallAttributes:()=>lt,PhoneContactsResult:()=>Q,RecordingToggleResult:()=>K,SetAgentConfigResult:()=>st,SetAgentStateResult:()=>at,SharedCapabilitiesResult:()=>B,ShowStorageAccessResult:()=>Rt,SignedRecordingUrlResult:()=>Z,StateChangeResult:()=>dt,StatsInfo:()=>It,SuperviseCallResult:()=>Ot,SupervisedCallInfo:()=>pt,SupervisorHangupResult:()=>St,TelephonyConnector:()=>Et,VendorConnector:()=>Tt,VoiceCapabilitiesResult:()=>F,initializeConnector:()=>Kt,log:()=>P,publishError:()=>Jt,publishEvent:()=>Qt,publishLog:()=>qt});var o=n(756),l=n.n(o);const c={SHARED_MESSAGE_TYPE:{SETUP_CONNECTOR:"SETUP_CONNECTOR",CONNECTOR_READY:"CONNECTOR_READY",LOG:"LOG",TELEPHONY_EVENT_DISPATCHED:"TELEPHONY_EVENT_DISPATCHED",SET_AGENT_STATUS:"SET_AGENT_STATUS",GET_AGENT_STATUS:"GET_AGENT_STATUS",LOGOUT:"LOGOUT",MESSAGE:"MESSAGE",DOWNLOAD_VENDOR_LOGS:"DOWNLOAD_VENDOR_LOGS",AGENT_WORK_EVENT:"AGENT_WORK_EVENT",GET_CONTACTS:"GET_CONTACTS"},VOICE_MESSAGE_TYPE:{ACCEPT_CALL:"ACCEPT_CALL",DECLINE_CALL:"DECLINE_CALL",END_CALL:"END_CALL",MUTE:"MUTE",UNMUTE:"UNMUTE",HOLD:"HOLD",RESUME:"RESUME",DIAL:"DIAL",SEND_DIGITS:"SEND_DIGITS",GET_PHONE_CONTACTS:"GET_PHONE_CONTACTS",SWAP_PARTICIPANTS:"SWAP_PARTICIPANTS",ADD_PARTICIPANT:"ADD_PARTICIPANT",CONFERENCE:"CONFERENCE",PAUSE_RECORDING:"PAUSE_RECORDING",RESUME_RECORDING:"RESUME_RECORDING",SUPERVISE_CALL:"SUPERVISE_CALL",SUPERVISOR_BARGE_IN:"SUPERVISOR_BARGE_IN",SUPERVISOR_DISCONNECT:"SUPERVISOR_DISCONNECT",SET_AGENT_CONFIG:"SET_AGENT_CONFIG",GET_SIGNED_RECORDING_URL:"GET_SIGNED_RECORDING_URL",WRAP_UP_CALL:"WRAP_UP_CALL",AGENT_AVAILABLE:"AGENT_AVAILABLE",GET_AUDIO_DEVICES:"GET_AUDIO_DEVICES"},SHARED_EVENT_TYPE:{ERROR:"ERROR",WARNING:"WARNING",INFO:"INFO",LOGIN_STARTED:"LOGIN_STARTED",LOGIN_RESULT:"LOGIN_RESULT",LOGOUT_RESULT:"LOGOUT_RESULT",SHOW_LOGIN:"SHOW_LOGIN",SET_AGENT_STATUS_RESULT:"SET_AGENT_STATUS_RESULT",GET_AGENT_STATUS_RESULT:"GET_AGENT_STATUS_RESULT",MESSAGE:"MESSAGE",SET_AGENT_STATUS:"SET_AGENT_STATUS",GET_AGENT_STATUS:"GET_AGENT_STATUS",STATE_CHANGE:"STATE_CHANGE",REMOTE_CONTROLLER:"REMOTE_CONTROLLER",SHOW_STORAGE_ACCESS:"SHOW_STORAGE_ACCESS",STORAGE_ACCESS_RESULT:"STORAGE_ACCESS_RESULT",GET_CONTACTS_RESULT:"GET_CONTACTS_RESULT",AFTER_CONVERSATION_WORK_STARTED:"AFTER_CONVERSATION_WORK_STARTED",AFTER_CONVERSATION_WORK_ENDED:"AFTER_CONVERSATION_WORK_ENDED"},VOICE_EVENT_TYPE:{QUEUED_CALL_STARTED:"QUEUED_CALL_STARTED",CALL_STARTED:"CALL_STARTED",CALL_CONNECTED:"CALL_CONNECTED",CALL_FAILED:"CALL_FAILED",MUTE_TOGGLE:"MUTE_TOGGLE",HOLD_TOGGLE:"HOLD_TOGGLE",PHONE_CONTACTS:"PHONE_CONTACTS",PARTICIPANT_ADDED:"PARTICIPANT_ADDED",PARTICIPANT_CONNECTED:"PARTICIPANT_CONNECTED",PARTICIPANT_REMOVED:"PARTICIPANT_REMOVED",RECORDING_TOGGLE:"RECORDING_TOGGLE",PARTICIPANTS_SWAPPED:"PARTICIPANTS_SWAPPED",PARTICIPANTS_CONFERENCED:"PARTICIPANTS_CONFERENCED",SIGNED_RECORDING_URL:"SIGNED_RECORDING_URL",UPDATE_AUDIO_STATS:"UPDATE_AUDIO_STATS",UPDATE_AUDIO_STATS_COMPLETED:"UPDATE_AUDIO_STATS_COMPLETED",SUPERVISOR_BARGED_IN:"SUPERVISOR_BARGED_IN",SUPERVISOR_CALL_STARTED:"SUPERVISOR_CALL_STARTED",SUPERVISOR_CALL_CONNECTED:"SUPERVISOR_CALL_CONNECTED",SUPERVISOR_HANGUP:"SUPERVISOR_HANGUP",CALL_BARGED_IN:"CALL_BARGED_IN",WRAP_UP_ENDED:"WRAP_UP_ENDED",AFTER_CALL_WORK_STARTED:"AFTER_CALL_WORK_STARTED",AGENT_CONFIG_UPDATED:"AGENT_CONFIG_UPDATED",AGENT_ERROR:"AGENT_ERROR",HANGUP:"HANGUP",SOFTPHONE_ERROR:"SOFTPHONE_ERROR",SHOW_TRANSFER_VIEW:"SHOW_TRANSFER_VIEW",GET_AUDIO_DEVICES:"GET_AUDIO_DEVICES",AUDIO_STATS:"AUDIO_STATS",CALL_UPDATED:"CALL_UPDATED"},INFO_TYPE:{CAN_NOT_ACCEPT_THE_CALL:"CAN_NOT_ACCEPT_THE_CALL"},SHARED_ERROR_TYPE:{CUSTOM_ERROR:"CUSTOM_ERROR",GENERIC_ERROR:"GENERIC_ERROR",AUTHENTICATION_ERROR:"AUTHENTICATION_ERROR",INVALID_AGENT_STATUS:"INVALID_AGENT_STATUS",CAN_NOT_GET_AGENT_STATUS:"CAN_NOT_GET_AGENT_STATUS",CAN_NOT_SET_AGENT_STATUS:"CAN_NOT_SET_AGENT_STATUS",LOGIN_REQUIRED:"LOGIN_REQUIRED",CAN_NOT_LOG_IN:"CAN_NOT_LOG_IN",CAN_NOT_LOG_OUT:"CAN_NOT_LOG_OUT",INVALID_STATE_CHANGE_RESULT:"INVALID_STATE_CHANGE_RESULT",INVALID_STORAGE_ACCESS_RESULT:"INVALID_STORAGE_ACCESS_RESULT",INVALID_ACW_INFO:"INVALID_ACW_INFO"},VOICE_ERROR_TYPE:{CAN_NOT_DECLINE_THE_CALL:"CAN_NOT_DECLINE_THE_CALL",CAN_NOT_END_THE_CALL:"CAN_NOT_END_THE_CALL",CAN_NOT_HOLD_CALL:"CAN_NOT_HOLD_CALL",CAN_NOT_RESUME_CALL:"CAN_NOT_RESUME_CALL",CAN_NOT_MUTE_CALL:"CAN_NOT_MUTE_CALL",CAN_NOT_UNMUTE_CALL:"CAN_NOT_UNMUTE_CALL",CAN_NOT_TOGGLE_MUTE:"CAN_NOT_TOGGLE_MUTE",CAN_NOT_TOGGLE_HOLD:"CAN_NOT_TOGGLE_HOLD",CAN_NOT_TOGGLE_RECORD:"CAN_NOT_TOGGLE_RECORD",INVALID_PARTICIPANT:"INVALID_PARTICIPANT",INVALID_PARAMS:"INVALID_PARAMS",CAN_NOT_GET_PHONE_CONTACTS:"CAN_NOT_GET_PHONE_CONTACTS",CAN_NOT_SWAP_PARTICIPANTS:"CAN_NOT_SWAP_PARTICIPANTS",CAN_NOT_CONFERENCE:"CAN_NOT_CONFERENCE",INVALID_DESTINATION:"INVALID_DESTINATION",INVALID_PHONE_NUMBER:"INVALID_PHONE_NUMBER",CAN_NOT_HANGUP_PARTICIPANT:"CAN_NOT_HANGUP_PARTICIPANT",CAN_NOT_ADD_PARTICIPANT:"CAN_NOT_ADD_PARTICIPANT",CAN_NOT_CONNECT_PARTICIPANT:"CAN_NOT_CONNECT_PARTICIPANT",CAN_NOT_START_THE_CALL:"CAN_NOT_START_THE_CALL",CAN_NOT_PAUSE_RECORDING:"CAN_NOT_PAUSE_RECORDING",CAN_NOT_RESUME_RECORDING:"CAN_NOT_RESUME_RECORDING",CAN_NOT_SET_AGENT_CONFIG:"CAN_NOT_SET_AGENT_CONFIG",CAN_NOT_SET_CAPABILITIES:"CAN_NOT_SET_CAPABILITIES",CAN_NOT_UPDATE_PHONE_NUMBER:"CAN_NOT_UPDATE_PHONE_NUMBER",CAN_NOT_GET_SIGNED_RECORDING_URL:"CAN_NOT_GET_SIGNED_RECORDING_URL",CAN_NOT_SUPERVISE_CALL:"CAN_NOT_SUPERVISE_CALL",CAN_NOT_DISCONNECT_SUPERVISOR:"CAN_NOT_DISCONNECT_SUPERVISOR",CAN_NOT_BARGE_IN_SUPERVISOR:"CAN_NOT_BARGE_IN_SUPERVISOR",CAN_NOT_BARGE_IN_CALL:"CAN_NOT_BARGE_IN_CALL",AGENT_ERROR:"AGENT_ERROR",MICROPHONE_NOT_SHARED:"MICROPHONE_NOT_SHARED",UNSUPPORTED_BROWSER:"UNSUPPORTED_BROWSER",USER_BUSY_ERROR:"USER_BUSY_ERROR",WEBRTC_ERROR:"WEBRTC_ERROR",CAN_NOT_GET_AUDIO_DEVICES:"CAN_NOT_GET_AUDIO_DEVICES",CAN_NOT_UPDATE_CALL:"CAN_NOT_UPDATE_CALL"},AGENT_STATUS:{ONLINE:"Online",OFFLINE:"Offline",ACW:"AfterCallWork"},PARTICIPANT_TYPE:{AGENT:"Agent",INITIAL_CALLER:"Initial_Caller",THIRD_PARTY:"Third_Party",SUPERVISOR:"Supervisor"},CALL_TYPE:{INBOUND:"Inbound",OUTBOUND:"Outbound",CALLBACK:"Callback",ADD_PARTICIPANT:"AddParticipant",TRANSFER:"Transfer",INTERNAL_CALL:"InternalCall",DIALED_CALLBACK:"DialedCallback",CONSULT:"Consult"},CALL_SUBTYPE:{PSTN:"PSTN",WEB_RTC:"WebRTC"},DIALER_TYPE:{OUTBOUND_PREVIEW:"OutboundPreview",NONE:"None"},CONTACT_TYPE:{PHONEBOOK:"PhoneBook",QUEUE:"Queue",PHONENUMBER:"PhoneNumber",AGENT:"Agent",FLOW:"Flow"},CONTACT_LIST_TYPE:{TRANSFER:"Transfer",CONFERENCE:"Conference",ALL:"All"},AGENT_CONFIG_TYPE:{SHOW_AGENT_SETTINGS:"SHOW_AGENT_SETTINGS",PHONES:"PHONES",SELECTED_PHONE:"SELECTED_PHONE"},SHARED_CAPABILITIES_TYPE:{DEBUG_ENABLED:"DEBUG_ENABLED",CONTACT_SEARCH:"CONTACT_SEARCH",VENDOR_PROVIDED_AVAILABILITY:"VENDOR_PROVIDED_AVAILABILITY",VENDOR_PROVIDED_QUEUE_WAIT_TIME:"VENDOR_PROVIDED_QUEUE_WAIT_TIME",TRANSFER_TO_OMNI_FLOW:"TRANSFER_TO_OMNI_FLOW",PENDING_STATUS_CHANGE:"PENDING_STATUS_CHANGE",SFDC_PENDING_STATE:"SFDC_PENDING_STATE",AUTO_ACCEPT_ENABLED:"AUTO_ACCEPT_ENABLED"},VOICE_CAPABILITIES_TYPE:{MUTE:"MUTE",RECORD:"RECORD",MERGE:"MERGE",SWAP:"SWAP",BLIND_TRANSFER:"BLIND_TRANSFER",SIGNED_RECORDING_URL:"SIGNED_RECORDING_URL",SUPERVISOR_LISTEN_IN:"SUPERVISOR_LISTEN_IN",SUPERVISOR_BARGE_IN:"SUPERVISOR_BARGE_IN",MOS:"MOS",PHONEBOOK:"PHONEBOOK",HAS_GET_EXTERNAL_SPEAKER:"HAS_GET_EXTERNAL_SPEAKER",HAS_SET_EXTERNAL_SPEAKER:"HAS_SET_EXTERNAL_SPEAKER",HAS_GET_EXTERNAL_MICROPHONE:"HAS_GET_EXTERNAL_MICROPHONE",HAS_SET_EXTERNAL_MICROPHONE:"HAS_SET_EXTERNAL_MICROPHONE",CAN_CONSULT:"CAN_CONSULT",DIAL_PAD:"DIAL_PAD",HAS_HID_SUPPORT:"HAS_HID_SUPPORT",PHONEBOOK_DISABLE:"PHONEBOOK_DISABLE"},CALL_STATE:{RINGING:"ringing",CONNECTED:"connected",TRANSFERRING:"transferring",TRANSFERRED:"transferred",ENDED:"ended"},PHONE_TYPE:{DESK_PHONE:"DESK_PHONE",SOFT_PHONE:"SOFT_PHONE"},HANGUP_REASON:{PHONE_CALL_ERROR:"error",PHONE_CALL_ENDED:"ended"},AGENT_AVAILABILITY:{AVAILABLE:"AVAILABLE",BUSY:"BUSY",OFFLINE:"OFFLINE"},REMOVE_PARTICIPANT_VARIANT:{ALWAYS:"ALWAYS",NEVER:"NEVER",ALWAYS_EXCEPT_ON_HOLD:"ALWAYS_EXCEPT_ON_HOLD"},LOG_LEVEL:{ERROR:"ERROR",INFO:"INFO"},LOG_SOURCE:{SYSTEM:"SYSTEM",PARTNER:"PARTNER"},CONTACTS_FILTER_TYPES:{AGENT:"AGENT",QUEUE:"QUEUE",CONTACT:"CONTACT",DIRECTORY:"DIRECTORY",FLOW:"FLOW",AVAILABLE:"AVAILABLE"},WORK_EVENT:{ASSIGNED:"ASSIGNED",ACCEPTED:"ACCEPTED",DECLINED:"DECLINED",COMPLETED:"COMPLETED",CLOSED:"CLOSED",PAUSED:"PAUSED",UNPAUSED:"UNPAUSED"},DIAL_OPTIONS:{CALLBACK:"isCallback=true",CONSULT:"isConsultCall"},HANGUP_STATUS:{MISSED_AGENT:"MissedCallAgent",DECLINED:"DeclinedByAgent",FAILED_CONNECT_AGENT:"FailedConnectAgent",FAILED_CONNECT_CUSTOMER:"FailedConnectCustomer",CALLBACK_MISSED_OR_REJECTED:"CallbackMissedOrRejected"}};var E=["/internalNameLabel","/reqGeneralInfo/reqAdapterUrl","/reqGeneralInfo/reqVendorInfoApiName","isACWAllowed","isHVSEnabled","orgDomainName","phoneServiceChannelId","telephonySettingsComponentFqn"],T=["/reqHvcc"],u=["/reqHvcc/reqTelephonyIntegrationCertificate"];function C(t,n){for(var a=0;a<n.length;a++){var s=n[a];s.enumerable=s.enumerable||!1,s.configurable=!0,"value"in s&&(s.writable=!0),Object.defineProperty(t,e(s.key),s)}}function h(t,e,n){return e&&C(t.prototype,e),n&&C(t,n),Object.defineProperty(t,"prototype",{writable:!1}),t}function _(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}function d(t){return d=Object.setPrototypeOf?Object.getPrototypeOf.bind():function(t){return t.__proto__||Object.getPrototypeOf(t)},d(t)}function p(t,e){return p=Object.setPrototypeOf?Object.setPrototypeOf.bind():function(t,e){return t.__proto__=e,t},p(t,e)}function A(t,e){if("function"!=typeof e&&null!==e)throw new TypeError("Super expression must either be null or a function");t.prototype=Object.create(e&&e.prototype,{constructor:{value:t,writable:!0,configurable:!0}}),Object.defineProperty(t,"prototype",{writable:!1}),e&&p(t,e)}function N(){try{var t=!Boolean.prototype.valueOf.call(Reflect.construct(Boolean,[],(function(){})))}catch(t){}return(N=function(){return!!t})()}function I(t){var e="function"==typeof Map?new Map:void 0;return I=function(t){if(null===t||!function(t){try{return-1!==Function.toString.call(t).indexOf("[native code]")}catch(e){return"function"==typeof t}}(t))return t;if("function"!=typeof t)throw new TypeError("Super expression must either be null or a function");if(void 0!==e){if(e.has(t))return e.get(t);e.set(t,n)}function n(){return function(t,e,n){if(N())return Reflect.construct.apply(null,arguments);var a=[null];a.push.apply(a,e);var s=new(t.bind.apply(t,a));return n&&p(s,n.prototype),s}(t,arguments,d(this).constructor)}return n.prototype=Object.create(t.prototype,{constructor:{value:n,enumerable:!1,writable:!0,configurable:!0}}),p(n,t)},I(t)}var O=75e5,S=function(t){return"string"==typeof t?t:JSON.stringify(t)},R=0,f=[];function P(t,e,n){!function(t,e,n){if(!e)throw new Error("Log Message required");t=t||c.LOG_LEVEL.INFO,n=n||c.LOG_SOURCE.PARTNER;var a=[(new Date).toISOString(),S(t),S(n),"".concat(S(e),"\n")].join("|");R+a.length>=O&&(f=[],R=0),R+=a.length,f.push(a)}(e,t,n)}function g(t,e){(null==e||e>t.length)&&(e=t.length);for(var n=0,a=Array(e);n<e;n++)a[n]=t[n];return a}function v(e,n,a){return n=d(n),function(e,n){if(n&&("object"==t(n)||"function"==typeof n))return n;if(void 0!==n)throw new TypeError("Derived constructors may only return object or undefined");return function(t){if(void 0===t)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return t}(e)}(e,L()?Reflect.construct(n,a||[],d(e).constructor):n.apply(e,a))}function L(){try{var t=!Boolean.prototype.valueOf.call(Reflect.construct(Boolean,[],(function(){})))}catch(t){}return(L=function(){return!!t})()}function b(t,e){var n=Object.keys(t);if(Object.getOwnPropertySymbols){var a=Object.getOwnPropertySymbols(t);e&&(a=a.filter((function(e){return Object.getOwnPropertyDescriptor(t,e).enumerable}))),n.push.apply(n,a)}return n}function m(t){for(var e=1;e<arguments.length;e++){var n=null!=arguments[e]?arguments[e]:{};e%2?b(Object(n),!0).forEach((function(e){s(t,e,n[e])})):Object.getOwnPropertyDescriptors?Object.defineProperties(t,Object.getOwnPropertyDescriptors(n)):b(Object(n)).forEach((function(e){Object.defineProperty(t,e,Object.getOwnPropertyDescriptor(n,e))}))}return t}var y,D,V,w,G={SHARED_EVENT_TYPE:{LOGIN_RESULT:c.SHARED_EVENT_TYPE.LOGIN_RESULT,LOGOUT_RESULT:c.SHARED_EVENT_TYPE.LOGOUT_RESULT,MESSAGE:c.SHARED_EVENT_TYPE.MESSAGE,SET_AGENT_STATUS:c.SHARED_EVENT_TYPE.SET_AGENT_STATUS,GET_AGENT_STATUS:c.SHARED_EVENT_TYPE.GET_AGENT_STATUS,STATE_CHANGE:c.SHARED_EVENT_TYPE.STATE_CHANGE,STORAGE_ACCESS_RESULT:c.SHARED_EVENT_TYPE.STORAGE_ACCESS_RESULT,GET_CONTACTS_RESULT:c.SHARED_EVENT_TYPE.GET_CONTACTS_RESULT,AFTER_CONVERSATION_WORK_STARTED:c.SHARED_EVENT_TYPE.AFTER_CONVERSATION_WORK_STARTED,AFTER_CONVERSATION_WORK_ENDED:c.SHARED_EVENT_TYPE.AFTER_CONVERSATION_WORK_ENDED},VOICE_EVENT_TYPE:{CALL_STARTED:c.VOICE_EVENT_TYPE.CALL_STARTED,QUEUED_CALL_STARTED:c.VOICE_EVENT_TYPE.QUEUED_CALL_STARTED,CALL_CONNECTED:c.VOICE_EVENT_TYPE.CALL_CONNECTED,HANGUP:c.VOICE_EVENT_TYPE.HANGUP,MUTE_TOGGLE:c.VOICE_EVENT_TYPE.MUTE_TOGGLE,HOLD_TOGGLE:c.VOICE_EVENT_TYPE.HOLD_TOGGLE,RECORDING_TOGGLE:c.VOICE_EVENT_TYPE.RECORDING_TOGGLE,PARTICIPANTS_SWAPPED:c.VOICE_EVENT_TYPE.PARTICIPANTS_SWAPPED,PARTICIPANTS_CONFERENCED:c.VOICE_EVENT_TYPE.PARTICIPANTS_CONFERENCED,PARTICIPANT_ADDED:c.VOICE_EVENT_TYPE.PARTICIPANT_ADDED,PARTICIPANT_CONNECTED:c.VOICE_EVENT_TYPE.PARTICIPANT_CONNECTED,PARTICIPANT_REMOVED:c.VOICE_EVENT_TYPE.PARTICIPANT_REMOVED,AFTER_CALL_WORK_STARTED:c.VOICE_EVENT_TYPE.AFTER_CALL_WORK_STARTED,WRAP_UP_ENDED:c.VOICE_EVENT_TYPE.WRAP_UP_ENDED,AGENT_ERROR:c.VOICE_EVENT_TYPE.AGENT_ERROR,SOFTPHONE_ERROR:c.VOICE_EVENT_TYPE.SOFTPHONE_ERROR,UPDATE_AUDIO_STATS:c.VOICE_EVENT_TYPE.UPDATE_AUDIO_STATS,CALL_BARGED_IN:c.VOICE_EVENT_TYPE.CALL_BARGED_IN,SUPERVISOR_BARGED_IN:c.VOICE_EVENT_TYPE.SUPERVISOR_BARGED_IN,SUPERVISOR_CALL_STARTED:c.VOICE_EVENT_TYPE.SUPERVISOR_CALL_STARTED,SUPERVISOR_CALL_CONNECTED:c.VOICE_EVENT_TYPE.SUPERVISOR_CALL_CONNECTED,SUPERVISOR_HANGUP:c.VOICE_EVENT_TYPE.SUPERVISOR_HANGUP,SHOW_TRANSFER_VIEW:c.VOICE_EVENT_TYPE.SHOW_TRANSFER_VIEW,AUDIO_STATS:c.VOICE_EVENT_TYPE.AUDIO_STATS,CALL_UPDATED:c.VOICE_EVENT_TYPE.CALL_UPDATED},SHARED_ERROR_TYPE:{GENERIC_ERROR:c.SHARED_ERROR_TYPE.GENERIC_ERROR,INVALID_AGENT_STATUS:c.SHARED_ERROR_TYPE.INVALID_AGENT_STATUS},VOICE_ERROR_TYPE:{INVALID_PARTICIPANT:c.VOICE_ERROR_TYPE.INVALID_PARTICIPANT,INVALID_DESTINATION:c.VOICE_ERROR_TYPE.INVALID_DESTINATION,CAN_NOT_UPDATE_PHONE_NUMBER:c.VOICE_ERROR_TYPE.CAN_NOT_UPDATE_PHONE_NUMBER,INVALID_PARAMS:c.VOICE_ERROR_TYPE.INVALID_PARAMS},AGENT_STATUS:m({},c.AGENT_STATUS),PARTICIPANT_TYPE:m({},c.PARTICIPANT_TYPE),CALL_TYPE:m({},c.CALL_TYPE),CALL_SUBTYPE:m({},c.CALL_SUBTYPE),DIALER_TYPE:m({},c.DIALER_TYPE),CONTACT_TYPE:m({},c.CONTACT_TYPE),CONTACT_LIST_TYPE:m({},c.CONTACT_LIST_TYPE),CALL_STATE:m({},c.CALL_STATE),HANGUP_REASON:m({},c.HANGUP_REASON),PHONE_TYPE:m({},c.PHONE_TYPE),AGENT_AVAILABILITY:m({},c.AGENT_AVAILABILITY),REMOVE_PARTICIPANT_VARIANT:m({},c.REMOVE_PARTICIPANT_VARIANT),LOG_LEVEL:m({},c.LOG_LEVEL),CONTACTS_FILTER_TYPES:m({},c.CONTACTS_FILTER_TYPES),WORK_EVENT:m({},c.WORK_EVENT),HANGUP_STATUS:m({},c.HANGUP_STATUS)},U=function(t){function e(t){var n,a=t.labelName,s=t.namespace,r=t.message;return _(this,e),n=v(this,e,[r]),ut.validateString(a),ut.validateString(s),r&&ut.validateString(r),n.labelName=a,n.namespace=s,n.message=r,n}return A(e,t),h(e)}(I(Error)),k=h((function t(e){var n=e.type,a=e.number;_(this,t),ut.validateEnum(n,Object.values(c.PHONE_TYPE)),a&&ut.validateString(a),this.type=n,this.number=a})),Y=h((function t(e){var n=e.productId,a=e.vendorId;_(this,t),n&&ut.validateNumber(n),a&&ut.validateNumber(a),this.productId=n,this.vendorId=a})),H=h((function t(e){var n=e.isMuted,a=e.call,s=e.isGlobal;_(this,t),this.isMuted=n,this.call=a,this.isGlobal=s})),M=h((function t(e){var n=e.activeCalls,a=void 0===n?[]:n;_(this,t),a.length>0&&a.forEach((function(t){ut.validateClassObject(t,ct)})),this.activeCalls=a})),x=h((function t(e){var n=e.audioDevices,a=void 0===n?[]:n;_(this,t),this.audioDevices=a})),B=h((function t(e){var n=e.debugEnabled,a=void 0===n||n,s=e.hasContactSearch,r=void 0!==s&&s,i=e.hasAgentAvailability,o=void 0!==i&&i,l=e.hasQueueWaitTime,c=void 0!==l&&l,E=e.hasTransferToOmniFlow,T=void 0!==E&&E,u=e.hasPendingStatusChange,C=void 0!==u&&u,h=e.hasSFDCPendingState,d=void 0!==h&&h,p=e.hasAutoAcceptEnabled,A=void 0!==p&&p;_(this,t),ut.validateBoolean(a),ut.validateBoolean(r),ut.validateBoolean(o),ut.validateBoolean(c),ut.validateBoolean(T),ut.validateBoolean(C),ut.validateBoolean(d),ut.validateBoolean(A),this.debugEnabled=a,this.hasContactSearch=r,this.hasAgentAvailability=o,this.hasQueueWaitTime=c,this.hasTransferToOmniFlow=T,this.hasPendingStatusChange=C,this.hasSFDCPendingState=d,this.hasAutoAcceptEnabled=A})),F=h((function t(e){var n=e.hasMute,a=void 0===n||n,s=e.hasRecord,r=void 0===s||s,i=e.hasMerge,o=void 0===i||i,l=e.hasSwap,c=void 0===l||l,E=e.hasBlindTransfer,T=void 0!==E&&E,u=e.hasSignedRecordingUrl,C=void 0!==u&&u,h=e.supportsMos,d=void 0!==h&&h,p=e.hasSupervisorListenIn,A=void 0!==p&&p,N=e.hasSupervisorBargeIn,I=void 0!==N&&N,O=e.hasPhoneBook,S=void 0!==O&&O,R=e.hasGetExternalSpeakerDeviceSetting,f=void 0!==R&&R,P=e.hasSetExternalSpeakerDeviceSetting,g=void 0!==P&&P,v=e.hasGetExternalMicrophoneDeviceSetting,L=void 0!==v&&v,b=e.hasSetExternalMicrophoneDeviceSetting,m=void 0!==b&&b,y=e.canConsult,D=void 0!==y&&y,V=e.isDialPadDisabled,w=void 0!==V&&V,G=e.isHidSupported,U=void 0!==G&&G,k=e.isPhoneBookDisabled,Y=void 0!==k&&k;_(this,t),ut.validateBoolean(a),ut.validateBoolean(r),ut.validateBoolean(o),ut.validateBoolean(c),ut.validateBoolean(T),ut.validateBoolean(C),ut.validateBoolean(d),ut.validateBoolean(A),ut.validateBoolean(I),ut.validateBoolean(S),ut.validateBoolean(f),ut.validateBoolean(g),ut.validateBoolean(L),ut.validateBoolean(m),ut.validateBoolean(D),ut.validateBoolean(w),ut.validateBoolean(U),ut.validateBoolean(Y),this.hasMute=a,this.hasRecord=r,this.hasMerge=o,this.hasSwap=c,this.hasBlindTransfer=T,this.hasSignedRecordingUrl=C,this.supportsMos=d,this.hasSupervisorListenIn=A,this.hasSupervisorBargeIn=I,this.hasPhoneBook=S,this.hasGetExternalSpeakerDeviceSetting=f,this.hasSetExternalSpeakerDeviceSetting=g,this.hasGetExternalMicrophoneDeviceSetting=L,this.hasSetExternalMicrophoneDeviceSetting=m,this.canConsult=D,this.isDialPadDisabled=w,this.isHidSupported=U,this.isPhoneBookDisabled=Y})),j=h((function t(e){var n=e.phones,a=void 0===n?[c.PHONE_TYPE.SOFT_PHONE]:n,s=e.selectedPhone,r=void 0===s?new k({type:c.PHONE_TYPE.SOFT_PHONE}):s,i=e.speakerDeviceId,o=void 0===i?"":i,l=e.microphoneDeviceId,E=void 0===l?"":l;_(this,t),ut.validateClassObject(a,Array),ut.validateClassObject(r,k),ut.validateString(o),ut.validateString(E),this.phones=a,this.selectedPhone=r,this.speakerDeviceId=o,this.microphoneDeviceId=E})),W=h((function t(e){var n=e.selectedPhone,a=e.speakerDeviceId,s=e.microphoneDeviceId,r=e.hidDeviceInfo;_(this,t),ut.validateClassObject(n,k),void 0!==r&&ut.validateClassObject(r,Y),this.selectedPhone=n,this.speakerDeviceId=a,this.microphoneDeviceId=s,this.hidDeviceInfo=r})),K=h((function t(e){var n=e.isRecordingPaused,a=e.contactId,s=void 0===a?null:a,r=e.initialContactId,i=void 0===r?null:r,o=e.instanceId,l=void 0===o?null:o,c=e.region,E=void 0===c?null:c;_(this,t),this.isRecordingPaused=n,this.contactId=s,this.initialContactId=i,this.instanceId=l,this.region=E})),q=h((function t(e){var n=e.initialCallHasEnded,a=e.callInfo,s=e.callAttributes,r=e.phoneNumber,i=e.callId,o=e.contact,l=void 0===o?null:o,c=e.connectionId;_(this,t),ut.validateClassObject(a,it),this.initialCallHasEnded=n,this.callInfo=a,this.callAttributes=s,this.phoneNumber=r,this.callId=i,this.contact=l,this.connectionId=c||i})),J=h((function t(e){var n=e.contacts,a=void 0===n?[]:n,s=e.contactTypes,r=void 0===s?[]:s;_(this,t),a.length>0&&a.forEach((function(t){ut.validateClassObject(t,ot)})),r.length>0&&r.forEach((function(t){ut.validateEnum(t,Object.values(c.CONTACT_TYPE))})),this.contacts=a,this.contactTypes=r})),Q=function(t){function e(t){var n=t.contacts,a=void 0===n?[]:n,s=t.contactTypes,r=void 0===s?[]:s;return _(this,e),v(this,e,[{contacts:a,contactTypes:r}])}return A(e,t),h(e)}(J),$=h((function t(e){var n=e.call;_(this,t),void 0!==n&&ut.validateClassObject(n,ct),this.call=n})),X=h((function t(e){var n=e.calls;_(this,t),n instanceof Array?(n.forEach((function(t){return ut.validateClassObject(t,ct)})),this.calls=n):(ut.validateClassObject(n,ct),this.calls=[n])})),z=h((function t(e){var n=e.isThirdPartyOnHold,a=e.isCustomerOnHold,s=e.calls,r=e.isCallMerged;_(this,t),s&&(Object.values(s).forEach((function(t){ut.validateClassObject(t,ct)})),this.calls=s),this.isThirdPartyOnHold=n,this.isCustomerOnHold=a,this.isCallMerged=r})),Z=h((function t(e){var n=e.success,a=e.url,s=e.duration,r=e.callId;_(this,t),n&&(ut.validateString(a),ut.validateString(r),s&&ut.validateNumber(s)),this.success=n,this.url=a,this.duration=s,this.callId=r})),tt=h((function t(e){var n=e.showLogin,a=void 0!==n&&n,s=e.loginFrameHeight,r=void 0===s?350:s,i=e.isSilentLogin,o=void 0!==i&&i,l=e.showStorageAccess,c=void 0!==l&&l;_(this,t),this.showLogin=a,this.loginFrameHeight=r,this.isSilentLogin=!this.showLogin&&o,this.showStorageAccess=c})),et=h((function t(e){var n=e.isCallback,a=void 0!==n&&n,s=e.isConsultCall,r=void 0!==s&&s;_(this,t),this.isCallback=a,this.isConsultCall=r})),nt=h((function t(e){var n=e.success;_(this,t),this.success=n})),at=function(t){function e(t){var n,a=t.success,s=t.isStatusSyncNeeded,r=void 0===s||s;return _(this,e),(n=v(this,e,[{success:a}])).isStatusSyncNeeded=r,n}return A(e,t),h(e)}(nt),st=function(t){function e(t){var n,a=t.success,s=t.isSystemEvent,r=void 0!==s&&s;return _(this,e),(n=v(this,e,[{success:a}])).isSystemEvent=r,n}return A(e,t),h(e,[{key:"setIsSystemEvent",value:function(t){this.isSystemEvent=t}}])}(nt),rt=h((function t(e){var n=e.success,a=e.loginFrameHeight,s=void 0===a?350:a;_(this,t),this.success=n,this.loginFrameHeight=s})),it=h((function t(e){var n=e.callStateTimestamp,a=void 0===n?null:n,s=e.isOnHold,r=e.isMuted,i=void 0!==r&&r,o=e.isRecordingPaused,l=void 0!==o&&o,E=e.initialCallId,T=e.queueId,u=void 0===T?null:T,C=e.queueName,h=void 0===C?null:C,d=e.queueTimestamp,p=void 0===d?null:d,A=e.isSoftphoneCall,N=void 0===A||A,I=e.acceptEnabled,O=void 0===I||I,S=e.declineEnabled,R=void 0===S||S,f=e.muteEnabled,P=void 0===f||f,g=e.swapEnabled,v=void 0===g||g,L=e.conferenceEnabled,b=void 0===L||L,m=e.holdEnabled,y=void 0===m||m,D=e.recordEnabled,V=void 0===D||D,w=e.addCallerEnabled,U=void 0===w||w,k=e.extensionEnabled,Y=void 0===k||k,H=e.isReplayable,M=void 0===H||H,x=e.isBargeable,B=void 0!==x&&x,F=e.isExternalTransfer,j=e.showMuteButton,W=void 0===j||j,K=e.showRecordButton,q=void 0===K||K,J=e.showAddCallerButton,Q=void 0===J||J,$=e.showAddBlindTransferButton,X=void 0===$||$,z=e.showMergeButton,Z=void 0===z||z,tt=e.showSwapButton,et=void 0===tt||tt,nt=e.removeParticipantVariant,at=void 0===nt?G.REMOVE_PARTICIPANT_VARIANT.ALWAYS:nt,st=e.additionalFields,rt=void 0===st?null:st,it=e.isMultiParty,ot=void 0!==it&&it,lt=e.isHIDCall,ct=void 0!==lt&&lt,Et=e.endCallDisabled,Tt=void 0!==Et&&Et,Ct=e.renderContactId,ht=void 0===Ct?null:Ct;_(this,t),a&&ut.validateDate(a),p&&ut.validateDate(p),u&&ut.validateString(u),h&&ut.validateString(h),ut.validateBoolean(l),ut.validateBoolean(i),ut.validateBoolean(N),ut.validateBoolean(O),ut.validateBoolean(R),ut.validateBoolean(P),ut.validateBoolean(v),ut.validateBoolean(b),ut.validateBoolean(y),ut.validateBoolean(V),ut.validateBoolean(U),ut.validateBoolean(Y),ut.validateBoolean(B),ut.validateBoolean(W),ut.validateBoolean(q),ut.validateBoolean(Q),ut.validateBoolean(X),ut.validateBoolean(Z),ut.validateBoolean(et),ut.validateBoolean(ct),ut.validateBoolean(Tt),void 0!==F&&ut.validateBoolean(F),ut.validateEnum(at,Object.values(c.REMOVE_PARTICIPANT_VARIANT)),rt&&ut.validateString(rt),ut.validateBoolean(ot),ht&&ut.validateString(ht),this.callStateTimestamp=a,this.isRecordingPaused=l,this.isMuted=i,this.isOnHold=s,this.initialCallId=E,this.queueName=h,this.queueId=u,this.queueTimestamp=p,this.isSoftphoneCall=N,this.acceptEnabled=O,this.declineEnabled=R,this.muteEnabled=P,this.swapEnabled=v,this.conferenceEnabled=b,this.holdEnabled=y,this.recordEnabled=V,this.addCallerEnabled=U,this.extensionEnabled=Y,this.isReplayable=M,this.isBargeable=B,this.isExternalTransfer=F,this.removeParticipantVariant=at,this.showMuteButton=W,this.showRecordButton=q,this.showAddCallerButton=Q,this.showAddBlindTransferButton=X,this.showMergeButton=Z,this.showSwapButton=et,this.additionalFields=rt,this.isMultiParty=ot,this.isHIDCall=ct,this.endCallDisabled=Tt,this.renderContactId=ht})),ot=h((function t(e){var n=e.phoneNumber,a=e.id,s=e.type,r=e.name,i=e.listType,o=e.prefix,l=e.extension,E=e.endpointARN,T=e.queue,u=e.availability,C=e.recordId,h=e.description,d=e.queueWaitTime;_(this,t),n&&ut.validateString(n),s&&ut.validateEnum(s,Object.values(c.CONTACT_TYPE)),a&&ut.validateString(a),r&&ut.validateString(r),i&&ut.validateEnum(i,Object.values(G.CONTACT_LIST_TYPE)),o&&ut.validateString(o),l&&ut.validateString(l),u&&ut.validateEnum(u,Object.values(c.AGENT_AVAILABILITY)),C&&ut.validateString(C),h&&ut.validateString(h),d&&ut.validateString(d),this.phoneNumber=n,this.id=a,this.type=s,this.name=r,this.listType=i,this.prefix=o,this.extension=l,this.endpointARN=E,this.queue=T,c.CONTACT_TYPE.AGENT===this.type?this.availability=u:this.availability=null,this.queueWaitTime=d,this.recordId=C,this.description=h})),lt=h((function t(e){var n=e.voiceCallId,a=e.participantType,s=e.dialerType,r=void 0===s?G.DIALER_TYPE.NONE:s,i=e.parentId,o=e.isOnHold,l=e.hasSupervisorBargedIn,E=void 0!==l&&l,T=e.isAutoMergeOn,u=void 0!==T&&T,C=e.isConsultCall,h=void 0!==C&&C;_(this,t),n&&ut.validateString(n),a&&ut.validateEnum(a,Object.values(c.PARTICIPANT_TYPE)),i&&ut.validateString(i),void 0!==o&&ut.validateBoolean(o),ut.validateBoolean(E),ut.validateEnum(r,Object.values(c.DIALER_TYPE)),ut.validateBoolean(u),ut.validateBoolean(h),this.voiceCallId=n,this.participantType=a,this.parentId=i,this.isOnHold=o,this.dialerType=r,this.hasSupervisorBargedIn=E,this.isAutoMergeOn=u,this.isConsultCall=h})),ct=h((function t(e){var n=e.callId,a=e.callType,s=e.callSubtype,r=e.contact,i=e.state,o=e.callAttributes,l=e.phoneNumber,E=e.callInfo,T=e.reason,u=e.closeCallOnError,C=e.agentStatus,h=e.agentARN,d=e.fromContact,p=e.toContact,A=e.connectionId;_(this,t),n&&(ut.validateString(n),this.callId=n),A?(ut.validateString(A),this.connectionId=A):n&&(this.connectionId=n),a&&(ut.validateEnum(a,Object.values(c.CALL_TYPE)),this.callType=a),s&&(ut.validateEnum(s,Object.values(c.CALL_SUBTYPE)),this.callSubtype=s),l&&(ut.validateString(l),this.phoneNumber=l),E&&(ut.validateClassObject(E,it),this.callInfo=E),r&&(ut.validateClassObject(r,ot),this.contact=r),d&&(ut.validateClassObject(d,ot),this.fromContact=d),p?(ut.validateClassObject(p,ot),this.toContact=p):r&&(this.toContact=r),T&&(this.reason=T),u&&(this.closeCallOnError=u),C&&(this.agentStatus=C),h&&(this.agentARN=h),this.state=i,this.callAttributes=o})),Et=h((function t(){_(this,t)}),[{key:"getActiveCalls",value:function(){throw new Error("Not implemented")}},{key:"acceptCall",value:function(t){throw new Error("Not implemented")}},{key:"declineCall",value:function(t){throw new Error("Not implemented")}},{key:"endCall",value:function(t,e){throw new Error("Not implemented")}},{key:"mute",value:function(t){throw new Error("Not implemented")}},{key:"unmute",value:function(t){throw new Error("Not implemented")}},{key:"hold",value:function(t){throw new Error("Not implemented")}},{key:"resume",value:function(t){throw new Error("Not implemented")}},{key:"dial",value:function(t,e){throw new Error("Not implemented")}},{key:"sendDigits",value:function(t){throw new Error("Not implemented")}},{key:"getPhoneContacts",value:function(t){throw new Error("Not implemented")}},{key:"swap",value:function(t,e){throw new Error("Not implemented")}},{key:"conference",value:function(t){throw new Error("Not implemented")}},{key:"addParticipant",value:function(t,e,n){throw new Error("Not implemented")}},{key:"pauseRecording",value:function(){throw new Error("Not implemented")}},{key:"resumeRecording",value:function(){throw new Error("Not implemented")}},{key:"getAgentConfig",value:function(){throw new Error("Not implemented")}},{key:"setAgentConfig",value:function(t){throw new Error("Not implemented")}},{key:"getVoiceCapabilities",value:function(){throw new Error("Not implemented")}},{key:"wrapUpCall",value:function(t){throw new Error("Not implemented")}},{key:"getSignedRecordingUrl",value:function(t,e,n){throw new Error("Not implemented")}},{key:"superviseCall",value:function(t){throw new Error("Not implemented")}},{key:"supervisorDisconnect",value:function(t){throw new Error("Not implemented")}},{key:"supervisorBargeIn",value:function(t){throw new Error("Not implemented")}}]),Tt=h((function t(){_(this,t)}),[{key:"init",value:function(t){throw new Error("Not implemented")}},{key:"getTelephonyConnector",value:function(){throw new Error("Not implemented")}},{key:"onAgentWorkEvent",value:function(t){throw new Error("Not implemented")}},{key:"setAgentStatus",value:function(t,e,n){throw new Error("Not implemented")}},{key:"getAgentStatus",value:function(){this.logMessageToVendor(c.LOG_LEVEL.INFO,"getAgentStatus API is NOT Implemented")}},{key:"logout",value:function(){throw new Error("Not implemented")}},{key:"handleMessage",value:function(t){throw new Error("Not implemented")}},{key:"downloadLogs",value:function(t){!function(t,e){if(document&&t){var n="string"==typeof t?t:JSON.stringify(t),a=new Blob([n],{type:"text/plain"}),s=document.createElement("a"),r=URL.createObjectURL(a);s.download=e,s.href=r,document.body.appendChild(s),s.click(),document.body.removeChild(s),URL.revokeObjectURL(r)}}(f.join(""),"log-".concat((new Date).getTime(),".txt"))}},{key:"logMessageToVendor",value:function(t,e,n){}},{key:"getContacts",value:function(t,e){throw new Error("Not implemented")}},{key:"getAudioDevices",value:function(){throw new Error("Not implemented")}},{key:"getSharedCapabilities",value:function(){throw new Error("Not implemented")}}]),ut=h((function t(){_(this,t)}),null,[{key:"validateString",value:function(e){if("string"!=typeof e)throw new Error("Invalid argument. Expecting a string but got ".concat(t(e)));return this}},{key:"validateNumber",value:function(e){if("number"!=typeof e)throw new Error("Invalid argument. Expecting a number but got ".concat(t(e)));return this}},{key:"validateBoolean",value:function(e){if("boolean"!=typeof e)throw new Error("Invalid argument. Expecting a boolean but got ".concat(t(e)));return this}},{key:"validateEnum",value:function(t,e){if(!new RegExp(e.join("|"),"i").test(t))throw new Error("Invalid argument. Expecting a value from ".concat(JSON.stringify(e)," but got ").concat(t));return this}},{key:"validateDate",value:function(e){if(!(e instanceof Date))throw new Error("Invalid argument. Expecting a Date object but got ".concat(t(e)));return this}},{key:"validateClassObject",value:function(e,n){if(!(e instanceof n))throw new Error("Invalid className. Expecting object of class ".concat(n," but got ").concat(t(e)));return this}},{key:"validateClassObjects",value:function(e){for(var n=!1,a=arguments.length,s=new Array(a>1?a-1:0),r=1;r<a;r++)s[r-1]=arguments[r];for(var i=0;i<s.length;i++)try{this.validateClassObject(e,s[i]),n=!0;break}catch(t){}if(!n)throw new Error("Invalid className. Expecting object matching a class name in ".concat(s," but got ").concat(t(e)));return this}}]),Ct=h((function t(e){var n=e.workItemId,a=e.workId,s=e.workEvent;_(this,t),ut.validateEnum(s,Object.values(c.WORK_EVENT)),this.workEvent=s,this.workItemId=n,this.workId=a})),ht=h((function t(e){var n=e.statusId,a=e.statusApiName,s=e.statusName;_(this,t),ut.validateString(n),a&&ut.validateString(a),s&&ut.validateString(s),this.statusId=n,this.statusApiName=a,this.statusName=s})),_t=h((function t(e){var n=e.statusId,a=e.statusType,s=e.statusName;_(this,t),n&&ut.validateString(n),a&&ut.validateString(a),s&&ut.validateString(s),this.statusId=n,this.statusType=a,this.statusName=s})),dt=h((function t(e){var n=e.newVendorStateInfo,a=e.oldVendorStateInfo;_(this,t),ut.validateClassObject(n,_t),ut.validateString(n.statusName),a&&ut.validateClassObject(a,_t),this.newVendorStateInfo=n,this.oldVendorStateInfo=a})),pt=h((function t(e){var n=e.callId,a=e.voiceCallId,s=e.callType,r=e.from,i=e.to,o=e.supervisorName,l=e.isBargedIn,c=e.connectionId;_(this,t),ut.validateString(n),this.callId=n,this.voiceCallId=a,this.callType=s,this.from=r,this.to=i,this.supervisorName=o,this.isBargedIn=l,this.connectionId=c||n})),At=h((function t(e){var n=e.callId,a=e.stats,s=e.isAudioStatsCompleted;_(this,t),n&&(ut.validateString(n),this.callId=n),a&&(ut.validateClassObject(a,Array),a.forEach((function(t){return ut.validateClassObject(t,Nt)})),this.stats=a),s&&(ut.validateBoolean(s),this.isAudioStatsCompleted=s)})),Nt=h((function t(e){var n=e.inputChannelStats,a=e.outputChannelStats;_(this,t),n&&ut.validateClassObject(n,It),a&&ut.validateClassObject(a,It),this.inputChannelStats=n,this.outputChannelStats=a})),It=h((function t(e){var n=e.packetsCount,a=e.packetsLost,s=e.jitterBufferMillis,r=e.roundTripTimeMillis;_(this,t),n=null==n||n<0?0:n,a=null==a||a<0?0:a,s=null==s||s<0?0:s,r=null==r||r<0?0:r,this.statsCount=0,this.packetsCount=n,this.packetsLost=a,this.jitterBufferMillis=s,this.roundTripTimeMillis=r})),Ot=h((function t(e){var n=e.call;_(this,t),ut.validateClassObject(n,ct),this.call=n})),St=function(t){function e(t){var n=t.calls;return _(this,e),v(this,e,[{calls:n}])}return A(e,t),h(e)}(X),Rt=h((function t(e){var n=e.success,a=void 0!==n&&n,s=e.showLogin,r=void 0!==s&&s,i=e.loginFrameHeight,o=void 0===i?350:i;_(this,t),this.success=a,this.showLogin=r,this.loginFrameHeight=o})),ft=h((function t(e){if(_(this,t),e){var n=e.contains,a=void 0===n?null:n,s=e.limit,r=void 0===s?50:s,i=e.offset,o=void 0===i?0:i,l=e.types,E=void 0===l?[]:l;a&&ut.validateString(a),ut.validateNumber(r),ut.validateNumber(o);var T,u=function(t){var e="undefined"!=typeof Symbol&&t[Symbol.iterator]||t["@@iterator"];if(!e){if(Array.isArray(t)||(e=function(t,e){if(t){if("string"==typeof t)return g(t,e);var n={}.toString.call(t).slice(8,-1);return"Object"===n&&t.constructor&&(n=t.constructor.name),"Map"===n||"Set"===n?Array.from(t):"Arguments"===n||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)?g(t,e):void 0}}(t))){e&&(t=e);var n=0,a=function(){};return{s:a,n:function(){return n>=t.length?{done:!0}:{done:!1,value:t[n++]}},e:function(t){throw t},f:a}}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}var s,r=!0,i=!1;return{s:function(){e=e.call(t)},n:function(){var t=e.next();return r=t.done,t},e:function(t){i=!0,s=t},f:function(){try{r||null==e.return||e.return()}finally{if(i)throw s}}}}(E);try{for(u.s();!(T=u.n()).done;)T.value,ut.validateEnum(E,Object.values(c.CONTACTS_FILTER_TYPES))}catch(t){u.e(t)}finally{u.f()}this.contains=a,this.limit=r,this.offset=o,this.types=E}})),Pt=h((function t(e){var n=e.agentWorkId,a=e.workItemId;if(_(this,t),n&&(ut.validateString(n),this.agentWorkId=n),a&&(ut.validateString(a),this.workItemId=a),!n&&!a)throw new Error("You must pass at least one of agent work id or work item (voice call or messaging session) id")})),gt=!1;function vt(t){var e=function(t){var e=y[t];return{packetsCount:e.packetsCount/e.statsCount,packetsLost:e.packetsLost/e.statsCount,jitterBufferMillis:e.jitterBufferMillis/e.statsCount,roundTripTimeMillis:e.roundTripTimeMillis/e.statsCount}}(t),n=e.roundTripTimeMillis+2*e.jitterBufferMillis+10,a=0;return a=n<160?93.2-n/40:93.2-(n-120)/10,1+.035*(a-=e.packetsLost/e.packetsCount*2.5)+7e-6*a*(a-60)*(100-a)}function Lt(){if(gt&&y){var t=vt("inputChannelStats"),e=vt("outputChannelStats");return y=null,isNaN(e)&&isNaN(t)?0:isNaN(e)?t:isNaN(t)?e:Math.min(t,e)}}function bt(){y=new Nt({inputChannelStats:new It({packetsCount:0,packetsLost:0,jitterBufferMillis:0,roundTripTimeMillis:0}),outputChannelStats:new It({packetsCount:0,packetsLost:0,jitterBufferMillis:0,roundTripTimeMillis:0})})}function mt(t){return t&&t.type?t.type:t}function yt(e){if(e){if("function"==typeof e)return;if("object"===t(e)){var n=Array.isArray(e),a=n?[]:{};if(n)e.forEach((function(t){a.push(yt(t))}));else for(var s in e)"phoneNumber"!==s&&"number"!==s&&"name"!==s&&"callAttributes"!==s&&"/reqHvcc/reqTelephonyIntegrationCertificate"!==s&&(a[s]=yt(e[s]));return a}}return e}function Dt(t){return t&&t.message?t.message:t}function Vt(t,e,n){var a=yt(e);P({eventType:t,payload:e},n?c.LOG_LEVEL.ERROR:c.LOG_LEVEL.INFO,c.LOG_SOURCE.SYSTEM),D.postMessage({type:c.SHARED_MESSAGE_TYPE.LOG,payload:{eventType:t,payload:a,isError:n}})}function wt(t,e){var n=!(arguments.length>2&&void 0!==arguments[2])||arguments[2];D.postMessage({type:c.SHARED_MESSAGE_TYPE.TELEPHONY_EVENT_DISPATCHED,payload:{telephonyEventType:t,telephonyEventPayload:e}}),n&&Vt(t,e,!1)}function Gt(t,e,n){console.error("SCV dispatched error ".concat(t," for eventType ").concat(n),e),wt(c.SHARED_EVENT_TYPE.ERROR,{message:t},!1),Vt(n,{errorType:t,error:e},!0)}function Ut(t,e){var n={customError:{labelName:t.labelName,namespace:t.namespace,message:t.message}};console.error("SCV dispatched custom error for eventType ".concat(e),n),wt(c.SHARED_EVENT_TYPE.ERROR,n,!1),Vt(e,{errorType:c.SHARED_ERROR_TYPE.CUSTOM_ERROR,error:t},!0)}function kt(t,e){console.info("SCV info message dispatched for eventType ".concat(t," with payload ").concat(JSON.stringify(e))),wt(c.SHARED_EVENT_TYPE.INFO,{message:t},!1),Vt(t,e,!1)}function Yt(){return Ht.apply(this,arguments)}function Ht(){return(Ht=i(l().mark((function t(){var e,n,a,r,i,o,E,T,u;return l().wrap((function(t){for(;;)switch(t.prev=t.next){case 0:return t.prev=0,t.next=3,V.getTelephonyConnector();case 3:return n=t.sent,t.next=6,n.getAgentConfig();case 6:return a=t.sent,t.next=9,V.getSharedCapabilities();case 9:return r=t.sent,t.next=12,n.getVoiceCapabilities();case 12:return i=t.sent,ut.validateClassObject(a,j),ut.validateClassObject(i,F),i.supportsMos&&(gt=!0),t.next=18,n.getActiveCalls();case 18:o=t.sent,ut.validateClassObject(o,M),E=o.activeCalls,T=c.SHARED_MESSAGE_TYPE.CONNECTOR_READY,u={agentConfig:s(s({},c.AGENT_CONFIG_TYPE.PHONES,a.phones),c.AGENT_CONFIG_TYPE.SELECTED_PHONE,a.selectedPhone),capabilities:(e={},s(s(s(s(s(s(s(s(s(s(e,c.SHARED_CAPABILITIES_TYPE.DEBUG_ENABLED,r.debugEnabled),c.SHARED_CAPABILITIES_TYPE.CONTACT_SEARCH,r.hasContactSearch),c.SHARED_CAPABILITIES_TYPE.VENDOR_PROVIDED_AVAILABILITY,r.hasAgentAvailability),c.SHARED_CAPABILITIES_TYPE.VENDOR_PROVIDED_QUEUE_WAIT_TIME,r.hasQueueWaitTime),c.SHARED_CAPABILITIES_TYPE.TRANSFER_TO_OMNI_FLOW,r.hasTransferToOmniFlow),c.SHARED_CAPABILITIES_TYPE.PENDING_STATUS_CHANGE,r.hasPendingStatusChange),c.SHARED_CAPABILITIES_TYPE.SFDC_PENDING_STATE,r.hasSFDCPendingState),c.SHARED_CAPABILITIES_TYPE.AUTO_ACCEPT_ENABLED,r.hasAutoAcceptEnabled),c.VOICE_CAPABILITIES_TYPE.MUTE,i.hasMute),c.VOICE_CAPABILITIES_TYPE.RECORD,i.hasRecord),s(s(s(s(s(s(s(s(s(s(e,c.VOICE_CAPABILITIES_TYPE.MERGE,i.hasMerge),c.VOICE_CAPABILITIES_TYPE.SWAP,i.hasSwap),c.VOICE_CAPABILITIES_TYPE.BLIND_TRANSFER,i.hasBlindTransfer),c.VOICE_CAPABILITIES_TYPE.SIGNED_RECORDING_URL,i.hasSignedRecordingUrl),c.VOICE_CAPABILITIES_TYPE.SUPERVISOR_LISTEN_IN,i.hasSupervisorListenIn),c.VOICE_CAPABILITIES_TYPE.SUPERVISOR_BARGE_IN,i.hasSupervisorBargeIn),c.VOICE_CAPABILITIES_TYPE.MOS,i.supportsMos),c.VOICE_CAPABILITIES_TYPE.PHONEBOOK,i.hasPhoneBook),c.VOICE_CAPABILITIES_TYPE.HAS_GET_EXTERNAL_SPEAKER,i.hasGetExternalSpeakerDeviceSetting),c.VOICE_CAPABILITIES_TYPE.HAS_SET_EXTERNAL_SPEAKER,i.hasSetExternalSpeakerDeviceSetting),s(s(s(s(s(s(e,c.VOICE_CAPABILITIES_TYPE.HAS_GET_EXTERNAL_MICROPHONE,i.hasGetExternalMicrophoneDeviceSetting),c.VOICE_CAPABILITIES_TYPE.HAS_SET_EXTERNAL_MICROPHONE,i.hasSetExternalMicrophoneDeviceSetting),c.VOICE_CAPABILITIES_TYPE.CAN_CONSULT,i.canConsult),c.VOICE_CAPABILITIES_TYPE.DIAL_PAD,i.isDialPadDisabled),c.VOICE_CAPABILITIES_TYPE.HAS_HID_SUPPORT,i.isHidSupported),c.VOICE_CAPABILITIES_TYPE.PHONEBOOK_DISABLE,i.isPhoneBookDisabled)),callInProgress:E.length>0?E[0]:null},D.postMessage({type:T,payload:u}),Vt(T,u,!1),t.next=31;break;case 27:t.prev=27,t.t0=t.catch(0),D.postMessage({type:c.SHARED_MESSAGE_TYPE.CONNECTOR_READY,payload:{}}),Vt(c.SHARED_MESSAGE_TYPE.CONNECTOR_READY,{},!1);case 31:case"end":return t.stop()}}),t,null,[[0,27]])})))).apply(this,arguments)}function Mt(t){return xt.apply(this,arguments)}function xt(){return(xt=i(l().mark((function t(e){var n,a,s,r,i,o,E,T,u,C,h,_,d,p,A,N,I,O,S,R,P,g,v,L,b,m,y,D,G,k,Y,H,B,F,j,W,K,q,z,tt,it,lt,ct,Et,Tt,Ct,ht,dt,pt,At,Nt,It,Rt,ft,Pt,gt,vt,Lt,yt,Yt,Ht,Mt,xt,Bt,Ft,jt,Wt,Kt,qt,Jt,$t,Xt,zt,Zt,te,ee,ne,ae,se,re,ie,oe,le,ce;return l().wrap((function(t){for(;;)switch(t.prev=t.next){case 0:(n=e.data.type)!==c.SHARED_MESSAGE_TYPE.LOG&&Vt(n,e.data,!1),t.t0=n,t.next=t.t0===c.VOICE_MESSAGE_TYPE.ACCEPT_CALL?5:t.t0===c.VOICE_MESSAGE_TYPE.DECLINE_CALL?32:t.t0===c.VOICE_MESSAGE_TYPE.END_CALL?48:t.t0===c.VOICE_MESSAGE_TYPE.MUTE?69:t.t0===c.VOICE_MESSAGE_TYPE.UNMUTE?83:t.t0===c.VOICE_MESSAGE_TYPE.HOLD?97:t.t0===c.VOICE_MESSAGE_TYPE.RESUME?121:t.t0===c.SHARED_MESSAGE_TYPE.SET_AGENT_STATUS?145:t.t0===c.SHARED_MESSAGE_TYPE.GET_AGENT_STATUS?171:t.t0===c.VOICE_MESSAGE_TYPE.DIAL?183:t.t0===c.VOICE_MESSAGE_TYPE.SEND_DIGITS?214:t.t0===c.VOICE_MESSAGE_TYPE.GET_PHONE_CONTACTS?226:t.t0===c.SHARED_MESSAGE_TYPE.GET_CONTACTS?242:t.t0===c.VOICE_MESSAGE_TYPE.SWAP_PARTICIPANTS?255:t.t0===c.VOICE_MESSAGE_TYPE.CONFERENCE?269:t.t0===c.VOICE_MESSAGE_TYPE.ADD_PARTICIPANT?283:t.t0===c.VOICE_MESSAGE_TYPE.PAUSE_RECORDING?309:t.t0===c.VOICE_MESSAGE_TYPE.RESUME_RECORDING?323:t.t0===c.SHARED_MESSAGE_TYPE.LOGOUT?337:t.t0===c.SHARED_MESSAGE_TYPE.MESSAGE?350:t.t0===c.VOICE_MESSAGE_TYPE.WRAP_UP_CALL?352:t.t0===c.VOICE_MESSAGE_TYPE.AGENT_AVAILABLE?357:t.t0===c.VOICE_MESSAGE_TYPE.SET_AGENT_CONFIG?399:t.t0===c.VOICE_MESSAGE_TYPE.GET_AUDIO_DEVICES?415:t.t0===c.VOICE_MESSAGE_TYPE.GET_SIGNED_RECORDING_URL?430:t.t0===c.SHARED_MESSAGE_TYPE.DOWNLOAD_VENDOR_LOGS?448:t.t0===c.SHARED_MESSAGE_TYPE.LOG?450:t.t0===c.VOICE_MESSAGE_TYPE.SUPERVISE_CALL?453:t.t0===c.VOICE_MESSAGE_TYPE.SUPERVISOR_DISCONNECT?473:t.t0===c.VOICE_MESSAGE_TYPE.SUPERVISOR_BARGE_IN?489:t.t0===c.SHARED_MESSAGE_TYPE.AGENT_WORK_EVENT?504:507;break;case 5:if(t.prev=5,!e.data.call||!e.data.call.callType||e.data.call.callType.toLowerCase()!==c.CALL_TYPE.OUTBOUND.toLowerCase()&&e.data.call.callType.toLowerCase()!==c.CALL_TYPE.DIALED_CALLBACK.toLowerCase()){t.next=8;break}return t.abrupt("return");case 8:return bt(),t.next=11,V.getTelephonyConnector();case 11:if(a=t.sent,!w){t.next=19;break}return t.next=15,a.supervisorDisconnect();case 15:s=t.sent,ut.validateClassObject(s,St),w=!1,wt(c.VOICE_EVENT_TYPE.SUPERVISOR_HANGUP,s.calls);case 19:return t.next=21,a.acceptCall(e.data.call);case 21:r=t.sent,ut.validateClassObject(r,$),wt((i=r.call).callType.toLowerCase()===c.CALL_TYPE.CALLBACK.toLowerCase()?c.VOICE_EVENT_TYPE.CALL_STARTED:c.VOICE_EVENT_TYPE.CALL_CONNECTED,i),t.next=31;break;case 27:t.prev=27,t.t1=t.catch(5),w=!1,t.t1 instanceof U?Ut(t.t1,c.VOICE_MESSAGE_TYPE.ACCEPT_CALL):kt(c.INFO_TYPE.CAN_NOT_ACCEPT_THE_CALL,{messagetype:c.VOICE_MESSAGE_TYPE.ACCEPT_CALL,additionalInfo:t.t1});case 31:return t.abrupt("break",508);case 32:return t.prev=32,t.next=35,V.getTelephonyConnector();case 35:return o=t.sent,t.next=38,o.declineCall(e.data.call);case 38:E=t.sent,ut.validateClassObject(E,$),T=E.call,wt(c.VOICE_EVENT_TYPE.HANGUP,T),t.next=47;break;case 44:t.prev=44,t.t2=t.catch(32),t.t2 instanceof U?Ut(t.t2,c.VOICE_MESSAGE_TYPE.DECLINE_CALL):Gt(c.VOICE_ERROR_TYPE.CAN_NOT_DECLINE_THE_CALL,t.t2,c.VOICE_MESSAGE_TYPE.DECLINE_CALL);case 47:return t.abrupt("break",508);case 48:return t.prev=48,t.next=51,V.getTelephonyConnector();case 51:return u=t.sent,t.next=54,u.endCall(e.data.call,e.data.agentStatus);case 54:return C=t.sent,ut.validateClassObject(C,X),t.next=58,u.getActiveCalls();case 58:h=t.sent,ut.validateClassObject(h,M),_=h.activeCalls,d=C.calls,0===_.length?wt(c.VOICE_EVENT_TYPE.HANGUP,d):wt(c.VOICE_EVENT_TYPE.PARTICIPANT_REMOVED,d.length>0&&d[0]),t.next=68;break;case 65:t.prev=65,t.t3=t.catch(48),t.t3 instanceof U?Ut(t.t3,c.VOICE_MESSAGE_TYPE.END_CALL):Gt(c.VOICE_ERROR_TYPE.CAN_NOT_END_THE_CALL,t.t3,c.VOICE_MESSAGE_TYPE.END_CALL);case 68:return t.abrupt("break",508);case 69:return t.prev=69,t.next=72,V.getTelephonyConnector();case 72:return p=t.sent,t.next=75,p.mute(e.data.call);case 75:A=t.sent,Qt({eventType:c.VOICE_EVENT_TYPE.MUTE_TOGGLE,payload:A}),t.next=82;break;case 79:t.prev=79,t.t4=t.catch(69),t.t4 instanceof U?Ut(t.t4,c.VOICE_MESSAGE_TYPE.MUTE):Gt(c.VOICE_ERROR_TYPE.CAN_NOT_MUTE_CALL,t.t4,c.VOICE_MESSAGE_TYPE.MUTE);case 82:return t.abrupt("break",508);case 83:return t.prev=83,t.next=86,V.getTelephonyConnector();case 86:return N=t.sent,t.next=89,N.unmute(e.data.call);case 89:I=t.sent,Qt({eventType:c.VOICE_EVENT_TYPE.MUTE_TOGGLE,payload:I}),t.next=96;break;case 93:t.prev=93,t.t5=t.catch(83),t.t5 instanceof U?Ut(t.t5,c.VOICE_MESSAGE_TYPE.UNMUTE):Gt(c.VOICE_ERROR_TYPE.CAN_NOT_UNMUTE_CALL,t.t5,c.VOICE_MESSAGE_TYPE.UNMUTE);case 96:return t.abrupt("break",508);case 97:return t.prev=97,t.next=100,V.getTelephonyConnector();case 100:return O=t.sent,t.next=103,O.hold(e.data.call);case 103:S=t.sent,Qt({eventType:c.VOICE_EVENT_TYPE.HOLD_TOGGLE,payload:S}),t.next=120;break;case 107:if(t.prev=107,t.t6=t.catch(97),!(t.t6 instanceof U)){t.next=113;break}Ut(t.t6,c.VOICE_MESSAGE_TYPE.HOLD),t.next=120;break;case 113:t.t7=mt(t.t6),t.next=t.t7===c.VOICE_ERROR_TYPE.INVALID_PARTICIPANT?116:118;break;case 116:return Gt(c.VOICE_ERROR_TYPE.INVALID_PARTICIPANT,Dt(t.t6),c.VOICE_MESSAGE_TYPE.HOLD),t.abrupt("break",120);case 118:return Gt(c.VOICE_ERROR_TYPE.CAN_NOT_HOLD_CALL,Dt(t.t6),c.VOICE_MESSAGE_TYPE.HOLD),t.abrupt("break",120);case 120:return t.abrupt("break",508);case 121:return t.prev=121,t.next=124,V.getTelephonyConnector();case 124:return R=t.sent,t.next=127,R.resume(e.data.call);case 127:P=t.sent,Qt({eventType:c.VOICE_EVENT_TYPE.HOLD_TOGGLE,payload:P}),t.next=144;break;case 131:if(t.prev=131,t.t8=t.catch(121),!(t.t8 instanceof U)){t.next=137;break}Ut(t.t8,c.VOICE_MESSAGE_TYPE.RESUME),t.next=144;break;case 137:t.t9=mt(t.t8),t.next=t.t9===c.VOICE_ERROR_TYPE.INVALID_PARTICIPANT?140:142;break;case 140:return Gt(c.VOICE_ERROR_TYPE.INVALID_PARTICIPANT,Dt(t.t8),c.VOICE_MESSAGE_TYPE.RESUME),t.abrupt("break",144);case 142:return Gt(c.VOICE_ERROR_TYPE.CAN_NOT_RESUME_CALL,Dt(t.t8),c.VOICE_MESSAGE_TYPE.RESUME),t.abrupt("break",144);case 144:return t.abrupt("break",508);case 145:return t.prev=145,g=e.data.statusInfo||{},v=e.data.enqueueNextState||!1,t.next=150,V.setAgentStatus(e.data.agentStatus,g,v);case 150:L=t.sent,ut.validateClassObject(L,nt,at),b=L.success,m=L.isStatusSyncNeeded,wt(c.SHARED_EVENT_TYPE.SET_AGENT_STATUS_RESULT,void 0!==m?{success:b,isStatusSyncNeeded:m}:{success:b}),t.next=170;break;case 156:if(t.prev=156,t.t10=t.catch(145),!(t.t10 instanceof U)){t.next=162;break}Ut(t.t10,c.SHARED_MESSAGE_TYPE.SET_AGENT_STATUS),t.next=170;break;case 162:e.data.statusInfo&&wt(c.SHARED_EVENT_TYPE.SET_AGENT_STATUS_RESULT,{success:!1}),t.t11=mt(t.t10),t.next=t.t11===c.SHARED_ERROR_TYPE.INVALID_AGENT_STATUS?166:168;break;case 166:return Gt(c.SHARED_ERROR_TYPE.INVALID_AGENT_STATUS,Dt(t.t10),c.SHARED_MESSAGE_TYPE.SET_AGENT_STATUS),t.abrupt("break",170);case 168:return Gt(c.SHARED_ERROR_TYPE.CAN_NOT_SET_AGENT_STATUS,Dt(t.t10),c.SHARED_MESSAGE_TYPE.SET_AGENT_STATUS),t.abrupt("break",170);case 170:return t.abrupt("break",508);case 171:return t.prev=171,t.next=174,V.getAgentStatus();case 174:y=t.sent,ut.validateClassObject(y,_t),wt(c.SHARED_EVENT_TYPE.GET_AGENT_STATUS_RESULT,y),t.next=182;break;case 179:t.prev=179,t.t12=t.catch(171),t.t12 instanceof U?Ut(t.t12,c.SHARED_MESSAGE_TYPE.GET_AGENT_STATUS):Gt(c.SHARED_ERROR_TYPE.CAN_NOT_GET_AGENT_STATUS,Dt(t.t12),c.SHARED_MESSAGE_TYPE.GET_AGENT_STATUS);case 182:return t.abrupt("break",508);case 183:return t.prev=183,t.next=186,V.getTelephonyConnector();case 186:return D=t.sent,G=e.data.params&&e.data.params.indexOf(c.DIAL_OPTIONS.CALLBACK)>=0,k=e.data.params&&e.data.params.indexOf(c.DIAL_OPTIONS.CONSULT)>=0,t.next=191,D.dial(new ot(e.data.contact),new et({isCallback:G,isConsultCall:k}));case 191:Y=t.sent,ut.validateClassObject(Y,$),H=Y.call,c.CALL_TYPE.DIALED_CALLBACK.toLowerCase()===H.callType.toLowerCase()&&G?wt(c.VOICE_EVENT_TYPE.QUEUED_CALL_STARTED,H):wt(c.VOICE_EVENT_TYPE.CALL_STARTED,H),t.next=213;break;case 197:if(t.prev=197,t.t13=t.catch(183),wt(c.VOICE_EVENT_TYPE.CALL_FAILED),!(t.t13 instanceof U)){t.next=204;break}Ut(t.t13,c.VOICE_MESSAGE_TYPE.DIAL),t.next=213;break;case 204:t.t14=mt(t.t13),t.next=t.t14===c.VOICE_ERROR_TYPE.INVALID_DESTINATION?207:t.t14===c.SHARED_ERROR_TYPE.GENERIC_ERROR?209:211;break;case 207:return Gt(c.VOICE_ERROR_TYPE.INVALID_DESTINATION,Dt(t.t13),c.VOICE_MESSAGE_TYPE.DIAL),t.abrupt("break",213);case 209:return Gt(c.SHARED_ERROR_TYPE.GENERIC_ERROR,Dt(t.t13),c.VOICE_MESSAGE_TYPE.DIAL),t.abrupt("break",213);case 211:return Gt(c.VOICE_ERROR_TYPE.CAN_NOT_START_THE_CALL,Dt(t.t13),c.VOICE_MESSAGE_TYPE.DIAL),t.abrupt("break",213);case 213:return t.abrupt("break",508);case 214:return t.prev=214,t.next=217,V.getTelephonyConnector();case 217:return B=t.sent,t.next=220,B.sendDigits(e.data.digits);case 220:t.next=225;break;case 222:t.prev=222,t.t15=t.catch(214),Vt(c.VOICE_MESSAGE_TYPE.SEND_DIGITS,e.data.digits,!0);case 225:return t.abrupt("break",508);case 226:return t.prev=226,t.next=229,V.getTelephonyConnector();case 229:return F=t.sent,t.next=232,F.getPhoneContacts(e.data.filter);case 232:j=t.sent,ut.validateClassObject(j,Q),W=j.contacts.map((function(t){return{id:t.id,type:t.type,name:t.name,listType:t.listType,phoneNumber:t.phoneNumber,prefix:t.prefix,extension:t.extension,endpointARN:t.endpointARN,queue:t.queue,availability:t.availability,queueWaitTime:t.queueWaitTime,recordId:t.recordId,description:t.description}})),wt(c.VOICE_EVENT_TYPE.PHONE_CONTACTS,{contacts:W,contactTypes:j.contactTypes}),t.next=241;break;case 238:t.prev=238,t.t16=t.catch(226),t.t16 instanceof U?Ut(t.t16,c.VOICE_MESSAGE_TYPE.GET_PHONE_CONTACTS):Gt(c.VOICE_ERROR_TYPE.CAN_NOT_GET_PHONE_CONTACTS,t.t16,c.VOICE_MESSAGE_TYPE.GET_PHONE_CONTACTS);case 241:return t.abrupt("break",508);case 242:return t.prev=242,t.next=245,V.getContacts(e.data.filter,e.data.workItemId);case 245:K=t.sent,ut.validateClassObject(K,J),q=K.contacts.map((function(t){return{id:t.id,type:t.type,name:t.name,listType:t.listType,phoneNumber:t.phoneNumber,prefix:t.prefix,extension:t.extension,endpointARN:t.endpointARN,queue:t.queue,availability:t.availability,queueWaitTime:t.queueWaitTime,recordId:t.recordId,description:t.description}})),wt(c.SHARED_EVENT_TYPE.GET_CONTACTS_RESULT,{contacts:q,contactTypes:K.contactTypes}),t.next=254;break;case 251:t.prev=251,t.t17=t.catch(242),Ut(t.t17,c.SHARED_MESSAGE_TYPE.GET_CONTACTS);case 254:return t.abrupt("break",508);case 255:return t.prev=255,t.next=258,V.getTelephonyConnector();case 258:return z=t.sent,t.next=261,z.swap(e.data.callToHold,e.data.callToResume);case 261:tt=t.sent,Qt({eventType:c.VOICE_EVENT_TYPE.PARTICIPANTS_SWAPPED,payload:tt}),t.next=268;break;case 265:t.prev=265,t.t18=t.catch(255),t.t18 instanceof U?Ut(t.t18,c.VOICE_MESSAGE_TYPE.SWAP_PARTICIPANTS):Gt(c.VOICE_ERROR_TYPE.CAN_NOT_SWAP_PARTICIPANTS,t.t18,c.VOICE_MESSAGE_TYPE.SWAP_PARTICIPANTS);case 268:return t.abrupt("break",508);case 269:return t.prev=269,t.next=272,V.getTelephonyConnector();case 272:return it=t.sent,t.next=275,it.conference(e.data.calls);case 275:lt=t.sent,Qt({eventType:c.VOICE_EVENT_TYPE.PARTICIPANTS_CONFERENCED,payload:lt}),t.next=282;break;case 279:t.prev=279,t.t19=t.catch(269),t.t19 instanceof U?Ut(t.t19,c.VOICE_MESSAGE_TYPE.CONFERENCE):Gt(c.VOICE_ERROR_TYPE.CAN_NOT_CONFERENCE,t.t19,c.VOICE_MESSAGE_TYPE.CONFERENCE);case 282:return t.abrupt("break",508);case 283:return t.prev=283,t.next=286,V.getTelephonyConnector();case 286:return ct=t.sent,t.next=289,ct.addParticipant(new ot(e.data.contact),e.data.call,e.data.isBlindTransfer);case 289:Et=t.sent,Qt({eventType:c.VOICE_EVENT_TYPE.PARTICIPANT_ADDED,payload:Et}),e.data.isBlindTransfer&&wt(c.VOICE_EVENT_TYPE.HANGUP,e.data.call),t.next=308;break;case 294:if(t.prev=294,t.t20=t.catch(283),wt(c.VOICE_EVENT_TYPE.PARTICIPANT_REMOVED,{reason:c.SHARED_EVENT_TYPE.ERROR.toLowerCase()}),!(t.t20 instanceof U)){t.next=301;break}Ut(t.t20,c.VOICE_MESSAGE_TYPE.ADD_PARTICIPANT),t.next=308;break;case 301:t.t21=mt(t.t20),t.next=t.t21===c.VOICE_ERROR_TYPE.INVALID_DESTINATION?304:306;break;case 304:return Gt(c.VOICE_ERROR_TYPE.INVALID_DESTINATION,Dt(t.t20),c.VOICE_MESSAGE_TYPE.ADD_PARTICIPANT),t.abrupt("break",308);case 306:return Gt(c.VOICE_ERROR_TYPE.CAN_NOT_ADD_PARTICIPANT,Dt(t.t20),c.VOICE_MESSAGE_TYPE.ADD_PARTICIPANT),t.abrupt("break",308);case 308:return t.abrupt("break",508);case 309:return t.prev=309,t.next=312,V.getTelephonyConnector();case 312:return Tt=t.sent,t.next=315,Tt.pauseRecording(e.data.call);case 315:Ct=t.sent,Qt({eventType:c.VOICE_EVENT_TYPE.RECORDING_TOGGLE,payload:Ct}),t.next=322;break;case 319:t.prev=319,t.t22=t.catch(309),t.t22 instanceof U?Ut(t.t22,c.VOICE_MESSAGE_TYPE.PAUSE_RECORDING):Gt(c.VOICE_ERROR_TYPE.CAN_NOT_PAUSE_RECORDING,t.t22,c.VOICE_MESSAGE_TYPE.PAUSE_RECORDING);case 322:return t.abrupt("break",508);case 323:return t.prev=323,t.next=326,V.getTelephonyConnector();case 326:return ht=t.sent,t.next=329,ht.resumeRecording(e.data.call);case 329:dt=t.sent,Qt({eventType:c.VOICE_EVENT_TYPE.RECORDING_TOGGLE,payload:dt}),t.next=336;break;case 333:t.prev=333,t.t23=t.catch(323),t.t23 instanceof U?Ut(t.t23,c.VOICE_MESSAGE_TYPE.RESUME_RECORDING):Gt(c.VOICE_ERROR_TYPE.CAN_NOT_RESUME_RECORDING,t.t23,c.VOICE_MESSAGE_TYPE.RESUME_RECORDING);case 336:return t.abrupt("break",508);case 337:return t.prev=337,t.next=340,V.logout();case 340:pt=t.sent,ut.validateClassObject(pt,rt),At=pt.success,Nt=pt.loginFrameHeight,wt(c.SHARED_EVENT_TYPE.LOGOUT_RESULT,{success:At,loginFrameHeight:Nt}),t.next=349;break;case 346:t.prev=346,t.t24=t.catch(337),t.t24 instanceof U?Ut(t.t24,c.SHARED_MESSAGE_TYPE.LOGOUT):Gt(c.SHARED_ERROR_TYPE.CAN_NOT_LOG_OUT,t.t24,c.SHARED_MESSAGE_TYPE.LOGOUT);case 349:return t.abrupt("break",508);case 350:return V.handleMessage(e.data.message),t.abrupt("break",508);case 352:return t.next=354,V.getTelephonyConnector();case 354:return t.sent.wrapUpCall(e.data.call),t.abrupt("break",508);case 357:if(!e.data||!e.data.isAvailable){t.next=398;break}return t.next=360,V.getTelephonyConnector();case 360:return It=t.sent,t.next=363,It.getActiveCalls();case 363:Rt=t.sent,ut.validateClassObject(Rt,M),ft=Rt.activeCalls,t.t25=l().keys(ft);case 367:if((t.t26=t.t25()).done){t.next=398;break}if(Pt=t.t26.value,gt=ft[Pt],vt=!gt.callInfo||gt.callInfo.isReplayable,Lt=gt.callAttributes&&gt.callAttributes.participantType===c.PARTICIPANT_TYPE.SUPERVISOR,yt=Lt&&gt.callAttributes&&gt.callAttributes.hasSupervisorBargedIn,!vt){t.next=396;break}gt.isReplayedCall=!0,t.t27=gt.state,t.next=t.t27===c.CALL_STATE.CONNECTED?378:t.t27===c.CALL_STATE.RINGING?385:t.t27===c.CALL_STATE.TRANSFERRING?391:t.t27===c.CALL_STATE.TRANSFERRED?393:395;break;case 378:if(!Lt){t.next=383;break}return w=!0,wt(c.VOICE_EVENT_TYPE.SUPERVISOR_CALL_CONNECTED,gt),yt&&wt(c.VOICE_EVENT_TYPE.SUPERVISOR_BARGED_IN,gt),t.abrupt("break",396);case 383:return wt(c.VOICE_EVENT_TYPE.CALL_CONNECTED,gt),t.abrupt("break",396);case 385:if(!Lt){t.next=389;break}return w=!0,wt(c.VOICE_EVENT_TYPE.SUPERVISOR_CALL_STARTED,gt),t.abrupt("break",396);case 389:return wt(c.VOICE_EVENT_TYPE.CALL_STARTED,gt),t.abrupt("break",396);case 391:return wt(c.VOICE_EVENT_TYPE.PARTICIPANT_ADDED,{phoneNumber:gt.contact.phoneNumber,contact:gt.contact,callInfo:gt.callInfo,callAttributes:gt.callAttributes,initialCallHasEnded:gt.callAttributes.initialCallHasEnded,callId:gt.callId,connectionId:gt.connectionId}),t.abrupt("break",396);case 393:return wt(c.VOICE_EVENT_TYPE.PARTICIPANT_CONNECTED,{phoneNumber:gt.contact.phoneNumber,contact:gt.contact,callInfo:gt.callInfo,callAttributes:gt.callAttributes,initialCallHasEnded:gt.callAttributes.initialCallHasEnded,callId:gt.callId,connectionId:gt.connectionId}),t.abrupt("break",396);case 395:return t.abrupt("break",396);case 396:t.next=367;break;case 398:return t.abrupt("break",508);case 399:return t.prev=399,t.next=402,V.getTelephonyConnector();case 402:return Yt=t.sent,t.next=405,Yt.setAgentConfig(e.data.config);case 405:Ht=t.sent,ut.validateClassObjects(Ht,nt,st),Ht instanceof st&&Ht.setIsSystemEvent(!!e.data.config.isSystemEvent),wt(c.VOICE_EVENT_TYPE.AGENT_CONFIG_UPDATED,Ht),t.next=414;break;case 411:t.prev=411,t.t28=t.catch(399),t.t28 instanceof U?Ut(t.t28,c.VOICE_MESSAGE_TYPE.SET_AGENT_CONFIG):Gt(mt(t.t28)===c.VOICE_ERROR_TYPE.CAN_NOT_UPDATE_PHONE_NUMBER?c.VOICE_ERROR_TYPE.CAN_NOT_UPDATE_PHONE_NUMBER:c.VOICE_ERROR_TYPE.CAN_NOT_SET_AGENT_CONFIG,Dt(t.t28),c.VOICE_MESSAGE_TYPE.SET_AGENT_CONFIG);case 414:return t.abrupt("break",508);case 415:return t.prev=415,t.next=418,V.getTelephonyConnector();case 418:return Mt=t.sent,t.next=421,Mt.getAudioDevices();case 421:xt=t.sent,ut.validateClassObject(xt,x),wt(c.VOICE_EVENT_TYPE.GET_AUDIO_DEVICES,xt),t.next=429;break;case 426:t.prev=426,t.t29=t.catch(415),Gt(c.VOICE_ERROR_TYPE.CAN_NOT_GET_AUDIO_DEVICES,Dt(t.t29),c.VOICE_MESSAGE_TYPE.GET_AUDIO_DEVICES);case 429:return t.abrupt("break",508);case 430:return t.prev=430,Bt=e.data,Ft=Bt.recordingUrl,jt=Bt.vendorCallKey,Wt=Bt.callId,t.next=434,V.getTelephonyConnector();case 434:return Kt=t.sent,t.next=437,Kt.getSignedRecordingUrl(Ft,jt,Wt);case 437:qt=t.sent,ut.validateClassObject(qt,Z),wt(c.VOICE_EVENT_TYPE.SIGNED_RECORDING_URL,qt),t.next=447;break;case 442:t.prev=442,t.t30=t.catch(430),Jt=new Z({success:!1}),wt(c.VOICE_EVENT_TYPE.SIGNED_RECORDING_URL,Jt,!1),Vt(c.VOICE_MESSAGE_TYPE.GET_SIGNED_RECORDING_URL,Jt,!0);case 447:return t.abrupt("break",508);case 448:return V.downloadLogs(JSON.parse(JSON.stringify(f))),t.abrupt("break",508);case 450:return $t=e.data,Xt=$t.logLevel,zt=$t.logMessage,Zt=$t.payload,V.logMessageToVendor(Xt,zt,Zt),t.abrupt("break",508);case 453:return t.prev=453,w=!0,t.next=457,V.getTelephonyConnector();case 457:return te=t.sent,t.next=460,te.superviseCall(e.data.call);case 460:return ee=t.sent,ut.validateClassObject(ee,Ot),t.next=464,te.getAgentConfig();case 464:t.sent.selectedPhone.type===c.PHONE_TYPE.SOFT_PHONE?wt(c.VOICE_EVENT_TYPE.SUPERVISOR_CALL_CONNECTED,ee.call):wt(c.VOICE_EVENT_TYPE.SUPERVISOR_CALL_STARTED,ee.call),t.next=472;break;case 468:t.prev=468,t.t31=t.catch(453),w=!1,t.t31 instanceof U?Ut(t.t31,c.VOICE_MESSAGE_TYPE.SUPERVISE_CALL):Gt(c.VOICE_ERROR_TYPE.CAN_NOT_SUPERVISE_CALL,t.t31,c.VOICE_MESSAGE_TYPE.SUPERVISE_CALL);case 472:return t.abrupt("break",508);case 473:return t.prev=473,t.next=476,V.getTelephonyConnector();case 476:return ne=t.sent,t.next=479,ne.supervisorDisconnect(e.data.call);case 479:ae=t.sent,ut.validateClassObject(ae,St),w=!1,wt(c.VOICE_EVENT_TYPE.SUPERVISOR_HANGUP,ae.calls),t.next=488;break;case 485:t.prev=485,t.t32=t.catch(473),t.t32 instanceof U?Ut(t.t32,c.VOICE_MESSAGE_TYPE.SUPERVISOR_DISCONNECT):Gt(c.VOICE_ERROR_TYPE.CAN_NOT_DISCONNECT_SUPERVISOR,t.t32,c.VOICE_MESSAGE_TYPE.SUPERVISOR_DISCONNECT);case 488:return t.abrupt("break",508);case 489:return t.prev=489,t.next=492,V.getTelephonyConnector();case 492:return se=t.sent,t.next=495,se.supervisorBargeIn(e.data.call);case 495:re=t.sent,ut.validateClassObject(re,Ot),wt(c.VOICE_EVENT_TYPE.SUPERVISOR_BARGED_IN,re.call),t.next=503;break;case 500:t.prev=500,t.t33=t.catch(489),t.t33 instanceof U?Ut(t.t33,c.VOICE_MESSAGE_TYPE.SUPERVISOR_BARGE_IN):Gt(c.VOICE_ERROR_TYPE.CAN_NOT_BARGE_IN_SUPERVISOR,t.t33,c.VOICE_MESSAGE_TYPE.SUPERVISOR_BARGE_IN);case 503:return t.abrupt("break",508);case 504:return ie=e.data.agentWork,oe=ie.workItemId,le=ie.workId,ce=ie.workEvent,V.onAgentWorkEvent({workItemId:oe,workId:le,workEvent:ce}),t.abrupt("break",508);case 507:return t.abrupt("break",508);case 508:case"end":return t.stop()}}),t,null,[[5,27],[32,44],[48,65],[69,79],[83,93],[97,107],[121,131],[145,156],[171,179],[183,197],[214,222],[226,238],[242,251],[255,265],[269,279],[283,294],[309,319],[323,333],[337,346],[399,411],[415,426],[430,442],[453,468],[473,485],[489,500]])})))).apply(this,arguments)}function Bt(t){return Ft.apply(this,arguments)}function Ft(){return(Ft=i(l().mark((function t(e){var n,a,s,r;return l().wrap((function(t){for(;;)switch(t.prev=t.next){case 0:t.t0=e.data.type,t.next=t.t0===c.SHARED_MESSAGE_TYPE.SETUP_CONNECTOR?3:33;break;case 3:if(n=/^https:\/\/[\w-.]+(lightning\.[\w]+\.soma\.force\.com|\.lightning\.force\.com|\.lightning\.pc-rnd\.force\.com|\.stm\.force\.com|\.vf\.force\.com|\.salesforce\.com|\.my\.salesforce-sites\.com|\.lightning\.localhost\.[\w]+\.force.com|\.lightning\.force-com\.[\w.-]+\.crm\.dev|\.pc-rnd\.(salesforce|crmforce)\.mil)$/,a=new URL(e.origin),s=a.protocol+"//"+a.hostname,!n.test(s)){t.next=31;break}return(D=e.ports[0]).onmessage=Mt,Vt(c.SHARED_MESSAGE_TYPE.SETUP_CONNECTOR,jt(e.data.connectorConfig),!1),t.prev=10,t.next=13,V.init(e.data.connectorConfig);case 13:r=t.sent,ut.validateClassObject(r,tt),r.showStorageAccess?wt(c.SHARED_EVENT_TYPE.SHOW_STORAGE_ACCESS,{success:!0}):r.showLogin?wt(c.SHARED_EVENT_TYPE.SHOW_LOGIN,{loginFrameHeight:r.loginFrameHeight}):r.isSilentLogin?wt(c.SHARED_EVENT_TYPE.SHOW_LOGIN,{isSilentLogin:r.isSilentLogin}):Yt(),t.next=31;break;case 18:if(t.prev=18,t.t1=t.catch(10),!(t.t1 instanceof U)){t.next=24;break}Ut(t.t1,c.SHARED_MESSAGE_TYPE.SETUP_CONNECTOR),t.next=31;break;case 24:t.t2=mt(t.t1),t.next=t.t2===c.VOICE_ERROR_TYPE.INVALID_PARAMS?27:29;break;case 27:return Gt(c.VOICE_ERROR_TYPE.INVALID_PARAMS,Dt(t.t1),c.SHARED_MESSAGE_TYPE.SETUP_CONNECTOR),t.abrupt("break",31);case 29:return Gt(c.SHARED_ERROR_TYPE.CAN_NOT_LOG_IN,Dt(t.t1),c.SHARED_MESSAGE_TYPE.SETUP_CONNECTOR),t.abrupt("break",31);case 31:return window.removeEventListener("message",Bt),t.abrupt("break",34);case 33:return t.abrupt("break",34);case 34:case"end":return t.stop()}}),t,null,[[10,18]])})))).apply(this,arguments)}function jt(t){t=t||{};var e={};return E.forEach((function(n){t.hasOwnProperty(n)&&(e[n]=t[n])})),T.forEach((function(n){Object.keys(t).forEach((function(a){a.startsWith(n)&&!u.includes(a)&&(e[a]=t[a])}))})),e}function Wt(t,e,n,a){try{return ut.validateClassObject(t,e),!0}catch(t){return n&&Gt(n,t,a),!1}}function Kt(t){V=t,window.addEventListener("message",Bt)}function qt(t){Vt(t.eventType,t.payload,t.isError)}function Jt(t){var e=t.eventType,n=t.error;if(n instanceof U)Ut(n,e);else switch(e){case c.SHARED_EVENT_TYPE.LOGIN_RESULT:Gt(c.SHARED_ERROR_TYPE.CAN_NOT_LOG_IN,n,c.SHARED_EVENT_TYPE.LOGIN_RESULT);break;case c.SHARED_EVENT_TYPE.LOGOUT_RESULT:Gt(c.SHARED_ERROR_TYPE.CAN_NOT_LOG_OUT,n,c.SHARED_EVENT_TYPE.LOGOUT_RESULT);break;case c.VOICE_EVENT_TYPE.CALL_STARTED:Gt(c.VOICE_ERROR_TYPE.CAN_NOT_START_THE_CALL,n,c.VOICE_EVENT_TYPE.CALL_STARTED);break;case c.VOICE_EVENT_TYPE.QUEUED_CALL_STARTED:Gt(c.VOICE_ERROR_TYPE.CAN_NOT_START_THE_CALL,n,c.VOICE_EVENT_TYPE.QUEUED_CALL_STARTED);break;case c.VOICE_EVENT_TYPE.CALL_CONNECTED:Gt(c.VOICE_ERROR_TYPE.CAN_NOT_START_THE_CALL,n,c.VOICE_EVENT_TYPE.CALL_CONNECTED);break;case c.VOICE_EVENT_TYPE.HANGUP:Gt(c.VOICE_ERROR_TYPE.CAN_NOT_END_THE_CALL,n,c.VOICE_EVENT_TYPE.HANGUP);break;case c.VOICE_EVENT_TYPE.PARTICIPANT_ADDED:Gt(mt(n)===c.VOICE_ERROR_TYPE.INVALID_PARTICIPANT?c.VOICE_ERROR_TYPE.INVALID_PARTICIPANT:c.VOICE_ERROR_TYPE.CAN_NOT_ADD_PARTICIPANT,n,c.VOICE_EVENT_TYPE.PARTICIPANT_ADDED);break;case c.VOICE_EVENT_TYPE.PARTICIPANT_CONNECTED:Gt(c.VOICE_ERROR_TYPE.CAN_NOT_CONNECT_PARTICIPANT,n,c.VOICE_EVENT_TYPE.PARTICIPANT_CONNECTED);break;case c.VOICE_EVENT_TYPE.PARTICIPANT_REMOVED:Gt(c.VOICE_ERROR_TYPE.CAN_NOT_HANGUP_PARTICIPANT,n,c.VOICE_EVENT_TYPE.PARTICIPANT_REMOVED);break;case c.VOICE_EVENT_TYPE.MUTE_TOGGLE:Gt(c.VOICE_ERROR_TYPE.CAN_NOT_TOGGLE_MUTE,n,c.VOICE_EVENT_TYPE.MUTE_TOGGLE);break;case c.VOICE_EVENT_TYPE.HOLD_TOGGLE:Gt(mt(n)===c.VOICE_ERROR_TYPE.INVALID_PARTICIPANT?c.VOICE_ERROR_TYPE.INVALID_PARTICIPANT:c.VOICE_ERROR_TYPE.CAN_NOT_TOGGLE_HOLD,n,c.VOICE_EVENT_TYPE.HOLD_TOGGLE);break;case c.VOICE_EVENT_TYPE.RECORDING_TOGGLE:Gt(c.VOICE_ERROR_TYPE.CAN_NOT_TOGGLE_RECORD,n,c.VOICE_EVENT_TYPE.RECORDING_TOGGLE);break;case c.VOICE_EVENT_TYPE.PARTICIPANTS_SWAPPED:Gt(c.VOICE_ERROR_TYPE.CAN_NOT_SWAP_PARTICIPANTS,n,c.VOICE_EVENT_TYPE.PARTICIPANTS_SWAPPED);break;case c.VOICE_EVENT_TYPE.PARTICIPANTS_CONFERENCED:Gt(c.VOICE_ERROR_TYPE.CAN_NOT_CONFERENCE,n,c.VOICE_EVENT_TYPE.PARTICIPANTS_CONFERENCED);break;case c.VOICE_EVENT_TYPE.AGENT_ERROR:Gt(c.VOICE_ERROR_TYPE.AGENT_ERROR,n,c.VOICE_EVENT_TYPE.AGENT_ERROR);break;case c.VOICE_EVENT_TYPE.SOFTPHONE_ERROR:switch(mt(n)){case c.VOICE_ERROR_TYPE.UNSUPPORTED_BROWSER:case c.VOICE_ERROR_TYPE.MICROPHONE_NOT_SHARED:case c.VOICE_ERROR_TYPE.USER_BUSY_ERROR:case c.VOICE_ERROR_TYPE.WEBRTC_ERROR:Gt(mt(n),n,c.VOICE_EVENT_TYPE.SOFTPHONE_ERROR);break;default:Gt(c.SHARED_ERROR_TYPE.GENERIC_ERROR,n,c.VOICE_EVENT_TYPE.SOFTPHONE_ERROR)}break;case c.VOICE_EVENT_TYPE.CALL_UPDATED:Gt(c.VOICE_ERROR_TYPE.CAN_NOT_UPDATE_CALL,n,c.VOICE_EVENT_TYPE.CALL_UPDATED);break;default:console.error("Unhandled error scenario with arguments ",arguments)}}function Qt(t){return $t.apply(this,arguments)}function $t(){return($t=i(l().mark((function t(e){var n,a,s,r,i,o,E,T,u,C,h,_,d,p,A,N,I,O,S,R,f,P,g,v,L,b,m,D,G,U,k,Y,x,B,F,j,W,J,Q,Z,tt,et,at;return l().wrap((function(t){for(;;)switch(t.prev=t.next){case 0:n=e.eventType,a=e.payload,s=e.registerLog,r=void 0===s||s,t.t0=n,t.next=t.t0===c.SHARED_EVENT_TYPE.LOGIN_RESULT?4:t.t0===c.SHARED_EVENT_TYPE.LOGOUT_RESULT?6:t.t0===c.VOICE_EVENT_TYPE.CALL_STARTED?8:t.t0===c.VOICE_EVENT_TYPE.QUEUED_CALL_STARTED?10:t.t0===c.VOICE_EVENT_TYPE.CALL_CONNECTED?12:t.t0===c.VOICE_EVENT_TYPE.HANGUP?28:t.t0===c.VOICE_EVENT_TYPE.PARTICIPANT_ADDED?30:t.t0===c.VOICE_EVENT_TYPE.PARTICIPANT_CONNECTED?32:t.t0===c.VOICE_EVENT_TYPE.PARTICIPANT_REMOVED?34:t.t0===c.SHARED_EVENT_TYPE.MESSAGE?44:t.t0===c.VOICE_EVENT_TYPE.AFTER_CALL_WORK_STARTED?46:t.t0===c.VOICE_EVENT_TYPE.WRAP_UP_ENDED?48:t.t0===c.SHARED_EVENT_TYPE.REMOTE_CONTROLLER?50:t.t0===c.VOICE_EVENT_TYPE.MUTE_TOGGLE?52:t.t0===c.VOICE_EVENT_TYPE.HOLD_TOGGLE?54:t.t0===c.VOICE_EVENT_TYPE.RECORDING_TOGGLE?57:t.t0===c.VOICE_EVENT_TYPE.PARTICIPANTS_SWAPPED?60:t.t0===c.VOICE_EVENT_TYPE.PARTICIPANTS_CONFERENCED?62:t.t0===c.VOICE_EVENT_TYPE.CALL_UPDATED?64:t.t0===c.VOICE_EVENT_TYPE.UPDATE_AUDIO_STATS?66:t.t0===c.VOICE_EVENT_TYPE.SUPERVISOR_BARGED_IN?68:t.t0===c.VOICE_EVENT_TYPE.CALL_BARGED_IN?70:t.t0===c.VOICE_EVENT_TYPE.SUPERVISOR_CALL_STARTED?72:t.t0===c.VOICE_EVENT_TYPE.SUPERVISOR_CALL_CONNECTED?74:t.t0===c.VOICE_EVENT_TYPE.SUPERVISOR_HANGUP?76:t.t0===c.SHARED_EVENT_TYPE.SET_AGENT_STATUS?78:t.t0===c.VOICE_EVENT_TYPE.SHOW_TRANSFER_VIEW?80:t.t0===c.SHARED_EVENT_TYPE.STORAGE_ACCESS_RESULT?82:t.t0===c.SHARED_EVENT_TYPE.AFTER_CONVERSATION_WORK_STARTED?84:t.t0===c.SHARED_EVENT_TYPE.AFTER_CONVERSATION_WORK_ENDED?86:t.t0===c.SHARED_EVENT_TYPE.GET_AGENT_STATUS?88:t.t0===c.SHARED_EVENT_TYPE.STATE_CHANGE?90:92;break;case 4:return Wt(a,nt,c.SHARED_ERROR_TYPE.CAN_NOT_LOG_IN,c.SHARED_EVENT_TYPE.LOGIN_RESULT)&&(wt(c.SHARED_EVENT_TYPE.LOGIN_RESULT,a,r),a.success&&Yt()),t.abrupt("break",92);case 6:return Wt(a,rt,c.SHARED_ERROR_TYPE.CAN_NOT_LOG_OUT,c.SHARED_EVENT_TYPE.LOGOUT_RESULT)&&wt(c.SHARED_EVENT_TYPE.LOGOUT_RESULT,{success:a.success,loginFrameHeight:a.loginFrameHeight},r),t.abrupt("break",92);case 8:return Wt(a,$,c.VOICE_ERROR_TYPE.CAN_NOT_START_THE_CALL,c.VOICE_EVENT_TYPE.CALL_STARTED)&&wt(c.VOICE_EVENT_TYPE.CALL_STARTED,a.call,!0),t.abrupt("break",92);case 10:return Wt(a,$,c.VOICE_ERROR_TYPE.CAN_NOT_START_THE_CALL,c.VOICE_EVENT_TYPE.QUEUED_CALL_STARTED)&&wt(c.VOICE_EVENT_TYPE.QUEUED_CALL_STARTED,a.call,!0),t.abrupt("break",92);case 12:if(!Wt(a,$,c.VOICE_ERROR_TYPE.CAN_NOT_START_THE_CALL,c.VOICE_EVENT_TYPE.CALL_CONNECTED)){t.next=27;break}if(bt(),!w){t.next=26;break}return t.next=17,V.getTelephonyConnector();case 17:return i=t.sent,t.next=20,i.supervisorDisconnect();case 20:return o=t.sent,ut.validateClassObject(o,St),w=!1,wt(c.VOICE_EVENT_TYPE.SUPERVISOR_HANGUP,o,!0),wt(c.VOICE_EVENT_TYPE.CALL_CONNECTED,a.call,!0),t.abrupt("break",92);case 26:wt(c.VOICE_EVENT_TYPE.CALL_CONNECTED,a.call,!0);case 27:return t.abrupt("break",92);case 28:return Wt(a,X,c.VOICE_ERROR_TYPE.CAN_NOT_END_THE_CALL,c.VOICE_EVENT_TYPE.HANGUP)&&wt(c.VOICE_EVENT_TYPE.HANGUP,a.calls,!0),t.abrupt("break",92);case 30:return Wt(a,q,c.VOICE_ERROR_TYPE.CAN_NOT_ADD_PARTICIPANT,c.VOICE_EVENT_TYPE.PARTICIPANT_ADDED)&&(E=a.contact,T=a.initialCallHasEnded,u=a.callInfo,C=a.callAttributes,h=a.phoneNumber,_=a.callId,d=a.connectionId,wt(c.VOICE_EVENT_TYPE.PARTICIPANT_ADDED,{contact:E,initialCallHasEnded:T,callInfo:u,callAttributes:C,phoneNumber:h,callId:_,connectionId:d},!0)),t.abrupt("break",92);case 32:return Wt(a,q,c.VOICE_ERROR_TYPE.CAN_NOT_CONNECT_PARTICIPANT,c.VOICE_EVENT_TYPE.PARTICIPANT_CONNECTED)&&(p=a.initialCallHasEnded,A=a.callInfo,N=a.callAttributes,I=a.phoneNumber,O=a.callId,S=a.contact,R=a.connectionId,wt(c.VOICE_EVENT_TYPE.PARTICIPANT_CONNECTED,{initialCallHasEnded:p,callInfo:A,callAttributes:N,phoneNumber:I,callId:O,contact:S,connectionId:R},!0)),t.abrupt("break",92);case 34:if(!Wt(a,$,c.VOICE_ERROR_TYPE.CAN_NOT_HANGUP_PARTICIPANT,c.VOICE_EVENT_TYPE.PARTICIPANT_REMOVED)){t.next=43;break}return f=a.call,t.next=38,V.getTelephonyConnector();case 38:return P=t.sent,t.next=41,P.getActiveCalls();case 41:Wt(g=t.sent,M)&&(0===(v=g.activeCalls).length?wt(c.VOICE_EVENT_TYPE.HANGUP,f,!0):f&&f.callAttributes&&f.callType!==c.CALL_TYPE.CONSULT&&f.callAttributes.participantType===c.PARTICIPANT_TYPE.INITIAL_CALLER?wt(Object.values(v).filter((function(t){return t.callType===c.CALL_TYPE.ADD_PARTICIPANT})).pop().state===c.CALL_STATE.TRANSFERRING?c.VOICE_EVENT_TYPE.PARTICIPANT_ADDED:c.VOICE_EVENT_TYPE.PARTICIPANT_CONNECTED,{initialCallHasEnded:!0},!0):wt(c.VOICE_EVENT_TYPE.PARTICIPANT_REMOVED,{callId:f?f.callId:null,connectionId:f?f.connectionId:null,reason:f?f.reason:null},!0));case 43:return t.abrupt("break",92);case 44:return wt(c.SHARED_EVENT_TYPE.MESSAGE,a,r),t.abrupt("break",92);case 46:return wt(c.VOICE_EVENT_TYPE.AFTER_CALL_WORK_STARTED,a,r),t.abrupt("break",92);case 48:return wt(c.VOICE_EVENT_TYPE.WRAP_UP_ENDED,a,r),t.abrupt("break",92);case 50:return Mt(a),t.abrupt("break",92);case 52:return Wt(a,H,c.VOICE_ERROR_TYPE.CAN_NOT_TOGGLE_MUTE,c.VOICE_EVENT_TYPE.MUTE_TOGGLE)&&wt(c.VOICE_EVENT_TYPE.MUTE_TOGGLE,a,r),t.abrupt("break",92);case 54:return L=a.isThirdPartyOnHold,b=a.isCustomerOnHold,m=a.calls,Wt(a,z,c.VOICE_ERROR_TYPE.CAN_NOT_TOGGLE_HOLD,c.VOICE_EVENT_TYPE.HOLD_TOGGLE)&&wt(c.VOICE_EVENT_TYPE.HOLD_TOGGLE,{isThirdPartyOnHold:L,isCustomerOnHold:b,calls:m},r),t.abrupt("break",92);case 57:return D=a.isRecordingPaused,G=a.contactId,U=a.initialContactId,k=a.instanceId,Y=a.region,Wt(a,K,c.VOICE_ERROR_TYPE.CAN_NOT_TOGGLE_RECORD,c.VOICE_EVENT_TYPE.RECORDING_TOGGLE)&&wt(c.VOICE_EVENT_TYPE.RECORDING_TOGGLE,{isRecordingPaused:D,contactId:G,initialContactId:U,instanceId:k,region:Y},r),t.abrupt("break",92);case 60:return Wt(a,z,c.VOICE_ERROR_TYPE.CAN_NOT_SWAP_PARTICIPANTS,c.VOICE_EVENT_TYPE.PARTICIPANTS_SWAPPED)&&(x=a.isThirdPartyOnHold,B=a.isCustomerOnHold,F=a.calls,wt(c.VOICE_EVENT_TYPE.HOLD_TOGGLE,{isThirdPartyOnHold:x,isCustomerOnHold:B,calls:F},!0)),t.abrupt("break",92);case 62:return Wt(a,z,c.VOICE_ERROR_TYPE.CAN_NOT_CONFERENCE,c.VOICE_EVENT_TYPE.PARTICIPANTS_CONFERENCED)&&(j=a.isThirdPartyOnHold,W=a.isCustomerOnHold,J=a.calls,Q=a.isCallMerged,wt(c.VOICE_EVENT_TYPE.HOLD_TOGGLE,{isThirdPartyOnHold:j,isCustomerOnHold:W,isCallMerged:Q,calls:J},!0)),t.abrupt("break",92);case 64:return Wt(a,$,c.VOICE_ERROR_TYPE.CAN_NOT_UPDATE_CALL,c.VOICE_EVENT_TYPE.CALL_UPDATED)&&wt(c.VOICE_EVENT_TYPE.CALL_UPDATED,a,r),t.abrupt("break",92);case 66:return Wt(a,At)&&(a.stats&&(l=a.stats,y&&l.forEach((function(t){t.inputChannelStats&&(y.inputChannelStats.statsCount++,y.inputChannelStats.packetsCount+=0|t.inputChannelStats.packetsCount,y.inputChannelStats.packetsLost+=0|t.inputChannelStats.packetsLost,y.inputChannelStats.jitterBufferMillis+=0|t.inputChannelStats.jitterBufferMillis,y.inputChannelStats.roundTripTimeMillis+=0|t.inputChannelStats.roundTripTimeMillis),t.outputChannelStats&&(y.outputChannelStats.statsCount++,y.outputChannelStats.packetsCount+=0|t.outputChannelStats.packetsCount,y.outputChannelStats.packetsLost+=0|t.outputChannelStats.packetsLost,y.outputChannelStats.jitterBufferMillis+=0|t.outputChannelStats.jitterBufferMillis,y.outputChannelStats.roundTripTimeMillis+=0|t.outputChannelStats.roundTripTimeMillis)})),Z=a.callId?{stats:a.stats,callId:a.callId}:{stats:a.stats},wt(c.VOICE_EVENT_TYPE.AUDIO_STATS,{audioStats:Z},r)),a.isAudioStatsCompleted&&a.callId&&(tt=a.callId,et=Lt(),wt(c.VOICE_EVENT_TYPE.UPDATE_AUDIO_STATS_COMPLETED,{callId:tt,mos:et},r))),t.abrupt("break",92);case 68:return Wt(a,Ot,c.VOICE_ERROR_TYPE.CAN_NOT_BARGE_IN_SUPERVISOR,c.VOICE_EVENT_TYPE.SUPERVISOR_BARGED_IN)&&wt(c.VOICE_EVENT_TYPE.SUPERVISOR_BARGED_IN,a.call,!0),t.abrupt("break",92);case 70:return Wt(a,pt,c.SHARED_ERROR_TYPE.GENERIC_ERROR,c.VOICE_EVENT_TYPE.CALL_BARGED_IN)&&wt(c.VOICE_EVENT_TYPE.CALL_BARGED_IN,a,!0),t.abrupt("break",92);case 72:return Wt(a,Ot,c.VOICE_ERROR_TYPE.CAN_NOT_SUPERVISE_CALL,c.VOICE_EVENT_TYPE.SUPERVISOR_CALL_STARTED)&&(w=!0,wt(c.VOICE_EVENT_TYPE.SUPERVISOR_CALL_STARTED,a.call,!0)),t.abrupt("break",92);case 74:return Wt(a,Ot,c.VOICE_ERROR_TYPE.CAN_NOT_SUPERVISE_CALL,c.VOICE_EVENT_TYPE.SUPERVISOR_CALL_CONNECTED)&&(w=!0,wt(c.VOICE_EVENT_TYPE.SUPERVISOR_CALL_CONNECTED,a.call,!0)),t.abrupt("break",92);case 76:return Wt(a,St,c.VOICE_ERROR_TYPE.CAN_NOT_DISCONNECT_SUPERVISOR,c.VOICE_EVENT_TYPE.SUPERVISOR_HANGUP)&&(w=!1,wt(c.VOICE_EVENT_TYPE.SUPERVISOR_HANGUP,a.calls,!0)),t.abrupt("break",92);case 78:return Wt(a,ht,c.SHARED_ERROR_TYPE.CAN_NOT_SET_AGENT_STATUS,c.SHARED_EVENT_TYPE.SET_AGENT_STATUS)&&(at=a.statusId,wt(c.SHARED_EVENT_TYPE.SET_AGENT_STATUS,{statusId:at},r)),t.abrupt("break",92);case 80:return wt(c.VOICE_EVENT_TYPE.SHOW_TRANSFER_VIEW,a),t.abrupt("break",92);case 82:return Wt(a,Rt,c.SHARED_ERROR_TYPE.INVALID_STORAGE_ACCESS_RESULT,c.SHARED_EVENT_TYPE.STORAGE_ACCESS_RESULT)&&(wt(c.SHARED_EVENT_TYPE.STORAGE_ACCESS_RESULT,a),a.success&&(a.showLogin?wt(c.SHARED_EVENT_TYPE.SHOW_LOGIN,{loginFrameHeight:a.loginFrameHeight},r):Yt())),t.abrupt("break",92);case 84:return Wt(a,Pt,c.SHARED_ERROR_TYPE.INVALID_ACW_INFO,c.SHARED_EVENT_TYPE.AFTER_CONVERSATION_WORK_STARTED)&&wt(c.SHARED_EVENT_TYPE.AFTER_CONVERSATION_WORK_STARTED,a,r),t.abrupt("break",92);case 86:return Wt(a,Pt,c.SHARED_ERROR_TYPE.INVALID_ACW_INFO,c.SHARED_EVENT_TYPE.AFTER_CONVERSATION_WORK_ENDED)&&wt(c.SHARED_EVENT_TYPE.AFTER_CONVERSATION_WORK_ENDED,a,r),t.abrupt("break",92);case 88:return Wt(a,_t,c.SHARED_ERROR_TYPE.CAN_NOT_GET_AGENT_STATUS,c.SHARED_EVENT_TYPE.GET_AGENT_STATUS)&&wt(c.SHARED_EVENT_TYPE.GET_AGENT_STATUS,a,r),t.abrupt("break",92);case 90:return Wt(a,dt,c.SHARED_ERROR_TYPE.INVALID_STATE_CHANGE_RESULT,c.SHARED_EVENT_TYPE.STATE_CHANGE)&&wt(c.SHARED_EVENT_TYPE.STATE_CHANGE,a),t.abrupt("break",92);case 92:case"end":return t.stop()}var l}),t)})))).apply(this,arguments)}})(),a})(),t.exports=e()},6930:(t,e,n)=>{"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.reconstructPacket=e.deconstructPacket=void 0;const a=n(2785);function s(t,e){if(!t)return t;if(a.isBinary(t)){const n={_placeholder:!0,num:e.length};return e.push(t),n}if(Array.isArray(t)){const n=new Array(t.length);for(let a=0;a<t.length;a++)n[a]=s(t[a],e);return n}if("object"==typeof t&&!(t instanceof Date)){const n={};for(const a in t)t.hasOwnProperty(a)&&(n[a]=s(t[a],e));return n}return t}function r(t,e){if(!t)return t;if(t&&!0===t._placeholder){if("number"==typeof t.num&&t.num>=0&&t.num<e.length)return e[t.num];throw new Error("illegal attachments")}if(Array.isArray(t))for(let n=0;n<t.length;n++)t[n]=r(t[n],e);else if("object"==typeof t)for(const n in t)t.hasOwnProperty(n)&&(t[n]=r(t[n],e));return t}e.deconstructPacket=function(t){const e=[],n=t.data,a=t;return a.data=s(n,e),a.attachments=e.length,{packet:a,buffers:e}},e.reconstructPacket=function(t,e){return t.data=r(t.data,e),t.attachments=void 0,t}},7519:(t,e,n)=>{"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.Decoder=e.Encoder=e.PacketType=e.protocol=void 0;const a=n(5971),s=n(6930),r=n(2785),i=n(7833)("socket.io-parser");var o;e.protocol=5,function(t){t[t.CONNECT=0]="CONNECT",t[t.DISCONNECT=1]="DISCONNECT",t[t.EVENT=2]="EVENT",t[t.ACK=3]="ACK",t[t.CONNECT_ERROR=4]="CONNECT_ERROR",t[t.BINARY_EVENT=5]="BINARY_EVENT",t[t.BINARY_ACK=6]="BINARY_ACK"}(o=e.PacketType||(e.PacketType={})),e.Encoder=class{encode(t){return i("encoding packet %j",t),t.type!==o.EVENT&&t.type!==o.ACK||!r.hasBinary(t)?[this.encodeAsString(t)]:(t.type=t.type===o.EVENT?o.BINARY_EVENT:o.BINARY_ACK,this.encodeAsBinary(t))}encodeAsString(t){let e=""+t.type;return t.type!==o.BINARY_EVENT&&t.type!==o.BINARY_ACK||(e+=t.attachments+"-"),t.nsp&&"/"!==t.nsp&&(e+=t.nsp+","),null!=t.id&&(e+=t.id),null!=t.data&&(e+=JSON.stringify(t.data)),i("encoded %j as %s",t,e),e}encodeAsBinary(t){const e=s.deconstructPacket(t),n=this.encodeAsString(e.packet),a=e.buffers;return a.unshift(n),a}};class l extends a{constructor(){super()}add(t){let e;if("string"==typeof t){if(this.reconstructor)throw new Error("got plaintext data when reconstructing a packet");e=this.decodeString(t),e.type===o.BINARY_EVENT||e.type===o.BINARY_ACK?(this.reconstructor=new c(e),0===e.attachments&&super.emit("decoded",e)):super.emit("decoded",e)}else{if(!r.isBinary(t)&&!t.base64)throw new Error("Unknown type: "+t);if(!this.reconstructor)throw new Error("got binary data when not reconstructing a packet");e=this.reconstructor.takeBinaryData(t),e&&(this.reconstructor=null,super.emit("decoded",e))}}decodeString(t){let e=0;const n={type:Number(t.charAt(0))};if(void 0===o[n.type])throw new Error("unknown packet type "+n.type);if(n.type===o.BINARY_EVENT||n.type===o.BINARY_ACK){const a=e+1;for(;"-"!==t.charAt(++e)&&e!=t.length;);const s=t.substring(a,e);if(s!=Number(s)||"-"!==t.charAt(e))throw new Error("Illegal attachments");n.attachments=Number(s)}if("/"===t.charAt(e+1)){const a=e+1;for(;++e&&","!==t.charAt(e)&&e!==t.length;);n.nsp=t.substring(a,e)}else n.nsp="/";const a=t.charAt(e+1);if(""!==a&&Number(a)==a){const a=e+1;for(;++e;){const n=t.charAt(e);if(null==n||Number(n)!=n){--e;break}if(e===t.length)break}n.id=Number(t.substring(a,e+1))}if(t.charAt(++e)){const a=function(t){try{return JSON.parse(t)}catch(t){return!1}}(t.substr(e));if(!l.isPayloadValid(n.type,a))throw new Error("invalid payload");n.data=a}return i("decoded %s as %j",t,n),n}static isPayloadValid(t,e){switch(t){case o.CONNECT:return"object"==typeof e;case o.DISCONNECT:return void 0===e;case o.CONNECT_ERROR:return"string"==typeof e||"object"==typeof e;case o.EVENT:case o.BINARY_EVENT:return Array.isArray(e)&&e.length>0;case o.ACK:case o.BINARY_ACK:return Array.isArray(e)}}destroy(){this.reconstructor&&this.reconstructor.finishedReconstruction()}}e.Decoder=l;class c{constructor(t){this.packet=t,this.buffers=[],this.reconPack=t}takeBinaryData(t){if(this.buffers.push(t),this.buffers.length===this.reconPack.attachments){const t=s.reconstructPacket(this.reconPack,this.buffers);return this.finishedReconstruction(),t}return null}finishedReconstruction(){this.reconPack=null,this.buffers=[]}}},2785:(t,e)=>{"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.hasBinary=e.isBinary=void 0;const n="function"==typeof ArrayBuffer,a=Object.prototype.toString,s="function"==typeof Blob||"undefined"!=typeof Blob&&"[object BlobConstructor]"===a.call(Blob),r="function"==typeof File||"undefined"!=typeof File&&"[object FileConstructor]"===a.call(File);function i(t){return n&&(t instanceof ArrayBuffer||(t=>"function"==typeof ArrayBuffer.isView?ArrayBuffer.isView(t):t.buffer instanceof ArrayBuffer)(t))||s&&t instanceof Blob||r&&t instanceof File}e.isBinary=i,e.hasBinary=function t(e,n){if(!e||"object"!=typeof e)return!1;if(Array.isArray(e)){for(let n=0,a=e.length;n<a;n++)if(t(e[n]))return!0;return!1}if(i(e))return!0;if(e.toJSON&&"function"==typeof e.toJSON&&1===arguments.length)return t(e.toJSON(),!0);for(const n in e)if(Object.prototype.hasOwnProperty.call(e,n)&&t(e[n]))return!0;return!1}},2121:t=>{"use strict";var e,n="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_".split(""),a=64,s={},r=0,i=0;function o(t){var e="";do{e=n[t%a]+e,t=Math.floor(t/a)}while(t>0);return e}function l(){var t=o(+new Date);return t!==e?(r=0,e=t):t+"."+o(r++)}for(;i<a;i++)s[n[i]]=i;l.encode=o,l.decode=function(t){var e=0;for(i=0;i<t.length;i++)e=e*a+s[t.charAt(i)];return e},t.exports=l},7230:(t,e,n)=>{"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.io=e.Socket=e.Manager=e.protocol=void 0;const a=n(9543),s=n(2081),r=n(7833)("socket.io-client");t.exports=e=o;const i=e.managers={};function o(t,e){"object"==typeof t&&(e=t,t=void 0),e=e||{};const n=(0,a.url)(t,e.path||"/socket.io"),o=n.source,l=n.id,c=n.path,E=i[l]&&c in i[l].nsps;let T;return e.forceNew||e["force new connection"]||!1===e.multiplex||E?(r("ignoring socket cache for %s",o),T=new s.Manager(o,e)):(i[l]||(r("new io instance for %s",o),i[l]=new s.Manager(o,e)),T=i[l]),n.query&&!e.query&&(e.query=n.queryKey),T.socket(n.path,e)}e.io=o;var l=n(7519);Object.defineProperty(e,"protocol",{enumerable:!0,get:function(){return l.protocol}}),e.connect=o;var c=n(2081);Object.defineProperty(e,"Manager",{enumerable:!0,get:function(){return c.Manager}});var E=n(9521);Object.defineProperty(e,"Socket",{enumerable:!0,get:function(){return E.Socket}}),e.default=o},2081:(t,e,n)=>{"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.Manager=void 0;const a=n(3357),s=n(9773),r=n(9521),i=n(7519),o=n(9221),l=n(3059),c=n(6278),E=n(7833)("socket.io-client:manager");class T extends c.StrictEventEmitter{constructor(t,e){var n;super(),this.nsps={},this.subs=[],t&&"object"==typeof t&&(e=t,t=void 0),(e=e||{}).path=e.path||"/socket.io",this.opts=e,(0,s.installTimerFunctions)(this,e),this.reconnection(!1!==e.reconnection),this.reconnectionAttempts(e.reconnectionAttempts||1/0),this.reconnectionDelay(e.reconnectionDelay||1e3),this.reconnectionDelayMax(e.reconnectionDelayMax||5e3),this.randomizationFactor(null!==(n=e.randomizationFactor)&&void 0!==n?n:.5),this.backoff=new l({min:this.reconnectionDelay(),max:this.reconnectionDelayMax(),jitter:this.randomizationFactor()}),this.timeout(null==e.timeout?2e4:e.timeout),this._readyState="closed",this.uri=t;const a=e.parser||i;this.encoder=new a.Encoder,this.decoder=new a.Decoder,this._autoConnect=!1!==e.autoConnect,this._autoConnect&&this.open()}reconnection(t){return arguments.length?(this._reconnection=!!t,this):this._reconnection}reconnectionAttempts(t){return void 0===t?this._reconnectionAttempts:(this._reconnectionAttempts=t,this)}reconnectionDelay(t){var e;return void 0===t?this._reconnectionDelay:(this._reconnectionDelay=t,null===(e=this.backoff)||void 0===e||e.setMin(t),this)}randomizationFactor(t){var e;return void 0===t?this._randomizationFactor:(this._randomizationFactor=t,null===(e=this.backoff)||void 0===e||e.setJitter(t),this)}reconnectionDelayMax(t){var e;return void 0===t?this._reconnectionDelayMax:(this._reconnectionDelayMax=t,null===(e=this.backoff)||void 0===e||e.setMax(t),this)}timeout(t){return arguments.length?(this._timeout=t,this):this._timeout}maybeReconnectOnOpen(){!this._reconnecting&&this._reconnection&&0===this.backoff.attempts&&this.reconnect()}open(t){if(E("readyState %s",this._readyState),~this._readyState.indexOf("open"))return this;E("opening %s",this.uri),this.engine=a(this.uri,this.opts);const e=this.engine,n=this;this._readyState="opening",this.skipReconnect=!1;const s=(0,o.on)(e,"open",(function(){n.onopen(),t&&t()})),r=(0,o.on)(e,"error",(e=>{E("error"),n.cleanup(),n._readyState="closed",this.emitReserved("error",e),t?t(e):n.maybeReconnectOnOpen()}));if(!1!==this._timeout){const t=this._timeout;E("connect attempt will timeout after %d",t),0===t&&s();const n=this.setTimeoutFn((()=>{E("connect attempt timed out after %d",t),s(),e.close(),e.emit("error",new Error("timeout"))}),t);this.opts.autoUnref&&n.unref(),this.subs.push((function(){clearTimeout(n)}))}return this.subs.push(s),this.subs.push(r),this}connect(t){return this.open(t)}onopen(){E("open"),this.cleanup(),this._readyState="open",this.emitReserved("open");const t=this.engine;this.subs.push((0,o.on)(t,"ping",this.onping.bind(this)),(0,o.on)(t,"data",this.ondata.bind(this)),(0,o.on)(t,"error",this.onerror.bind(this)),(0,o.on)(t,"close",this.onclose.bind(this)),(0,o.on)(this.decoder,"decoded",this.ondecoded.bind(this)))}onping(){this.emitReserved("ping")}ondata(t){this.decoder.add(t)}ondecoded(t){this.emitReserved("packet",t)}onerror(t){E("error",t),this.emitReserved("error",t)}socket(t,e){let n=this.nsps[t];return n||(n=new r.Socket(this,t,e),this.nsps[t]=n),n}_destroy(t){const e=Object.keys(this.nsps);for(const t of e)if(this.nsps[t].active)return void E("socket %s is still active, skipping close",t);this._close()}_packet(t){E("writing packet %j",t);const e=this.encoder.encode(t);for(let n=0;n<e.length;n++)this.engine.write(e[n],t.options)}cleanup(){E("cleanup"),this.subs.forEach((t=>t())),this.subs.length=0,this.decoder.destroy()}_close(){E("disconnect"),this.skipReconnect=!0,this._reconnecting=!1,"opening"===this._readyState&&this.cleanup(),this.backoff.reset(),this._readyState="closed",this.engine&&this.engine.close()}disconnect(){return this._close()}onclose(t){E("onclose"),this.cleanup(),this.backoff.reset(),this._readyState="closed",this.emitReserved("close",t),this._reconnection&&!this.skipReconnect&&this.reconnect()}reconnect(){if(this._reconnecting||this.skipReconnect)return this;const t=this;if(this.backoff.attempts>=this._reconnectionAttempts)E("reconnect failed"),this.backoff.reset(),this.emitReserved("reconnect_failed"),this._reconnecting=!1;else{const e=this.backoff.duration();E("will wait %dms before reconnect attempt",e),this._reconnecting=!0;const n=this.setTimeoutFn((()=>{t.skipReconnect||(E("attempting reconnect"),this.emitReserved("reconnect_attempt",t.backoff.attempts),t.skipReconnect||t.open((e=>{e?(E("reconnect attempt error"),t._reconnecting=!1,t.reconnect(),this.emitReserved("reconnect_error",e)):(E("reconnect success"),t.onreconnect())})))}),e);this.opts.autoUnref&&n.unref(),this.subs.push((function(){clearTimeout(n)}))}}onreconnect(){const t=this.backoff.attempts;this._reconnecting=!1,this.backoff.reset(),this.emitReserved("reconnect",t)}}e.Manager=T},9221:(t,e)=>{"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.on=void 0,e.on=function(t,e,n){return t.on(e,n),function(){t.off(e,n)}}},9521:(t,e,n)=>{"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.Socket=void 0;const a=n(7519),s=n(9221),r=n(6278),i=n(7833)("socket.io-client:socket"),o=Object.freeze({connect:1,connect_error:1,disconnect:1,disconnecting:1,newListener:1,removeListener:1});class l extends r.StrictEventEmitter{constructor(t,e,n){super(),this.connected=!1,this.disconnected=!0,this.receiveBuffer=[],this.sendBuffer=[],this.ids=0,this.acks={},this.flags={},this.io=t,this.nsp=e,n&&n.auth&&(this.auth=n.auth),this.io._autoConnect&&this.open()}subEvents(){if(this.subs)return;const t=this.io;this.subs=[(0,s.on)(t,"open",this.onopen.bind(this)),(0,s.on)(t,"packet",this.onpacket.bind(this)),(0,s.on)(t,"error",this.onerror.bind(this)),(0,s.on)(t,"close",this.onclose.bind(this))]}get active(){return!!this.subs}connect(){return this.connected||(this.subEvents(),this.io._reconnecting||this.io.open(),"open"===this.io._readyState&&this.onopen()),this}open(){return this.connect()}send(...t){return t.unshift("message"),this.emit.apply(this,t),this}emit(t,...e){if(o.hasOwnProperty(t))throw new Error('"'+t+'" is a reserved event name');e.unshift(t);const n={type:a.PacketType.EVENT,data:e,options:{}};n.options.compress=!1!==this.flags.compress,"function"==typeof e[e.length-1]&&(i("emitting packet with ack id %d",this.ids),this.acks[this.ids]=e.pop(),n.id=this.ids++);const s=this.io.engine&&this.io.engine.transport&&this.io.engine.transport.writable;return!this.flags.volatile||s&&this.connected?this.connected?this.packet(n):this.sendBuffer.push(n):i("discard packet as the transport is not currently writable"),this.flags={},this}packet(t){t.nsp=this.nsp,this.io._packet(t)}onopen(){i("transport is open - connecting"),"function"==typeof this.auth?this.auth((t=>{this.packet({type:a.PacketType.CONNECT,data:t})})):this.packet({type:a.PacketType.CONNECT,data:this.auth})}onerror(t){this.connected||this.emitReserved("connect_error",t)}onclose(t){i("close (%s)",t),this.connected=!1,this.disconnected=!0,delete this.id,this.emitReserved("disconnect",t)}onpacket(t){if(t.nsp===this.nsp)switch(t.type){case a.PacketType.CONNECT:if(t.data&&t.data.sid){const e=t.data.sid;this.onconnect(e)}else this.emitReserved("connect_error",new Error("It seems you are trying to reach a Socket.IO server in v2.x with a v3.x client, but they are not compatible (more information here: https://socket.io/docs/v3/migrating-from-2-x-to-3-0/)"));break;case a.PacketType.EVENT:case a.PacketType.BINARY_EVENT:this.onevent(t);break;case a.PacketType.ACK:case a.PacketType.BINARY_ACK:this.onack(t);break;case a.PacketType.DISCONNECT:this.ondisconnect();break;case a.PacketType.CONNECT_ERROR:const e=new Error(t.data.message);e.data=t.data.data,this.emitReserved("connect_error",e)}}onevent(t){const e=t.data||[];i("emitting event %j",e),null!=t.id&&(i("attaching ack callback to event"),e.push(this.ack(t.id))),this.connected?this.emitEvent(e):this.receiveBuffer.push(Object.freeze(e))}emitEvent(t){if(this._anyListeners&&this._anyListeners.length){const e=this._anyListeners.slice();for(const n of e)n.apply(this,t)}super.emit.apply(this,t)}ack(t){const e=this;let n=!1;return function(...s){n||(n=!0,i("sending ack %j",s),e.packet({type:a.PacketType.ACK,id:t,data:s}))}}onack(t){const e=this.acks[t.id];"function"==typeof e?(i("calling ack %s with %j",t.id,t.data),e.apply(this,t.data),delete this.acks[t.id]):i("bad ack %s",t.id)}onconnect(t){i("socket connected with id %s",t),this.id=t,this.connected=!0,this.disconnected=!1,this.emitBuffered(),this.emitReserved("connect")}emitBuffered(){this.receiveBuffer.forEach((t=>this.emitEvent(t))),this.receiveBuffer=[],this.sendBuffer.forEach((t=>this.packet(t))),this.sendBuffer=[]}ondisconnect(){i("server disconnect (%s)",this.nsp),this.destroy(),this.onclose("io server disconnect")}destroy(){this.subs&&(this.subs.forEach((t=>t())),this.subs=void 0),this.io._destroy(this)}disconnect(){return this.connected&&(i("performing disconnect (%s)",this.nsp),this.packet({type:a.PacketType.DISCONNECT})),this.destroy(),this.connected&&this.onclose("io client disconnect"),this}close(){return this.disconnect()}compress(t){return this.flags.compress=t,this}get volatile(){return this.flags.volatile=!0,this}onAny(t){return this._anyListeners=this._anyListeners||[],this._anyListeners.push(t),this}prependAny(t){return this._anyListeners=this._anyListeners||[],this._anyListeners.unshift(t),this}offAny(t){if(!this._anyListeners)return this;if(t){const e=this._anyListeners;for(let n=0;n<e.length;n++)if(t===e[n])return e.splice(n,1),this}else this._anyListeners=[];return this}listenersAny(){return this._anyListeners||[]}}e.Socket=l},6278:(t,e,n)=>{"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.StrictEventEmitter=void 0;const a=n(5971);e.StrictEventEmitter=class extends a{on(t,e){return super.on(t,e),this}once(t,e){return super.once(t,e),this}emit(t,...e){return super.emit(t,...e),this}emitReserved(t,...e){return super.emit(t,...e),this}listeners(t){return super.listeners(t)}}},9543:(t,e,n)=>{"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.url=void 0;const a=n(4258),s=n(7833)("socket.io-client:url");e.url=function(t,e="",n){let r=t;n=n||"undefined"!=typeof location&&location,null==t&&(t=n.protocol+"//"+n.host),"string"==typeof t&&("/"===t.charAt(0)&&(t="/"===t.charAt(1)?n.protocol+t:n.host+t),/^(https?|wss?):\/\//.test(t)||(s("protocol-less url %s",t),t=void 0!==n?n.protocol+"//"+t:"https://"+t),s("parse %s",t),r=a(t)),r.port||(/^(http|ws)$/.test(r.protocol)?r.port="80":/^(http|ws)s$/.test(r.protocol)&&(r.port="443")),r.path=r.path||"/";const i=-1!==r.host.indexOf(":")?"["+r.host+"]":r.host;return r.id=r.protocol+"://"+i+":"+r.port+e,r.href=r.protocol+"://"+i+(n&&n.port===r.port?"":":"+r.port),r}}},e={};function n(a){var s=e[a];if(void 0!==s)return s.exports;var r=e[a]={exports:{}};return t[a].call(r.exports,r,r.exports,n),r.exports}(()=>{"use strict";var t=n(4252),e=n(7230);e.Manager,e.Socket;const a={LOGIN_SUBMIT:"LOGIN_SUBMIT",SHOW_LOGIN_PAGE:"SHOW_LOGIN_PAGE",GET_SHOW_LOGIN_PAGE:"GET_SHOW_LOGIN_PAGE",SET_SHOW_LOGIN_PAGE:"SET_SHOW_LOGIN_PAGE",AGENT_CONFIG:"AGENT_CONFIG",AGENT_WORK_EVENT:"AGENT_WORK_EVENT",CAPABILITIES:"CAPABILITIES",GET_AGENT_CONFIG:"GET_AGENT_CONFIG",SET_AGENT_CONFIG:"SET_AGENT_CONFIG",GET_CAPABILITIES:"GET_CAPABILITIES",SET_CAPABILITIES:"SET_CAPABILITIES",SET_CONTACT_TYPES:"SET_CONTACT_TYPES",START_OUTBOUND_CALL:"START_OUTBOUND_CALL",START_INBOUND_CALL:"START_INBOUND_CALL",CONNECT_PARTICIPANT:"CONNECT_PARTICIPANT",REMOVE_PARTICIPANT:"REMOVE_PARTICIPANT",REMOVE_SUPERVISOR:"REMOVE_SUPERVISOR",CONNECT_SUPERVISOR:"CONNECT_SUPERVISOR",CONNECT_CALL:"CONNECT_CALL",AGENT_HANGUP:"AGENT_HANGUP",END_CALL:"END_CALL",CONSULT:"CONSULT",HARDPHONE_EVENT:"HARDPHONE_EVENT",SET_AGENT_STATUS:"SET_AGENT_STATUS",GET_PHONE_CONTACTS:"GET_PHONE_CONTACTS",GET_ACTIVE_CALLS:"GET_ACTIVE_CALLS",CALL_INFO_UPDATED:"CALL_INFO_UPDATED",ACTIVE_CALLS:"ACTIVE_CALLS",SOFTPHONE_LOGOUT:"SOFTPHONE_LOGOUT",CREATE_TRANSCRIPTION:"SEND_TRANSCRIPTION",INBOUND_CALL_TYPE:"inbound",MESSAGE_FROM_CONNECTOR:"MESSAGE_FROM_CONNECTOR",MESSAGE_TO_CONNECTOR:"MESSAGE_TO_CONNECTOR",SENDER_TYPE:{END_USER:"END_USER",HUMAN_AGENT:"HUMAN_AGENT",VIRTUAL_AGENT:"VIRTUAL_AGENT",SUPERVISOR:"SUPERVISOR",EXTERNAL_USER:"EXTERNAL_USER"},PARTICIPANT_TYPE:{...t.Constants.PARTICIPANT_TYPE},CALL_TYPE:{...t.Constants.CALL_TYPE},CALL_CONTROL:{ACCEPT_CALL:"ACCEPT_CALL",DECLINE_CALL:"DECLINE_CALL",MUTE:"MUTE",HOLD:"HOLD",SWAP_PARTICIPANTS:"SWAP_PARTICIPANTS",ADD_PARTICIPANT:"ADD_PARTICIPANT",CONFERENCE:"CONFERENCE",RECORD:"RECORD"},HANGUP_REASON:{PHONE_CALL_ERROR:"error",PHONE_CALL_ENDED:"ended"},SEND_RECORDING:"SEND_RECORDING",SEND_VOICE_MAIL:"SEND_VOICE_MAIL",SEND_REALTIME_CONVERSATION_EVENTS:"SEND_REALTIME_CONVERSATION_EVENTS",LOGIN_RESULT:"LOGIN_RESULT",LOGOUT_RESULT:"LOGOUT_RESULT",CALL_CONNECTED:"CALL_CONNECTED",THROW_ERROR:"THROW_ERROR",CUSTOM_ERROR:"CUSTOM_ERROR",ERROR:"ERROR",PARTICIPANT_CONNECTED:"PARTICIPANT_CONNECTED",PARTICIPANT_REMOVED:"PARTICIPANT_REMOVED",MESSAGE:"MESSAGE",REMOTE_CONTROLLER:"REMOTE_CONTROLLER",SHARED_EVENT_TYPE:{...t.Constants.SHARED_EVENT_TYPE},VOICE_EVENT_TYPE:t.Constants.VOICE_EVENT_TYPE,AGENT_ERROR_STATUS:{DECLINED_BY_AGENT:"DeclinedByAgent",FAILED_TO_CONNECT_AGENT:"FailedToConnectAgent",MISSED_BY_AGENT:"MissedByAgent"},REQUEST_CALLBACK:"REQUEST_CALLBACK",PUSH_DIALER:"PUSH_DIALER",PROGRESSIVE_DIALER:"PROGRESSIVE_DIALER",CTR_SYNC:"CTR_SYNC",CTR_SYNC_RESULT:"CTR_SYNC_RESULT",SEND_AUDIO_STATS:"SEND_AUDIO_STATS",CONTACT_TYPE:{...t.Constants.CONTACT_TYPE},CALL_UPDATED:"CALL_UPDATED"},s="CALL_STARTED",r="INTERNAL_CALL_STARTED",i="PARTICIPANT_CONNECTED",o="CALL_BARGED_IN",l="CALL_DESTROYED",c="MUTE",E="UNMUTE",T="MERGE",u={[t.Constants.CONTACTS_FILTER_TYPES.AGENT]:t.Constants.CONTACT_TYPE.AGENT,[t.Constants.CONTACTS_FILTER_TYPES.CONTACT]:t.Constants.CONTACT_TYPE.PHONENUMBER,[t.Constants.CONTACTS_FILTER_TYPES.DIRECTORY]:t.Constants.CONTACT_TYPE.PHONEBOOK,[t.Constants.CONTACTS_FILTER_TYPES.QUEUE]:t.Constants.CONTACT_TYPE.QUEUE};var C=n(7007);class h{parseInputReport(t,e){throw new Error("This method should be overridden by subclasses.")}}let _=[],d=!1,p=null,A=null;class N extends h{async parseInputReport(t,e){const{data:n}=t,a=n.getUint8(0),s=await e.getActiveCalls();0!==s.activeCalls.length&&(p=s.activeCalls[0],A=p.callInfo,A.isHIDCall=!0,1===a||3===a?(d=!0,_=[a]):2!==a&&0!==a||(d&&1===_.length?(await this.performAction("muteToggle",e),_=[],d=!1):await this.performAction("acceptOrHangupCall",e)))}async performAction(e,n){switch(e){case"muteToggle":if(A.isMuted){const e=await n.unmute(p);n.log("unmute call triggered using HID: ",p),(0,t.publishEvent)({eventType:t.Constants.VOICE_EVENT_TYPE.MUTE_TOGGLE,payload:e})}else{const e=await n.mute(p);n.log("mute call triggered using HID: ",p),(0,t.publishEvent)({eventType:t.Constants.VOICE_EVENT_TYPE.MUTE_TOGGLE,payload:e})}break;case"acceptOrHangupCall":p.state===t.Constants.CALL_STATE.RINGING&&"inbound"===p.callType?(n.log("answer call triggered using HID: ",p),n.connectCall(A)):(n.log("hangup call triggered using HID: ",p),n.hangup(t.Constants.HANGUP_REASON.PHONE_CALL_ENDED))}}}let I=[1,0,1,0],O=[],S=null,R=null;class f extends h{async parseInputReport(t,e){const{data:n}=t,a=n.getUint8(0),s=await e.getActiveCalls();0!==s.activeCalls.length&&(S=s.activeCalls[0],R=S.callInfo,R.isHIDCall=!0,O.push(a),this.compareAcceptHangupCalbuffer(O)&&(O=[],await this.performAction("acceptOrHangupCall",e)))}async performAction(e,n){"acceptOrHangupCall"===e&&(S.state===t.Constants.CALL_STATE.RINGING&&"inbound"===S.callType?(n.log("answer call triggered using HID: ",S),n.connectCall(R)):(n.log("hangup call triggered using HID: ",S),n.hangup(t.Constants.HANGUP_REASON.PHONE_CALL_ENDED)))}compareAcceptHangupCalbuffer(t){return 4===t.length&&t.every(((t,e)=>t===I[e]))}}class P extends t.PhoneCall{constructor(e,n,a,s,r){const i=t.Constants.CALL_STATE.RINGING;a.initialCallHasEnded=!1,a.isOnHold=s&&s.isOnHold,r=r||Math.random().toString(36).substring(7),a.participantType===t.Constants.PARTICIPANT_TYPE.INITIAL_CALLER&&(s.parentCallId=r),super({callId:r,callType:e,contact:n,state:i,callAttributes:a,phoneNumber:n&&n.phoneNumber,callInfo:s})}set parentCallId(t){this.callInfo.parentCallId=t}}class g{constructor(){this.userId,this.scrtUrl,this.orgId,this.instanceUrl,this.authorizationContext,this.customPlatformEvent,this.customEventPayloadField,this.customEventTypeField,this.routingOwner,this.channelAddressIdentifier}}class v extends C.EventEmitter{}const L=new v;class b{constructor(e={isLoginRequired:!0,agentConfig:JSON.parse(localStorage.getItem("agentConfig"))||{phones:["SOFT_PHONE","DESK_PHONE"],selectedPhone:{type:"SOFT_PHONE"}},updateRemoveTransferCallParticipantVariant:t.Constants.REMOVE_PARTICIPANT_VARIANT.ALWAYS,capabilities:JSON.parse(localStorage.getItem("capabilities"))||{hasMute:!0,hasRecord:!0,hasMerge:!0,hasSwap:!0,hasSignedRecordingUrl:!1,debugEnabled:!0,signedRecordingUrl:"",signedRecordingDuration:null,hasContactSearch:!0,hasAgentAvailability:!0,hasQueueWaitTime:!0,supportsMos:!1,hasSupervisorListenIn:!0,hasSupervisorBargeIn:!0,hasBlindTransfer:!0,hasTransferToOmniFlow:!0,hasPendingStatusChange:!0,hasPhoneBook:!1,canConsult:!0,isDialPadDisabled:!1,isPhoneBookDisabled:!1,isHidSupported:!1,hasSetExternalMicrophoneDeviceSetting:!1,hasSetExternalSpeakerDeviceSetting:!1},agentId:null,userFullName:null,activeCalls:this.getActiveCallsObj(),destroyedCalls:[],agentStatus:"Available",publishHardphoneErrors:!0,agentAvailable:!1,messagingContacts:this.getAllMessagingContacts(20),phoneContacts:this.getAllPhoneContacts(20),onlineUsers:[],activeConferenceCalls:[],callInfoObj:{},userFullNames:{},userPresenceStatuses:null,isMultipartyAllowed:null,isConsultAllowed:null,contactCenterChannels:null,delayMs:0,contactTypes:JSON.parse(localStorage.getItem("contactTypes"))||[t.Constants.CONTACT_TYPE.AGENT,t.Constants.CONTACT_TYPE.QUEUE,t.Constants.CONTACT_TYPE.PHONEBOOK,t.Constants.CONTACT_TYPE.PHONENUMBER],contactCenterAdditionalSettings:new g,flowConfig:null}){this.state={...e,showLoginPage:!!JSON.parse(localStorage.getItem("showLoginPage")),throwError:!!JSON.parse(localStorage.getItem("throwError"))},this.eventEmitter=L}getCall(t){if(!this.hasActiveCalls())throw new Error("Couldn't find an active call",t);if(t.callId){const e=this.state.activeCalls[t.callId];if(!e)throw new Error("Couldn't find an active call for callId "+t.callId);return e}if(t.callAttributes&&t.callAttributes.isConsultCall){const e=Object.values(this.state.activeCalls).filter((t=>!0===t.callAttributes.isConsultCall)).pop();if(!e)throw new Error("Couldn't find an active consult call "+t.callAttributes.participantType);return e}if(t.callAttributes&&t.callAttributes.participantType){const e=Object.values(this.state.activeCalls).filter((e=>e.callAttributes.participantType===t.callAttributes.participantType)).shift();if(!e)throw new Error("Couldn't find an active call for participant "+t.callAttributes.participantType);return e}if(t.contact&&t.contact.id){return Object.values(this.state.activeCalls).filter((e=>e.contact.id===t.contact.id)).pop()||null}if(t.callInfo&&t.callInfo.renderContactId){return Object.values(this.state.activeCalls).filter((e=>e.callInfo.renderContactId===t.callInfo.renderContactId)).pop()||null}throw new Error("Call is not defined or invalid.",t)}addCall(e){if(e instanceof P||e instanceof t.PhoneCall)this.state.activeCalls[e.callId]=e;else{let n=new t.PhoneCall({});Object.assign(n,{callId:e.callId,callType:e.callType,contact:e.contact,state:e.state,callAttributes:e.callAttributes,phoneNumber:e.contact&&e.contact.phoneNumber,callInfo:e.callInfo}),this.state.activeCalls[e.callId]=n}localStorage.setItem("activeCalls",JSON.stringify(this.state.activeCalls))}messageUser(t,n,a){const s=e(),r=this.state.agentId;s.emit("message",{fromUsername:r,toUsername:t,messageType:n,data:a})}toggleAgentPresence(t){const n=e(),a=this.state.agentId,s=this.state.userFullName,r=this.state.userId;n.emit("presence",{isAvailable:t,username:a,fullName:s,userId:r})}getPrimaryCall(){let e;try{e=this.getCall({callAttributes:{participantType:t.Constants.PARTICIPANT_TYPE.INITIAL_CALLER}})}catch(n){try{e=this.getCall({callAttributes:{participantType:t.Constants.PARTICIPANT_TYPE.SUPERVISOR}})}catch(t){try{e=this.getCall({callAttributes:{isConsultCall:!0}})}catch(t){return this.getActiveCallsList()[0]}}}return e}updateCallInfo(e,n){let a;try{a=this.getCall({...n||{},callAttributes:{participantType:t.Constants.PARTICIPANT_TYPE.INITIAL_CALLER}})}catch(e){a=this.getCall({callAttributes:{participantType:t.Constants.PARTICIPANT_TYPE.SUPERVISOR}})}return Object.assign(a.callInfo,e),this.addCall(a),a}showLoginPage(t){localStorage.setItem("showLoginPage",t),this.state.showLoginPage=t}setAgentConfig(e){if(e)return e.selectedPhone&&Object.keys(e.selectedPhone).length>0&&(this.state.agentConfig.selectedPhone=e.selectedPhone),e.hidDeviceInfo&&Object.keys(e.hidDeviceInfo).length>0&&(this.state.agentConfig.hidDeviceInfo=e.hidDeviceInfo),localStorage.setItem("agentConfig",JSON.stringify(this.state.agentConfig)),void 0!==e.hidDeviceInfo&&async function(t,e){const n=await navigator.hid.getDevices();if(n&&n.length>0){const a=n.find((e=>e.vendorId===t?.hidDeviceInfo?.vendorId&&e.productId===t?.hidDeviceInfo?.productId));if(a){const t=function(t){switch(t.productName){case"Plantronics Blackwire 5220 Series":return new N;case"Jabra EVOLVE LINK MS":return new f;default:throw new Error("Unsupported HID device")}}(a);await a.open().then((()=>{a.oninputreport=n=>{t.parseInputReport(n,e)}}))}}}(e,this),this.executeAsync("setAgentConfig",new t.SetAgentConfigResult({success:!0}))}updateAgentConfig(t){this.state.agentConfig.selectedPhone=t.selectedPhone,localStorage.setItem("agentConfig",JSON.stringify(this.state.agentConfig))}setCapabilities(){return localStorage.setItem("capabilities",JSON.stringify(this.state.capabilities)),this.executeAsync("setCapabilities",new t.GenericResult({success:!0}))}updateCapabilities(t){this.state.capabilities.hasSignedRecordingUrl=t.hasSignedRecordingUrl,this.state.capabilities.signedRecordingUrl=t.signedRecordingUrl,this.state.capabilities.signedRecordingDuration=t.signedRecordingDuration,this.state.capabilities.hasMute=t.hasMute,this.state.capabilities.hasRecord=t.hasRecord,this.state.capabilities.hasSwap=t.hasSwap,this.state.capabilities.hasMerge=t.hasMerge,this.state.capabilities.hasContactSearch=t.hasContactSearch,this.state.capabilities.supportsMos=t.supportsMos,this.state.capabilities.hasAgentAvailability=t.hasAgentAvailability,this.state.capabilities.hasQueueWaitTime=t.hasQueueWaitTime,this.state.capabilities.hasSupervisorListenIn=t.hasSupervisorListenIn,this.state.capabilities.hasSupervisorBargeIn=t.hasSupervisorBargeIn,this.state.capabilities.hasBlindTransfer=t.hasBlindTransfer,this.state.capabilities.hasTransferToOmniFlow=t.hasTransferToOmniFlow,this.state.capabilities.debugEnabled=t.debugEnabled,this.state.capabilities.hasPendingStatusChange=t.hasPendingStatusChange,this.state.capabilities.hasPhoneBook=t.hasPhoneBook,this.state.capabilities.canConsult=t.canConsult,this.state.capabilities.isDialPadDisabled=t.isDialPadDisabled,this.state.capabilities.isPhoneBookDisabled=t.isPhoneBookDisabled,this.state.capabilities.isHidSupported=t.isHidSupported,this.state.capabilities.hasSetExternalMicrophoneDeviceSetting=t.hasSetExternalMicrophoneDeviceSetting,this.state.capabilities.hasSetExternalSpeakerDeviceSetting=t.hasSetExternalSpeakerDeviceSetting,localStorage.setItem("capabilities",JSON.stringify(this.state.capabilities))}updateContactTypes(t){this.state.contactTypes=t,localStorage.setItem("contactTypes",JSON.stringify(this.state.contactTypes))}throwError(t){localStorage.setItem("throwError",t),this.state.throwError=t}customErrorChanged(t){localStorage.setItem("customError",t),this.state.customError=t}subsystemLoginResult(e){this.state.agentAvailable=e,(0,t.publishEvent)({eventType:t.Constants.SHARED_EVENT_TYPE.LOGIN_RESULT,payload:new t.GenericResult({success:this.state.showLoginPage&&e})})}log(...e){if(this.state.capabilities.debugEnabled){const n=e.map((t=>"string"==typeof t?t:JSON.stringify(t))).join(" ");(0,t.log)({message:n},t.Constants.LOG_LEVEL.INFO)}else Function.apply.call(console.log,console,["[sdk]",...e])}filterContacts(t,e){if(!e)return t;let n=t;e.contains&&(n=n.filter((t=>Object.keys(t).some((n=>t[n]&&t[n].toLowerCase().includes(e.contains.toLowerCase())))))),(e.types||[e.type&&e.type.toUpperCase()]||0).forEach((t=>{const e=u[t]||t,a=u[t]?"type":"availability";n=n.filter((t=>t[a]===e))}));const a=e.offset?e.offset:0,s=e.limit?a+e.limit:n.length;return n.slice(a,s)}getActiveCallsList(){return Object.values(this.state.activeCalls)}getCallsToDestroy(e){let n=[];if(e.callAttributes&&e.callAttributes.participantType===t.Constants.PARTICIPANT_TYPE.AGENT){try{const e=this.getCall({callAttributes:{participantType:t.Constants.PARTICIPANT_TYPE.INITIAL_CALLER}});n.push(e)}catch(t){}try{const e=this.getCall({callAttributes:{participantType:t.Constants.PARTICIPANT_TYPE.THIRD_PARTY}});n.push(e)}catch(t){}0===n.length&&n.push(this.getCall(e))}else n.push(this.getCall(e));return n}destroyCalls(t,e){let n=[];return this.state.isMultipartyAllowed?t.callId?n.push(t):n.push(this.getCall(t)):n=this.getCallsToDestroy(t),this.processCallsToDestroy(n,e)}processCallsToDestroy(e,n){return e.forEach((e=>{const a=t.Constants.CALL_STATE.ENDED;e.state=a,e.reason=n,!this.state.isMultipartyAllowed&&this.shouldMessageOtherUser(e)&&this.messageUser(null,l,{callId:e.callId,reason:n}),this.state.destroyedCalls.push(e),delete this.state.activeCalls[e.callId]})),localStorage.setItem("activeCalls",JSON.stringify(this.state.activeCalls)),this.state.agentAvailable=0===Object.keys(this.state.activeCalls).length,e}shouldMessageOtherUser(e){return e.callType===t.Constants.CALL_TYPE.INTERNAL_CALL.toLocaleLowerCase()}destroyCall(t,e){return this.destroyCalls(t,e).pop()}async init(n){const a=this.state.agentId=n.userName;if(this.state.userFullName=n.userFullName,this.state.userId=n.userId,this.state.userPresenceStatuses=n.userPresenceStatuses,this.state.contactCenterChannels=n.contactCenterChannels,this.state.isMultipartyAllowed=n.isSCVMultipartyAllowed,this.state.isConsultAllowed=n.isSCVMultipartyConsultAllowed,n.messagingChannel&&0!==n.messagingChannel.length&&!await this.fetchServer("/is-local-config","GET"))try{this.readCallCenterConfigAndSetState(n)}catch(t){return Promise.reject("Failed to configure tenant information")}const s=e();s.on("onlineUsers",(t=>{this.state.onlineUsers=t.users,this.state.userFullNames=new Map(JSON.parse(t.userNames))})),s.on("connect",(()=>{s.emit("join",{username:a,id:this.state.userId})})),s.on("message",(t=>{this.handleSocketMessage(t)}));const r={scrtBaseUrl:n.scrtUrl,orgId:n.organizationId,callCenterName:n["/reqGeneralInfo/reqInternalName"]};return fetch("/api/configureTenantInfo",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(r)}).then((t=>t.json())).then((e=>e.success?(this.toggleAgentPresence(!0),this.state.agentAvailable=!this.state.showLoginPage,this.executeAsync("ssoLogin",this.state.showLoginPage?new t.InitResult({showLogin:!0,loginFrameHeight:350}):new t.InitResult({}))):Promise.reject("Failed to configure tenant information")))}fetchServer(t,e,n){return fetch("/api/fetchServer",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({...n,method:e,endpoint:t})}).then((t=>t.json())).then((t=>t))}readCallCenterConfigAndSetState(t){this.fetchServer("/getsettings","GET").then((e=>{if(!e)return new Error("Couldn't fetch settings from /getsettings");{this.state.channelAddressIdentifier=e.channelAddressIdentifier,this.state.contactCenterAdditionalSettings.userId=t.userId,this.state.contactCenterAdditionalSettings.scrtUrl=t.scrtUrl,this.state.contactCenterAdditionalSettings.orgId=t.organizationId;let n=t.domain;this.state.contactCenterAdditionalSettings.instanceUrl=n,t.messagingChannel&&Object.keys(t.messagingChannel).forEach((e=>{let n=t.messagingChannel[e];if(n.ChannelAddressIdentifier===this.state.channelAddressIdentifier){let e=n.ChannelDefinitionId;Object.keys(t.conversationChannelDefinition).forEach((n=>{let a=t.conversationChannelDefinition[n];a.Id===e&&(this.state.contactCenterAdditionalSettings.authorizationContext=a.DeveloperName,this.state.contactCenterAdditionalSettings.customPlatformEvent=a.CustomPlatformEvent,this.state.contactCenterAdditionalSettings.customEventPayloadField=a.CustomEventPayloadField,this.state.contactCenterAdditionalSettings.customEventTypeField=a.CustomEventTypeField,this.state.contactCenterAdditionalSettings.routingOwner=a.RoutingOwner)}))}})),this.fetchContactCenterConfigToEnv()}}))}async fetchContactCenterConfigToEnv(){const t={authorizationContext:this.state.contactCenterAdditionalSettings.authorizationContext,userId:this.state.contactCenterAdditionalSettings.userId,userName:this.state.agentId,customEventPayloadField:this.state.contactCenterAdditionalSettings.customEventPayloadField,customPlatformEvent:this.state.contactCenterAdditionalSettings.customPlatformEvent,customEventTypeField:this.state.contactCenterAdditionalSettings.customEventTypeField,routingOwner:this.state.contactCenterAdditionalSettings.routingOwner,instanceUrl:this.state.contactCenterAdditionalSettings.instanceUrl,scrtUrl:this.state.contactCenterAdditionalSettings.scrtUrl,orgId:this.state.contactCenterAdditionalSettings.orgId};return await this.fetchServer("/setcallcenterconfig","POST",t).then((t=>{if(200!==t.status)return new Error("Couldn't fetch settings to /setcallcenterconfig");console.log(t)}))}handleSocketMessage(e){if(e.messageType)switch(e.messageType){case s:this.startTransferOrConsultCall(e);break;case r:this.startInternalCall(e);break;case i:e.fromUsername===this.state.agentId||this.isSupervisorListeningIn()||this.connectParticipant(e.data.callInfo,e.data.callType,e.data.call);break;case o:this.publishCallBargedInEventToAgents(e.data);break;case l:this.isSupervisorListeningIn()||this.processCallDestroyed(e.data);break;case c:e.fromUsername!==this.state.agentId&&this.processBroadcastMute(e.data,!0);break;case E:e.fromUsername!==this.state.agentId&&this.processBroadcastMute(e.data,!1);break;case T:if(!this.hasActiveCalls())return;if(e.fromUsername!==this.state.agentId&&e.data.consultCall&&!this.isSupervisorListeningIn()){let n;this.state.activeConferenceCalls=e.data.activeConferenceCalls;let a=this.getActiveCallsList();n=1===a.length&&this.hasConsultCall(a)?a[0]:this.getPrimaryCall();let s=this.state.activeConferenceCalls.find((({callId:t})=>t===n.callId));s&&(s.callAttributes.participantType=t.Constants.PARTICIPANT_TYPE.INITIAL_CALLER,s.receiverContact=s.receiverContact||this.state.activeCalls[n.callId].receiverContact),e.data.consultCall.callId===n.callId&&(e.data.consultCall.callAttributes.participantType=t.Constants.PARTICIPANT_TYPE.INITIAL_CALLER),e.data.consultCall.contact=new t.Contact({id:e.fromUsername}),e.data.consultCall.callInfo.renderContactId=e.fromUsername,this.mergeConsultCall(e.data.consultCall),this.updateConferenceUsers(!0)}break;default:this.log("Could not handle message "+e.messageType,e)}else e.data&&e.data.type&&this.eventEmitter.emit("event",e)}updateCallInfoObj(t){this.state.callInfoObj=t.data.callInfo,localStorage.setItem("callInfo",JSON.stringify(this.state.callInfoObj))}generateCallId(){return Math.random().toString(36).substring(7)}startTransferOrConsultCall(e){const n=e.data.isConsultCall;let a=e.data.flowConfig||{isUnifiedRoutingEnabled:!1};a.isTransferFlow=!0;const s=e.data.callInfo||{};s.callStateTimestamp=e.data.callInfo?.callStateTimestamp?new Date(e.data.callInfo.callStateTimestamp):new Date;const r=new t.PhoneCall({callType:n?t.Constants.CALL_TYPE.CONSULT:t.Constants.CALL_TYPE.TRANSFER,phoneNumber:e.data.phoneNumber,callId:e.data.callId||this.generateCallId(),callAttributes:new t.PhoneCallAttributes({participantType:n?t.Constants.PARTICIPANT_TYPE.THIRD_PARTY:t.Constants.PARTICIPANT_TYPE.INITIAL_CALLER,voiceCallId:e.data.voiceCallId,parentId:e.data.callAttributes?.parentId,isConsultCall:n}),state:t.Constants.CALL_STATE.RINGING}),i=s.renderContact||e.data.renderContact;if(r.callInfo=Object.assign(s,JSON.parse(localStorage.getItem("callInfo"))),this.state.isMultipartyAllowed||(r.callInfo.isOnHold=!1),i&&(r.contact=new t.Contact(i),r.toContact=this.getCurrentUserContact()),r.callInfo.renderContactId=e.fromUsername,this.addCall(r),a?.isUnifiedRoutingEnabled);else{let e=new t.CallResult({call:r});(0,t.publishEvent)({eventType:t.Constants.VOICE_EVENT_TYPE.CALL_STARTED,payload:e})}this.state.isMultipartyAllowed&&!n&&(this.state.activeConferenceCalls=e.data.activeConferenceCalls)}startInternalCall(e){const n=new t.Contact({phoneNumber:e.data.contact.phoneNumber,id:e.data.contact.id,type:e.data.contact.type,name:e.data.contact.name}),a=new t.PhoneCall({callType:t.Constants.CALL_TYPE.INTERNAL_CALL,phoneNumber:e.data.contact.phoneNumber,callId:e.data.callId,contact:n,callInfo:new t.CallInfo({isOnHold:!1,renderContactId:e.data.renderContact.name}),callAttributes:new t.PhoneCallAttributes({participantType:t.Constants.PARTICIPANT_TYPE.AGENT})});this.addCall(a);let s=new t.CallResult({call:a});(0,t.publishEvent)({eventType:t.Constants.VOICE_EVENT_TYPE.CALL_STARTED,payload:s})}updateConferenceUsers(e){this.state.isMultipartyAllowed&&this.state.activeConferenceCalls.length>0&&setTimeout((()=>{this.state.activeConferenceCalls.forEach((n=>{const a=this.state.activeCalls[n.callId];if(e||!a){const e=a?a.callAttributes:{isAutoMergeOn:!0};let s=this.state.isMultipartyAllowed?Object.assign(n.callInfo,JSON.parse(localStorage.getItem("callInfo"))):n.callInfo||{};s.callStateTimestamp=s.callStateTimestamp?new Date(s.callStateTimestamp):new Date,a&&(n.contact=a.contact,s.renderContactId=a.callInfo.renderContactId);const r=n.contact,i=new P(t.Constants.CALL_TYPE.ADD_PARTICIPANT,new t.Contact(r),new t.PhoneCallAttributes({participantType:t.Constants.PARTICIPANT_TYPE.THIRD_PARTY,...e}),new t.CallInfo(s),n.callId);i.fromContact=n.fromContact,i.toContact=n.toContact,this.addCall(i),this.connectParticipant(null,null,i)}})),this.state.activeConferenceCalls=[]}),1e3)}processCallDestroyed(e){if(e.callId){let n=null;try{n=this.getCall({callId:e.callId})}catch(t){}if(n)if(this.state.isMultipartyAllowed)if(e.target===this.state.agentId)if(n.callType===t.Constants.CALL_TYPE.CONSULT.toString()){let a=this.destroyCalls(n,e.reason),s=new t.CallResult({call:a.pop()});(0,t.publishEvent)({eventType:t.Constants.VOICE_EVENT_TYPE.PARTICIPANT_REMOVED,payload:s})}else this.hangupMultiParty(n,e.reason,null);else{let a;try{a=this.getPrimaryCall()}catch(t){}let s=this.processEndCall(n,null,e.reason,!1),r=new t.CallResult({call:s.pop()});(0,t.publishEvent)({eventType:t.Constants.VOICE_EVENT_TYPE.PARTICIPANT_REMOVED,payload:r}),a&&a.callInfo&&a.callInfo.renderContactId&&e.target===a.callInfo.renderContactId&&(0,t.publishEvent)({eventType:t.Constants.VOICE_EVENT_TYPE.PARTICIPANT_CONNECTED,payload:new t.ParticipantResult({callId:a.callId,contact:new t.Contact(r.call.contact),phoneNumber:r.call.contact&&r.call.contact.phoneNumber,callInfo:new t.CallInfo(r.call.callInfo),initialCallHasEnded:r.call.callAttributes&&r.call.callAttributes.initialCallHasEnded})})}else this.hangup(e.reason)}}subsystemLogout(){(0,t.publishEvent)({eventType:t.Constants.SHARED_EVENT_TYPE.LOGOUT_RESULT,payload:new t.LogoutResult({success:!this.state.throwError,loginFrameHeight:350})})}omniLogout(){return this.executeAsync("SubsystemLogout",new t.LogoutResult({success:!0,loginFrameHeight:350}))}getContacts(e,n){let a=this.filterContacts(this.state.messagingContacts,e);return this.executeAsync("getContacts",new t.ContactsResult({contacts:a}))}executeAsync(e,n){if(this.log(`Executing action - ${e}`,n),this.state.throwError){if(this.state.customError){const e=this.state.customError.split(".");return Promise.reject(new t.CustomError({namespace:e[0],labelName:e[1]}))}return Promise.reject("demo error")}switch(e){case"mute":case"unmute":if(!this.state.capabilities.hasMute)return Promise.reject(new Error("Mute is not supported"));break;case"conference":if(!this.state.capabilities.hasMerge)return Promise.reject(new Error("Conference is not supported"));break;case"swapCalls":if(!this.state.capabilities.hasSwap)return Promise.reject(new Error("Swap Calls is not supported"));break;case"pauseRecording":case"resumeRecording":if(!this.state.capabilities.hasRecord)return Promise.reject(new Error("Recording is not supported"));break;case"getSignedRecordingUrl":if(!this.state.capabilities.hasSignedRecordingUrl||!this.state.capabilities.signedRecordingUrl)return Promise.reject(new Error("Signed recording url is not supported"));break;case"onAgentWorkEvent":switch(n.workEvent){case t.Constants.WORK_EVENT.PAUSED:case t.Constants.WORK_EVENT.UNPAUSED:return Promise.resolve(n);case t.Constants.WORK_EVENT.ACCEPTED:return console.log("Agent accepted the work",n),Promise.resolve(n);case t.Constants.WORK_EVENT.DECLINED:return console.log("Agent declined the work",n),Promise.resolve(n)}}return 0===this.state.delayMs?Promise.resolve(n):this.delay(this.state.delayMs).then((()=>Promise.resolve(n)))}delay(t,e){return new Promise((n=>{setTimeout(n.bind(null,e),t)}))}getCurrentUserContact(){return new t.Contact({phoneNumber:this.state.agentId,id:this.state.agentId,type:this.state.type,name:this.state.userFullName})}dial(e,n,a,i,o){if(!o&&this.hasActiveCalls(t.Constants.PARTICIPANT_TYPE.INITIAL_CALLER))return Promise.reject(new Error("Agent is not available for an outbound call"));n={...n,isOnHold:n?.isOnHold??!1,callStateTimestamp:new Date,renderContactId:e.id};const l={participantType:t.Constants.PARTICIPANT_TYPE.INITIAL_CALLER,parentId:o?this.getPrimaryCall().callId:null,...o&&{isConsultCall:o}};let c=t.Constants.CALL_TYPE.OUTBOUND.toLowerCase();o?c=t.Constants.CALL_TYPE.CONSULT:i?c=t.Constants.CALL_TYPE.DIALED_CALLBACK:e.type===t.Constants.CONTACT_TYPE.AGENT&&(c=t.Constants.CALL_TYPE.INTERNAL_CALL.toLowerCase());const E=new P(c,e,l,new t.CallInfo(n));E.fromContact=this.getCurrentUserContact(),this.addCall(E);const T=new t.CallResult({call:E});if(!n.isSoftphoneCall&&a&&(0,t.publishEvent)({eventType:t.Constants.VOICE_EVENT_TYPE.CALL_STARTED,payload:T}),this.state.agentAvailable=!1,this.state.onlineUsers.includes(e.id)&&e.type===t.Constants.CONTACT_TYPE.AGENT){const n=this.getCurrentUserContact(),a=new t.Contact(n),i=new t.Contact(e);this.messageUser(e.id,o?s:r,{phoneNumber:e.phoneNumber,callId:E.callId,contact:e,renderContact:n,fromContact:a,toContact:i,isConsultCall:o,callAttributes:l})}return this.executeAsync("dial",T)}startInboundCall(e,n,a){if(a=a||{isUnifiedRoutingEnabled:!1},(n=n||{isOnHold:!1}).callStateTimestamp=new Date,!this.state.agentAvailable){const t=`Agent is not available for a inbound call from phoneNumber - ${e}`;return this.log(t),Promise.reject(new Error(t))}let s={participantType:t.Constants.PARTICIPANT_TYPE.INITIAL_CALLER};const r=Math.random().toString(36).substring(5);let i=new t.Contact({phoneNumber:e,id:r,name:"Customer "+r});return this.createVoiceCall(void 0,t.Constants.CALL_TYPE.INBOUND,e,n&&n.additionalFields).then((e=>{s.voiceCallId=e.voiceCallId;const r=new P(t.Constants.CALL_TYPE.INBOUND.toLowerCase(),i,s,new t.CallInfo(n),e.vendorCallKey||this.generateCallId());r.fromContact=i,r.toContact=this.getCurrentUserContact(),this.addCall(r);const o=new t.CallResult({call:r});if(a?.isUnifiedRoutingEnabled){null==this.state.flowConfig?this.state.flowConfig={...a}:Object.assign(this.state.flowConfig,a),console.log("Inside isUnifiedRoutingEnabled "+a.isUnifiedRoutingEnabled);var l=this.executeOmniFlowForUnifiedRouting(e,a);console.log("response From execute onmi flow"+l)}else console.log("Non UnifiedRouting flow"),(0,t.publishEvent)({eventType:t.Constants.VOICE_EVENT_TYPE.CALL_STARTED,payload:o});return this.executeAsync("startInboundCall",o)}))}getAllPhoneContacts(e){let n=[];for(let a=1;a<=e;a++)n=n.concat(new t.Contact({id:"id"+a,type:t.Constants.CONTACT_TYPE.AGENT,name:["Agent Name "]+a,phoneNumber:"555555444"+a,availability:this.getRandomAvailability()}));for(let a=e+1;a<=2*e;a++)n=n.concat(new t.Contact({id:"id"+a,type:t.Constants.CONTACT_TYPE.QUEUE,name:"Queue Name "+a,queue:"Queue"+a,queueWaitTime:(400*Math.random()).toString()}));for(let a=2*e+1;a<=3*e;a++)n=n.concat(new t.Contact({id:"id"+a,type:t.Constants.CONTACT_TYPE.PHONEBOOK,name:"Phonebook Entry "+a,phoneNumber:"55566644"+a}));for(let a=3*e+1;a<=4*e;a++)n=n.concat(new t.Contact({id:"id"+a,type:t.Constants.CONTACT_TYPE.PHONENUMBER,name:"Phone Number "+a,phoneNumber:"5557774"+a}));for(let a=4*e+1;a<=5*e;a++)n=n.concat(new t.Contact({endpointARN:"arn"+a,type:t.Constants.CONTACT_TYPE.PHONENUMBER,name:["ARN "]+a,phoneNumber:"5555554"+a}));return n}getAllMessagingContacts(e){let n=[],a={0:t.Constants.CONTACT_LIST_TYPE.ALL,1:t.Constants.CONTACT_LIST_TYPE.CONFERENCE,2:t.Constants.CONTACT_LIST_TYPE.TRANSFER};for(let s=1;s<=e;s++)n=n.concat(new t.Contact({id:"id"+s,type:t.Constants.CONTACT_TYPE.AGENT,name:["Agent Name "]+s,availability:this.getRandomAvailability(),listType:a[s%3]}));for(let s=e+1;s<=2*e;s++)n=n.concat(new t.Contact({id:"id"+s,type:t.Constants.CONTACT_TYPE.QUEUE,name:"Queue Name "+s,queue:"Queue"+s,queueWaitTime:(400*Math.random()).toString(),listType:a[s%3]}));for(let s=2*e+1;s<=3*e;s++)n=n.concat(new t.Contact({id:"id"+s,type:t.Constants.CONTACT_TYPE.PHONENUMBER,name:"External Contact "+s,phoneNumber:"55566644"+s,listType:a[s%3]}));return n}getRandomAvailability(){return{0:t.Constants.AGENT_AVAILABILITY.AVAILABLE,1:t.Constants.AGENT_AVAILABILITY.BUSY,2:t.Constants.AGENT_AVAILABILITY.OFFLINE}[Math.floor(3*Math.random())]}getActiveCallsObj(){const e=JSON.parse(localStorage.getItem("activeCalls"))||{};return Object.keys(e).forEach((n=>{e[n].contact&&(e[n].contact=new t.Contact(e[n].contact)),e[n].toContact&&(e[n].toContact=new t.Contact(e[n].toContact)),e[n].fromContact&&(e[n].fromContact=new t.Contact(e[n].fromContact)),e[n].callInfo.callStateTimestamp=e[n].callInfo.callStateTimestamp?new Date(e[n].callInfo.callStateTimestamp):new Date,e[n].callInfo=new t.CallInfo(e[n].callInfo),e[n].callAttributes=new t.PhoneCallAttributes(e[n].callAttributes),e[n]=new t.PhoneCall(e[n])})),e}hasActiveCalls(t){return t?Object.values(this.state.activeCalls).filter((e=>e.callAttributes.participantType===t)).length>0:this.state.activeCalls&&Object.keys(this.state.activeCalls).length>0}getAgentConfig(){return this.executeAsync("getAgentConfig",new t.AgentConfigResult({phones:this.state.agentConfig.phones,selectedPhone:new t.Phone(this.state.agentConfig.selectedPhone)}))}getSharedCapabilities(){return this.executeAsync("getSharedCapabilities",new t.SharedCapabilitiesResult({hasContactSearch:this.state.capabilities.hasContactSearch,hasAgentAvailability:this.state.capabilities.hasAgentAvailability,hasQueueWaitTime:this.state.capabilities.hasQueueWaitTime,debugEnabled:this.state.capabilities.debugEnabled,hasTransferToOmniFlow:this.state.capabilities.hasTransferToOmniFlow,hasPendingStatusChange:this.state.capabilities.hasPendingStatusChange,hasSFDCPendingState:this.state.capabilities.hasSFDCPendingState}))}getVoiceCapabilities(){return this.executeAsync("getVoiceCapabilities",new t.VoiceCapabilitiesResult({hasMute:this.state.capabilities.hasMute,hasMerge:this.state.capabilities.hasMerge,hasRecord:this.state.capabilities.hasRecord,hasSwap:this.state.capabilities.hasSwap,hasSignedRecordingUrl:this.state.capabilities.hasSignedRecordingUrl,supportsMos:this.state.capabilities.supportsMos,hasSupervisorListenIn:this.state.capabilities.hasSupervisorListenIn,hasSupervisorBargeIn:this.state.capabilities.hasSupervisorBargeIn,hasBlindTransfer:this.state.capabilities.hasBlindTransfer,hasPhoneBook:this.state.capabilities.hasPhoneBook,canConsult:this.state.capabilities.canConsult,signedRecordingUrl:"",signedRecordingDuration:null,isDialPadDisabled:this.state.capabilities.isDialPadDisabled,isPhoneBookDisabled:this.state.capabilities.isPhoneBookDisabled,isHidSupported:this.state.capabilities.isHidSupported,hasSetExternalMicrophoneDeviceSetting:this.state.capabilities.hasSetExternalMicrophoneDeviceSetting,hasSetExternalSpeakerDeviceSetting:this.state.capabilities.hasSetExternalSpeakerDeviceSetting}))}getActiveCalls(){try{const e=this.getActiveCallsObj(),n=Object.values(e);return this.executeAsync("getActiveCalls",new t.ActiveCallsResult({activeCalls:n}))}catch(t){return Promise.reject("Error getting active calls. "+t)}}acceptCall(e){let n=null;if(!this.state.throwError){let a=this.getCall(e);const s=new t.Contact({phoneNumber:this.state.agentId,id:this.state.agentId,name:this.state.userFullName});a.receiverContact=s,a.toContact=this.getCurrentUserContact(),"internalcall"===a.callType&&(a.contact.name=a.callInfo.renderContactId);const r=a.callType.toLowerCase(),o=r!==t.Constants.CALL_TYPE.CALLBACK.toLowerCase()&&r!==t.Constants.CALL_TYPE.INTERNAL_CALL.toLowerCase()||a.state===t.Constants.CALL_STATE.CONNECTED?t.Constants.CALL_STATE.CONNECTED:t.Constants.CALL_STATE.RINGING;a.state=o,this.log("acceptCall",a),this.addCall(a),this.state.agentAvailable=!1,r!==t.Constants.CALL_TYPE.TRANSFER.toLowerCase()&&r!==t.Constants.CALL_TYPE.CONSULT.toLowerCase()||this.messageUser(null,i,{callInfo:a.callInfo,callType:r,call:a}),n=new t.CallResult({call:a}),this.updateConferenceUsers(!1)}return this.executeAsync("acceptCall",n)}declineCall(e){this.log("declineCall",e);const n=this.destroyCall(this.getCall(e),t.Constants.HANGUP_REASON.PHONE_CALL_ENDED);return this.state.activeConferenceCalls=[],this.state.agentAvailable=!0,this.executeAsync("declineCall",new t.CallResult({call:n}))}endCall(e,n){this.log("endCall",e,n);let a=this.processEndCall(e,n,t.Constants.HANGUP_REASON.PHONE_CALL_ENDED,!0);return this.executeAsync("endCall",new t.HangupResult({calls:a}))}processEndCall(e,n,a,s){let r=[];if(!this.state.throwError)if(this.state.isMultipartyAllowed){let i={};if(e.callId)i=this.getCall(e),!i.callAttributes||i.callAttributes?.participantType!==t.Constants.PARTICIPANT_TYPE.INITIAL_CALLER||i.contact&&this.state.agentId!==i.contact.id?i.callType?.toLowerCase()===t.Constants.CALL_TYPE.CONSULT.toString().toLowerCase()&&i.callAttributes?.participantType.toLowerCase()===t.Constants.PARTICIPANT_TYPE.THIRD_PARTY.toString().toLowerCase()?r=this.hangupMultiParty(i,a,n):(r=this.destroyCalls(i,a),this.beginWrapup(r[0])):r=this.hangupMultiParty(i,a,n);else{i=Object.values(this.state.activeCalls).filter((t=>!0===t.callAttributes?.isConsultCall))[0]||this.getCall({callAttributes:{participantType:t.Constants.PARTICIPANT_TYPE.INITIAL_CALLER}}),r=this.hangupMultiParty(i,a,n)}s&&this.messageUser(null,l,{callId:i.callId,reason:a,target:e.callId?i.callInfo.renderContactId:this.state.agentId})}else r=this.destroyCalls(e,a),this.beginWrapup(r[0]);return this.state.agentAvailable=0===Object.keys(this.state.activeCalls).length,r}mute(t){return this.processMute(t,!0)}unmute(t){return this.processMute(t,!1)}processMute(e,n){const a=!!e&&e.isGlobal,s=e&&e.isSupervisor;e=this.updateCallInfo({isMuted:n},e);const r=this.getPrimaryCall().callId===e.callId,i=a?this.state.agentId:r&&e.contact?e.contact.id?e.contact.id:e.contact.phoneNumber:e.callInfo.renderContactId;e.callAttributes.target=i;const o=n?c:E;return this.state.isMultipartyAllowed&&!1===s&&this.messageUser(null,o,e,n),this.executeAsync("mute",new t.MuteToggleResult({isMuted:n,call:e,isGlobal:a}))}async processBroadcastMute(e,n){const a=e.callAttributes.target,s=this.state.agentId===a,r=this.getCall({callInfo:{renderContactId:a}}),i=this.getPrimaryCall().contact.id===a;let o=s||i?this.getPrimaryCall():r;o=this.updateCallInfo({isMuted:n},o);let l=await this.executeAsync("mute",new t.MuteToggleResult({isMuted:n,call:o,isGlobal:s}));(0,t.publishEvent)({eventType:t.Constants.VOICE_EVENT_TYPE.MUTE_TOGGLE,payload:l})}hold(e){return this.updateHoldState(e,!0),this.executeAsync("hold",new t.HoldToggleResult({isThirdPartyOnHold:this.isOnHold({callAttributes:{participantType:t.Constants.PARTICIPANT_TYPE.THIRD_PARTY}}),isCustomerOnHold:this.isOnHold({callAttributes:{participantType:t.Constants.PARTICIPANT_TYPE.INITIAL_CALLER}}),calls:this.state.activeCalls}))}resume(e){return this.updateHoldState(e,!1),this.executeAsync("resume",new t.HoldToggleResult({isThirdPartyOnHold:this.isOnHold({callAttributes:{participantType:t.Constants.PARTICIPANT_TYPE.THIRD_PARTY}}),isCustomerOnHold:this.isOnHold({callAttributes:{participantType:t.Constants.PARTICIPANT_TYPE.INITIAL_CALLER}}),calls:this.state.activeCalls}))}pauseRecording(e){const n=!0;return e=e||this.getCall({callAttributes:{participantType:t.Constants.PARTICIPANT_TYPE.INITIAL_CALLER}}),this.isConsultCall(e)&&(e=this.getCall({callAttributes:{isConsultCall:!0}})),this.executeAsync("pauseRecording",new t.RecordingToggleResult({isRecordingPaused:n,contactId:e.callId},this.updateCallInfo({isRecordingPaused:n},e)))}resumeRecording(e){const n=!1;return e=e||this.getCall({callAttributes:{participantType:t.Constants.PARTICIPANT_TYPE.INITIAL_CALLER}}),this.isConsultCall(e)&&(e=this.getCall({callAttributes:{isConsultCall:!0}})),this.executeAsync("resumeRecording",new t.RecordingToggleResult({isRecordingPaused:n,contactId:e.callId},this.updateCallInfo({isRecordingPaused:n},e)))}superviseCall(e){if(this.hasActiveCalls())return Promise.reject(new Error("Agent is not available to supervise a call"));const n=new t.PhoneCall({callType:e.callType,contact:new t.Contact({phoneNumber:e.callType===t.Constants.CALL_TYPE.INBOUND?e.from:e.to}),callId:e.callId,callInfo:new t.CallInfo({initialCallId:e.callId,callStateTimestamp:new Date}),callAttributes:{voiceCallId:e.voiceCallId,participantType:t.Constants.PARTICIPANT_TYPE.SUPERVISOR},state:this.state.agentConfig.selectedPhone.type===t.Constants.PHONE_TYPE.SOFT_PHONE?t.Constants.CALL_STATE.CONNECTED:t.Constants.CALL_STATE.RINGING});return this.addCall(n),this.executeAsync("superviseCall",new t.SuperviseCallResult({call:n}))}supervisorDisconnect(e){let n;return this.state.throwError||(n=this.destroyCalls({callAttributes:{participantType:t.Constants.PARTICIPANT_TYPE.SUPERVISOR}})),this.executeAsync("supervisorDisconnect",new t.SupervisorHangupResult({calls:n}))}supervisorBargeIn(e){const n=this.getCall({callAttributes:{participantType:t.Constants.PARTICIPANT_TYPE.SUPERVISOR}});return n.callAttributes.hasSupervisorBargedIn=e.isBargedIn=!0,e.supervisorName=this.state.userFullName,this.addCall(n),this.messageUser(null,o,e),this.executeAsync("supervisorBargeIn",new t.SuperviseCallResult({call:n}))}isOnHold(t){try{return this.getCall(t).callAttributes.isOnHold}catch(t){return}}updateHoldState(t,e){const n=this.getCall(t);n.callAttributes.isOnHold=e,n.callInfo.isOnHold=e,this.addCall(n)}swapCalls(e,n){const a=this.getCall(e),s=this.getCall(n);return this.updateHoldState(e,!a.callAttributes.isOnHold),this.updateHoldState(n,!s.callAttributes.isOnHold),this.executeAsync("swapCalls",new t.HoldToggleResult({isThirdPartyOnHold:this.isOnHold(e),isCustomerOnHold:this.isOnHold(n),calls:this.state.activeCalls}))}conference(e){const n=e||Object.values(this.state.activeCalls);let a;if(this.state.isMultipartyAllowed&&(this.hasConsultCall(n)||2===Object.keys(this.state.activeCalls).length)){let e;try{e=this.getCall({callAttributes:{isConsultCall:!0}})}catch(n){e=this.getCall({callAttributes:{participantType:t.Constants.PARTICIPANT_TYPE.THIRD_PARTY}})}e&&(this.mergeConsultCall(e),e.callAttributes.participantType=t.Constants.PARTICIPANT_TYPE.THIRD_PARTY,this.messageUser(null,T,{consultCall:e,activeConferenceCalls:Object.values(this.state.activeCalls)}));let n=this.getPrimaryCall();this.updateHoldState(n,!1)}else n.forEach((t=>{this.updateHoldState(t,!1)}));return a=new t.HoldToggleResult({isThirdPartyOnHold:!1,isCustomerOnHold:!1}),this.state.isMultipartyAllowed&&(a.calls=this.state.activeCalls,a.isCallMerged=!0),this.executeAsync("conference",a)}hasConsultCall(t){return this.state.isConsultAllowed&&this.state.capabilities.canConsult&&t?.some((t=>!0===t?.callAttributes?.isConsultCall))}mergeConsultCall(e){e.callAttributes.isConsultCall=!1,e.callType=t.Constants.CALL_TYPE.ADD_PARTICIPANT,e.callAttributes.isAutoMergeOn=!0,e.reason=t.Constants.HANGUP_REASON.PHONE_CALL_ENDED;let n=this.state.activeCalls[e.callId];if(n){let a={callAttributes:{isConsultCall:!1,isAutoMergeOn:!0,isOnHold:!1,participantType:e.callAttributes.participantType},callInfo:{isOnHold:!1},callType:t.Constants.CALL_TYPE.ADD_PARTICIPANT,reason:t.Constants.HANGUP_REASON.PHONE_CALL_ENDED};for(const t in a)n[t]="object"==typeof a[t]?Object.assign({},n[t],a[t]):a[t]}else this.addCall(e),this.updateHoldState(e,!1)}setAgentStatus(e,n,a){return this.agentStatus=e,this.toggleAgentPresence(!(e===t.Constants.AGENT_STATUS.OFFLINE)),this.executeAsync("setAgentStatus",new t.GenericResult({success:!0}))}sendDigits(t){return this.executeAsync("sendDigits")}getPhoneContacts(e){let n=[];this.state.onlineUsers.forEach((e=>{this.state.agentId!==e&&(n=n.concat(new t.Contact({id:e,type:t.Constants.CONTACT_TYPE.AGENT,name:this.state.userFullNames.get(e),availability:"AVAILABLE",phoneNumber:e})))}));let a=this.filterContacts(n.concat(this.state.phoneContacts),e);return this.executeAsync("getPhoneContacts",new t.PhoneContactsResult({contacts:a,contactTypes:this.state.contactTypes}))}async addParticipant(e,n,a){const r=this.getCall(n),i=n.callAttributes?.isAutoMergeOn,o={...r.callAttributes,isAutoMergeOn:i,isBlindTransfer:a},l=new t.Contact({phoneNumber:this.state.agentId,id:this.state.agentId,type:this.state.type,name:this.state.userFullName});let c,E={...r.callInfo?new t.CallInfo(r.callInfo):{},renderContact:l,renderContactId:e.id};void 0!==E.isExternalTransfer?c=E.isExternalTransfer:e&&(c=!!e.phoneNumber),E.isExternalTransfer=c,E.callStateTimestamp=new Date,E.initialCallId=r.callId;let T=E.additionalFields?E.additionalFields:r.callInfo&&r.callInfo.additionalFields,u=await this.createVoiceCall(r.callId,t.Constants.CALL_TYPE.TRANSFER,r.phoneNumber,T),C=e.id;if(e.type===t.Constants.CONTACT_TYPE.FLOW){let t=await this.executeOmniFlow(u,e.id);C=t.agent||t.queue}e.id||(e.id=Math.random().toString(36).substring(5));let h=u.vendorCallKey||this.generateCallId();if(this.state?.flowConfig?.isUnifiedRoutingEnabled){let t={transferTo:C,voiceCallId:h},e={dialedNumber:this.state.flowConfig.dialedNumber};await this.executeOmniFlowForUnifiedRouting(t,e)}if(a){this.state.onlineUsers.includes(C)?this.messageUser(C,s,{phoneNumber:r.phoneNumber,callId:h,voiceCallId:u.voiceCallId}):this.state?.flowConfig?.isUnifiedRoutingEnabled&&this.messageUser(null,s,{phoneNumber:r.phoneNumber,callId:h,voiceCallId:u.voiceCallId,flowConfig:this.state.flowConfig});const a=this.destroyCall(n,t.Constants.HANGUP_REASON.PHONE_CALL_ENDED);return this.log("addParticipant - cold transfer (destroyed call)",a),this.beginWrapup(a),this.executeAsync("addParticipant",new t.ParticipantResult({contact:e,phoneNumber:e.phoneNumber,callInfo:new t.CallInfo(E),callAttributes:o,initialCallHasEnded:!0,callId:n.callId}))}o.isOnHold=r.callInfo.isOnHold=!this.state.isMultipartyAllowed&&!i,E.isOnHold=!1;const _=o.voiceCallId;this.state.isMultipartyAllowed&&(E=Object.assign(E,JSON.parse(localStorage.getItem("callInfo")),{isRecordingPaused:!!r.callInfo&&r.callInfo.isRecordingPaused}));const d=new P(t.Constants.CALL_TYPE.ADD_PARTICIPANT,e,{participantType:t.Constants.PARTICIPANT_TYPE.THIRD_PARTY,voiceCallId:_,isAutoMergeOn:i},new t.CallInfo(E),u.vendorCallKey||this.generateCallId());return d.parentCallId=r.callId,d.callAttributes.isOnHold=!1,d.state=t.Constants.CALL_STATE.TRANSFERRING,d.fromContact=l,this.log("addParticipant to parent voiceCall "+_,d),this.addCall(r),this.state.onlineUsers.includes(C)?this.messageUser(C,s,{phoneNumber:this.state.userFullName,callInfo:E,contact:e,initiatorContact:l,callId:d.callId,voiceCallId:u.voiceCallId,activeConferenceCalls:i?Object.values(this.state.activeCalls):[],flowConfig:this.state.flowConfig}):this.state?.flowConfig?.isUnifiedRoutingEnabled&&this.messageUser(null,s,{phoneNumber:this.state.userFullName,callInfo:E,contact:e,initiatorContact:l,callId:d.callId,voiceCallId:u.voiceCallId,activeConferenceCalls:i?Object.values(this.state.activeCalls):[],flowConfig:this.state.flowConfig}),this.addCall(d),this.executeAsync("addParticipant",new t.ParticipantResult({contact:e,phoneNumber:e.phoneNumber,callInfo:new t.CallInfo(E),callAttributes:o,initialCallHasEnded:o.initialCallHasEnded,callId:d.callId}))}onAgentWorkEvent(t){return this.messageUser(null,"AGENT_WORK_NOTIFICATION",t),this.executeAsync("onAgentWorkEvent",t)}executeOmniFlow(t,e){return fetch("/api/executeOmniFlow",{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({flowName:e,voiceCallId:t.vendorCallKey||this.generateCallId()})}).then((t=>t.json())).then((t=>t)).catch((t=>Promise.reject(t)))}executeOmniFlowForUnifiedRouting(t,e){var n=e.dialedNumber,a=e.flowDevName,s=e.fallbackQueue;let r={dialedNumber:n,voiceCallId:t.voiceCallId,fallbackQueue:s};return t?.transferTo&&(r.transferTarget=t.transferTo),e?.isTransferFlow?r.flowDevName=a:r.flowName=a,fetch("/api/executeOmniFlow",{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify(r)}).then((t=>t.json())).then((t=>t)).catch((t=>(console.log("ERR ",t),Promise.reject(t))))}createVoiceCall(t,e,n,a){return fetch("/api/createVoiceCall?caller="+n+"&type="+e+(t?"&parentCallId="+t:"")+(a?"&additionalFields="+a:""),{headers:{"Strict-Transport-Security":"max-age=31536000"}}).then((t=>t.json())).then((t=>(t.voiceCallId||this.log("Could not contact Service Cloud Real ,Time. VoiceCall will be created by Salesforce Service Degradation Service."),t))).catch((t=>Promise.reject(t)))}connectParticipant(e,n,a){if(!this.hasActiveCalls())return;if(a?.callType===t.Constants.CALL_TYPE.CONSULT&&-1===Object.keys(this.state.activeCalls).indexOf(a.callId))return;let s;if(a&&(a.receiverContact?(a.callInfo.renderContactId=a.receiverContact.id,s=a.receiverContact):a.contact&&a.contact.id?a.callInfo.renderContactId=a.contact.id:a.contact&&a.contact.phoneNumber&&(a.callInfo.renderContactId=a.contact.phoneNumber)),this.state.isMultipartyAllowed&&a&&!this.state.activeCalls[a.callId]&&(a.callType=t.Constants.CALL_TYPE.ADD_PARTICIPANT,a.callAttributes.participantType=t.Constants.PARTICIPANT_TYPE.THIRD_PARTY,this.addCall(a)),n===t.Constants.CALL_TYPE.INTERNAL_CALL.toLowerCase()?(a=this.getCall({...a||{},callAttributes:{participantType:t.Constants.PARTICIPANT_TYPE.INITIAL_CALLER}})).state=t.Constants.CALL_STATE.CONNECTED:n===t.Constants.CALL_TYPE.CONSULT.toLowerCase()?(a=this.getCall({...a||{},callAttributes:{participantType:t.Constants.PARTICIPANT_TYPE.THIRD_PARTY}})).state=t.Constants.CALL_STATE.CONNECTED:(a=this.getCall({...a||{},callAttributes:{participantType:t.Constants.PARTICIPANT_TYPE.THIRD_PARTY}})).state=t.Constants.CALL_STATE.TRANSFERRED,this.log("connectParticipant",a),this.addCall(a),n||(n=a.callType.toLowerCase()),n!==t.Constants.CALL_TYPE.INTERNAL_CALL.toLowerCase()&&n!==t.Constants.CALL_TYPE.CONSULT.toLowerCase()){let e=a.callInfo||{};e.callStateTimestamp=e.callStateTimestamp?new Date(e.callStateTimestamp):new Date,(0,t.publishEvent)({eventType:t.Constants.VOICE_EVENT_TYPE.PARTICIPANT_CONNECTED,payload:new t.ParticipantResult({contact:s||a.contact,phoneNumber:a.contact&&a.contact.phoneNumber,callAttributes:a.callAttributes,callInfo:new t.CallInfo(e),initialCallHasEnded:a.callAttributes&&a.callAttributes.initialCallHasEnded,callId:a.callId})})}else(0,t.publishEvent)({eventType:t.Constants.VOICE_EVENT_TYPE.CALL_CONNECTED,payload:new t.CallResult({call:a})})}connectSupervisor(){const e=this.getCall({callAttributes:{participantType:t.Constants.PARTICIPANT_TYPE.SUPERVISOR}});e.state=t.Constants.CALL_STATE.CONNECTED,this.log("connectSupervisor",e),this.addCall(e),(0,t.publishEvent)({eventType:t.Constants.VOICE_EVENT_TYPE.SUPERVISOR_CALL_CONNECTED,payload:new t.SuperviseCallResult({call:e})})}removeParticipant(e,n){n=this.getCall({...n||{},callAttributes:{participantType:e}});const a=t.Constants.HANGUP_REASON.PHONE_CALL_ENDED,s=this.destroyCall(n,a);this.log("removeParticipant",n),this.state.isMultipartyAllowed&&this.messageUser(null,l,{callId:n.callId,reason:a}),this.state.agentAvailable=0===Object.keys(this.state.activeCalls).length,this.beginWrapup(s);const r=new t.CallResult({call:s});return(0,t.publishEvent)({eventType:t.Constants.VOICE_EVENT_TYPE.PARTICIPANT_REMOVED,payload:r}),this.executeAsync("removeParticipant",r)}removeSupervisor(){const e=this.getCall({callAttributes:{participantType:t.Constants.PARTICIPANT_TYPE.SUPERVISOR}}),n=this.destroyCall(e);this.log("removeSupervisor",e);const a=new t.SupervisorHangupResult({calls:n});return(0,t.publishEvent)({eventType:t.Constants.VOICE_EVENT_TYPE.SUPERVISOR_HANGUP,payload:a}),this.executeAsync("removeSupervisor",a)}connectCall(e,n){const a=n||this.getCall({callAttributes:{participantType:t.Constants.PARTICIPANT_TYPE.INITIAL_CALLER}});a.state=t.Constants.CALL_STATE.CONNECTED,a.callInfo=Object.assign(a.callInfo,e),this.addCall(a),this.log("connectCall",a),(0,t.publishEvent)({eventType:t.Constants.VOICE_EVENT_TYPE.CALL_CONNECTED,payload:new t.CallResult({call:a})})}hangup(e,n){let a=this.destroyCalls({callAttributes:{participantType:t.Constants.PARTICIPANT_TYPE.AGENT}},e);return a.map((t=>(t.callInfo.isSoftphoneCall=!1,t.agentStatus=n,t.reason=e,t))),this.state.agentAvailable=0===Object.keys(this.state.activeCalls).length,(0,t.publishEvent)({eventType:t.Constants.VOICE_EVENT_TYPE.HANGUP,payload:new t.HangupResult({calls:a})}),this.beginWrapup(a[0]),this.executeAsync("hangup",a)}hangupMultiParty(e,n,a){let s=this.getActiveCallsList();return this.processCallsToDestroy(s,n),s.map((t=>(t.callInfo.isSoftphoneCall=!1,t.agentStatus=a,t.reason=n,t))),this.state.agentAvailable=0===Object.keys(this.state.activeCalls).length,(0,t.publishEvent)({eventType:t.Constants.VOICE_EVENT_TYPE.HANGUP,payload:new t.HangupResult({calls:[e]})}),this.beginWrapup(e),s}isConsultCall(e){return this.state.isConsultAllowed&&this.state.capabilities.canConsult&&(!0===e?.callAttributes?.isConsultCall||e?.callType?.toLowerCase()===t.Constants.CALL_TYPE.CONSULT.toLowerCase())}initiateHangupMultiParty(e,n){let a;try{a=this.getCall({callAttributes:{participantType:t.Constants.PARTICIPANT_TYPE.INITIAL_CALLER}})}catch(e){a=this.getCall({callAttributes:{participantType:t.Constants.PARTICIPANT_TYPE.THIRD_PARTY}})}this.hangupMultiParty(a,e,n),this.messageUser(null,l,{callId:a.callId,reason:e})}beginWrapup(e){setTimeout((()=>{this.state.agentAvailable&&(0,t.publishEvent)({eventType:t.Constants.VOICE_EVENT_TYPE.AFTER_CALL_WORK_STARTED,payload:{callId:e.callId}})}),0)}endWrapup(){this.log("endWrapup")}publishMessage(e){this.log("publishMessage",e),(0,t.publishEvent)({eventType:t.Constants.SHARED_EVENT_TYPE.MESSAGE,payload:e})}handleMessage(e){new BroadcastChannel("rc-request").postMessage({type:t.Constants.SHARED_EVENT_TYPE.MESSAGE,payload:e}),this.log("handleMessage",e)}getSignedRecordingUrl(e,n,a){return this.executeAsync("getSignedRecordingUrl",new t.SignedRecordingUrlResult({success:this.state.capabilities.hasSignedRecordingUrl,url:this.state.capabilities.signedRecordingUrl,duration:parseInt(this.state.capabilities.signedRecordingDuration),callId:a}))}requestCallback(e){const{phoneNumber:n}=e,a=new t.CallInfo({callStateTimestamp:new Date}),s=new t.PhoneCall({callId:this.generateCallId(),phoneNumber:n,callInfo:a,callType:t.Constants.CALL_TYPE.CALLBACK.toLowerCase(),contact:new t.Contact({phoneNumber:n}),callAttributes:{participantType:t.Constants.PARTICIPANT_TYPE.INITIAL_CALLER}});this.addCall(s),(0,t.publishEvent)({eventType:t.Constants.VOICE_EVENT_TYPE.QUEUED_CALL_STARTED,payload:new t.CallResult({call:s})})}previewCall(e){const{phoneNumber:n}=e,a=new t.CallInfo({callStateTimestamp:new Date}),s=new t.PhoneCall({callId:this.generateCallId(),phoneNumber:n,callInfo:a,callType:t.Constants.CALL_TYPE.OUTBOUND.toLowerCase(),contact:new t.Contact({phoneNumber:n}),callAttributes:{participantType:t.Constants.PARTICIPANT_TYPE.INITIAL_CALLER,dialerType:t.Constants.DIALER_TYPE.OUTBOUND_PREVIEW}});this.addCall(s),(0,t.publishEvent)({eventType:t.Constants.VOICE_EVENT_TYPE.PREVIEW_CALL_STARTED,payload:new t.CallResult({call:s})})}updateAudioStats(e){this.log("updateAudioStats",e);let n=[];e.stats.forEach((e=>{let a,s;e.inputChannelStats&&(a=new t.StatsInfo(e.inputChannelStats)),e.outputChannelStats&&(s=new t.StatsInfo(e.outputChannelStats)),n.push(new t.AudioStatsElement({inputChannelStats:a,outputChannelStats:s}))}));const a=new t.AudioStats({stats:n,callId:e.callId,isAudioStatsCompleted:e.isAudioStatsCompleted});(0,t.publishEvent)({eventType:t.Constants.VOICE_EVENT_TYPE.UPDATE_AUDIO_STATS,payload:a})}updateRemoveTransferCallParticipantVariant(t){this.state.updateRemoveTransferCallParticipantVariant=t}publishSetAgentStatus(e){(0,t.publishEvent)({eventType:"SET_AGENT_STATUS",payload:new t.AgentStatusInfo({statusId:e})})}publishCallBargedInEventToAgents(e){(0,t.publishEvent)({eventType:"CALL_BARGED_IN",payload:new t.SupervisedCallInfo(e)})}isSupervisorListeningIn(){return this.state.capabilities.hasSupervisorListenIn&&Object.values(this.state.activeCalls||{}).some((e=>e?.callAttributes?.participantType===t.Constants.PARTICIPANT_TYPE.SUPERVISOR))}async ctrSync(t){if(!t)return{success:!1,message:"Voice Call ID is required"};try{if(!(await this.verifyCallState()).allParticipantsHungUp)return{success:!1,message:"Cannot sync CTR: Not all participants have hung up"};const e=await fetch("/api/updateVoiceCall",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({voiceCallId:t,endTime:(new Date).toISOString(),isActiveCall:!1})});return e.ok?(await e.json()).success?{success:!0,message:"Voice call updated successfully"}:{success:!1,message:"Voice call update failed"}:{success:!1,message:`Voice call update failed with status ${e.status}`}}catch(t){return{success:!1,message:`Voice call update failed: ${t.message}`}}}async verifyCallState(){return Object.keys(this.state.activeCalls).length>0?{allParticipantsHungUp:!1}:{allParticipantsHungUp:!0}}}class m extends t.TelephonyConnector{constructor(t){super(),this.sdk=t}getActiveCalls(){return this.sdk.getActiveCalls()}acceptCall(t){return this.sdk.acceptCall(t)}declineCall(e){return this.sdk.declineCall(e||{callAttributes:{participantType:t.Constants.PARTICIPANT_TYPE.INITIAL_CALLER}})}endCall(t,e){return this.sdk.endCall(t,e)}mute(t){return this.sdk.mute(t)}unmute(t){return this.sdk.unmute(t)}hold(t){return this.sdk.hold(t)}resume(t){return this.sdk.resume(t)}pauseRecording(t){return this.sdk.pauseRecording(t)}resumeRecording(t){return this.sdk.resumeRecording(t)}swap(t,e){return this.sdk.swapCalls(t,e)}conference(t){return this.sdk.conference(t)}dial(t,e){return this.sdk.dial(t,{},!1,e&&e.isCallback,e&&e.isConsultCall)}sendDigits(t){return this.sdk.sendDigits(t)}getPhoneContacts(t){return this.sdk.getPhoneContacts(t)}addParticipant(t,e,n){return this.sdk.addParticipant(t,e,n)}getAgentConfig(){return this.sdk.getAgentConfig()}setAgentConfig(t){return this.sdk.setAgentConfig(t)}getVoiceCapabilities(){return this.sdk.getVoiceCapabilities()}setCapabilities(t){return this.sdk.setCapabilities(t)}wrapUpCall(){this.sdk.endWrapup()}getSignedRecordingUrl(t,e,n){return this.sdk.getSignedRecordingUrl(t,e,n)}superviseCall(t){return console.log("superviseCall",t),this.sdk.superviseCall(t)}supervisorDisconnect(t){return console.log("supervisorDisconnect",t),this.sdk.supervisorDisconnect(t)}supervisorBargeIn(t){return console.log("supervisorBargeIn",t),this.sdk.supervisorBargeIn(t)}}class y extends t.VendorConnector{constructor(t){super(),this.sdk=new b(t),this.telephonyConnector=new m(this.sdk)}getTelephonyConnector(){return this.telephonyConnector}init(t){return this.sdk.init(t)}setAgentStatus(t,e,n){return this.sdk.setAgentStatus(t,e,n)}onAgentWorkEvent(t){return this.sdk.onAgentWorkEvent(t)}logout(){return this.sdk.omniLogout()}handleMessage(t){return this.sdk.handleMessage(t)}getContacts(t,e){return this.sdk.getContacts(t,e)}getSharedCapabilities(){return this.sdk.getSharedCapabilities()}}class D extends C.EventEmitter{}new D;const V=new y;window.addEventListener("load",(()=>{(0,t.initializeConnector)(V),function(e){e.sdk.eventEmitter.on("event",(async n=>{if(n&&n.data)try{let s,r;switch(n.data.type){case a.LOGIN_SUBMIT:e.sdk.subsystemLoginResult(n.data.success);break;case a.GET_SHOW_LOGIN_PAGE:{const{showLoginPage:t}=e.sdk.state;e.sdk.messageUser(n.fromUsername,a.SHOW_LOGIN_PAGE,{type:a.SHOW_LOGIN_PAGE,value:t})}break;case a.GET_AGENT_CONFIG:{const{agentConfig:t,contactCenterChannels:s,agentId:r,userPresenceStatuses:i,isMultipartyAllowed:o,isConsultAllowed:l}=e.sdk.state;e.sdk.messageUser(n.fromUsername,a.AGENT_CONFIG,{type:a.AGENT_CONFIG,value:t,userPresenceStatuses:i,contactCenterChannels:s,referrer:`${document.referrer}`,agentId:r,isMultipartyAllowed:o,isConsultAllowed:l})}break;case a.GET_CAPABILITIES:{const{capabilities:t,agentId:s}=e.sdk.state;e.sdk.messageUser(n.fromUsername,a.CAPABILITIES,{type:a.CAPABILITIES,value:t,referrer:`${document.referrer}`,agentId:s})}break;case a.CALL_INFO_UPDATED:e.sdk.updateCallInfoObj(n);break;case a.GET_ACTIVE_CALLS:e.sdk.messageUser(n.fromUsername,a.ACTIVE_CALLS,{type:a.ACTIVE_CALLS,value:Object.values(e.sdk.getActiveCallsObj())});break;case a.THROW_ERROR:e.sdk.throwError(n.data.value);break;case a.CUSTOM_ERROR:e.sdk.customErrorChanged(n.data.value);break;case a.SET_SHOW_LOGIN_PAGE:e.sdk.showLoginPage(n.data.value);break;case a.SET_AGENT_CONFIG:e.sdk.updateAgentConfig({selectedPhone:n.data.value.selectedPhone});break;case a.SET_CAPABILITIES:e.sdk.updateCapabilities({hasMute:n.data.value.hasMute,hasRecord:n.data.value.hasRecord,hasSwap:n.data.value.hasSwap,hasMerge:n.data.value.hasMerge,hasContactSearch:n.data.value.hasContactSearch,hasSignedRecordingUrl:n.data.value.hasSignedRecordingUrl,signedRecordingUrl:n.data.value.signedRecordingUrl,signedRecordingDuration:n.data.value.signedRecordingDuration,supportsMos:n.data.value.supportsMos,hasSupervisorListenIn:n.data.value.hasSupervisorListenIn,hasSupervisorBargeIn:n.data.value.hasSupervisorBargeIn,hasBlindTransfer:n.data.value.hasBlindTransfer,hasPhoneBook:n.data.value.hasPhoneBook,debugEnabled:n.data.value.debugEnabled,hasAgentAvailability:n.data.value.hasAgentAvailability,hasQueueWaitTime:n.data.value.hasQueueWaitTime,hasTransferToOmniFlow:n.data.value.hasTransferToOmniFlow,hasPendingStatusChange:n.data.value.hasPendingStatusChange,canConsult:n.data.value.canConsult,isDialPadDisabled:n.data.value.isDialPadDisabled,isPhoneBookDisabled:n.data.value.isPhoneBookDisabled,isHidSupported:n.data.value.isHidSupported,hasSetExternalMicrophoneDeviceSetting:n.data.value.hasSetExternalMicrophoneDeviceSetting,hasSetExternalSpeakerDeviceSetting:n.data.value.hasSetExternalSpeakerDeviceSetting});break;case a.SET_CONTACT_TYPES:e.sdk.updateContactTypes(n.data.contactTypes);break;case a.START_OUTBOUND_CALL:await e.sdk.dial(new t.Contact({phoneNumber:n.data.phoneNumber}),n.data.callInfo,!0);break;case a.CONSULT:await e.sdk.dial(new t.Contact(n.data.contact),n.data.callInfo,!0,!1,!0);break;case a.START_INBOUND_CALL:case a.PROGRESSIVE_DIALER:await e.sdk.startInboundCall(n.data.phoneNumber,n.data.callInfo,n.data.flowConfig);break;case a.CONNECT_PARTICIPANT:e.sdk.connectParticipant(null,null,n.data.call);break;case a.SET_AGENT_STATUS:e.sdk.publishSetAgentStatus(n.data.statusId);break;case a.CONNECT_SUPERVISOR:e.sdk.connectSupervisor();break;case a.REMOVE_PARTICIPANT:case a.END_CALL:e.sdk.removeParticipant(n.data.participantType,n.data.call);break;case a.REMOVE_SUPERVISOR:e.sdk.removeSupervisor();break;case a.CONNECT_CALL:e.sdk.connectCall(n.data.callInfo);break;case a.AGENT_HANGUP:{const{isMultipartyAllowed:t}=e.sdk.state;t?e.sdk.initiateHangupMultiParty(n.data.reason,n.data.agentErrorStatus):e.sdk.hangup(n.data.reason,n.data.agentErrorStatus)}break;case a.SOFTPHONE_LOGOUT:e.sdk.subsystemLogout();break;case a.CREATE_TRANSCRIPTION:fetch("/api/createTranscription",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(n.data)}).then((t=>{e.sdk.log(`Create transcript returned with ${t.success}`)})).catch((t=>{e.sdk.log(`Create transcript failed - ${t}`)}));break;case a.SEND_VOICE_MAIL:fetch("/api/sendVoiceMail",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(n.data.voiceMailDetails)}).then((t=>{e.sdk.log(`Store recording link returned with ${t.success}`)})).catch((t=>{e.sdk.log(`Store recording link failed - ${t}`)}));break;case a.SEND_REALTIME_CONVERSATION_EVENTS:fetch("/api/sendRealtimeConversationEvents",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(n.data.sendRealtimeConversationEventsDetails)}).then((t=>{e.sdk.log(`sendRealtimeConversationEvents returned with ${t.success}`)})).catch((t=>{e.sdk.log(`sendRealtimeConversationEvents failed - ${t}`)}));break;case a.SEND_RECORDING:fetch("/api/updateVoiceCall",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(n.data.recordingInfo)}).then((t=>{e.sdk.log(`Store recording link returned with ${t.success}`)})).catch((t=>{e.sdk.log(`Store recording link failed - ${t}`)}));break;case a.MESSAGE_FROM_CONNECTOR:await e.sdk.publishMessage(n.data.message);break;case a.REQUEST_CALLBACK:e.sdk.requestCallback(n.data.payload);break;case a.PUSH_DIALER:e.sdk.previewCall(n.data.payload);break;case a.SEND_AUDIO_STATS:await e.sdk.updateAudioStats(n.data.audioStats);break;case a.CTR_SYNC:try{const t=await e.sdk.ctrSync(n.data.voiceCallId);e.sdk.messageUser(n.fromUsername,a.CTR_SYNC_RESULT,{type:a.CTR_SYNC_RESULT,success:t.success,message:t.message})}catch(t){e.sdk.messageUser(n.fromUsername,a.CTR_SYNC_RESULT,{type:a.CTR_SYNC_RESULT,success:!1,message:t.message})}break;case a.REMOVE_TRANSFER_PARTICIPANT_VARIANT:e.sdk.updateRemoveTransferCallParticipantVariant(n.data.variant);break;case a.HARDPHONE_EVENT:{const s=n.data.eventType,r=n.data.payload;let i;switch(s){case a.VOICE_EVENT_TYPE.MUTE_TOGGLE:i=r.isMuted?await e.sdk.mute(r.call):await e.sdk.unmute(r.call);break;case a.VOICE_EVENT_TYPE.HOLD_TOGGLE:i=r.isCustomerOnHold?await e.sdk.hold(r.call):await e.sdk.resume(r.call);break;case a.VOICE_EVENT_TYPE.RECORDING_TOGGLE:i=r.isRecordingPaused?await e.sdk.pauseRecording(r.call):await e.sdk.resumeRecording(r.call);break;case a.VOICE_EVENT_TYPE.PARTICIPANT_ADDED:i=await e.sdk.addParticipant(new t.Contact(r.contact),r.call);break;case a.VOICE_EVENT_TYPE.PARTICIPANTS_SWAPPED:i=await e.sdk.swapCalls(r.call,r.thirdPartyCall);break;case a.VOICE_EVENT_TYPE.PARTICIPANTS_CONFERENCED:i=await e.sdk.conference(r)}(0,t.publishEvent)({eventType:s,payload:i})}break;case a.SHARED_EVENT_TYPE.AFTER_CONVERSATION_WORK_STARTED:case a.SHARED_EVENT_TYPE.AFTER_CONVERSATION_WORK_ENDED:(0,t.publishEvent)({eventType:n.data.type,payload:new t.ACWInfo(n.data.acwInfo)});break;case a.CALL_UPDATED:s=new t.PhoneCall({callInfo:new t.CallInfo(n.data.payload)}),r=new t.CallResult({call:s}),(0,t.publishEvent)({eventType:n.data.eventType,payload:r});break;default:(0,t.publishEvent)({eventType:n.data.type})}}catch(s){const r=n.data.eventType;e.sdk.messageUser(n.fromUsername,a.ERROR,{type:a.ERROR,error:`${s.message} (Event: ${r||n.data.type})`}),console.error(`Error occured when published event ${r} from the hardphone simulator: ${s.message}`),e.sdk&&e.sdk.state.publishHardphoneErrors&&(0,t.publishError)({eventType:r,error:s})}}))}(V),function(e){e.sdk.eventEmitter.on("event",(async n=>{if(n&&n.data)try{switch(n.data.type){case a.GET_AGENT_CONFIG:{const{agentConfig:t,contactCenterChannels:s,agentId:r,userPresenceStatuses:i,isSCVMultipartyAllowed:o}=e.sdk.state;e.sdk.messageUser(n.fromUsername,a.AGENT_CONFIG,{type:a.AGENT_CONFIG,value:t,userPresenceStatuses:i,contactCenterChannels:s,referrer:`${document.referrer}`,agentId:r,isSCVMultipartyAllowed:o})}break;case a.SET_AGENT_CONFIG:e.sdk.updateAgentConfig({selectedPhone:n.data.value.selectedPhone});break;case a.SET_AGENT_STATUS:e.sdk.publishSetAgentStatus(n.data.statusId)}}catch(s){const r=n.data.eventType;e.sdk.messageUser(n.fromUsername,a.ERROR,{type:a.ERROR,error:`${s.message} (Event: ${r||n.data.type})`}),console.error(`Error occured when published event ${r} from the hardphone simulator: ${s.message}`),e.sdk.state.publishHardphoneErrors&&(0,t.publishError)({eventType:r,error:s})}}))}(V)}))})()})();
+/******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./node_modules/backo2/index.js":
+/*!**************************************!*\
+  !*** ./node_modules/backo2/index.js ***!
+  \**************************************/
+/***/ ((module) => {
+
+
+/**
+ * Expose `Backoff`.
+ */
+
+module.exports = Backoff;
+
+/**
+ * Initialize backoff timer with `opts`.
+ *
+ * - `min` initial timeout in milliseconds [100]
+ * - `max` max timeout [10000]
+ * - `jitter` [0]
+ * - `factor` [2]
+ *
+ * @param {Object} opts
+ * @api public
+ */
+
+function Backoff(opts) {
+  opts = opts || {};
+  this.ms = opts.min || 100;
+  this.max = opts.max || 10000;
+  this.factor = opts.factor || 2;
+  this.jitter = opts.jitter > 0 && opts.jitter <= 1 ? opts.jitter : 0;
+  this.attempts = 0;
+}
+
+/**
+ * Return the backoff duration.
+ *
+ * @return {Number}
+ * @api public
+ */
+
+Backoff.prototype.duration = function(){
+  var ms = this.ms * Math.pow(this.factor, this.attempts++);
+  if (this.jitter) {
+    var rand =  Math.random();
+    var deviation = Math.floor(rand * this.jitter * ms);
+    ms = (Math.floor(rand * 10) & 1) == 0  ? ms - deviation : ms + deviation;
+  }
+  return Math.min(ms, this.max) | 0;
+};
+
+/**
+ * Reset the number of attempts.
+ *
+ * @api public
+ */
+
+Backoff.prototype.reset = function(){
+  this.attempts = 0;
+};
+
+/**
+ * Set the minimum duration
+ *
+ * @api public
+ */
+
+Backoff.prototype.setMin = function(min){
+  this.ms = min;
+};
+
+/**
+ * Set the maximum duration
+ *
+ * @api public
+ */
+
+Backoff.prototype.setMax = function(max){
+  this.max = max;
+};
+
+/**
+ * Set the jitter
+ *
+ * @api public
+ */
+
+Backoff.prototype.setJitter = function(jitter){
+  this.jitter = jitter;
+};
+
+
+
+/***/ }),
+
+/***/ "./node_modules/base64-arraybuffer/lib/base64-arraybuffer.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/base64-arraybuffer/lib/base64-arraybuffer.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+/*
+ * base64-arraybuffer
+ * https://github.com/niklasvh/base64-arraybuffer
+ *
+ * Copyright (c) 2012 Niklas von Hertzen
+ * Licensed under the MIT license.
+ */
+(function(chars){
+  "use strict";
+
+  exports.encode = function(arraybuffer) {
+    var bytes = new Uint8Array(arraybuffer),
+    i, len = bytes.length, base64 = "";
+
+    for (i = 0; i < len; i+=3) {
+      base64 += chars[bytes[i] >> 2];
+      base64 += chars[((bytes[i] & 3) << 4) | (bytes[i + 1] >> 4)];
+      base64 += chars[((bytes[i + 1] & 15) << 2) | (bytes[i + 2] >> 6)];
+      base64 += chars[bytes[i + 2] & 63];
+    }
+
+    if ((len % 3) === 2) {
+      base64 = base64.substring(0, base64.length - 1) + "=";
+    } else if (len % 3 === 1) {
+      base64 = base64.substring(0, base64.length - 2) + "==";
+    }
+
+    return base64;
+  };
+
+  exports.decode =  function(base64) {
+    var bufferLength = base64.length * 0.75,
+    len = base64.length, i, p = 0,
+    encoded1, encoded2, encoded3, encoded4;
+
+    if (base64[base64.length - 1] === "=") {
+      bufferLength--;
+      if (base64[base64.length - 2] === "=") {
+        bufferLength--;
+      }
+    }
+
+    var arraybuffer = new ArrayBuffer(bufferLength),
+    bytes = new Uint8Array(arraybuffer);
+
+    for (i = 0; i < len; i+=4) {
+      encoded1 = chars.indexOf(base64[i]);
+      encoded2 = chars.indexOf(base64[i+1]);
+      encoded3 = chars.indexOf(base64[i+2]);
+      encoded4 = chars.indexOf(base64[i+3]);
+
+      bytes[p++] = (encoded1 << 2) | (encoded2 >> 4);
+      bytes[p++] = ((encoded2 & 15) << 4) | (encoded3 >> 2);
+      bytes[p++] = ((encoded3 & 3) << 6) | (encoded4 & 63);
+    }
+
+    return arraybuffer;
+  };
+})("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/");
+
+
+/***/ }),
+
+/***/ "./node_modules/component-emitter/index.js":
+/*!*************************************************!*\
+  !*** ./node_modules/component-emitter/index.js ***!
+  \*************************************************/
+/***/ ((module) => {
+
+
+/**
+ * Expose `Emitter`.
+ */
+
+if (true) {
+  module.exports = Emitter;
+}
+
+/**
+ * Initialize a new `Emitter`.
+ *
+ * @api public
+ */
+
+function Emitter(obj) {
+  if (obj) return mixin(obj);
+};
+
+/**
+ * Mixin the emitter properties.
+ *
+ * @param {Object} obj
+ * @return {Object}
+ * @api private
+ */
+
+function mixin(obj) {
+  for (var key in Emitter.prototype) {
+    obj[key] = Emitter.prototype[key];
+  }
+  return obj;
+}
+
+/**
+ * Listen on the given `event` with `fn`.
+ *
+ * @param {String} event
+ * @param {Function} fn
+ * @return {Emitter}
+ * @api public
+ */
+
+Emitter.prototype.on =
+Emitter.prototype.addEventListener = function(event, fn){
+  this._callbacks = this._callbacks || {};
+  (this._callbacks['$' + event] = this._callbacks['$' + event] || [])
+    .push(fn);
+  return this;
+};
+
+/**
+ * Adds an `event` listener that will be invoked a single
+ * time then automatically removed.
+ *
+ * @param {String} event
+ * @param {Function} fn
+ * @return {Emitter}
+ * @api public
+ */
+
+Emitter.prototype.once = function(event, fn){
+  function on() {
+    this.off(event, on);
+    fn.apply(this, arguments);
+  }
+
+  on.fn = fn;
+  this.on(event, on);
+  return this;
+};
+
+/**
+ * Remove the given callback for `event` or all
+ * registered callbacks.
+ *
+ * @param {String} event
+ * @param {Function} fn
+ * @return {Emitter}
+ * @api public
+ */
+
+Emitter.prototype.off =
+Emitter.prototype.removeListener =
+Emitter.prototype.removeAllListeners =
+Emitter.prototype.removeEventListener = function(event, fn){
+  this._callbacks = this._callbacks || {};
+
+  // all
+  if (0 == arguments.length) {
+    this._callbacks = {};
+    return this;
+  }
+
+  // specific event
+  var callbacks = this._callbacks['$' + event];
+  if (!callbacks) return this;
+
+  // remove all handlers
+  if (1 == arguments.length) {
+    delete this._callbacks['$' + event];
+    return this;
+  }
+
+  // remove specific handler
+  var cb;
+  for (var i = 0; i < callbacks.length; i++) {
+    cb = callbacks[i];
+    if (cb === fn || cb.fn === fn) {
+      callbacks.splice(i, 1);
+      break;
+    }
+  }
+
+  // Remove event specific arrays for event types that no
+  // one is subscribed for to avoid memory leak.
+  if (callbacks.length === 0) {
+    delete this._callbacks['$' + event];
+  }
+
+  return this;
+};
+
+/**
+ * Emit `event` with the given args.
+ *
+ * @param {String} event
+ * @param {Mixed} ...
+ * @return {Emitter}
+ */
+
+Emitter.prototype.emit = function(event){
+  this._callbacks = this._callbacks || {};
+
+  var args = new Array(arguments.length - 1)
+    , callbacks = this._callbacks['$' + event];
+
+  for (var i = 1; i < arguments.length; i++) {
+    args[i - 1] = arguments[i];
+  }
+
+  if (callbacks) {
+    callbacks = callbacks.slice(0);
+    for (var i = 0, len = callbacks.length; i < len; ++i) {
+      callbacks[i].apply(this, args);
+    }
+  }
+
+  return this;
+};
+
+/**
+ * Return array of callbacks for `event`.
+ *
+ * @param {String} event
+ * @return {Array}
+ * @api public
+ */
+
+Emitter.prototype.listeners = function(event){
+  this._callbacks = this._callbacks || {};
+  return this._callbacks['$' + event] || [];
+};
+
+/**
+ * Check if this emitter has `event` handlers.
+ *
+ * @param {String} event
+ * @return {Boolean}
+ * @api public
+ */
+
+Emitter.prototype.hasListeners = function(event){
+  return !! this.listeners(event).length;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/debug/src/browser.js":
+/*!*******************************************!*\
+  !*** ./node_modules/debug/src/browser.js ***!
+  \*******************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+/* eslint-env browser */
+
+/**
+ * This is the web browser implementation of `debug()`.
+ */
+
+exports.formatArgs = formatArgs;
+exports.save = save;
+exports.load = load;
+exports.useColors = useColors;
+exports.storage = localstorage();
+exports.destroy = (() => {
+	let warned = false;
+
+	return () => {
+		if (!warned) {
+			warned = true;
+			console.warn('Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.');
+		}
+	};
+})();
+
+/**
+ * Colors.
+ */
+
+exports.colors = [
+	'#0000CC',
+	'#0000FF',
+	'#0033CC',
+	'#0033FF',
+	'#0066CC',
+	'#0066FF',
+	'#0099CC',
+	'#0099FF',
+	'#00CC00',
+	'#00CC33',
+	'#00CC66',
+	'#00CC99',
+	'#00CCCC',
+	'#00CCFF',
+	'#3300CC',
+	'#3300FF',
+	'#3333CC',
+	'#3333FF',
+	'#3366CC',
+	'#3366FF',
+	'#3399CC',
+	'#3399FF',
+	'#33CC00',
+	'#33CC33',
+	'#33CC66',
+	'#33CC99',
+	'#33CCCC',
+	'#33CCFF',
+	'#6600CC',
+	'#6600FF',
+	'#6633CC',
+	'#6633FF',
+	'#66CC00',
+	'#66CC33',
+	'#9900CC',
+	'#9900FF',
+	'#9933CC',
+	'#9933FF',
+	'#99CC00',
+	'#99CC33',
+	'#CC0000',
+	'#CC0033',
+	'#CC0066',
+	'#CC0099',
+	'#CC00CC',
+	'#CC00FF',
+	'#CC3300',
+	'#CC3333',
+	'#CC3366',
+	'#CC3399',
+	'#CC33CC',
+	'#CC33FF',
+	'#CC6600',
+	'#CC6633',
+	'#CC9900',
+	'#CC9933',
+	'#CCCC00',
+	'#CCCC33',
+	'#FF0000',
+	'#FF0033',
+	'#FF0066',
+	'#FF0099',
+	'#FF00CC',
+	'#FF00FF',
+	'#FF3300',
+	'#FF3333',
+	'#FF3366',
+	'#FF3399',
+	'#FF33CC',
+	'#FF33FF',
+	'#FF6600',
+	'#FF6633',
+	'#FF9900',
+	'#FF9933',
+	'#FFCC00',
+	'#FFCC33'
+];
+
+/**
+ * Currently only WebKit-based Web Inspectors, Firefox >= v31,
+ * and the Firebug extension (any Firefox version) are known
+ * to support "%c" CSS customizations.
+ *
+ * TODO: add a `localStorage` variable to explicitly enable/disable colors
+ */
+
+// eslint-disable-next-line complexity
+function useColors() {
+	// NB: In an Electron preload script, document will be defined but not fully
+	// initialized. Since we know we're in Chrome, we'll just detect this case
+	// explicitly
+	if (typeof window !== 'undefined' && window.process && (window.process.type === 'renderer' || window.process.__nwjs)) {
+		return true;
+	}
+
+	// Internet Explorer and Edge do not support colors.
+	if (typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/(edge|trident)\/(\d+)/)) {
+		return false;
+	}
+
+	let m;
+
+	// Is webkit? http://stackoverflow.com/a/16459606/376773
+	// document is undefined in react-native: https://github.com/facebook/react-native/pull/1632
+	return (typeof document !== 'undefined' && document.documentElement && document.documentElement.style && document.documentElement.style.WebkitAppearance) ||
+		// Is firebug? http://stackoverflow.com/a/398120/376773
+		(typeof window !== 'undefined' && window.console && (window.console.firebug || (window.console.exception && window.console.table))) ||
+		// Is firefox >= v31?
+		// https://developer.mozilla.org/en-US/docs/Tools/Web_Console#Styling_messages
+		(typeof navigator !== 'undefined' && navigator.userAgent && (m = navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/)) && parseInt(m[1], 10) >= 31) ||
+		// Double check webkit in userAgent just in case we are in a worker
+		(typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/applewebkit\/(\d+)/));
+}
+
+/**
+ * Colorize log arguments if enabled.
+ *
+ * @api public
+ */
+
+function formatArgs(args) {
+	args[0] = (this.useColors ? '%c' : '') +
+		this.namespace +
+		(this.useColors ? ' %c' : ' ') +
+		args[0] +
+		(this.useColors ? '%c ' : ' ') +
+		'+' + module.exports.humanize(this.diff);
+
+	if (!this.useColors) {
+		return;
+	}
+
+	const c = 'color: ' + this.color;
+	args.splice(1, 0, c, 'color: inherit');
+
+	// The final "%c" is somewhat tricky, because there could be other
+	// arguments passed either before or after the %c, so we need to
+	// figure out the correct index to insert the CSS into
+	let index = 0;
+	let lastC = 0;
+	args[0].replace(/%[a-zA-Z%]/g, match => {
+		if (match === '%%') {
+			return;
+		}
+		index++;
+		if (match === '%c') {
+			// We only are interested in the *last* %c
+			// (the user may have provided their own)
+			lastC = index;
+		}
+	});
+
+	args.splice(lastC, 0, c);
+}
+
+/**
+ * Invokes `console.debug()` when available.
+ * No-op when `console.debug` is not a "function".
+ * If `console.debug` is not available, falls back
+ * to `console.log`.
+ *
+ * @api public
+ */
+exports.log = console.debug || console.log || (() => {});
+
+/**
+ * Save `namespaces`.
+ *
+ * @param {String} namespaces
+ * @api private
+ */
+function save(namespaces) {
+	try {
+		if (namespaces) {
+			exports.storage.setItem('debug', namespaces);
+		} else {
+			exports.storage.removeItem('debug');
+		}
+	} catch (error) {
+		// Swallow
+		// XXX (@Qix-) should we be logging these?
+	}
+}
+
+/**
+ * Load `namespaces`.
+ *
+ * @return {String} returns the previously persisted debug modes
+ * @api private
+ */
+function load() {
+	let r;
+	try {
+		r = exports.storage.getItem('debug');
+	} catch (error) {
+		// Swallow
+		// XXX (@Qix-) should we be logging these?
+	}
+
+	// If debug isn't set in LS, and we're in Electron, try to load $DEBUG
+	if (!r && typeof process !== 'undefined' && 'env' in process) {
+		r = process.env.DEBUG;
+	}
+
+	return r;
+}
+
+/**
+ * Localstorage attempts to return the localstorage.
+ *
+ * This is necessary because safari throws
+ * when a user disables cookies/localstorage
+ * and you attempt to access it.
+ *
+ * @return {LocalStorage}
+ * @api private
+ */
+
+function localstorage() {
+	try {
+		// TVMLKit (Apple TV JS Runtime) does not have a window object, just localStorage in the global context
+		// The Browser also has localStorage in the global context.
+		return localStorage;
+	} catch (error) {
+		// Swallow
+		// XXX (@Qix-) should we be logging these?
+	}
+}
+
+module.exports = __webpack_require__(/*! ./common */ "./node_modules/debug/src/common.js")(exports);
+
+const {formatters} = module.exports;
+
+/**
+ * Map %j to `JSON.stringify()`, since no Web Inspectors do that by default.
+ */
+
+formatters.j = function (v) {
+	try {
+		return JSON.stringify(v);
+	} catch (error) {
+		return '[UnexpectedJSONParseError]: ' + error.message;
+	}
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/debug/src/common.js":
+/*!******************************************!*\
+  !*** ./node_modules/debug/src/common.js ***!
+  \******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+
+/**
+ * This is the common logic for both the Node.js and web browser
+ * implementations of `debug()`.
+ */
+
+function setup(env) {
+	createDebug.debug = createDebug;
+	createDebug.default = createDebug;
+	createDebug.coerce = coerce;
+	createDebug.disable = disable;
+	createDebug.enable = enable;
+	createDebug.enabled = enabled;
+	createDebug.humanize = __webpack_require__(/*! ms */ "./node_modules/ms/index.js");
+	createDebug.destroy = destroy;
+
+	Object.keys(env).forEach(key => {
+		createDebug[key] = env[key];
+	});
+
+	/**
+	* The currently active debug mode names, and names to skip.
+	*/
+
+	createDebug.names = [];
+	createDebug.skips = [];
+
+	/**
+	* Map of special "%n" handling functions, for the debug "format" argument.
+	*
+	* Valid key names are a single, lower or upper-case letter, i.e. "n" and "N".
+	*/
+	createDebug.formatters = {};
+
+	/**
+	* Selects a color for a debug namespace
+	* @param {String} namespace The namespace string for the debug instance to be colored
+	* @return {Number|String} An ANSI color code for the given namespace
+	* @api private
+	*/
+	function selectColor(namespace) {
+		let hash = 0;
+
+		for (let i = 0; i < namespace.length; i++) {
+			hash = ((hash << 5) - hash) + namespace.charCodeAt(i);
+			hash |= 0; // Convert to 32bit integer
+		}
+
+		return createDebug.colors[Math.abs(hash) % createDebug.colors.length];
+	}
+	createDebug.selectColor = selectColor;
+
+	/**
+	* Create a debugger with the given `namespace`.
+	*
+	* @param {String} namespace
+	* @return {Function}
+	* @api public
+	*/
+	function createDebug(namespace) {
+		let prevTime;
+		let enableOverride = null;
+		let namespacesCache;
+		let enabledCache;
+
+		function debug(...args) {
+			// Disabled?
+			if (!debug.enabled) {
+				return;
+			}
+
+			const self = debug;
+
+			// Set `diff` timestamp
+			const curr = Number(new Date());
+			const ms = curr - (prevTime || curr);
+			self.diff = ms;
+			self.prev = prevTime;
+			self.curr = curr;
+			prevTime = curr;
+
+			args[0] = createDebug.coerce(args[0]);
+
+			if (typeof args[0] !== 'string') {
+				// Anything else let's inspect with %O
+				args.unshift('%O');
+			}
+
+			// Apply any `formatters` transformations
+			let index = 0;
+			args[0] = args[0].replace(/%([a-zA-Z%])/g, (match, format) => {
+				// If we encounter an escaped % then don't increase the array index
+				if (match === '%%') {
+					return '%';
+				}
+				index++;
+				const formatter = createDebug.formatters[format];
+				if (typeof formatter === 'function') {
+					const val = args[index];
+					match = formatter.call(self, val);
+
+					// Now we need to remove `args[index]` since it's inlined in the `format`
+					args.splice(index, 1);
+					index--;
+				}
+				return match;
+			});
+
+			// Apply env-specific formatting (colors, etc.)
+			createDebug.formatArgs.call(self, args);
+
+			const logFn = self.log || createDebug.log;
+			logFn.apply(self, args);
+		}
+
+		debug.namespace = namespace;
+		debug.useColors = createDebug.useColors();
+		debug.color = createDebug.selectColor(namespace);
+		debug.extend = extend;
+		debug.destroy = createDebug.destroy; // XXX Temporary. Will be removed in the next major release.
+
+		Object.defineProperty(debug, 'enabled', {
+			enumerable: true,
+			configurable: false,
+			get: () => {
+				if (enableOverride !== null) {
+					return enableOverride;
+				}
+				if (namespacesCache !== createDebug.namespaces) {
+					namespacesCache = createDebug.namespaces;
+					enabledCache = createDebug.enabled(namespace);
+				}
+
+				return enabledCache;
+			},
+			set: v => {
+				enableOverride = v;
+			}
+		});
+
+		// Env-specific initialization logic for debug instances
+		if (typeof createDebug.init === 'function') {
+			createDebug.init(debug);
+		}
+
+		return debug;
+	}
+
+	function extend(namespace, delimiter) {
+		const newDebug = createDebug(this.namespace + (typeof delimiter === 'undefined' ? ':' : delimiter) + namespace);
+		newDebug.log = this.log;
+		return newDebug;
+	}
+
+	/**
+	* Enables a debug mode by namespaces. This can include modes
+	* separated by a colon and wildcards.
+	*
+	* @param {String} namespaces
+	* @api public
+	*/
+	function enable(namespaces) {
+		createDebug.save(namespaces);
+		createDebug.namespaces = namespaces;
+
+		createDebug.names = [];
+		createDebug.skips = [];
+
+		let i;
+		const split = (typeof namespaces === 'string' ? namespaces : '').split(/[\s,]+/);
+		const len = split.length;
+
+		for (i = 0; i < len; i++) {
+			if (!split[i]) {
+				// ignore empty strings
+				continue;
+			}
+
+			namespaces = split[i].replace(/\*/g, '.*?');
+
+			if (namespaces[0] === '-') {
+				createDebug.skips.push(new RegExp('^' + namespaces.slice(1) + '$'));
+			} else {
+				createDebug.names.push(new RegExp('^' + namespaces + '$'));
+			}
+		}
+	}
+
+	/**
+	* Disable debug output.
+	*
+	* @return {String} namespaces
+	* @api public
+	*/
+	function disable() {
+		const namespaces = [
+			...createDebug.names.map(toNamespace),
+			...createDebug.skips.map(toNamespace).map(namespace => '-' + namespace)
+		].join(',');
+		createDebug.enable('');
+		return namespaces;
+	}
+
+	/**
+	* Returns true if the given mode name is enabled, false otherwise.
+	*
+	* @param {String} name
+	* @return {Boolean}
+	* @api public
+	*/
+	function enabled(name) {
+		if (name[name.length - 1] === '*') {
+			return true;
+		}
+
+		let i;
+		let len;
+
+		for (i = 0, len = createDebug.skips.length; i < len; i++) {
+			if (createDebug.skips[i].test(name)) {
+				return false;
+			}
+		}
+
+		for (i = 0, len = createDebug.names.length; i < len; i++) {
+			if (createDebug.names[i].test(name)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	* Convert regexp to namespace
+	*
+	* @param {RegExp} regxep
+	* @return {String} namespace
+	* @api private
+	*/
+	function toNamespace(regexp) {
+		return regexp.toString()
+			.substring(2, regexp.toString().length - 2)
+			.replace(/\.\*\?$/, '*');
+	}
+
+	/**
+	* Coerce `val`.
+	*
+	* @param {Mixed} val
+	* @return {Mixed}
+	* @api private
+	*/
+	function coerce(val) {
+		if (val instanceof Error) {
+			return val.stack || val.message;
+		}
+		return val;
+	}
+
+	/**
+	* XXX DO NOT USE. This is a temporary stub function.
+	* XXX It WILL be removed in the next major release.
+	*/
+	function destroy() {
+		console.warn('Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.');
+	}
+
+	createDebug.enable(createDebug.load());
+
+	return createDebug;
+}
+
+module.exports = setup;
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-client/lib/globalThis.browser.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/engine.io-client/lib/globalThis.browser.js ***!
+  \*****************************************************************/
+/***/ ((module) => {
+
+module.exports = (() => {
+  if (typeof self !== "undefined") {
+    return self;
+  } else if (typeof window !== "undefined") {
+    return window;
+  } else {
+    return Function("return this")();
+  }
+})();
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-client/lib/index.js":
+/*!****************************************************!*\
+  !*** ./node_modules/engine.io-client/lib/index.js ***!
+  \****************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const Socket = __webpack_require__(/*! ./socket */ "./node_modules/engine.io-client/lib/socket.js");
+
+module.exports = (uri, opts) => new Socket(uri, opts);
+
+/**
+ * Expose deps for legacy compatibility
+ * and standalone browser access.
+ */
+
+module.exports.Socket = Socket;
+module.exports.protocol = Socket.protocol; // this is an int
+module.exports.Transport = __webpack_require__(/*! ./transport */ "./node_modules/engine.io-client/lib/transport.js");
+module.exports.transports = __webpack_require__(/*! ./transports/index */ "./node_modules/engine.io-client/lib/transports/index.js");
+module.exports.parser = __webpack_require__(/*! engine.io-parser */ "./node_modules/engine.io-parser/lib/index.js");
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-client/lib/socket.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/engine.io-client/lib/socket.js ***!
+  \*****************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const transports = __webpack_require__(/*! ./transports/index */ "./node_modules/engine.io-client/lib/transports/index.js");
+const Emitter = __webpack_require__(/*! component-emitter */ "./node_modules/component-emitter/index.js");
+const debug = __webpack_require__(/*! debug */ "./node_modules/debug/src/browser.js")("engine.io-client:socket");
+const parser = __webpack_require__(/*! engine.io-parser */ "./node_modules/engine.io-parser/lib/index.js");
+const parseuri = __webpack_require__(/*! parseuri */ "./node_modules/parseuri/index.js");
+const parseqs = __webpack_require__(/*! parseqs */ "./node_modules/parseqs/index.js");
+const { installTimerFunctions } = __webpack_require__(/*! ./util */ "./node_modules/engine.io-client/lib/util.js");
+
+class Socket extends Emitter {
+  /**
+   * Socket constructor.
+   *
+   * @param {String|Object} uri or options
+   * @param {Object} options
+   * @api public
+   */
+  constructor(uri, opts = {}) {
+    super();
+
+    if (uri && "object" === typeof uri) {
+      opts = uri;
+      uri = null;
+    }
+
+    if (uri) {
+      uri = parseuri(uri);
+      opts.hostname = uri.host;
+      opts.secure = uri.protocol === "https" || uri.protocol === "wss";
+      opts.port = uri.port;
+      if (uri.query) opts.query = uri.query;
+    } else if (opts.host) {
+      opts.hostname = parseuri(opts.host).host;
+    }
+
+    installTimerFunctions(this, opts);
+
+    this.secure =
+      null != opts.secure
+        ? opts.secure
+        : typeof location !== "undefined" && "https:" === location.protocol;
+
+    if (opts.hostname && !opts.port) {
+      // if no port is specified manually, use the protocol default
+      opts.port = this.secure ? "443" : "80";
+    }
+
+    this.hostname =
+      opts.hostname ||
+      (typeof location !== "undefined" ? location.hostname : "localhost");
+    this.port =
+      opts.port ||
+      (typeof location !== "undefined" && location.port
+        ? location.port
+        : this.secure
+        ? 443
+        : 80);
+
+    this.transports = opts.transports || ["polling", "websocket"];
+    this.readyState = "";
+    this.writeBuffer = [];
+    this.prevBufferLen = 0;
+
+    this.opts = Object.assign(
+      {
+        path: "/engine.io",
+        agent: false,
+        withCredentials: false,
+        upgrade: true,
+        jsonp: true,
+        timestampParam: "t",
+        rememberUpgrade: false,
+        rejectUnauthorized: true,
+        perMessageDeflate: {
+          threshold: 1024
+        },
+        transportOptions: {},
+        closeOnBeforeunload: true
+      },
+      opts
+    );
+
+    this.opts.path = this.opts.path.replace(/\/$/, "") + "/";
+
+    if (typeof this.opts.query === "string") {
+      this.opts.query = parseqs.decode(this.opts.query);
+    }
+
+    // set on handshake
+    this.id = null;
+    this.upgrades = null;
+    this.pingInterval = null;
+    this.pingTimeout = null;
+
+    // set on heartbeat
+    this.pingTimeoutTimer = null;
+
+    if (typeof addEventListener === "function") {
+      if (this.opts.closeOnBeforeunload) {
+        // Firefox closes the connection when the "beforeunload" event is emitted but not Chrome. This event listener
+        // ensures every browser behaves the same (no "disconnect" event at the Socket.IO level when the page is
+        // closed/reloaded)
+        addEventListener(
+          "beforeunload",
+          () => {
+            if (this.transport) {
+              // silently close the transport
+              this.transport.removeAllListeners();
+              this.transport.close();
+            }
+          },
+          false
+        );
+      }
+      if (this.hostname !== "localhost") {
+        this.offlineEventListener = () => {
+          this.onClose("transport close");
+        };
+        addEventListener("offline", this.offlineEventListener, false);
+      }
+    }
+
+    this.open();
+  }
+
+  /**
+   * Creates transport of the given type.
+   *
+   * @param {String} transport name
+   * @return {Transport}
+   * @api private
+   */
+  createTransport(name) {
+    debug('creating transport "%s"', name);
+    const query = clone(this.opts.query);
+
+    // append engine.io protocol identifier
+    query.EIO = parser.protocol;
+
+    // transport name
+    query.transport = name;
+
+    // session id if we already have one
+    if (this.id) query.sid = this.id;
+
+    const opts = Object.assign(
+      {},
+      this.opts.transportOptions[name],
+      this.opts,
+      {
+        query,
+        socket: this,
+        hostname: this.hostname,
+        secure: this.secure,
+        port: this.port
+      }
+    );
+
+    debug("options: %j", opts);
+
+    return new transports[name](opts);
+  }
+
+  /**
+   * Initializes transport to use and starts probe.
+   *
+   * @api private
+   */
+  open() {
+    let transport;
+    if (
+      this.opts.rememberUpgrade &&
+      Socket.priorWebsocketSuccess &&
+      this.transports.indexOf("websocket") !== -1
+    ) {
+      transport = "websocket";
+    } else if (0 === this.transports.length) {
+      // Emit error on next tick so it can be listened to
+      this.setTimeoutFn(() => {
+        this.emit("error", "No transports available");
+      }, 0);
+      return;
+    } else {
+      transport = this.transports[0];
+    }
+    this.readyState = "opening";
+
+    // Retry with the next transport if the transport is disabled (jsonp: false)
+    try {
+      transport = this.createTransport(transport);
+    } catch (e) {
+      debug("error while creating transport: %s", e);
+      this.transports.shift();
+      this.open();
+      return;
+    }
+
+    transport.open();
+    this.setTransport(transport);
+  }
+
+  /**
+   * Sets the current transport. Disables the existing one (if any).
+   *
+   * @api private
+   */
+  setTransport(transport) {
+    debug("setting transport %s", transport.name);
+
+    if (this.transport) {
+      debug("clearing existing transport %s", this.transport.name);
+      this.transport.removeAllListeners();
+    }
+
+    // set up transport
+    this.transport = transport;
+
+    // set up transport listeners
+    transport
+      .on("drain", this.onDrain.bind(this))
+      .on("packet", this.onPacket.bind(this))
+      .on("error", this.onError.bind(this))
+      .on("close", () => {
+        this.onClose("transport close");
+      });
+  }
+
+  /**
+   * Probes a transport.
+   *
+   * @param {String} transport name
+   * @api private
+   */
+  probe(name) {
+    debug('probing transport "%s"', name);
+    let transport = this.createTransport(name, { probe: 1 });
+    let failed = false;
+
+    Socket.priorWebsocketSuccess = false;
+
+    const onTransportOpen = () => {
+      if (failed) return;
+
+      debug('probe transport "%s" opened', name);
+      transport.send([{ type: "ping", data: "probe" }]);
+      transport.once("packet", msg => {
+        if (failed) return;
+        if ("pong" === msg.type && "probe" === msg.data) {
+          debug('probe transport "%s" pong', name);
+          this.upgrading = true;
+          this.emit("upgrading", transport);
+          if (!transport) return;
+          Socket.priorWebsocketSuccess = "websocket" === transport.name;
+
+          debug('pausing current transport "%s"', this.transport.name);
+          this.transport.pause(() => {
+            if (failed) return;
+            if ("closed" === this.readyState) return;
+            debug("changing transport and sending upgrade packet");
+
+            cleanup();
+
+            this.setTransport(transport);
+            transport.send([{ type: "upgrade" }]);
+            this.emit("upgrade", transport);
+            transport = null;
+            this.upgrading = false;
+            this.flush();
+          });
+        } else {
+          debug('probe transport "%s" failed', name);
+          const err = new Error("probe error");
+          err.transport = transport.name;
+          this.emit("upgradeError", err);
+        }
+      });
+    };
+
+    function freezeTransport() {
+      if (failed) return;
+
+      // Any callback called by transport should be ignored since now
+      failed = true;
+
+      cleanup();
+
+      transport.close();
+      transport = null;
+    }
+
+    // Handle any error that happens while probing
+    const onerror = err => {
+      const error = new Error("probe error: " + err);
+      error.transport = transport.name;
+
+      freezeTransport();
+
+      debug('probe transport "%s" failed because of error: %s', name, err);
+
+      this.emit("upgradeError", error);
+    };
+
+    function onTransportClose() {
+      onerror("transport closed");
+    }
+
+    // When the socket is closed while we're probing
+    function onclose() {
+      onerror("socket closed");
+    }
+
+    // When the socket is upgraded while we're probing
+    function onupgrade(to) {
+      if (transport && to.name !== transport.name) {
+        debug('"%s" works - aborting "%s"', to.name, transport.name);
+        freezeTransport();
+      }
+    }
+
+    // Remove all listeners on the transport and on self
+    const cleanup = () => {
+      transport.removeListener("open", onTransportOpen);
+      transport.removeListener("error", onerror);
+      transport.removeListener("close", onTransportClose);
+      this.removeListener("close", onclose);
+      this.removeListener("upgrading", onupgrade);
+    };
+
+    transport.once("open", onTransportOpen);
+    transport.once("error", onerror);
+    transport.once("close", onTransportClose);
+
+    this.once("close", onclose);
+    this.once("upgrading", onupgrade);
+
+    transport.open();
+  }
+
+  /**
+   * Called when connection is deemed open.
+   *
+   * @api public
+   */
+  onOpen() {
+    debug("socket open");
+    this.readyState = "open";
+    Socket.priorWebsocketSuccess = "websocket" === this.transport.name;
+    this.emit("open");
+    this.flush();
+
+    // we check for `readyState` in case an `open`
+    // listener already closed the socket
+    if (
+      "open" === this.readyState &&
+      this.opts.upgrade &&
+      this.transport.pause
+    ) {
+      debug("starting upgrade probes");
+      let i = 0;
+      const l = this.upgrades.length;
+      for (; i < l; i++) {
+        this.probe(this.upgrades[i]);
+      }
+    }
+  }
+
+  /**
+   * Handles a packet.
+   *
+   * @api private
+   */
+  onPacket(packet) {
+    if (
+      "opening" === this.readyState ||
+      "open" === this.readyState ||
+      "closing" === this.readyState
+    ) {
+      debug('socket receive: type "%s", data "%s"', packet.type, packet.data);
+
+      this.emit("packet", packet);
+
+      // Socket is live - any packet counts
+      this.emit("heartbeat");
+
+      switch (packet.type) {
+        case "open":
+          this.onHandshake(JSON.parse(packet.data));
+          break;
+
+        case "ping":
+          this.resetPingTimeout();
+          this.sendPacket("pong");
+          this.emit("ping");
+          this.emit("pong");
+          break;
+
+        case "error":
+          const err = new Error("server error");
+          err.code = packet.data;
+          this.onError(err);
+          break;
+
+        case "message":
+          this.emit("data", packet.data);
+          this.emit("message", packet.data);
+          break;
+      }
+    } else {
+      debug('packet received with socket readyState "%s"', this.readyState);
+    }
+  }
+
+  /**
+   * Called upon handshake completion.
+   *
+   * @param {Object} handshake obj
+   * @api private
+   */
+  onHandshake(data) {
+    this.emit("handshake", data);
+    this.id = data.sid;
+    this.transport.query.sid = data.sid;
+    this.upgrades = this.filterUpgrades(data.upgrades);
+    this.pingInterval = data.pingInterval;
+    this.pingTimeout = data.pingTimeout;
+    this.onOpen();
+    // In case open handler closes socket
+    if ("closed" === this.readyState) return;
+    this.resetPingTimeout();
+  }
+
+  /**
+   * Sets and resets ping timeout timer based on server pings.
+   *
+   * @api private
+   */
+  resetPingTimeout() {
+    this.clearTimeoutFn(this.pingTimeoutTimer);
+    this.pingTimeoutTimer = this.setTimeoutFn(() => {
+      this.onClose("ping timeout");
+    }, this.pingInterval + this.pingTimeout);
+    if (this.opts.autoUnref) {
+      this.pingTimeoutTimer.unref();
+    }
+  }
+
+  /**
+   * Called on `drain` event
+   *
+   * @api private
+   */
+  onDrain() {
+    this.writeBuffer.splice(0, this.prevBufferLen);
+
+    // setting prevBufferLen = 0 is very important
+    // for example, when upgrading, upgrade packet is sent over,
+    // and a nonzero prevBufferLen could cause problems on `drain`
+    this.prevBufferLen = 0;
+
+    if (0 === this.writeBuffer.length) {
+      this.emit("drain");
+    } else {
+      this.flush();
+    }
+  }
+
+  /**
+   * Flush write buffers.
+   *
+   * @api private
+   */
+  flush() {
+    if (
+      "closed" !== this.readyState &&
+      this.transport.writable &&
+      !this.upgrading &&
+      this.writeBuffer.length
+    ) {
+      debug("flushing %d packets in socket", this.writeBuffer.length);
+      this.transport.send(this.writeBuffer);
+      // keep track of current length of writeBuffer
+      // splice writeBuffer and callbackBuffer on `drain`
+      this.prevBufferLen = this.writeBuffer.length;
+      this.emit("flush");
+    }
+  }
+
+  /**
+   * Sends a message.
+   *
+   * @param {String} message.
+   * @param {Function} callback function.
+   * @param {Object} options.
+   * @return {Socket} for chaining.
+   * @api public
+   */
+  write(msg, options, fn) {
+    this.sendPacket("message", msg, options, fn);
+    return this;
+  }
+
+  send(msg, options, fn) {
+    this.sendPacket("message", msg, options, fn);
+    return this;
+  }
+
+  /**
+   * Sends a packet.
+   *
+   * @param {String} packet type.
+   * @param {String} data.
+   * @param {Object} options.
+   * @param {Function} callback function.
+   * @api private
+   */
+  sendPacket(type, data, options, fn) {
+    if ("function" === typeof data) {
+      fn = data;
+      data = undefined;
+    }
+
+    if ("function" === typeof options) {
+      fn = options;
+      options = null;
+    }
+
+    if ("closing" === this.readyState || "closed" === this.readyState) {
+      return;
+    }
+
+    options = options || {};
+    options.compress = false !== options.compress;
+
+    const packet = {
+      type: type,
+      data: data,
+      options: options
+    };
+    this.emit("packetCreate", packet);
+    this.writeBuffer.push(packet);
+    if (fn) this.once("flush", fn);
+    this.flush();
+  }
+
+  /**
+   * Closes the connection.
+   *
+   * @api private
+   */
+  close() {
+    const close = () => {
+      this.onClose("forced close");
+      debug("socket closing - telling transport to close");
+      this.transport.close();
+    };
+
+    const cleanupAndClose = () => {
+      this.removeListener("upgrade", cleanupAndClose);
+      this.removeListener("upgradeError", cleanupAndClose);
+      close();
+    };
+
+    const waitForUpgrade = () => {
+      // wait for upgrade to finish since we can't send packets while pausing a transport
+      this.once("upgrade", cleanupAndClose);
+      this.once("upgradeError", cleanupAndClose);
+    };
+
+    if ("opening" === this.readyState || "open" === this.readyState) {
+      this.readyState = "closing";
+
+      if (this.writeBuffer.length) {
+        this.once("drain", () => {
+          if (this.upgrading) {
+            waitForUpgrade();
+          } else {
+            close();
+          }
+        });
+      } else if (this.upgrading) {
+        waitForUpgrade();
+      } else {
+        close();
+      }
+    }
+
+    return this;
+  }
+
+  /**
+   * Called upon transport error
+   *
+   * @api private
+   */
+  onError(err) {
+    debug("socket error %j", err);
+    Socket.priorWebsocketSuccess = false;
+    this.emit("error", err);
+    this.onClose("transport error", err);
+  }
+
+  /**
+   * Called upon transport close.
+   *
+   * @api private
+   */
+  onClose(reason, desc) {
+    if (
+      "opening" === this.readyState ||
+      "open" === this.readyState ||
+      "closing" === this.readyState
+    ) {
+      debug('socket close with reason: "%s"', reason);
+
+      // clear timers
+      this.clearTimeoutFn(this.pingIntervalTimer);
+      this.clearTimeoutFn(this.pingTimeoutTimer);
+
+      // stop event from firing again for transport
+      this.transport.removeAllListeners("close");
+
+      // ensure transport won't stay open
+      this.transport.close();
+
+      // ignore further transport communication
+      this.transport.removeAllListeners();
+
+      if (typeof removeEventListener === "function") {
+        removeEventListener("offline", this.offlineEventListener, false);
+      }
+
+      // set ready state
+      this.readyState = "closed";
+
+      // clear session id
+      this.id = null;
+
+      // emit close event
+      this.emit("close", reason, desc);
+
+      // clean buffers after, so users can still
+      // grab the buffers on `close` event
+      this.writeBuffer = [];
+      this.prevBufferLen = 0;
+    }
+  }
+
+  /**
+   * Filters upgrades, returning only those matching client transports.
+   *
+   * @param {Array} server upgrades
+   * @api private
+   *
+   */
+  filterUpgrades(upgrades) {
+    const filteredUpgrades = [];
+    let i = 0;
+    const j = upgrades.length;
+    for (; i < j; i++) {
+      if (~this.transports.indexOf(upgrades[i]))
+        filteredUpgrades.push(upgrades[i]);
+    }
+    return filteredUpgrades;
+  }
+}
+
+Socket.priorWebsocketSuccess = false;
+
+/**
+ * Protocol version.
+ *
+ * @api public
+ */
+
+Socket.protocol = parser.protocol; // this is an int
+
+function clone(obj) {
+  const o = {};
+  for (let i in obj) {
+    if (obj.hasOwnProperty(i)) {
+      o[i] = obj[i];
+    }
+  }
+  return o;
+}
+
+module.exports = Socket;
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-client/lib/transport.js":
+/*!********************************************************!*\
+  !*** ./node_modules/engine.io-client/lib/transport.js ***!
+  \********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const parser = __webpack_require__(/*! engine.io-parser */ "./node_modules/engine.io-parser/lib/index.js");
+const Emitter = __webpack_require__(/*! component-emitter */ "./node_modules/component-emitter/index.js");
+const { installTimerFunctions } = __webpack_require__(/*! ./util */ "./node_modules/engine.io-client/lib/util.js");
+const debug = __webpack_require__(/*! debug */ "./node_modules/debug/src/browser.js")("engine.io-client:transport");
+
+class Transport extends Emitter {
+  /**
+   * Transport abstract constructor.
+   *
+   * @param {Object} options.
+   * @api private
+   */
+  constructor(opts) {
+    super();
+    installTimerFunctions(this, opts);
+
+    this.opts = opts;
+    this.query = opts.query;
+    this.readyState = "";
+    this.socket = opts.socket;
+  }
+
+  /**
+   * Emits an error.
+   *
+   * @param {String} str
+   * @return {Transport} for chaining
+   * @api public
+   */
+  onError(msg, desc) {
+    const err = new Error(msg);
+    err.type = "TransportError";
+    err.description = desc;
+    this.emit("error", err);
+    return this;
+  }
+
+  /**
+   * Opens the transport.
+   *
+   * @api public
+   */
+  open() {
+    if ("closed" === this.readyState || "" === this.readyState) {
+      this.readyState = "opening";
+      this.doOpen();
+    }
+
+    return this;
+  }
+
+  /**
+   * Closes the transport.
+   *
+   * @api private
+   */
+  close() {
+    if ("opening" === this.readyState || "open" === this.readyState) {
+      this.doClose();
+      this.onClose();
+    }
+
+    return this;
+  }
+
+  /**
+   * Sends multiple packets.
+   *
+   * @param {Array} packets
+   * @api private
+   */
+  send(packets) {
+    if ("open" === this.readyState) {
+      this.write(packets);
+    } else {
+      // this might happen if the transport was silently closed in the beforeunload event handler
+      debug("transport is not open, discarding packets");
+    }
+  }
+
+  /**
+   * Called upon open
+   *
+   * @api private
+   */
+  onOpen() {
+    this.readyState = "open";
+    this.writable = true;
+    this.emit("open");
+  }
+
+  /**
+   * Called with data.
+   *
+   * @param {String} data
+   * @api private
+   */
+  onData(data) {
+    const packet = parser.decodePacket(data, this.socket.binaryType);
+    this.onPacket(packet);
+  }
+
+  /**
+   * Called with a decoded packet.
+   */
+  onPacket(packet) {
+    this.emit("packet", packet);
+  }
+
+  /**
+   * Called upon close.
+   *
+   * @api private
+   */
+  onClose() {
+    this.readyState = "closed";
+    this.emit("close");
+  }
+}
+
+module.exports = Transport;
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-client/lib/transports/index.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/engine.io-client/lib/transports/index.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+const XMLHttpRequest = __webpack_require__(/*! xmlhttprequest-ssl */ "./node_modules/engine.io-client/lib/xmlhttprequest.js");
+const XHR = __webpack_require__(/*! ./polling-xhr */ "./node_modules/engine.io-client/lib/transports/polling-xhr.js");
+const JSONP = __webpack_require__(/*! ./polling-jsonp */ "./node_modules/engine.io-client/lib/transports/polling-jsonp.js");
+const websocket = __webpack_require__(/*! ./websocket */ "./node_modules/engine.io-client/lib/transports/websocket.js");
+
+exports.polling = polling;
+exports.websocket = websocket;
+
+/**
+ * Polling transport polymorphic constructor.
+ * Decides on xhr vs jsonp based on feature detection.
+ *
+ * @api private
+ */
+
+function polling(opts) {
+  let xhr;
+  let xd = false;
+  let xs = false;
+  const jsonp = false !== opts.jsonp;
+
+  if (typeof location !== "undefined") {
+    const isSSL = "https:" === location.protocol;
+    let port = location.port;
+
+    // some user agents have empty `location.port`
+    if (!port) {
+      port = isSSL ? 443 : 80;
+    }
+
+    xd = opts.hostname !== location.hostname || port !== opts.port;
+    xs = opts.secure !== isSSL;
+  }
+
+  opts.xdomain = xd;
+  opts.xscheme = xs;
+  xhr = new XMLHttpRequest(opts);
+
+  if ("open" in xhr && !opts.forceJSONP) {
+    return new XHR(opts);
+  } else {
+    if (!jsonp) throw new Error("JSONP disabled");
+    return new JSONP(opts);
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-client/lib/transports/polling-jsonp.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/engine.io-client/lib/transports/polling-jsonp.js ***!
+  \***********************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const Polling = __webpack_require__(/*! ./polling */ "./node_modules/engine.io-client/lib/transports/polling.js");
+const globalThis = __webpack_require__(/*! ../globalThis */ "./node_modules/engine.io-client/lib/globalThis.browser.js");
+
+const rNewline = /\n/g;
+const rEscapedNewline = /\\n/g;
+
+/**
+ * Global JSONP callbacks.
+ */
+
+let callbacks;
+
+class JSONPPolling extends Polling {
+  /**
+   * JSONP Polling constructor.
+   *
+   * @param {Object} opts.
+   * @api public
+   */
+  constructor(opts) {
+    super(opts);
+
+    this.query = this.query || {};
+
+    // define global callbacks array if not present
+    // we do this here (lazily) to avoid unneeded global pollution
+    if (!callbacks) {
+      // we need to consider multiple engines in the same page
+      callbacks = globalThis.___eio = globalThis.___eio || [];
+    }
+
+    // callback identifier
+    this.index = callbacks.length;
+
+    // add callback to jsonp global
+    callbacks.push(this.onData.bind(this));
+
+    // append to query string
+    this.query.j = this.index;
+  }
+
+  /**
+   * JSONP only supports binary as base64 encoded strings
+   */
+  get supportsBinary() {
+    return false;
+  }
+
+  /**
+   * Closes the socket.
+   *
+   * @api private
+   */
+  doClose() {
+    if (this.script) {
+      // prevent spurious errors from being emitted when the window is unloaded
+      this.script.onerror = () => {};
+      this.script.parentNode.removeChild(this.script);
+      this.script = null;
+    }
+
+    if (this.form) {
+      this.form.parentNode.removeChild(this.form);
+      this.form = null;
+      this.iframe = null;
+    }
+
+    super.doClose();
+  }
+
+  /**
+   * Starts a poll cycle.
+   *
+   * @api private
+   */
+  doPoll() {
+    const script = document.createElement("script");
+
+    if (this.script) {
+      this.script.parentNode.removeChild(this.script);
+      this.script = null;
+    }
+
+    script.async = true;
+    script.src = this.uri();
+    script.onerror = e => {
+      this.onError("jsonp poll error", e);
+    };
+
+    const insertAt = document.getElementsByTagName("script")[0];
+    if (insertAt) {
+      insertAt.parentNode.insertBefore(script, insertAt);
+    } else {
+      (document.head || document.body).appendChild(script);
+    }
+    this.script = script;
+
+    const isUAgecko =
+      "undefined" !== typeof navigator && /gecko/i.test(navigator.userAgent);
+
+    if (isUAgecko) {
+      this.setTimeoutFn(function() {
+        const iframe = document.createElement("iframe");
+        document.body.appendChild(iframe);
+        document.body.removeChild(iframe);
+      }, 100);
+    }
+  }
+
+  /**
+   * Writes with a hidden iframe.
+   *
+   * @param {String} data to send
+   * @param {Function} called upon flush.
+   * @api private
+   */
+  doWrite(data, fn) {
+    let iframe;
+
+    if (!this.form) {
+      const form = document.createElement("form");
+      const area = document.createElement("textarea");
+      const id = (this.iframeId = "eio_iframe_" + this.index);
+
+      form.className = "socketio";
+      form.style.position = "absolute";
+      form.style.top = "-1000px";
+      form.style.left = "-1000px";
+      form.target = id;
+      form.method = "POST";
+      form.setAttribute("accept-charset", "utf-8");
+      area.name = "d";
+      form.appendChild(area);
+      document.body.appendChild(form);
+
+      this.form = form;
+      this.area = area;
+    }
+
+    this.form.action = this.uri();
+
+    function complete() {
+      initIframe();
+      fn();
+    }
+
+    const initIframe = () => {
+      if (this.iframe) {
+        try {
+          this.form.removeChild(this.iframe);
+        } catch (e) {
+          this.onError("jsonp polling iframe removal error", e);
+        }
+      }
+
+      try {
+        // ie6 dynamic iframes with target="" support (thanks Chris Lambacher)
+        const html = '<iframe src="javascript:0" name="' + this.iframeId + '">';
+        iframe = document.createElement(html);
+      } catch (e) {
+        iframe = document.createElement("iframe");
+        iframe.name = this.iframeId;
+        iframe.src = "javascript:0";
+      }
+
+      iframe.id = this.iframeId;
+
+      this.form.appendChild(iframe);
+      this.iframe = iframe;
+    };
+
+    initIframe();
+
+    // escape \n to prevent it from being converted into \r\n by some UAs
+    // double escaping is required for escaped new lines because unescaping of new lines can be done safely on server-side
+    data = data.replace(rEscapedNewline, "\\\n");
+    this.area.value = data.replace(rNewline, "\\n");
+
+    try {
+      this.form.submit();
+    } catch (e) {}
+
+    if (this.iframe.attachEvent) {
+      this.iframe.onreadystatechange = () => {
+        if (this.iframe.readyState === "complete") {
+          complete();
+        }
+      };
+    } else {
+      this.iframe.onload = complete;
+    }
+  }
+}
+
+module.exports = JSONPPolling;
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-client/lib/transports/polling-xhr.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/engine.io-client/lib/transports/polling-xhr.js ***!
+  \*********************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+/* global attachEvent */
+
+const XMLHttpRequest = __webpack_require__(/*! xmlhttprequest-ssl */ "./node_modules/engine.io-client/lib/xmlhttprequest.js");
+const Polling = __webpack_require__(/*! ./polling */ "./node_modules/engine.io-client/lib/transports/polling.js");
+const Emitter = __webpack_require__(/*! component-emitter */ "./node_modules/component-emitter/index.js");
+const { pick, installTimerFunctions } = __webpack_require__(/*! ../util */ "./node_modules/engine.io-client/lib/util.js");
+const globalThis = __webpack_require__(/*! ../globalThis */ "./node_modules/engine.io-client/lib/globalThis.browser.js");
+
+const debug = __webpack_require__(/*! debug */ "./node_modules/debug/src/browser.js")("engine.io-client:polling-xhr");
+
+/**
+ * Empty function
+ */
+
+function empty() {}
+
+const hasXHR2 = (function() {
+  const xhr = new XMLHttpRequest({ xdomain: false });
+  return null != xhr.responseType;
+})();
+
+class XHR extends Polling {
+  /**
+   * XHR Polling constructor.
+   *
+   * @param {Object} opts
+   * @api public
+   */
+  constructor(opts) {
+    super(opts);
+
+    if (typeof location !== "undefined") {
+      const isSSL = "https:" === location.protocol;
+      let port = location.port;
+
+      // some user agents have empty `location.port`
+      if (!port) {
+        port = isSSL ? 443 : 80;
+      }
+
+      this.xd =
+        (typeof location !== "undefined" &&
+          opts.hostname !== location.hostname) ||
+        port !== opts.port;
+      this.xs = opts.secure !== isSSL;
+    }
+    /**
+     * XHR supports binary
+     */
+    const forceBase64 = opts && opts.forceBase64;
+    this.supportsBinary = hasXHR2 && !forceBase64;
+  }
+
+  /**
+   * Creates a request.
+   *
+   * @param {String} method
+   * @api private
+   */
+  request(opts = {}) {
+    Object.assign(opts, { xd: this.xd, xs: this.xs }, this.opts);
+    return new Request(this.uri(), opts);
+  }
+
+  /**
+   * Sends data.
+   *
+   * @param {String} data to send.
+   * @param {Function} called upon flush.
+   * @api private
+   */
+  doWrite(data, fn) {
+    const req = this.request({
+      method: "POST",
+      data: data
+    });
+    req.on("success", fn);
+    req.on("error", err => {
+      this.onError("xhr post error", err);
+    });
+  }
+
+  /**
+   * Starts a poll cycle.
+   *
+   * @api private
+   */
+  doPoll() {
+    debug("xhr poll");
+    const req = this.request();
+    req.on("data", this.onData.bind(this));
+    req.on("error", err => {
+      this.onError("xhr poll error", err);
+    });
+    this.pollXhr = req;
+  }
+}
+
+class Request extends Emitter {
+  /**
+   * Request constructor
+   *
+   * @param {Object} options
+   * @api public
+   */
+  constructor(uri, opts) {
+    super();
+    installTimerFunctions(this, opts);
+    this.opts = opts;
+
+    this.method = opts.method || "GET";
+    this.uri = uri;
+    this.async = false !== opts.async;
+    this.data = undefined !== opts.data ? opts.data : null;
+
+    this.create();
+  }
+
+  /**
+   * Creates the XHR object and sends the request.
+   *
+   * @api private
+   */
+  create() {
+    const opts = pick(
+      this.opts,
+      "agent",
+      "enablesXDR",
+      "pfx",
+      "key",
+      "passphrase",
+      "cert",
+      "ca",
+      "ciphers",
+      "rejectUnauthorized",
+      "autoUnref"
+    );
+    opts.xdomain = !!this.opts.xd;
+    opts.xscheme = !!this.opts.xs;
+
+    const xhr = (this.xhr = new XMLHttpRequest(opts));
+
+    try {
+      debug("xhr open %s: %s", this.method, this.uri);
+      xhr.open(this.method, this.uri, this.async);
+      try {
+        if (this.opts.extraHeaders) {
+          xhr.setDisableHeaderCheck && xhr.setDisableHeaderCheck(true);
+          for (let i in this.opts.extraHeaders) {
+            if (this.opts.extraHeaders.hasOwnProperty(i)) {
+              xhr.setRequestHeader(i, this.opts.extraHeaders[i]);
+            }
+          }
+        }
+      } catch (e) {}
+
+      if ("POST" === this.method) {
+        try {
+          xhr.setRequestHeader("Content-type", "text/plain;charset=UTF-8");
+        } catch (e) {}
+      }
+
+      try {
+        xhr.setRequestHeader("Accept", "*/*");
+      } catch (e) {}
+
+      // ie6 check
+      if ("withCredentials" in xhr) {
+        xhr.withCredentials = this.opts.withCredentials;
+      }
+
+      if (this.opts.requestTimeout) {
+        xhr.timeout = this.opts.requestTimeout;
+      }
+
+      if (this.hasXDR()) {
+        xhr.onload = () => {
+          this.onLoad();
+        };
+        xhr.onerror = () => {
+          this.onError(xhr.responseText);
+        };
+      } else {
+        xhr.onreadystatechange = () => {
+          if (4 !== xhr.readyState) return;
+          if (200 === xhr.status || 1223 === xhr.status) {
+            this.onLoad();
+          } else {
+            // make sure the `error` event handler that's user-set
+            // does not throw in the same tick and gets caught here
+            this.setTimeoutFn(() => {
+              this.onError(typeof xhr.status === "number" ? xhr.status : 0);
+            }, 0);
+          }
+        };
+      }
+
+      debug("xhr data %s", this.data);
+      xhr.send(this.data);
+    } catch (e) {
+      // Need to defer since .create() is called directly from the constructor
+      // and thus the 'error' event can only be only bound *after* this exception
+      // occurs.  Therefore, also, we cannot throw here at all.
+      this.setTimeoutFn(() => {
+        this.onError(e);
+      }, 0);
+      return;
+    }
+
+    if (typeof document !== "undefined") {
+      this.index = Request.requestsCount++;
+      Request.requests[this.index] = this;
+    }
+  }
+
+  /**
+   * Called upon successful response.
+   *
+   * @api private
+   */
+  onSuccess() {
+    this.emit("success");
+    this.cleanup();
+  }
+
+  /**
+   * Called if we have data.
+   *
+   * @api private
+   */
+  onData(data) {
+    this.emit("data", data);
+    this.onSuccess();
+  }
+
+  /**
+   * Called upon error.
+   *
+   * @api private
+   */
+  onError(err) {
+    this.emit("error", err);
+    this.cleanup(true);
+  }
+
+  /**
+   * Cleans up house.
+   *
+   * @api private
+   */
+  cleanup(fromError) {
+    if ("undefined" === typeof this.xhr || null === this.xhr) {
+      return;
+    }
+    // xmlhttprequest
+    if (this.hasXDR()) {
+      this.xhr.onload = this.xhr.onerror = empty;
+    } else {
+      this.xhr.onreadystatechange = empty;
+    }
+
+    if (fromError) {
+      try {
+        this.xhr.abort();
+      } catch (e) {}
+    }
+
+    if (typeof document !== "undefined") {
+      delete Request.requests[this.index];
+    }
+
+    this.xhr = null;
+  }
+
+  /**
+   * Called upon load.
+   *
+   * @api private
+   */
+  onLoad() {
+    const data = this.xhr.responseText;
+    if (data !== null) {
+      this.onData(data);
+    }
+  }
+
+  /**
+   * Check if it has XDomainRequest.
+   *
+   * @api private
+   */
+  hasXDR() {
+    return typeof XDomainRequest !== "undefined" && !this.xs && this.enablesXDR;
+  }
+
+  /**
+   * Aborts the request.
+   *
+   * @api public
+   */
+  abort() {
+    this.cleanup();
+  }
+}
+
+/**
+ * Aborts pending requests when unloading the window. This is needed to prevent
+ * memory leaks (e.g. when using IE) and to ensure that no spurious error is
+ * emitted.
+ */
+
+Request.requestsCount = 0;
+Request.requests = {};
+
+if (typeof document !== "undefined") {
+  if (typeof attachEvent === "function") {
+    attachEvent("onunload", unloadHandler);
+  } else if (typeof addEventListener === "function") {
+    const terminationEvent = "onpagehide" in globalThis ? "pagehide" : "unload";
+    addEventListener(terminationEvent, unloadHandler, false);
+  }
+}
+
+function unloadHandler() {
+  for (let i in Request.requests) {
+    if (Request.requests.hasOwnProperty(i)) {
+      Request.requests[i].abort();
+    }
+  }
+}
+
+module.exports = XHR;
+module.exports.Request = Request;
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-client/lib/transports/polling.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/engine.io-client/lib/transports/polling.js ***!
+  \*****************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const Transport = __webpack_require__(/*! ../transport */ "./node_modules/engine.io-client/lib/transport.js");
+const parseqs = __webpack_require__(/*! parseqs */ "./node_modules/parseqs/index.js");
+const parser = __webpack_require__(/*! engine.io-parser */ "./node_modules/engine.io-parser/lib/index.js");
+const yeast = __webpack_require__(/*! yeast */ "./node_modules/yeast/index.js");
+
+const debug = __webpack_require__(/*! debug */ "./node_modules/debug/src/browser.js")("engine.io-client:polling");
+
+class Polling extends Transport {
+  /**
+   * Transport name.
+   */
+  get name() {
+    return "polling";
+  }
+
+  /**
+   * Opens the socket (triggers polling). We write a PING message to determine
+   * when the transport is open.
+   *
+   * @api private
+   */
+  doOpen() {
+    this.poll();
+  }
+
+  /**
+   * Pauses polling.
+   *
+   * @param {Function} callback upon buffers are flushed and transport is paused
+   * @api private
+   */
+  pause(onPause) {
+    this.readyState = "pausing";
+
+    const pause = () => {
+      debug("paused");
+      this.readyState = "paused";
+      onPause();
+    };
+
+    if (this.polling || !this.writable) {
+      let total = 0;
+
+      if (this.polling) {
+        debug("we are currently polling - waiting to pause");
+        total++;
+        this.once("pollComplete", function() {
+          debug("pre-pause polling complete");
+          --total || pause();
+        });
+      }
+
+      if (!this.writable) {
+        debug("we are currently writing - waiting to pause");
+        total++;
+        this.once("drain", function() {
+          debug("pre-pause writing complete");
+          --total || pause();
+        });
+      }
+    } else {
+      pause();
+    }
+  }
+
+  /**
+   * Starts polling cycle.
+   *
+   * @api public
+   */
+  poll() {
+    debug("polling");
+    this.polling = true;
+    this.doPoll();
+    this.emit("poll");
+  }
+
+  /**
+   * Overloads onData to detect payloads.
+   *
+   * @api private
+   */
+  onData(data) {
+    debug("polling got data %s", data);
+    const callback = packet => {
+      // if its the first message we consider the transport open
+      if ("opening" === this.readyState && packet.type === "open") {
+        this.onOpen();
+      }
+
+      // if its a close packet, we close the ongoing requests
+      if ("close" === packet.type) {
+        this.onClose();
+        return false;
+      }
+
+      // otherwise bypass onData and handle the message
+      this.onPacket(packet);
+    };
+
+    // decode payload
+    parser.decodePayload(data, this.socket.binaryType).forEach(callback);
+
+    // if an event did not trigger closing
+    if ("closed" !== this.readyState) {
+      // if we got data we're not polling
+      this.polling = false;
+      this.emit("pollComplete");
+
+      if ("open" === this.readyState) {
+        this.poll();
+      } else {
+        debug('ignoring poll - transport state "%s"', this.readyState);
+      }
+    }
+  }
+
+  /**
+   * For polling, send a close packet.
+   *
+   * @api private
+   */
+  doClose() {
+    const close = () => {
+      debug("writing close packet");
+      this.write([{ type: "close" }]);
+    };
+
+    if ("open" === this.readyState) {
+      debug("transport open - closing");
+      close();
+    } else {
+      // in case we're trying to close while
+      // handshaking is in progress (GH-164)
+      debug("transport not open - deferring close");
+      this.once("open", close);
+    }
+  }
+
+  /**
+   * Writes a packets payload.
+   *
+   * @param {Array} data packets
+   * @param {Function} drain callback
+   * @api private
+   */
+  write(packets) {
+    this.writable = false;
+
+    parser.encodePayload(packets, data => {
+      this.doWrite(data, () => {
+        this.writable = true;
+        this.emit("drain");
+      });
+    });
+  }
+
+  /**
+   * Generates uri for connection.
+   *
+   * @api private
+   */
+  uri() {
+    let query = this.query || {};
+    const schema = this.opts.secure ? "https" : "http";
+    let port = "";
+
+    // cache busting is forced
+    if (false !== this.opts.timestampRequests) {
+      query[this.opts.timestampParam] = yeast();
+    }
+
+    if (!this.supportsBinary && !query.sid) {
+      query.b64 = 1;
+    }
+
+    query = parseqs.encode(query);
+
+    // avoid port if default for schema
+    if (
+      this.opts.port &&
+      (("https" === schema && Number(this.opts.port) !== 443) ||
+        ("http" === schema && Number(this.opts.port) !== 80))
+    ) {
+      port = ":" + this.opts.port;
+    }
+
+    // prepend ? to query
+    if (query.length) {
+      query = "?" + query;
+    }
+
+    const ipv6 = this.opts.hostname.indexOf(":") !== -1;
+    return (
+      schema +
+      "://" +
+      (ipv6 ? "[" + this.opts.hostname + "]" : this.opts.hostname) +
+      port +
+      this.opts.path +
+      query
+    );
+  }
+}
+
+module.exports = Polling;
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-client/lib/transports/websocket-constructor.browser.js":
+/*!***************************************************************************************!*\
+  !*** ./node_modules/engine.io-client/lib/transports/websocket-constructor.browser.js ***!
+  \***************************************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const globalThis = __webpack_require__(/*! ../globalThis */ "./node_modules/engine.io-client/lib/globalThis.browser.js");
+const nextTick = (() => {
+  const isPromiseAvailable =
+    typeof Promise === "function" && typeof Promise.resolve === "function";
+  if (isPromiseAvailable) {
+    return cb => Promise.resolve().then(cb);
+  } else {
+    return (cb, setTimeoutFn) => setTimeoutFn(cb, 0);
+  }
+})();
+
+module.exports = {
+  WebSocket: globalThis.WebSocket || globalThis.MozWebSocket,
+  usingBrowserWebSocket: true,
+  defaultBinaryType: "arraybuffer",
+  nextTick
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-client/lib/transports/websocket.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/engine.io-client/lib/transports/websocket.js ***!
+  \*******************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const Transport = __webpack_require__(/*! ../transport */ "./node_modules/engine.io-client/lib/transport.js");
+const parser = __webpack_require__(/*! engine.io-parser */ "./node_modules/engine.io-parser/lib/index.js");
+const parseqs = __webpack_require__(/*! parseqs */ "./node_modules/parseqs/index.js");
+const yeast = __webpack_require__(/*! yeast */ "./node_modules/yeast/index.js");
+const { pick } = __webpack_require__(/*! ../util */ "./node_modules/engine.io-client/lib/util.js");
+const {
+  WebSocket,
+  usingBrowserWebSocket,
+  defaultBinaryType,
+  nextTick
+} = __webpack_require__(/*! ./websocket-constructor */ "./node_modules/engine.io-client/lib/transports/websocket-constructor.browser.js");
+
+const debug = __webpack_require__(/*! debug */ "./node_modules/debug/src/browser.js")("engine.io-client:websocket");
+
+// detect ReactNative environment
+const isReactNative =
+  typeof navigator !== "undefined" &&
+  typeof navigator.product === "string" &&
+  navigator.product.toLowerCase() === "reactnative";
+
+class WS extends Transport {
+  /**
+   * WebSocket transport constructor.
+   *
+   * @api {Object} connection options
+   * @api public
+   */
+  constructor(opts) {
+    super(opts);
+
+    this.supportsBinary = !opts.forceBase64;
+  }
+
+  /**
+   * Transport name.
+   *
+   * @api public
+   */
+  get name() {
+    return "websocket";
+  }
+
+  /**
+   * Opens socket.
+   *
+   * @api private
+   */
+  doOpen() {
+    if (!this.check()) {
+      // let probe timeout
+      return;
+    }
+
+    const uri = this.uri();
+    const protocols = this.opts.protocols;
+
+    // React Native only supports the 'headers' option, and will print a warning if anything else is passed
+    const opts = isReactNative
+      ? {}
+      : pick(
+          this.opts,
+          "agent",
+          "perMessageDeflate",
+          "pfx",
+          "key",
+          "passphrase",
+          "cert",
+          "ca",
+          "ciphers",
+          "rejectUnauthorized",
+          "localAddress",
+          "protocolVersion",
+          "origin",
+          "maxPayload",
+          "family",
+          "checkServerIdentity"
+        );
+
+    if (this.opts.extraHeaders) {
+      opts.headers = this.opts.extraHeaders;
+    }
+
+    try {
+      this.ws =
+        usingBrowserWebSocket && !isReactNative
+          ? protocols
+            ? new WebSocket(uri, protocols)
+            : new WebSocket(uri)
+          : new WebSocket(uri, protocols, opts);
+    } catch (err) {
+      return this.emit("error", err);
+    }
+
+    this.ws.binaryType = this.socket.binaryType || defaultBinaryType;
+
+    this.addEventListeners();
+  }
+
+  /**
+   * Adds event listeners to the socket
+   *
+   * @api private
+   */
+  addEventListeners() {
+    this.ws.onopen = () => {
+      if (this.opts.autoUnref) {
+        this.ws._socket.unref();
+      }
+      this.onOpen();
+    };
+    this.ws.onclose = this.onClose.bind(this);
+    this.ws.onmessage = ev => this.onData(ev.data);
+    this.ws.onerror = e => this.onError("websocket error", e);
+  }
+
+  /**
+   * Writes data to socket.
+   *
+   * @param {Array} array of packets.
+   * @api private
+   */
+  write(packets) {
+    this.writable = false;
+
+    // encodePacket efficient as it uses WS framing
+    // no need for encodePayload
+    for (let i = 0; i < packets.length; i++) {
+      const packet = packets[i];
+      const lastPacket = i === packets.length - 1;
+
+      parser.encodePacket(packet, this.supportsBinary, data => {
+        // always create a new object (GH-437)
+        const opts = {};
+        if (!usingBrowserWebSocket) {
+          if (packet.options) {
+            opts.compress = packet.options.compress;
+          }
+
+          if (this.opts.perMessageDeflate) {
+            const len =
+              "string" === typeof data ? Buffer.byteLength(data) : data.length;
+            if (len < this.opts.perMessageDeflate.threshold) {
+              opts.compress = false;
+            }
+          }
+        }
+
+        // Sometimes the websocket has already been closed but the browser didn't
+        // have a chance of informing us about it yet, in that case send will
+        // throw an error
+        try {
+          if (usingBrowserWebSocket) {
+            // TypeError is thrown when passing the second argument on Safari
+            this.ws.send(data);
+          } else {
+            this.ws.send(data, opts);
+          }
+        } catch (e) {
+          debug("websocket closed before onclose event");
+        }
+
+        if (lastPacket) {
+          // fake drain
+          // defer to next tick to allow Socket to clear writeBuffer
+          nextTick(() => {
+            this.writable = true;
+            this.emit("drain");
+          }, this.setTimeoutFn);
+        }
+      });
+    }
+  }
+
+  /**
+   * Called upon close
+   *
+   * @api private
+   */
+  onClose() {
+    Transport.prototype.onClose.call(this);
+  }
+
+  /**
+   * Closes socket.
+   *
+   * @api private
+   */
+  doClose() {
+    if (typeof this.ws !== "undefined") {
+      this.ws.close();
+      this.ws = null;
+    }
+  }
+
+  /**
+   * Generates uri for connection.
+   *
+   * @api private
+   */
+  uri() {
+    let query = this.query || {};
+    const schema = this.opts.secure ? "wss" : "ws";
+    let port = "";
+
+    // avoid port if default for schema
+    if (
+      this.opts.port &&
+      (("wss" === schema && Number(this.opts.port) !== 443) ||
+        ("ws" === schema && Number(this.opts.port) !== 80))
+    ) {
+      port = ":" + this.opts.port;
+    }
+
+    // append timestamp to URI
+    if (this.opts.timestampRequests) {
+      query[this.opts.timestampParam] = yeast();
+    }
+
+    // communicate binary support capabilities
+    if (!this.supportsBinary) {
+      query.b64 = 1;
+    }
+
+    query = parseqs.encode(query);
+
+    // prepend ? to query
+    if (query.length) {
+      query = "?" + query;
+    }
+
+    const ipv6 = this.opts.hostname.indexOf(":") !== -1;
+    return (
+      schema +
+      "://" +
+      (ipv6 ? "[" + this.opts.hostname + "]" : this.opts.hostname) +
+      port +
+      this.opts.path +
+      query
+    );
+  }
+
+  /**
+   * Feature detection for WebSocket.
+   *
+   * @return {Boolean} whether this transport is available.
+   * @api public
+   */
+  check() {
+    return (
+      !!WebSocket &&
+      !("__initialize" in WebSocket && this.name === WS.prototype.name)
+    );
+  }
+}
+
+module.exports = WS;
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-client/lib/util.js":
+/*!***************************************************!*\
+  !*** ./node_modules/engine.io-client/lib/util.js ***!
+  \***************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const globalThis = __webpack_require__(/*! ./globalThis */ "./node_modules/engine.io-client/lib/globalThis.browser.js");
+
+module.exports.pick = (obj, ...attr) => {
+  return attr.reduce((acc, k) => {
+    if (obj.hasOwnProperty(k)) {
+      acc[k] = obj[k];
+    }
+    return acc;
+  }, {});
+};
+
+// Keep a reference to the real timeout functions so they can be used when overridden
+const NATIVE_SET_TIMEOUT = setTimeout;
+const NATIVE_CLEAR_TIMEOUT = clearTimeout;
+
+module.exports.installTimerFunctions = (obj, opts) => {
+  if (opts.useNativeTimers) {
+    obj.setTimeoutFn = NATIVE_SET_TIMEOUT.bind(globalThis);
+    obj.clearTimeoutFn = NATIVE_CLEAR_TIMEOUT.bind(globalThis);
+  } else {
+    obj.setTimeoutFn = setTimeout.bind(globalThis);
+    obj.clearTimeoutFn = clearTimeout.bind(globalThis);
+  }
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-client/lib/xmlhttprequest.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/engine.io-client/lib/xmlhttprequest.js ***!
+  \*************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// browser shim for xmlhttprequest module
+
+const hasCORS = __webpack_require__(/*! has-cors */ "./node_modules/has-cors/index.js");
+const globalThis = __webpack_require__(/*! ./globalThis */ "./node_modules/engine.io-client/lib/globalThis.browser.js");
+
+module.exports = function(opts) {
+  const xdomain = opts.xdomain;
+
+  // scheme must be same when usign XDomainRequest
+  // http://blogs.msdn.com/b/ieinternals/archive/2010/05/13/xdomainrequest-restrictions-limitations-and-workarounds.aspx
+  const xscheme = opts.xscheme;
+
+  // XDomainRequest has a flow of not sending cookie, therefore it should be disabled as a default.
+  // https://github.com/Automattic/engine.io-client/pull/217
+  const enablesXDR = opts.enablesXDR;
+
+  // XMLHttpRequest can be disabled on IE
+  try {
+    if ("undefined" !== typeof XMLHttpRequest && (!xdomain || hasCORS)) {
+      return new XMLHttpRequest();
+    }
+  } catch (e) {}
+
+  // Use XDomainRequest for IE8 if enablesXDR is true
+  // because loading bar keeps flashing when using jsonp-polling
+  // https://github.com/yujiosaka/socke.io-ie8-loading-example
+  try {
+    if ("undefined" !== typeof XDomainRequest && !xscheme && enablesXDR) {
+      return new XDomainRequest();
+    }
+  } catch (e) {}
+
+  if (!xdomain) {
+    try {
+      return new globalThis[["Active"].concat("Object").join("X")](
+        "Microsoft.XMLHTTP"
+      );
+    } catch (e) {}
+  }
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-parser/lib/commons.js":
+/*!******************************************************!*\
+  !*** ./node_modules/engine.io-parser/lib/commons.js ***!
+  \******************************************************/
+/***/ ((module) => {
+
+const PACKET_TYPES = Object.create(null); // no Map = no polyfill
+PACKET_TYPES["open"] = "0";
+PACKET_TYPES["close"] = "1";
+PACKET_TYPES["ping"] = "2";
+PACKET_TYPES["pong"] = "3";
+PACKET_TYPES["message"] = "4";
+PACKET_TYPES["upgrade"] = "5";
+PACKET_TYPES["noop"] = "6";
+
+const PACKET_TYPES_REVERSE = Object.create(null);
+Object.keys(PACKET_TYPES).forEach(key => {
+  PACKET_TYPES_REVERSE[PACKET_TYPES[key]] = key;
+});
+
+const ERROR_PACKET = { type: "error", data: "parser error" };
+
+module.exports = {
+  PACKET_TYPES,
+  PACKET_TYPES_REVERSE,
+  ERROR_PACKET
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-parser/lib/decodePacket.browser.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/engine.io-parser/lib/decodePacket.browser.js ***!
+  \*******************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const { PACKET_TYPES_REVERSE, ERROR_PACKET } = __webpack_require__(/*! ./commons */ "./node_modules/engine.io-parser/lib/commons.js");
+
+const withNativeArrayBuffer = typeof ArrayBuffer === "function";
+
+let base64decoder;
+if (withNativeArrayBuffer) {
+  base64decoder = __webpack_require__(/*! base64-arraybuffer */ "./node_modules/base64-arraybuffer/lib/base64-arraybuffer.js");
+}
+
+const decodePacket = (encodedPacket, binaryType) => {
+  if (typeof encodedPacket !== "string") {
+    return {
+      type: "message",
+      data: mapBinary(encodedPacket, binaryType)
+    };
+  }
+  const type = encodedPacket.charAt(0);
+  if (type === "b") {
+    return {
+      type: "message",
+      data: decodeBase64Packet(encodedPacket.substring(1), binaryType)
+    };
+  }
+  const packetType = PACKET_TYPES_REVERSE[type];
+  if (!packetType) {
+    return ERROR_PACKET;
+  }
+  return encodedPacket.length > 1
+    ? {
+        type: PACKET_TYPES_REVERSE[type],
+        data: encodedPacket.substring(1)
+      }
+    : {
+        type: PACKET_TYPES_REVERSE[type]
+      };
+};
+
+const decodeBase64Packet = (data, binaryType) => {
+  if (base64decoder) {
+    const decoded = base64decoder.decode(data);
+    return mapBinary(decoded, binaryType);
+  } else {
+    return { base64: true, data }; // fallback for old browsers
+  }
+};
+
+const mapBinary = (data, binaryType) => {
+  switch (binaryType) {
+    case "blob":
+      return data instanceof ArrayBuffer ? new Blob([data]) : data;
+    case "arraybuffer":
+    default:
+      return data; // assuming the data is already an ArrayBuffer
+  }
+};
+
+module.exports = decodePacket;
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-parser/lib/encodePacket.browser.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/engine.io-parser/lib/encodePacket.browser.js ***!
+  \*******************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const { PACKET_TYPES } = __webpack_require__(/*! ./commons */ "./node_modules/engine.io-parser/lib/commons.js");
+
+const withNativeBlob =
+  typeof Blob === "function" ||
+  (typeof Blob !== "undefined" &&
+    Object.prototype.toString.call(Blob) === "[object BlobConstructor]");
+const withNativeArrayBuffer = typeof ArrayBuffer === "function";
+
+// ArrayBuffer.isView method is not defined in IE10
+const isView = obj => {
+  return typeof ArrayBuffer.isView === "function"
+    ? ArrayBuffer.isView(obj)
+    : obj && obj.buffer instanceof ArrayBuffer;
+};
+
+const encodePacket = ({ type, data }, supportsBinary, callback) => {
+  if (withNativeBlob && data instanceof Blob) {
+    if (supportsBinary) {
+      return callback(data);
+    } else {
+      return encodeBlobAsBase64(data, callback);
+    }
+  } else if (
+    withNativeArrayBuffer &&
+    (data instanceof ArrayBuffer || isView(data))
+  ) {
+    if (supportsBinary) {
+      return callback(data);
+    } else {
+      return encodeBlobAsBase64(new Blob([data]), callback);
+    }
+  }
+  // plain string
+  return callback(PACKET_TYPES[type] + (data || ""));
+};
+
+const encodeBlobAsBase64 = (data, callback) => {
+  const fileReader = new FileReader();
+  fileReader.onload = function() {
+    const content = fileReader.result.split(",")[1];
+    callback("b" + content);
+  };
+  return fileReader.readAsDataURL(data);
+};
+
+module.exports = encodePacket;
+
+
+/***/ }),
+
+/***/ "./node_modules/engine.io-parser/lib/index.js":
+/*!****************************************************!*\
+  !*** ./node_modules/engine.io-parser/lib/index.js ***!
+  \****************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const encodePacket = __webpack_require__(/*! ./encodePacket */ "./node_modules/engine.io-parser/lib/encodePacket.browser.js");
+const decodePacket = __webpack_require__(/*! ./decodePacket */ "./node_modules/engine.io-parser/lib/decodePacket.browser.js");
+
+const SEPARATOR = String.fromCharCode(30); // see https://en.wikipedia.org/wiki/Delimiter#ASCII_delimited_text
+
+const encodePayload = (packets, callback) => {
+  // some packets may be added to the array while encoding, so the initial length must be saved
+  const length = packets.length;
+  const encodedPackets = new Array(length);
+  let count = 0;
+
+  packets.forEach((packet, i) => {
+    // force base64 encoding for binary packets
+    encodePacket(packet, false, encodedPacket => {
+      encodedPackets[i] = encodedPacket;
+      if (++count === length) {
+        callback(encodedPackets.join(SEPARATOR));
+      }
+    });
+  });
+};
+
+const decodePayload = (encodedPayload, binaryType) => {
+  const encodedPackets = encodedPayload.split(SEPARATOR);
+  const packets = [];
+  for (let i = 0; i < encodedPackets.length; i++) {
+    const decodedPacket = decodePacket(encodedPackets[i], binaryType);
+    packets.push(decodedPacket);
+    if (decodedPacket.type === "error") {
+      break;
+    }
+  }
+  return packets;
+};
+
+module.exports = {
+  protocol: 4,
+  encodePacket,
+  encodePayload,
+  decodePacket,
+  decodePayload
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/events/events.js":
+/*!***************************************!*\
+  !*** ./node_modules/events/events.js ***!
+  \***************************************/
+/***/ ((module) => {
+
+"use strict";
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+
+var R = typeof Reflect === 'object' ? Reflect : null
+var ReflectApply = R && typeof R.apply === 'function'
+  ? R.apply
+  : function ReflectApply(target, receiver, args) {
+    return Function.prototype.apply.call(target, receiver, args);
+  }
+
+var ReflectOwnKeys
+if (R && typeof R.ownKeys === 'function') {
+  ReflectOwnKeys = R.ownKeys
+} else if (Object.getOwnPropertySymbols) {
+  ReflectOwnKeys = function ReflectOwnKeys(target) {
+    return Object.getOwnPropertyNames(target)
+      .concat(Object.getOwnPropertySymbols(target));
+  };
+} else {
+  ReflectOwnKeys = function ReflectOwnKeys(target) {
+    return Object.getOwnPropertyNames(target);
+  };
+}
+
+function ProcessEmitWarning(warning) {
+  if (console && console.warn) console.warn(warning);
+}
+
+var NumberIsNaN = Number.isNaN || function NumberIsNaN(value) {
+  return value !== value;
+}
+
+function EventEmitter() {
+  EventEmitter.init.call(this);
+}
+module.exports = EventEmitter;
+module.exports.once = once;
+
+// Backwards-compat with node 0.10.x
+EventEmitter.EventEmitter = EventEmitter;
+
+EventEmitter.prototype._events = undefined;
+EventEmitter.prototype._eventsCount = 0;
+EventEmitter.prototype._maxListeners = undefined;
+
+// By default EventEmitters will print a warning if more than 10 listeners are
+// added to it. This is a useful default which helps finding memory leaks.
+var defaultMaxListeners = 10;
+
+function checkListener(listener) {
+  if (typeof listener !== 'function') {
+    throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof listener);
+  }
+}
+
+Object.defineProperty(EventEmitter, 'defaultMaxListeners', {
+  enumerable: true,
+  get: function() {
+    return defaultMaxListeners;
+  },
+  set: function(arg) {
+    if (typeof arg !== 'number' || arg < 0 || NumberIsNaN(arg)) {
+      throw new RangeError('The value of "defaultMaxListeners" is out of range. It must be a non-negative number. Received ' + arg + '.');
+    }
+    defaultMaxListeners = arg;
+  }
+});
+
+EventEmitter.init = function() {
+
+  if (this._events === undefined ||
+      this._events === Object.getPrototypeOf(this)._events) {
+    this._events = Object.create(null);
+    this._eventsCount = 0;
+  }
+
+  this._maxListeners = this._maxListeners || undefined;
+};
+
+// Obviously not all Emitters should be limited to 10. This function allows
+// that to be increased. Set to zero for unlimited.
+EventEmitter.prototype.setMaxListeners = function setMaxListeners(n) {
+  if (typeof n !== 'number' || n < 0 || NumberIsNaN(n)) {
+    throw new RangeError('The value of "n" is out of range. It must be a non-negative number. Received ' + n + '.');
+  }
+  this._maxListeners = n;
+  return this;
+};
+
+function _getMaxListeners(that) {
+  if (that._maxListeners === undefined)
+    return EventEmitter.defaultMaxListeners;
+  return that._maxListeners;
+}
+
+EventEmitter.prototype.getMaxListeners = function getMaxListeners() {
+  return _getMaxListeners(this);
+};
+
+EventEmitter.prototype.emit = function emit(type) {
+  var args = [];
+  for (var i = 1; i < arguments.length; i++) args.push(arguments[i]);
+  var doError = (type === 'error');
+
+  var events = this._events;
+  if (events !== undefined)
+    doError = (doError && events.error === undefined);
+  else if (!doError)
+    return false;
+
+  // If there is no 'error' event listener then throw.
+  if (doError) {
+    var er;
+    if (args.length > 0)
+      er = args[0];
+    if (er instanceof Error) {
+      // Note: The comments on the `throw` lines are intentional, they show
+      // up in Node's output if this results in an unhandled exception.
+      throw er; // Unhandled 'error' event
+    }
+    // At least give some kind of context to the user
+    var err = new Error('Unhandled error.' + (er ? ' (' + er.message + ')' : ''));
+    err.context = er;
+    throw err; // Unhandled 'error' event
+  }
+
+  var handler = events[type];
+
+  if (handler === undefined)
+    return false;
+
+  if (typeof handler === 'function') {
+    ReflectApply(handler, this, args);
+  } else {
+    var len = handler.length;
+    var listeners = arrayClone(handler, len);
+    for (var i = 0; i < len; ++i)
+      ReflectApply(listeners[i], this, args);
+  }
+
+  return true;
+};
+
+function _addListener(target, type, listener, prepend) {
+  var m;
+  var events;
+  var existing;
+
+  checkListener(listener);
+
+  events = target._events;
+  if (events === undefined) {
+    events = target._events = Object.create(null);
+    target._eventsCount = 0;
+  } else {
+    // To avoid recursion in the case that type === "newListener"! Before
+    // adding it to the listeners, first emit "newListener".
+    if (events.newListener !== undefined) {
+      target.emit('newListener', type,
+                  listener.listener ? listener.listener : listener);
+
+      // Re-assign `events` because a newListener handler could have caused the
+      // this._events to be assigned to a new object
+      events = target._events;
+    }
+    existing = events[type];
+  }
+
+  if (existing === undefined) {
+    // Optimize the case of one listener. Don't need the extra array object.
+    existing = events[type] = listener;
+    ++target._eventsCount;
+  } else {
+    if (typeof existing === 'function') {
+      // Adding the second element, need to change to array.
+      existing = events[type] =
+        prepend ? [listener, existing] : [existing, listener];
+      // If we've already got an array, just append.
+    } else if (prepend) {
+      existing.unshift(listener);
+    } else {
+      existing.push(listener);
+    }
+
+    // Check for listener leak
+    m = _getMaxListeners(target);
+    if (m > 0 && existing.length > m && !existing.warned) {
+      existing.warned = true;
+      // No error code for this since it is a Warning
+      // eslint-disable-next-line no-restricted-syntax
+      var w = new Error('Possible EventEmitter memory leak detected. ' +
+                          existing.length + ' ' + String(type) + ' listeners ' +
+                          'added. Use emitter.setMaxListeners() to ' +
+                          'increase limit');
+      w.name = 'MaxListenersExceededWarning';
+      w.emitter = target;
+      w.type = type;
+      w.count = existing.length;
+      ProcessEmitWarning(w);
+    }
+  }
+
+  return target;
+}
+
+EventEmitter.prototype.addListener = function addListener(type, listener) {
+  return _addListener(this, type, listener, false);
+};
+
+EventEmitter.prototype.on = EventEmitter.prototype.addListener;
+
+EventEmitter.prototype.prependListener =
+    function prependListener(type, listener) {
+      return _addListener(this, type, listener, true);
+    };
+
+function onceWrapper() {
+  if (!this.fired) {
+    this.target.removeListener(this.type, this.wrapFn);
+    this.fired = true;
+    if (arguments.length === 0)
+      return this.listener.call(this.target);
+    return this.listener.apply(this.target, arguments);
+  }
+}
+
+function _onceWrap(target, type, listener) {
+  var state = { fired: false, wrapFn: undefined, target: target, type: type, listener: listener };
+  var wrapped = onceWrapper.bind(state);
+  wrapped.listener = listener;
+  state.wrapFn = wrapped;
+  return wrapped;
+}
+
+EventEmitter.prototype.once = function once(type, listener) {
+  checkListener(listener);
+  this.on(type, _onceWrap(this, type, listener));
+  return this;
+};
+
+EventEmitter.prototype.prependOnceListener =
+    function prependOnceListener(type, listener) {
+      checkListener(listener);
+      this.prependListener(type, _onceWrap(this, type, listener));
+      return this;
+    };
+
+// Emits a 'removeListener' event if and only if the listener was removed.
+EventEmitter.prototype.removeListener =
+    function removeListener(type, listener) {
+      var list, events, position, i, originalListener;
+
+      checkListener(listener);
+
+      events = this._events;
+      if (events === undefined)
+        return this;
+
+      list = events[type];
+      if (list === undefined)
+        return this;
+
+      if (list === listener || list.listener === listener) {
+        if (--this._eventsCount === 0)
+          this._events = Object.create(null);
+        else {
+          delete events[type];
+          if (events.removeListener)
+            this.emit('removeListener', type, list.listener || listener);
+        }
+      } else if (typeof list !== 'function') {
+        position = -1;
+
+        for (i = list.length - 1; i >= 0; i--) {
+          if (list[i] === listener || list[i].listener === listener) {
+            originalListener = list[i].listener;
+            position = i;
+            break;
+          }
+        }
+
+        if (position < 0)
+          return this;
+
+        if (position === 0)
+          list.shift();
+        else {
+          spliceOne(list, position);
+        }
+
+        if (list.length === 1)
+          events[type] = list[0];
+
+        if (events.removeListener !== undefined)
+          this.emit('removeListener', type, originalListener || listener);
+      }
+
+      return this;
+    };
+
+EventEmitter.prototype.off = EventEmitter.prototype.removeListener;
+
+EventEmitter.prototype.removeAllListeners =
+    function removeAllListeners(type) {
+      var listeners, events, i;
+
+      events = this._events;
+      if (events === undefined)
+        return this;
+
+      // not listening for removeListener, no need to emit
+      if (events.removeListener === undefined) {
+        if (arguments.length === 0) {
+          this._events = Object.create(null);
+          this._eventsCount = 0;
+        } else if (events[type] !== undefined) {
+          if (--this._eventsCount === 0)
+            this._events = Object.create(null);
+          else
+            delete events[type];
+        }
+        return this;
+      }
+
+      // emit removeListener for all listeners on all events
+      if (arguments.length === 0) {
+        var keys = Object.keys(events);
+        var key;
+        for (i = 0; i < keys.length; ++i) {
+          key = keys[i];
+          if (key === 'removeListener') continue;
+          this.removeAllListeners(key);
+        }
+        this.removeAllListeners('removeListener');
+        this._events = Object.create(null);
+        this._eventsCount = 0;
+        return this;
+      }
+
+      listeners = events[type];
+
+      if (typeof listeners === 'function') {
+        this.removeListener(type, listeners);
+      } else if (listeners !== undefined) {
+        // LIFO order
+        for (i = listeners.length - 1; i >= 0; i--) {
+          this.removeListener(type, listeners[i]);
+        }
+      }
+
+      return this;
+    };
+
+function _listeners(target, type, unwrap) {
+  var events = target._events;
+
+  if (events === undefined)
+    return [];
+
+  var evlistener = events[type];
+  if (evlistener === undefined)
+    return [];
+
+  if (typeof evlistener === 'function')
+    return unwrap ? [evlistener.listener || evlistener] : [evlistener];
+
+  return unwrap ?
+    unwrapListeners(evlistener) : arrayClone(evlistener, evlistener.length);
+}
+
+EventEmitter.prototype.listeners = function listeners(type) {
+  return _listeners(this, type, true);
+};
+
+EventEmitter.prototype.rawListeners = function rawListeners(type) {
+  return _listeners(this, type, false);
+};
+
+EventEmitter.listenerCount = function(emitter, type) {
+  if (typeof emitter.listenerCount === 'function') {
+    return emitter.listenerCount(type);
+  } else {
+    return listenerCount.call(emitter, type);
+  }
+};
+
+EventEmitter.prototype.listenerCount = listenerCount;
+function listenerCount(type) {
+  var events = this._events;
+
+  if (events !== undefined) {
+    var evlistener = events[type];
+
+    if (typeof evlistener === 'function') {
+      return 1;
+    } else if (evlistener !== undefined) {
+      return evlistener.length;
+    }
+  }
+
+  return 0;
+}
+
+EventEmitter.prototype.eventNames = function eventNames() {
+  return this._eventsCount > 0 ? ReflectOwnKeys(this._events) : [];
+};
+
+function arrayClone(arr, n) {
+  var copy = new Array(n);
+  for (var i = 0; i < n; ++i)
+    copy[i] = arr[i];
+  return copy;
+}
+
+function spliceOne(list, index) {
+  for (; index + 1 < list.length; index++)
+    list[index] = list[index + 1];
+  list.pop();
+}
+
+function unwrapListeners(arr) {
+  var ret = new Array(arr.length);
+  for (var i = 0; i < ret.length; ++i) {
+    ret[i] = arr[i].listener || arr[i];
+  }
+  return ret;
+}
+
+function once(emitter, name) {
+  return new Promise(function (resolve, reject) {
+    function errorListener(err) {
+      emitter.removeListener(name, resolver);
+      reject(err);
+    }
+
+    function resolver() {
+      if (typeof emitter.removeListener === 'function') {
+        emitter.removeListener('error', errorListener);
+      }
+      resolve([].slice.call(arguments));
+    };
+
+    eventTargetAgnosticAddListener(emitter, name, resolver, { once: true });
+    if (name !== 'error') {
+      addErrorHandlerIfEventEmitter(emitter, errorListener, { once: true });
+    }
+  });
+}
+
+function addErrorHandlerIfEventEmitter(emitter, handler, flags) {
+  if (typeof emitter.on === 'function') {
+    eventTargetAgnosticAddListener(emitter, 'error', handler, flags);
+  }
+}
+
+function eventTargetAgnosticAddListener(emitter, name, listener, flags) {
+  if (typeof emitter.on === 'function') {
+    if (flags.once) {
+      emitter.once(name, listener);
+    } else {
+      emitter.on(name, listener);
+    }
+  } else if (typeof emitter.addEventListener === 'function') {
+    // EventTarget does not have `error` event semantics like Node
+    // EventEmitters, we do not listen for `error` events here.
+    emitter.addEventListener(name, function wrapListener(arg) {
+      // IE does not have builtin `{ once: true }` support so we
+      // have to do it manually.
+      if (flags.once) {
+        emitter.removeEventListener(name, wrapListener);
+      }
+      listener(arg);
+    });
+  } else {
+    throw new TypeError('The "emitter" argument must be of type EventEmitter. Received type ' + typeof emitter);
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/has-cors/index.js":
+/*!****************************************!*\
+  !*** ./node_modules/has-cors/index.js ***!
+  \****************************************/
+/***/ ((module) => {
+
+
+/**
+ * Module exports.
+ *
+ * Logic borrowed from Modernizr:
+ *
+ *   - https://github.com/Modernizr/Modernizr/blob/master/feature-detects/cors.js
+ */
+
+try {
+  module.exports = typeof XMLHttpRequest !== 'undefined' &&
+    'withCredentials' in new XMLHttpRequest();
+} catch (err) {
+  // if XMLHttp support is disabled in IE then it will throw
+  // when trying to create
+  module.exports = false;
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/ms/index.js":
+/*!**********************************!*\
+  !*** ./node_modules/ms/index.js ***!
+  \**********************************/
+/***/ ((module) => {
+
+/**
+ * Helpers.
+ */
+
+var s = 1000;
+var m = s * 60;
+var h = m * 60;
+var d = h * 24;
+var w = d * 7;
+var y = d * 365.25;
+
+/**
+ * Parse or format the given `val`.
+ *
+ * Options:
+ *
+ *  - `long` verbose formatting [false]
+ *
+ * @param {String|Number} val
+ * @param {Object} [options]
+ * @throws {Error} throw an error if val is not a non-empty string or a number
+ * @return {String|Number}
+ * @api public
+ */
+
+module.exports = function(val, options) {
+  options = options || {};
+  var type = typeof val;
+  if (type === 'string' && val.length > 0) {
+    return parse(val);
+  } else if (type === 'number' && isFinite(val)) {
+    return options.long ? fmtLong(val) : fmtShort(val);
+  }
+  throw new Error(
+    'val is not a non-empty string or a valid number. val=' +
+      JSON.stringify(val)
+  );
+};
+
+/**
+ * Parse the given `str` and return milliseconds.
+ *
+ * @param {String} str
+ * @return {Number}
+ * @api private
+ */
+
+function parse(str) {
+  str = String(str);
+  if (str.length > 100) {
+    return;
+  }
+  var match = /^(-?(?:\d+)?\.?\d+) *(milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|weeks?|w|years?|yrs?|y)?$/i.exec(
+    str
+  );
+  if (!match) {
+    return;
+  }
+  var n = parseFloat(match[1]);
+  var type = (match[2] || 'ms').toLowerCase();
+  switch (type) {
+    case 'years':
+    case 'year':
+    case 'yrs':
+    case 'yr':
+    case 'y':
+      return n * y;
+    case 'weeks':
+    case 'week':
+    case 'w':
+      return n * w;
+    case 'days':
+    case 'day':
+    case 'd':
+      return n * d;
+    case 'hours':
+    case 'hour':
+    case 'hrs':
+    case 'hr':
+    case 'h':
+      return n * h;
+    case 'minutes':
+    case 'minute':
+    case 'mins':
+    case 'min':
+    case 'm':
+      return n * m;
+    case 'seconds':
+    case 'second':
+    case 'secs':
+    case 'sec':
+    case 's':
+      return n * s;
+    case 'milliseconds':
+    case 'millisecond':
+    case 'msecs':
+    case 'msec':
+    case 'ms':
+      return n;
+    default:
+      return undefined;
+  }
+}
+
+/**
+ * Short format for `ms`.
+ *
+ * @param {Number} ms
+ * @return {String}
+ * @api private
+ */
+
+function fmtShort(ms) {
+  var msAbs = Math.abs(ms);
+  if (msAbs >= d) {
+    return Math.round(ms / d) + 'd';
+  }
+  if (msAbs >= h) {
+    return Math.round(ms / h) + 'h';
+  }
+  if (msAbs >= m) {
+    return Math.round(ms / m) + 'm';
+  }
+  if (msAbs >= s) {
+    return Math.round(ms / s) + 's';
+  }
+  return ms + 'ms';
+}
+
+/**
+ * Long format for `ms`.
+ *
+ * @param {Number} ms
+ * @return {String}
+ * @api private
+ */
+
+function fmtLong(ms) {
+  var msAbs = Math.abs(ms);
+  if (msAbs >= d) {
+    return plural(ms, msAbs, d, 'day');
+  }
+  if (msAbs >= h) {
+    return plural(ms, msAbs, h, 'hour');
+  }
+  if (msAbs >= m) {
+    return plural(ms, msAbs, m, 'minute');
+  }
+  if (msAbs >= s) {
+    return plural(ms, msAbs, s, 'second');
+  }
+  return ms + ' ms';
+}
+
+/**
+ * Pluralization helper.
+ */
+
+function plural(ms, msAbs, n, name) {
+  var isPlural = msAbs >= n * 1.5;
+  return Math.round(ms / n) + ' ' + name + (isPlural ? 's' : '');
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/parseqs/index.js":
+/*!***************************************!*\
+  !*** ./node_modules/parseqs/index.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+/**
+ * Compiles a querystring
+ * Returns string representation of the object
+ *
+ * @param {Object}
+ * @api private
+ */
+
+exports.encode = function (obj) {
+  var str = '';
+
+  for (var i in obj) {
+    if (obj.hasOwnProperty(i)) {
+      if (str.length) str += '&';
+      str += encodeURIComponent(i) + '=' + encodeURIComponent(obj[i]);
+    }
+  }
+
+  return str;
+};
+
+/**
+ * Parses a simple querystring into an object
+ *
+ * @param {String} qs
+ * @api private
+ */
+
+exports.decode = function(qs){
+  var qry = {};
+  var pairs = qs.split('&');
+  for (var i = 0, l = pairs.length; i < l; i++) {
+    var pair = pairs[i].split('=');
+    qry[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
+  }
+  return qry;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/parseuri/index.js":
+/*!****************************************!*\
+  !*** ./node_modules/parseuri/index.js ***!
+  \****************************************/
+/***/ ((module) => {
+
+/**
+ * Parses an URI
+ *
+ * @author Steven Levithan <stevenlevithan.com> (MIT license)
+ * @api private
+ */
+
+var re = /^(?:(?![^:@]+:[^:@\/]*@)(http|https|ws|wss):\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?((?:[a-f0-9]{0,4}:){2,7}[a-f0-9]{0,4}|[^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/;
+
+var parts = [
+    'source', 'protocol', 'authority', 'userInfo', 'user', 'password', 'host', 'port', 'relative', 'path', 'directory', 'file', 'query', 'anchor'
+];
+
+module.exports = function parseuri(str) {
+    var src = str,
+        b = str.indexOf('['),
+        e = str.indexOf(']');
+
+    if (b != -1 && e != -1) {
+        str = str.substring(0, b) + str.substring(b, e).replace(/:/g, ';') + str.substring(e, str.length);
+    }
+
+    var m = re.exec(str || ''),
+        uri = {},
+        i = 14;
+
+    while (i--) {
+        uri[parts[i]] = m[i] || '';
+    }
+
+    if (b != -1 && e != -1) {
+        uri.source = src;
+        uri.host = uri.host.substring(1, uri.host.length - 1).replace(/;/g, ':');
+        uri.authority = uri.authority.replace('[', '').replace(']', '').replace(/;/g, ':');
+        uri.ipv6uri = true;
+    }
+
+    uri.pathNames = pathNames(uri, uri['path']);
+    uri.queryKey = queryKey(uri, uri['query']);
+
+    return uri;
+};
+
+function pathNames(obj, path) {
+    var regx = /\/{2,9}/g,
+        names = path.replace(regx, "/").split("/");
+
+    if (path.substr(0, 1) == '/' || path.length === 0) {
+        names.splice(0, 1);
+    }
+    if (path.substr(path.length - 1, 1) == '/') {
+        names.splice(names.length - 1, 1);
+    }
+
+    return names;
+}
+
+function queryKey(uri, query) {
+    var data = {};
+
+    query.replace(/(?:^|&)([^&=]*)=?([^&]*)/g, function ($0, $1, $2) {
+        if ($1) {
+            data[$1] = $2;
+        }
+    });
+
+    return data;
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/scv-connector-base/dist/scv-connector-base.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/scv-connector-base/dist/scv-connector-base.js ***!
+  \********************************************************************/
+/***/ (function(module) {
+
+/*! For license information please see scv-connector-base.js.LICENSE.txt */
+!function(e,t){ true?module.exports=t():0}(this,(()=>(()=>{var e={633:(e,t,E)=>{var a=E(738).default;function n(){"use strict";e.exports=n=function(){return E},e.exports.__esModule=!0,e.exports.default=e.exports;var t,E={},r=Object.prototype,_=r.hasOwnProperty,T=Object.defineProperty||function(e,t,E){e[t]=E.value},i="function"==typeof Symbol?Symbol:{},o=i.iterator||"@@iterator",s=i.asyncIterator||"@@asyncIterator",A=i.toStringTag||"@@toStringTag";function l(e,t,E){return Object.defineProperty(e,t,{value:E,enumerable:!0,configurable:!0,writable:!0}),e[t]}try{l({},"")}catch(t){l=function(e,t,E){return e[t]=E}}function c(e,t,E,a){var n=t&&t.prototype instanceof u?t:u,r=Object.create(n.prototype),_=new U(a||[]);return T(r,"_invoke",{value:f(e,E,_)}),r}function C(e,t,E){try{return{type:"normal",arg:e.call(t,E)}}catch(e){return{type:"throw",arg:e}}}E.wrap=c;var N="suspendedStart",O="suspendedYield",R="executing",S="completed",I={};function u(){}function P(){}function d(){}var L={};l(L,o,(function(){return this}));var p=Object.getPrototypeOf,D=p&&p(p(g([])));D&&D!==r&&_.call(D,o)&&(L=D);var h=d.prototype=u.prototype=Object.create(L);function V(e){["next","throw","return"].forEach((function(t){l(e,t,(function(e){return this._invoke(t,e)}))}))}function v(e,t){function E(n,r,T,i){var o=C(e[n],e,r);if("throw"!==o.type){var s=o.arg,A=s.value;return A&&"object"==a(A)&&_.call(A,"__await")?t.resolve(A.__await).then((function(e){E("next",e,T,i)}),(function(e){E("throw",e,T,i)})):t.resolve(A).then((function(e){s.value=e,T(s)}),(function(e){return E("throw",e,T,i)}))}i(o.arg)}var n;T(this,"_invoke",{value:function(e,a){function r(){return new t((function(t,n){E(e,a,t,n)}))}return n=n?n.then(r,r):r()}})}function f(e,E,a){var n=N;return function(r,_){if(n===R)throw Error("Generator is already running");if(n===S){if("throw"===r)throw _;return{value:t,done:!0}}for(a.method=r,a.arg=_;;){var T=a.delegate;if(T){var i=G(T,a);if(i){if(i===I)continue;return i}}if("next"===a.method)a.sent=a._sent=a.arg;else if("throw"===a.method){if(n===N)throw n=S,a.arg;a.dispatchException(a.arg)}else"return"===a.method&&a.abrupt("return",a.arg);n=R;var o=C(e,E,a);if("normal"===o.type){if(n=a.done?S:O,o.arg===I)continue;return{value:o.arg,done:a.done}}"throw"===o.type&&(n=S,a.method="throw",a.arg=o.arg)}}}function G(e,E){var a=E.method,n=e.iterator[a];if(n===t)return E.delegate=null,"throw"===a&&e.iterator.return&&(E.method="return",E.arg=t,G(e,E),"throw"===E.method)||"return"!==a&&(E.method="throw",E.arg=new TypeError("The iterator does not provide a '"+a+"' method")),I;var r=C(n,e.iterator,E.arg);if("throw"===r.type)return E.method="throw",E.arg=r.arg,E.delegate=null,I;var _=r.arg;return _?_.done?(E[e.resultName]=_.value,E.next=e.nextLoc,"return"!==E.method&&(E.method="next",E.arg=t),E.delegate=null,I):_:(E.method="throw",E.arg=new TypeError("iterator result is not an object"),E.delegate=null,I)}function b(e){var t={tryLoc:e[0]};1 in e&&(t.catchLoc=e[1]),2 in e&&(t.finallyLoc=e[2],t.afterLoc=e[3]),this.tryEntries.push(t)}function Y(e){var t=e.completion||{};t.type="normal",delete t.arg,e.completion=t}function U(e){this.tryEntries=[{tryLoc:"root"}],e.forEach(b,this),this.reset(!0)}function g(e){if(e||""===e){var E=e[o];if(E)return E.call(e);if("function"==typeof e.next)return e;if(!isNaN(e.length)){var n=-1,r=function E(){for(;++n<e.length;)if(_.call(e,n))return E.value=e[n],E.done=!1,E;return E.value=t,E.done=!0,E};return r.next=r}}throw new TypeError(a(e)+" is not iterable")}return P.prototype=d,T(h,"constructor",{value:d,configurable:!0}),T(d,"constructor",{value:P,configurable:!0}),P.displayName=l(d,A,"GeneratorFunction"),E.isGeneratorFunction=function(e){var t="function"==typeof e&&e.constructor;return!!t&&(t===P||"GeneratorFunction"===(t.displayName||t.name))},E.mark=function(e){return Object.setPrototypeOf?Object.setPrototypeOf(e,d):(e.__proto__=d,l(e,A,"GeneratorFunction")),e.prototype=Object.create(h),e},E.awrap=function(e){return{__await:e}},V(v.prototype),l(v.prototype,s,(function(){return this})),E.AsyncIterator=v,E.async=function(e,t,a,n,r){void 0===r&&(r=Promise);var _=new v(c(e,t,a,n),r);return E.isGeneratorFunction(t)?_:_.next().then((function(e){return e.done?e.value:_.next()}))},V(h),l(h,A,"Generator"),l(h,o,(function(){return this})),l(h,"toString",(function(){return"[object Generator]"})),E.keys=function(e){var t=Object(e),E=[];for(var a in t)E.push(a);return E.reverse(),function e(){for(;E.length;){var a=E.pop();if(a in t)return e.value=a,e.done=!1,e}return e.done=!0,e}},E.values=g,U.prototype={constructor:U,reset:function(e){if(this.prev=0,this.next=0,this.sent=this._sent=t,this.done=!1,this.delegate=null,this.method="next",this.arg=t,this.tryEntries.forEach(Y),!e)for(var E in this)"t"===E.charAt(0)&&_.call(this,E)&&!isNaN(+E.slice(1))&&(this[E]=t)},stop:function(){this.done=!0;var e=this.tryEntries[0].completion;if("throw"===e.type)throw e.arg;return this.rval},dispatchException:function(e){if(this.done)throw e;var E=this;function a(a,n){return T.type="throw",T.arg=e,E.next=a,n&&(E.method="next",E.arg=t),!!n}for(var n=this.tryEntries.length-1;n>=0;--n){var r=this.tryEntries[n],T=r.completion;if("root"===r.tryLoc)return a("end");if(r.tryLoc<=this.prev){var i=_.call(r,"catchLoc"),o=_.call(r,"finallyLoc");if(i&&o){if(this.prev<r.catchLoc)return a(r.catchLoc,!0);if(this.prev<r.finallyLoc)return a(r.finallyLoc)}else if(i){if(this.prev<r.catchLoc)return a(r.catchLoc,!0)}else{if(!o)throw Error("try statement without catch or finally");if(this.prev<r.finallyLoc)return a(r.finallyLoc)}}}},abrupt:function(e,t){for(var E=this.tryEntries.length-1;E>=0;--E){var a=this.tryEntries[E];if(a.tryLoc<=this.prev&&_.call(a,"finallyLoc")&&this.prev<a.finallyLoc){var n=a;break}}n&&("break"===e||"continue"===e)&&n.tryLoc<=t&&t<=n.finallyLoc&&(n=null);var r=n?n.completion:{};return r.type=e,r.arg=t,n?(this.method="next",this.next=n.finallyLoc,I):this.complete(r)},complete:function(e,t){if("throw"===e.type)throw e.arg;return"break"===e.type||"continue"===e.type?this.next=e.arg:"return"===e.type?(this.rval=this.arg=e.arg,this.method="return",this.next="end"):"normal"===e.type&&t&&(this.next=t),I},finish:function(e){for(var t=this.tryEntries.length-1;t>=0;--t){var E=this.tryEntries[t];if(E.finallyLoc===e)return this.complete(E.completion,E.afterLoc),Y(E),I}},catch:function(e){for(var t=this.tryEntries.length-1;t>=0;--t){var E=this.tryEntries[t];if(E.tryLoc===e){var a=E.completion;if("throw"===a.type){var n=a.arg;Y(E)}return n}}throw Error("illegal catch attempt")},delegateYield:function(e,E,a){return this.delegate={iterator:g(e),resultName:E,nextLoc:a},"next"===this.method&&(this.arg=t),I}},E}e.exports=n,e.exports.__esModule=!0,e.exports.default=e.exports},738:e=>{function t(E){return e.exports=t="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e.exports.__esModule=!0,e.exports.default=e.exports,t(E)}e.exports=t,e.exports.__esModule=!0,e.exports.default=e.exports},756:(e,t,E)=>{var a=E(633)();e.exports=a;try{regeneratorRuntime=a}catch(e){"object"==typeof globalThis?globalThis.regeneratorRuntime=a:Function("r","regeneratorRuntime = r")(a)}}},t={};function E(a){var n=t[a];if(void 0!==n)return n.exports;var r=t[a]={exports:{}};return e[a](r,r.exports,E),r.exports}E.n=e=>{var t=e&&e.__esModule?()=>e.default:()=>e;return E.d(t,{a:t}),t},E.d=(e,t)=>{for(var a in t)E.o(t,a)&&!E.o(e,a)&&Object.defineProperty(e,a,{enumerable:!0,get:t[a]})},E.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t),E.r=e=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})};var a={};return(()=>{"use strict";function e(t){return e="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e(t)}function t(t){var E=function(t){if("object"!=e(t)||!t)return t;var E=t[Symbol.toPrimitive];if(void 0!==E){var a=E.call(t,"string");if("object"!=e(a))return a;throw new TypeError("@@toPrimitive must return a primitive value.")}return String(t)}(t);return"symbol"==e(E)?E:E+""}function n(e,E,a){return(E=t(E))in e?Object.defineProperty(e,E,{value:a,enumerable:!0,configurable:!0,writable:!0}):e[E]=a,e}function r(e,t,E,a,n,r,_){try{var T=e[r](_),i=T.value}catch(e){return void E(e)}T.done?t(i):Promise.resolve(i).then(a,n)}function _(e){return function(){var t=this,E=arguments;return new Promise((function(a,n){var _=e.apply(t,E);function T(e){r(_,a,n,T,i,"next",e)}function i(e){r(_,a,n,T,i,"throw",e)}T(void 0)}))}}E.r(a),E.d(a,{ACWInfo:()=>he,ActiveCallsResult:()=>B,AgentConfig:()=>K,AgentConfigResult:()=>W,AgentStatusInfo:()=>Ne,AgentVendorStatusInfo:()=>Oe,AgentWork:()=>Ce,AudioDevicesResult:()=>x,AudioStats:()=>Ie,AudioStatsElement:()=>ue,CallInfo:()=>Te,CallResult:()=>$,Constants:()=>m,Contact:()=>ie,ContactsFilter:()=>De,ContactsResult:()=>X,CustomError:()=>H,DialOptions:()=>Ee,GenericResult:()=>ae,HangupResult:()=>z,HidDevice:()=>k,HoldToggleResult:()=>Z,InitResult:()=>te,LogoutResult:()=>_e,MuteToggleResult:()=>w,ParticipantResult:()=>Q,Phone:()=>M,PhoneCall:()=>se,PhoneCallAttributes:()=>oe,PhoneContactsResult:()=>J,RecordingToggleResult:()=>q,SetAgentConfigResult:()=>re,SetAgentStateResult:()=>ne,SharedCapabilitiesResult:()=>F,ShowStorageAccessResult:()=>pe,SignedRecordingUrlResult:()=>ee,StateChangeResult:()=>Re,StatsInfo:()=>Pe,SuperviseCallResult:()=>de,SupervisedCallInfo:()=>Se,SupervisorHangupResult:()=>Le,TelephonyConnector:()=>Ae,VendorConnector:()=>le,VoiceCapabilitiesResult:()=>j,initializeConnector:()=>qe,log:()=>D,publishError:()=>Xe,publishEvent:()=>Je,publishLog:()=>Qe});var T=E(756),i=E.n(T);const o={SHARED_MESSAGE_TYPE:{SETUP_CONNECTOR:"SETUP_CONNECTOR",CONNECTOR_READY:"CONNECTOR_READY",LOG:"LOG",TELEPHONY_EVENT_DISPATCHED:"TELEPHONY_EVENT_DISPATCHED",SET_AGENT_STATUS:"SET_AGENT_STATUS",GET_AGENT_STATUS:"GET_AGENT_STATUS",LOGOUT:"LOGOUT",MESSAGE:"MESSAGE",DOWNLOAD_VENDOR_LOGS:"DOWNLOAD_VENDOR_LOGS",AGENT_WORK_EVENT:"AGENT_WORK_EVENT",GET_CONTACTS:"GET_CONTACTS"},VOICE_MESSAGE_TYPE:{ACCEPT_CALL:"ACCEPT_CALL",DECLINE_CALL:"DECLINE_CALL",END_CALL:"END_CALL",MUTE:"MUTE",UNMUTE:"UNMUTE",HOLD:"HOLD",RESUME:"RESUME",DIAL:"DIAL",SEND_DIGITS:"SEND_DIGITS",GET_PHONE_CONTACTS:"GET_PHONE_CONTACTS",SWAP_PARTICIPANTS:"SWAP_PARTICIPANTS",ADD_PARTICIPANT:"ADD_PARTICIPANT",CONFERENCE:"CONFERENCE",PAUSE_RECORDING:"PAUSE_RECORDING",RESUME_RECORDING:"RESUME_RECORDING",SUPERVISE_CALL:"SUPERVISE_CALL",SUPERVISOR_BARGE_IN:"SUPERVISOR_BARGE_IN",SUPERVISOR_DISCONNECT:"SUPERVISOR_DISCONNECT",SET_AGENT_CONFIG:"SET_AGENT_CONFIG",GET_SIGNED_RECORDING_URL:"GET_SIGNED_RECORDING_URL",WRAP_UP_CALL:"WRAP_UP_CALL",AGENT_AVAILABLE:"AGENT_AVAILABLE",GET_AUDIO_DEVICES:"GET_AUDIO_DEVICES"},SHARED_EVENT_TYPE:{ERROR:"ERROR",WARNING:"WARNING",INFO:"INFO",LOGIN_STARTED:"LOGIN_STARTED",LOGIN_RESULT:"LOGIN_RESULT",LOGOUT_RESULT:"LOGOUT_RESULT",SHOW_LOGIN:"SHOW_LOGIN",SET_AGENT_STATUS_RESULT:"SET_AGENT_STATUS_RESULT",GET_AGENT_STATUS_RESULT:"GET_AGENT_STATUS_RESULT",MESSAGE:"MESSAGE",SET_AGENT_STATUS:"SET_AGENT_STATUS",GET_AGENT_STATUS:"GET_AGENT_STATUS",STATE_CHANGE:"STATE_CHANGE",REMOTE_CONTROLLER:"REMOTE_CONTROLLER",SHOW_STORAGE_ACCESS:"SHOW_STORAGE_ACCESS",STORAGE_ACCESS_RESULT:"STORAGE_ACCESS_RESULT",GET_CONTACTS_RESULT:"GET_CONTACTS_RESULT",AFTER_CONVERSATION_WORK_STARTED:"AFTER_CONVERSATION_WORK_STARTED",AFTER_CONVERSATION_WORK_ENDED:"AFTER_CONVERSATION_WORK_ENDED"},VOICE_EVENT_TYPE:{QUEUED_CALL_STARTED:"QUEUED_CALL_STARTED",CALL_STARTED:"CALL_STARTED",CALL_CONNECTED:"CALL_CONNECTED",CALL_FAILED:"CALL_FAILED",MUTE_TOGGLE:"MUTE_TOGGLE",HOLD_TOGGLE:"HOLD_TOGGLE",PHONE_CONTACTS:"PHONE_CONTACTS",PARTICIPANT_ADDED:"PARTICIPANT_ADDED",PARTICIPANT_CONNECTED:"PARTICIPANT_CONNECTED",PARTICIPANT_REMOVED:"PARTICIPANT_REMOVED",RECORDING_TOGGLE:"RECORDING_TOGGLE",PARTICIPANTS_SWAPPED:"PARTICIPANTS_SWAPPED",PARTICIPANTS_CONFERENCED:"PARTICIPANTS_CONFERENCED",SIGNED_RECORDING_URL:"SIGNED_RECORDING_URL",UPDATE_AUDIO_STATS:"UPDATE_AUDIO_STATS",UPDATE_AUDIO_STATS_COMPLETED:"UPDATE_AUDIO_STATS_COMPLETED",SUPERVISOR_BARGED_IN:"SUPERVISOR_BARGED_IN",SUPERVISOR_CALL_STARTED:"SUPERVISOR_CALL_STARTED",SUPERVISOR_CALL_CONNECTED:"SUPERVISOR_CALL_CONNECTED",SUPERVISOR_HANGUP:"SUPERVISOR_HANGUP",CALL_BARGED_IN:"CALL_BARGED_IN",WRAP_UP_ENDED:"WRAP_UP_ENDED",AFTER_CALL_WORK_STARTED:"AFTER_CALL_WORK_STARTED",AGENT_CONFIG_UPDATED:"AGENT_CONFIG_UPDATED",AGENT_ERROR:"AGENT_ERROR",HANGUP:"HANGUP",SOFTPHONE_ERROR:"SOFTPHONE_ERROR",SHOW_TRANSFER_VIEW:"SHOW_TRANSFER_VIEW",GET_AUDIO_DEVICES:"GET_AUDIO_DEVICES",AUDIO_STATS:"AUDIO_STATS",CALL_UPDATED:"CALL_UPDATED"},INFO_TYPE:{CAN_NOT_ACCEPT_THE_CALL:"CAN_NOT_ACCEPT_THE_CALL"},SHARED_ERROR_TYPE:{CUSTOM_ERROR:"CUSTOM_ERROR",GENERIC_ERROR:"GENERIC_ERROR",AUTHENTICATION_ERROR:"AUTHENTICATION_ERROR",INVALID_AGENT_STATUS:"INVALID_AGENT_STATUS",CAN_NOT_GET_AGENT_STATUS:"CAN_NOT_GET_AGENT_STATUS",CAN_NOT_SET_AGENT_STATUS:"CAN_NOT_SET_AGENT_STATUS",LOGIN_REQUIRED:"LOGIN_REQUIRED",CAN_NOT_LOG_IN:"CAN_NOT_LOG_IN",CAN_NOT_LOG_OUT:"CAN_NOT_LOG_OUT",INVALID_STATE_CHANGE_RESULT:"INVALID_STATE_CHANGE_RESULT",INVALID_STORAGE_ACCESS_RESULT:"INVALID_STORAGE_ACCESS_RESULT",INVALID_ACW_INFO:"INVALID_ACW_INFO"},VOICE_ERROR_TYPE:{CAN_NOT_DECLINE_THE_CALL:"CAN_NOT_DECLINE_THE_CALL",CAN_NOT_END_THE_CALL:"CAN_NOT_END_THE_CALL",CAN_NOT_HOLD_CALL:"CAN_NOT_HOLD_CALL",CAN_NOT_RESUME_CALL:"CAN_NOT_RESUME_CALL",CAN_NOT_MUTE_CALL:"CAN_NOT_MUTE_CALL",CAN_NOT_UNMUTE_CALL:"CAN_NOT_UNMUTE_CALL",CAN_NOT_TOGGLE_MUTE:"CAN_NOT_TOGGLE_MUTE",CAN_NOT_TOGGLE_HOLD:"CAN_NOT_TOGGLE_HOLD",CAN_NOT_TOGGLE_RECORD:"CAN_NOT_TOGGLE_RECORD",INVALID_PARTICIPANT:"INVALID_PARTICIPANT",INVALID_PARAMS:"INVALID_PARAMS",CAN_NOT_GET_PHONE_CONTACTS:"CAN_NOT_GET_PHONE_CONTACTS",CAN_NOT_SWAP_PARTICIPANTS:"CAN_NOT_SWAP_PARTICIPANTS",CAN_NOT_CONFERENCE:"CAN_NOT_CONFERENCE",INVALID_DESTINATION:"INVALID_DESTINATION",INVALID_PHONE_NUMBER:"INVALID_PHONE_NUMBER",CAN_NOT_HANGUP_PARTICIPANT:"CAN_NOT_HANGUP_PARTICIPANT",CAN_NOT_ADD_PARTICIPANT:"CAN_NOT_ADD_PARTICIPANT",CAN_NOT_CONNECT_PARTICIPANT:"CAN_NOT_CONNECT_PARTICIPANT",CAN_NOT_START_THE_CALL:"CAN_NOT_START_THE_CALL",CAN_NOT_PAUSE_RECORDING:"CAN_NOT_PAUSE_RECORDING",CAN_NOT_RESUME_RECORDING:"CAN_NOT_RESUME_RECORDING",CAN_NOT_SET_AGENT_CONFIG:"CAN_NOT_SET_AGENT_CONFIG",CAN_NOT_SET_CAPABILITIES:"CAN_NOT_SET_CAPABILITIES",CAN_NOT_UPDATE_PHONE_NUMBER:"CAN_NOT_UPDATE_PHONE_NUMBER",CAN_NOT_GET_SIGNED_RECORDING_URL:"CAN_NOT_GET_SIGNED_RECORDING_URL",CAN_NOT_SUPERVISE_CALL:"CAN_NOT_SUPERVISE_CALL",CAN_NOT_DISCONNECT_SUPERVISOR:"CAN_NOT_DISCONNECT_SUPERVISOR",CAN_NOT_BARGE_IN_SUPERVISOR:"CAN_NOT_BARGE_IN_SUPERVISOR",CAN_NOT_BARGE_IN_CALL:"CAN_NOT_BARGE_IN_CALL",AGENT_ERROR:"AGENT_ERROR",MICROPHONE_NOT_SHARED:"MICROPHONE_NOT_SHARED",UNSUPPORTED_BROWSER:"UNSUPPORTED_BROWSER",USER_BUSY_ERROR:"USER_BUSY_ERROR",WEBRTC_ERROR:"WEBRTC_ERROR",CAN_NOT_GET_AUDIO_DEVICES:"CAN_NOT_GET_AUDIO_DEVICES",CAN_NOT_UPDATE_CALL:"CAN_NOT_UPDATE_CALL"},AGENT_STATUS:{ONLINE:"Online",OFFLINE:"Offline",ACW:"AfterCallWork"},PARTICIPANT_TYPE:{AGENT:"Agent",INITIAL_CALLER:"Initial_Caller",THIRD_PARTY:"Third_Party",SUPERVISOR:"Supervisor"},CALL_TYPE:{INBOUND:"Inbound",OUTBOUND:"Outbound",CALLBACK:"Callback",ADD_PARTICIPANT:"AddParticipant",TRANSFER:"Transfer",INTERNAL_CALL:"InternalCall",DIALED_CALLBACK:"DialedCallback",CONSULT:"Consult"},CALL_SUBTYPE:{PSTN:"PSTN",WEB_RTC:"WebRTC"},DIALER_TYPE:{OUTBOUND_PREVIEW:"OutboundPreview",NONE:"None"},CONTACT_TYPE:{PHONEBOOK:"PhoneBook",QUEUE:"Queue",PHONENUMBER:"PhoneNumber",AGENT:"Agent",FLOW:"Flow"},CONTACT_LIST_TYPE:{TRANSFER:"Transfer",CONFERENCE:"Conference",ALL:"All"},AGENT_CONFIG_TYPE:{SHOW_AGENT_SETTINGS:"SHOW_AGENT_SETTINGS",PHONES:"PHONES",SELECTED_PHONE:"SELECTED_PHONE"},SHARED_CAPABILITIES_TYPE:{DEBUG_ENABLED:"DEBUG_ENABLED",CONTACT_SEARCH:"CONTACT_SEARCH",VENDOR_PROVIDED_AVAILABILITY:"VENDOR_PROVIDED_AVAILABILITY",VENDOR_PROVIDED_QUEUE_WAIT_TIME:"VENDOR_PROVIDED_QUEUE_WAIT_TIME",TRANSFER_TO_OMNI_FLOW:"TRANSFER_TO_OMNI_FLOW",PENDING_STATUS_CHANGE:"PENDING_STATUS_CHANGE",SFDC_PENDING_STATE:"SFDC_PENDING_STATE",AUTO_ACCEPT_ENABLED:"AUTO_ACCEPT_ENABLED"},VOICE_CAPABILITIES_TYPE:{MUTE:"MUTE",RECORD:"RECORD",MERGE:"MERGE",SWAP:"SWAP",BLIND_TRANSFER:"BLIND_TRANSFER",SIGNED_RECORDING_URL:"SIGNED_RECORDING_URL",SUPERVISOR_LISTEN_IN:"SUPERVISOR_LISTEN_IN",SUPERVISOR_BARGE_IN:"SUPERVISOR_BARGE_IN",MOS:"MOS",PHONEBOOK:"PHONEBOOK",HAS_GET_EXTERNAL_SPEAKER:"HAS_GET_EXTERNAL_SPEAKER",HAS_SET_EXTERNAL_SPEAKER:"HAS_SET_EXTERNAL_SPEAKER",HAS_GET_EXTERNAL_MICROPHONE:"HAS_GET_EXTERNAL_MICROPHONE",HAS_SET_EXTERNAL_MICROPHONE:"HAS_SET_EXTERNAL_MICROPHONE",CAN_CONSULT:"CAN_CONSULT",DIAL_PAD:"DIAL_PAD",HAS_HID_SUPPORT:"HAS_HID_SUPPORT",PHONEBOOK_DISABLE:"PHONEBOOK_DISABLE"},CALL_STATE:{RINGING:"ringing",CONNECTED:"connected",TRANSFERRING:"transferring",TRANSFERRED:"transferred",ENDED:"ended"},PHONE_TYPE:{DESK_PHONE:"DESK_PHONE",SOFT_PHONE:"SOFT_PHONE"},HANGUP_REASON:{PHONE_CALL_ERROR:"error",PHONE_CALL_ENDED:"ended"},AGENT_AVAILABILITY:{AVAILABLE:"AVAILABLE",BUSY:"BUSY",OFFLINE:"OFFLINE"},REMOVE_PARTICIPANT_VARIANT:{ALWAYS:"ALWAYS",NEVER:"NEVER",ALWAYS_EXCEPT_ON_HOLD:"ALWAYS_EXCEPT_ON_HOLD"},LOG_LEVEL:{ERROR:"ERROR",INFO:"INFO"},LOG_SOURCE:{SYSTEM:"SYSTEM",PARTNER:"PARTNER"},CONTACTS_FILTER_TYPES:{AGENT:"AGENT",QUEUE:"QUEUE",CONTACT:"CONTACT",DIRECTORY:"DIRECTORY",FLOW:"FLOW",AVAILABLE:"AVAILABLE"},WORK_EVENT:{ASSIGNED:"ASSIGNED",ACCEPTED:"ACCEPTED",DECLINED:"DECLINED",COMPLETED:"COMPLETED",CLOSED:"CLOSED",PAUSED:"PAUSED",UNPAUSED:"UNPAUSED"},DIAL_OPTIONS:{CALLBACK:"isCallback=true",CONSULT:"isConsultCall"},HANGUP_STATUS:{MISSED_AGENT:"MissedCallAgent",DECLINED:"DeclinedByAgent",FAILED_CONNECT_AGENT:"FailedConnectAgent",FAILED_CONNECT_CUSTOMER:"FailedConnectCustomer",CALLBACK_MISSED_OR_REJECTED:"CallbackMissedOrRejected"}};var s=["/internalNameLabel","/reqGeneralInfo/reqAdapterUrl","/reqGeneralInfo/reqVendorInfoApiName","isACWAllowed","isHVSEnabled","orgDomainName","phoneServiceChannelId","telephonySettingsComponentFqn"],A=["/reqHvcc"],l=["/reqHvcc/reqTelephonyIntegrationCertificate"];function c(e,E){for(var a=0;a<E.length;a++){var n=E[a];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,t(n.key),n)}}function C(e,t,E){return t&&c(e.prototype,t),E&&c(e,E),Object.defineProperty(e,"prototype",{writable:!1}),e}function N(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function O(e){return O=Object.setPrototypeOf?Object.getPrototypeOf.bind():function(e){return e.__proto__||Object.getPrototypeOf(e)},O(e)}function R(e,t){return R=Object.setPrototypeOf?Object.setPrototypeOf.bind():function(e,t){return e.__proto__=t,e},R(e,t)}function S(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function");e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,writable:!0,configurable:!0}}),Object.defineProperty(e,"prototype",{writable:!1}),t&&R(e,t)}function I(){try{var e=!Boolean.prototype.valueOf.call(Reflect.construct(Boolean,[],(function(){})))}catch(e){}return(I=function(){return!!e})()}function u(e){var t="function"==typeof Map?new Map:void 0;return u=function(e){if(null===e||!function(e){try{return-1!==Function.toString.call(e).indexOf("[native code]")}catch(t){return"function"==typeof e}}(e))return e;if("function"!=typeof e)throw new TypeError("Super expression must either be null or a function");if(void 0!==t){if(t.has(e))return t.get(e);t.set(e,E)}function E(){return function(e,t,E){if(I())return Reflect.construct.apply(null,arguments);var a=[null];a.push.apply(a,t);var n=new(e.bind.apply(e,a));return E&&R(n,E.prototype),n}(e,arguments,O(this).constructor)}return E.prototype=Object.create(e.prototype,{constructor:{value:E,enumerable:!1,writable:!0,configurable:!0}}),R(E,e)},u(e)}var P=75e5,d=function(e){return"string"==typeof e?e:JSON.stringify(e)},L=0,p=[];function D(e,t,E){!function(e,t,E){if(!t)throw new Error("Log Message required");e=e||o.LOG_LEVEL.INFO,E=E||o.LOG_SOURCE.PARTNER;var a=[(new Date).toISOString(),d(e),d(E),"".concat(d(t),"\n")].join("|");L+a.length>=P&&(p=[],L=0),L+=a.length,p.push(a)}(t,e,E)}function h(){!function(e,t){if(document&&e){var E="string"==typeof e?e:JSON.stringify(e),a=new Blob([E],{type:"text/plain"}),n=document.createElement("a"),r=URL.createObjectURL(a);n.download=t,n.href=r,document.body.appendChild(n),n.click(),document.body.removeChild(n),URL.revokeObjectURL(r)}}(p.join(""),"log-".concat((new Date).getTime(),".txt"))}function V(e,t){(null==t||t>e.length)&&(t=e.length);for(var E=0,a=Array(t);E<t;E++)a[E]=e[E];return a}function v(t,E,a){return E=O(E),function(t,E){if(E&&("object"==e(E)||"function"==typeof E))return E;if(void 0!==E)throw new TypeError("Derived constructors may only return object or undefined");return function(e){if(void 0===e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return e}(t)}(t,f()?Reflect.construct(E,a||[],O(t).constructor):E.apply(t,a))}function f(){try{var e=!Boolean.prototype.valueOf.call(Reflect.construct(Boolean,[],(function(){})))}catch(e){}return(f=function(){return!!e})()}function G(e,t){var E=Object.keys(e);if(Object.getOwnPropertySymbols){var a=Object.getOwnPropertySymbols(e);t&&(a=a.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),E.push.apply(E,a)}return E}function b(e){for(var t=1;t<arguments.length;t++){var E=null!=arguments[t]?arguments[t]:{};t%2?G(Object(E),!0).forEach((function(t){n(e,t,E[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(E)):G(Object(E)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(E,t))}))}return e}var Y,U,g,y,m={SHARED_EVENT_TYPE:{LOGIN_RESULT:o.SHARED_EVENT_TYPE.LOGIN_RESULT,LOGOUT_RESULT:o.SHARED_EVENT_TYPE.LOGOUT_RESULT,MESSAGE:o.SHARED_EVENT_TYPE.MESSAGE,SET_AGENT_STATUS:o.SHARED_EVENT_TYPE.SET_AGENT_STATUS,GET_AGENT_STATUS:o.SHARED_EVENT_TYPE.GET_AGENT_STATUS,STATE_CHANGE:o.SHARED_EVENT_TYPE.STATE_CHANGE,STORAGE_ACCESS_RESULT:o.SHARED_EVENT_TYPE.STORAGE_ACCESS_RESULT,GET_CONTACTS_RESULT:o.SHARED_EVENT_TYPE.GET_CONTACTS_RESULT,AFTER_CONVERSATION_WORK_STARTED:o.SHARED_EVENT_TYPE.AFTER_CONVERSATION_WORK_STARTED,AFTER_CONVERSATION_WORK_ENDED:o.SHARED_EVENT_TYPE.AFTER_CONVERSATION_WORK_ENDED},VOICE_EVENT_TYPE:{CALL_STARTED:o.VOICE_EVENT_TYPE.CALL_STARTED,QUEUED_CALL_STARTED:o.VOICE_EVENT_TYPE.QUEUED_CALL_STARTED,CALL_CONNECTED:o.VOICE_EVENT_TYPE.CALL_CONNECTED,HANGUP:o.VOICE_EVENT_TYPE.HANGUP,MUTE_TOGGLE:o.VOICE_EVENT_TYPE.MUTE_TOGGLE,HOLD_TOGGLE:o.VOICE_EVENT_TYPE.HOLD_TOGGLE,RECORDING_TOGGLE:o.VOICE_EVENT_TYPE.RECORDING_TOGGLE,PARTICIPANTS_SWAPPED:o.VOICE_EVENT_TYPE.PARTICIPANTS_SWAPPED,PARTICIPANTS_CONFERENCED:o.VOICE_EVENT_TYPE.PARTICIPANTS_CONFERENCED,PARTICIPANT_ADDED:o.VOICE_EVENT_TYPE.PARTICIPANT_ADDED,PARTICIPANT_CONNECTED:o.VOICE_EVENT_TYPE.PARTICIPANT_CONNECTED,PARTICIPANT_REMOVED:o.VOICE_EVENT_TYPE.PARTICIPANT_REMOVED,AFTER_CALL_WORK_STARTED:o.VOICE_EVENT_TYPE.AFTER_CALL_WORK_STARTED,WRAP_UP_ENDED:o.VOICE_EVENT_TYPE.WRAP_UP_ENDED,AGENT_ERROR:o.VOICE_EVENT_TYPE.AGENT_ERROR,SOFTPHONE_ERROR:o.VOICE_EVENT_TYPE.SOFTPHONE_ERROR,UPDATE_AUDIO_STATS:o.VOICE_EVENT_TYPE.UPDATE_AUDIO_STATS,CALL_BARGED_IN:o.VOICE_EVENT_TYPE.CALL_BARGED_IN,SUPERVISOR_BARGED_IN:o.VOICE_EVENT_TYPE.SUPERVISOR_BARGED_IN,SUPERVISOR_CALL_STARTED:o.VOICE_EVENT_TYPE.SUPERVISOR_CALL_STARTED,SUPERVISOR_CALL_CONNECTED:o.VOICE_EVENT_TYPE.SUPERVISOR_CALL_CONNECTED,SUPERVISOR_HANGUP:o.VOICE_EVENT_TYPE.SUPERVISOR_HANGUP,SHOW_TRANSFER_VIEW:o.VOICE_EVENT_TYPE.SHOW_TRANSFER_VIEW,AUDIO_STATS:o.VOICE_EVENT_TYPE.AUDIO_STATS,CALL_UPDATED:o.VOICE_EVENT_TYPE.CALL_UPDATED},SHARED_ERROR_TYPE:{GENERIC_ERROR:o.SHARED_ERROR_TYPE.GENERIC_ERROR,INVALID_AGENT_STATUS:o.SHARED_ERROR_TYPE.INVALID_AGENT_STATUS},VOICE_ERROR_TYPE:{INVALID_PARTICIPANT:o.VOICE_ERROR_TYPE.INVALID_PARTICIPANT,INVALID_DESTINATION:o.VOICE_ERROR_TYPE.INVALID_DESTINATION,CAN_NOT_UPDATE_PHONE_NUMBER:o.VOICE_ERROR_TYPE.CAN_NOT_UPDATE_PHONE_NUMBER,INVALID_PARAMS:o.VOICE_ERROR_TYPE.INVALID_PARAMS},AGENT_STATUS:b({},o.AGENT_STATUS),PARTICIPANT_TYPE:b({},o.PARTICIPANT_TYPE),CALL_TYPE:b({},o.CALL_TYPE),CALL_SUBTYPE:b({},o.CALL_SUBTYPE),DIALER_TYPE:b({},o.DIALER_TYPE),CONTACT_TYPE:b({},o.CONTACT_TYPE),CONTACT_LIST_TYPE:b({},o.CONTACT_LIST_TYPE),CALL_STATE:b({},o.CALL_STATE),HANGUP_REASON:b({},o.HANGUP_REASON),PHONE_TYPE:b({},o.PHONE_TYPE),AGENT_AVAILABILITY:b({},o.AGENT_AVAILABILITY),REMOVE_PARTICIPANT_VARIANT:b({},o.REMOVE_PARTICIPANT_VARIANT),LOG_LEVEL:b({},o.LOG_LEVEL),CONTACTS_FILTER_TYPES:b({},o.CONTACTS_FILTER_TYPES),WORK_EVENT:b({},o.WORK_EVENT),HANGUP_STATUS:b({},o.HANGUP_STATUS)},H=function(e){function t(e){var E,a=e.labelName,n=e.namespace,r=e.message;return N(this,t),E=v(this,t,[r]),ce.validateString(a),ce.validateString(n),r&&ce.validateString(r),E.labelName=a,E.namespace=n,E.message=r,E}return S(t,e),C(t)}(u(Error)),M=C((function e(t){var E=t.type,a=t.number;N(this,e),ce.validateEnum(E,Object.values(o.PHONE_TYPE)),a&&ce.validateString(a),this.type=E,this.number=a})),k=C((function e(t){var E=t.productId,a=t.vendorId;N(this,e),E&&ce.validateNumber(E),a&&ce.validateNumber(a),this.productId=E,this.vendorId=a})),w=C((function e(t){var E=t.isMuted,a=t.call,n=t.isGlobal;N(this,e),this.isMuted=E,this.call=a,this.isGlobal=n})),B=C((function e(t){var E=t.activeCalls,a=void 0===E?[]:E;N(this,e),a.length>0&&a.forEach((function(e){ce.validateClassObject(e,se)})),this.activeCalls=a})),x=C((function e(t){var E=t.audioDevices,a=void 0===E?[]:E;N(this,e),this.audioDevices=a})),F=C((function e(t){var E=t.debugEnabled,a=void 0===E||E,n=t.hasContactSearch,r=void 0!==n&&n,_=t.hasAgentAvailability,T=void 0!==_&&_,i=t.hasQueueWaitTime,o=void 0!==i&&i,s=t.hasTransferToOmniFlow,A=void 0!==s&&s,l=t.hasPendingStatusChange,c=void 0!==l&&l,C=t.hasSFDCPendingState,O=void 0!==C&&C,R=t.hasAutoAcceptEnabled,S=void 0!==R&&R;N(this,e),ce.validateBoolean(a),ce.validateBoolean(r),ce.validateBoolean(T),ce.validateBoolean(o),ce.validateBoolean(A),ce.validateBoolean(c),ce.validateBoolean(O),ce.validateBoolean(S),this.debugEnabled=a,this.hasContactSearch=r,this.hasAgentAvailability=T,this.hasQueueWaitTime=o,this.hasTransferToOmniFlow=A,this.hasPendingStatusChange=c,this.hasSFDCPendingState=O,this.hasAutoAcceptEnabled=S})),j=C((function e(t){var E=t.hasMute,a=void 0===E||E,n=t.hasRecord,r=void 0===n||n,_=t.hasMerge,T=void 0===_||_,i=t.hasSwap,o=void 0===i||i,s=t.hasBlindTransfer,A=void 0!==s&&s,l=t.hasSignedRecordingUrl,c=void 0!==l&&l,C=t.supportsMos,O=void 0!==C&&C,R=t.hasSupervisorListenIn,S=void 0!==R&&R,I=t.hasSupervisorBargeIn,u=void 0!==I&&I,P=t.hasPhoneBook,d=void 0!==P&&P,L=t.hasGetExternalSpeakerDeviceSetting,p=void 0!==L&&L,D=t.hasSetExternalSpeakerDeviceSetting,h=void 0!==D&&D,V=t.hasGetExternalMicrophoneDeviceSetting,v=void 0!==V&&V,f=t.hasSetExternalMicrophoneDeviceSetting,G=void 0!==f&&f,b=t.canConsult,Y=void 0!==b&&b,U=t.isDialPadDisabled,g=void 0!==U&&U,y=t.isHidSupported,m=void 0!==y&&y,H=t.isPhoneBookDisabled,M=void 0!==H&&H;N(this,e),ce.validateBoolean(a),ce.validateBoolean(r),ce.validateBoolean(T),ce.validateBoolean(o),ce.validateBoolean(A),ce.validateBoolean(c),ce.validateBoolean(O),ce.validateBoolean(S),ce.validateBoolean(u),ce.validateBoolean(d),ce.validateBoolean(p),ce.validateBoolean(h),ce.validateBoolean(v),ce.validateBoolean(G),ce.validateBoolean(Y),ce.validateBoolean(g),ce.validateBoolean(m),ce.validateBoolean(M),this.hasMute=a,this.hasRecord=r,this.hasMerge=T,this.hasSwap=o,this.hasBlindTransfer=A,this.hasSignedRecordingUrl=c,this.supportsMos=O,this.hasSupervisorListenIn=S,this.hasSupervisorBargeIn=u,this.hasPhoneBook=d,this.hasGetExternalSpeakerDeviceSetting=p,this.hasSetExternalSpeakerDeviceSetting=h,this.hasGetExternalMicrophoneDeviceSetting=v,this.hasSetExternalMicrophoneDeviceSetting=G,this.canConsult=Y,this.isDialPadDisabled=g,this.isHidSupported=m,this.isPhoneBookDisabled=M})),W=C((function e(t){var E=t.phones,a=void 0===E?[o.PHONE_TYPE.SOFT_PHONE]:E,n=t.selectedPhone,r=void 0===n?new M({type:o.PHONE_TYPE.SOFT_PHONE}):n,_=t.speakerDeviceId,T=void 0===_?"":_,i=t.microphoneDeviceId,s=void 0===i?"":i;N(this,e),ce.validateClassObject(a,Array),ce.validateClassObject(r,M),ce.validateString(T),ce.validateString(s),this.phones=a,this.selectedPhone=r,this.speakerDeviceId=T,this.microphoneDeviceId=s})),K=C((function e(t){var E=t.selectedPhone,a=t.speakerDeviceId,n=t.microphoneDeviceId,r=t.hidDeviceInfo;N(this,e),ce.validateClassObject(E,M),void 0!==r&&ce.validateClassObject(r,k),this.selectedPhone=E,this.speakerDeviceId=a,this.microphoneDeviceId=n,this.hidDeviceInfo=r})),q=C((function e(t){var E=t.isRecordingPaused,a=t.contactId,n=void 0===a?null:a,r=t.initialContactId,_=void 0===r?null:r,T=t.instanceId,i=void 0===T?null:T,o=t.region,s=void 0===o?null:o;N(this,e),this.isRecordingPaused=E,this.contactId=n,this.initialContactId=_,this.instanceId=i,this.region=s})),Q=C((function e(t){var E=t.initialCallHasEnded,a=t.callInfo,n=t.callAttributes,r=t.phoneNumber,_=t.callId,T=t.contact,i=void 0===T?null:T,o=t.connectionId;N(this,e),ce.validateClassObject(a,Te),this.initialCallHasEnded=E,this.callInfo=a,this.callAttributes=n,this.phoneNumber=r,this.callId=_,this.contact=i,this.connectionId=o||_})),X=C((function e(t){var E=t.contacts,a=void 0===E?[]:E,n=t.contactTypes,r=void 0===n?[]:n;N(this,e),a.length>0&&a.forEach((function(e){ce.validateClassObject(e,ie)})),r.length>0&&r.forEach((function(e){ce.validateEnum(e,Object.values(o.CONTACT_TYPE))})),this.contacts=a,this.contactTypes=r})),J=function(e){function t(e){var E=e.contacts,a=void 0===E?[]:E,n=e.contactTypes,r=void 0===n?[]:n;return N(this,t),v(this,t,[{contacts:a,contactTypes:r}])}return S(t,e),C(t)}(X),$=C((function e(t){var E=t.call;N(this,e),void 0!==E&&ce.validateClassObject(E,se),this.call=E})),z=C((function e(t){var E=t.calls;N(this,e),E instanceof Array?(E.forEach((function(e){return ce.validateClassObject(e,se)})),this.calls=E):(ce.validateClassObject(E,se),this.calls=[E])})),Z=C((function e(t){var E=t.isThirdPartyOnHold,a=t.isCustomerOnHold,n=t.calls,r=t.isCallMerged;N(this,e),n&&(Object.values(n).forEach((function(e){ce.validateClassObject(e,se)})),this.calls=n),this.isThirdPartyOnHold=E,this.isCustomerOnHold=a,this.isCallMerged=r})),ee=C((function e(t){var E=t.success,a=t.url,n=t.duration,r=t.callId;N(this,e),E&&(ce.validateString(a),ce.validateString(r),n&&ce.validateNumber(n)),this.success=E,this.url=a,this.duration=n,this.callId=r})),te=C((function e(t){var E=t.showLogin,a=void 0!==E&&E,n=t.loginFrameHeight,r=void 0===n?350:n,_=t.isSilentLogin,T=void 0!==_&&_,i=t.showStorageAccess,o=void 0!==i&&i;N(this,e),this.showLogin=a,this.loginFrameHeight=r,this.isSilentLogin=!this.showLogin&&T,this.showStorageAccess=o})),Ee=C((function e(t){var E=t.isCallback,a=void 0!==E&&E,n=t.isConsultCall,r=void 0!==n&&n;N(this,e),this.isCallback=a,this.isConsultCall=r})),ae=C((function e(t){var E=t.success;N(this,e),this.success=E})),ne=function(e){function t(e){var E,a=e.success,n=e.isStatusSyncNeeded,r=void 0===n||n;return N(this,t),(E=v(this,t,[{success:a}])).isStatusSyncNeeded=r,E}return S(t,e),C(t)}(ae),re=function(e){function t(e){var E,a=e.success,n=e.isSystemEvent,r=void 0!==n&&n;return N(this,t),(E=v(this,t,[{success:a}])).isSystemEvent=r,E}return S(t,e),C(t,[{key:"setIsSystemEvent",value:function(e){this.isSystemEvent=e}}])}(ae),_e=C((function e(t){var E=t.success,a=t.loginFrameHeight,n=void 0===a?350:a;N(this,e),this.success=E,this.loginFrameHeight=n})),Te=C((function e(t){var E=t.callStateTimestamp,a=void 0===E?null:E,n=t.isOnHold,r=t.isMuted,_=void 0!==r&&r,T=t.isRecordingPaused,i=void 0!==T&&T,s=t.initialCallId,A=t.queueId,l=void 0===A?null:A,c=t.queueName,C=void 0===c?null:c,O=t.queueTimestamp,R=void 0===O?null:O,S=t.isSoftphoneCall,I=void 0===S||S,u=t.acceptEnabled,P=void 0===u||u,d=t.declineEnabled,L=void 0===d||d,p=t.muteEnabled,D=void 0===p||p,h=t.swapEnabled,V=void 0===h||h,v=t.conferenceEnabled,f=void 0===v||v,G=t.holdEnabled,b=void 0===G||G,Y=t.recordEnabled,U=void 0===Y||Y,g=t.addCallerEnabled,y=void 0===g||g,H=t.extensionEnabled,M=void 0===H||H,k=t.isReplayable,w=void 0===k||k,B=t.isBargeable,x=void 0!==B&&B,F=t.isExternalTransfer,j=t.showMuteButton,W=void 0===j||j,K=t.showRecordButton,q=void 0===K||K,Q=t.showAddCallerButton,X=void 0===Q||Q,J=t.showAddBlindTransferButton,$=void 0===J||J,z=t.showMergeButton,Z=void 0===z||z,ee=t.showSwapButton,te=void 0===ee||ee,Ee=t.removeParticipantVariant,ae=void 0===Ee?m.REMOVE_PARTICIPANT_VARIANT.ALWAYS:Ee,ne=t.additionalFields,re=void 0===ne?null:ne,_e=t.isMultiParty,Te=void 0!==_e&&_e,ie=t.isHIDCall,oe=void 0!==ie&&ie,se=t.endCallDisabled,Ae=void 0!==se&&se,le=t.renderContactId,Ce=void 0===le?null:le;N(this,e),a&&ce.validateDate(a),R&&ce.validateDate(R),l&&ce.validateString(l),C&&ce.validateString(C),ce.validateBoolean(i),ce.validateBoolean(_),ce.validateBoolean(I),ce.validateBoolean(P),ce.validateBoolean(L),ce.validateBoolean(D),ce.validateBoolean(V),ce.validateBoolean(f),ce.validateBoolean(b),ce.validateBoolean(U),ce.validateBoolean(y),ce.validateBoolean(M),ce.validateBoolean(x),ce.validateBoolean(W),ce.validateBoolean(q),ce.validateBoolean(X),ce.validateBoolean($),ce.validateBoolean(Z),ce.validateBoolean(te),ce.validateBoolean(oe),ce.validateBoolean(Ae),void 0!==F&&ce.validateBoolean(F),ce.validateEnum(ae,Object.values(o.REMOVE_PARTICIPANT_VARIANT)),re&&ce.validateString(re),ce.validateBoolean(Te),Ce&&ce.validateString(Ce),this.callStateTimestamp=a,this.isRecordingPaused=i,this.isMuted=_,this.isOnHold=n,this.initialCallId=s,this.queueName=C,this.queueId=l,this.queueTimestamp=R,this.isSoftphoneCall=I,this.acceptEnabled=P,this.declineEnabled=L,this.muteEnabled=D,this.swapEnabled=V,this.conferenceEnabled=f,this.holdEnabled=b,this.recordEnabled=U,this.addCallerEnabled=y,this.extensionEnabled=M,this.isReplayable=w,this.isBargeable=x,this.isExternalTransfer=F,this.removeParticipantVariant=ae,this.showMuteButton=W,this.showRecordButton=q,this.showAddCallerButton=X,this.showAddBlindTransferButton=$,this.showMergeButton=Z,this.showSwapButton=te,this.additionalFields=re,this.isMultiParty=Te,this.isHIDCall=oe,this.endCallDisabled=Ae,this.renderContactId=Ce})),ie=C((function e(t){var E=t.phoneNumber,a=t.id,n=t.type,r=t.name,_=t.listType,T=t.prefix,i=t.extension,s=t.endpointARN,A=t.queue,l=t.availability,c=t.recordId,C=t.description,O=t.queueWaitTime;N(this,e),E&&ce.validateString(E),n&&ce.validateEnum(n,Object.values(o.CONTACT_TYPE)),a&&ce.validateString(a),r&&ce.validateString(r),_&&ce.validateEnum(_,Object.values(m.CONTACT_LIST_TYPE)),T&&ce.validateString(T),i&&ce.validateString(i),l&&ce.validateEnum(l,Object.values(o.AGENT_AVAILABILITY)),c&&ce.validateString(c),C&&ce.validateString(C),O&&ce.validateString(O),this.phoneNumber=E,this.id=a,this.type=n,this.name=r,this.listType=_,this.prefix=T,this.extension=i,this.endpointARN=s,this.queue=A,o.CONTACT_TYPE.AGENT===this.type?this.availability=l:this.availability=null,this.queueWaitTime=O,this.recordId=c,this.description=C})),oe=C((function e(t){var E=t.voiceCallId,a=t.participantType,n=t.dialerType,r=void 0===n?m.DIALER_TYPE.NONE:n,_=t.parentId,T=t.isOnHold,i=t.hasSupervisorBargedIn,s=void 0!==i&&i,A=t.isAutoMergeOn,l=void 0!==A&&A,c=t.isConsultCall,C=void 0!==c&&c;N(this,e),E&&ce.validateString(E),a&&ce.validateEnum(a,Object.values(o.PARTICIPANT_TYPE)),_&&ce.validateString(_),void 0!==T&&ce.validateBoolean(T),ce.validateBoolean(s),ce.validateEnum(r,Object.values(o.DIALER_TYPE)),ce.validateBoolean(l),ce.validateBoolean(C),this.voiceCallId=E,this.participantType=a,this.parentId=_,this.isOnHold=T,this.dialerType=r,this.hasSupervisorBargedIn=s,this.isAutoMergeOn=l,this.isConsultCall=C})),se=C((function e(t){var E=t.callId,a=t.callType,n=t.callSubtype,r=t.contact,_=t.state,T=t.callAttributes,i=t.phoneNumber,s=t.callInfo,A=t.reason,l=t.closeCallOnError,c=t.agentStatus,C=t.agentARN,O=t.fromContact,R=t.toContact,S=t.connectionId;N(this,e),E&&(ce.validateString(E),this.callId=E),S?(ce.validateString(S),this.connectionId=S):E&&(this.connectionId=E),a&&(ce.validateEnum(a,Object.values(o.CALL_TYPE)),this.callType=a),n&&(ce.validateEnum(n,Object.values(o.CALL_SUBTYPE)),this.callSubtype=n),i&&(ce.validateString(i),this.phoneNumber=i),s&&(ce.validateClassObject(s,Te),this.callInfo=s),r&&(ce.validateClassObject(r,ie),this.contact=r),O&&(ce.validateClassObject(O,ie),this.fromContact=O),R?(ce.validateClassObject(R,ie),this.toContact=R):r&&(this.toContact=r),A&&(this.reason=A),l&&(this.closeCallOnError=l),c&&(this.agentStatus=c),C&&(this.agentARN=C),this.state=_,this.callAttributes=T})),Ae=function(){return C((function e(){N(this,e)}),[{key:"getActiveCalls",value:function(){throw new Error("Not implemented")}},{key:"acceptCall",value:function(e){throw new Error("Not implemented")}},{key:"declineCall",value:function(e){throw new Error("Not implemented")}},{key:"endCall",value:function(e,t){throw new Error("Not implemented")}},{key:"mute",value:function(e){throw new Error("Not implemented")}},{key:"unmute",value:function(e){throw new Error("Not implemented")}},{key:"hold",value:function(e){throw new Error("Not implemented")}},{key:"resume",value:function(e){throw new Error("Not implemented")}},{key:"dial",value:function(e,t){throw new Error("Not implemented")}},{key:"sendDigits",value:function(e){throw new Error("Not implemented")}},{key:"getPhoneContacts",value:function(e){throw new Error("Not implemented")}},{key:"swap",value:function(e,t){throw new Error("Not implemented")}},{key:"conference",value:function(e){throw new Error("Not implemented")}},{key:"addParticipant",value:function(e,t,E){throw new Error("Not implemented")}},{key:"pauseRecording",value:function(){throw new Error("Not implemented")}},{key:"resumeRecording",value:function(){throw new Error("Not implemented")}},{key:"getAgentConfig",value:function(){throw new Error("Not implemented")}},{key:"setAgentConfig",value:function(e){throw new Error("Not implemented")}},{key:"getVoiceCapabilities",value:function(){throw new Error("Not implemented")}},{key:"wrapUpCall",value:function(e){throw new Error("Not implemented")}},{key:"getSignedRecordingUrl",value:function(e,t,E){throw new Error("Not implemented")}},{key:"superviseCall",value:function(e){throw new Error("Not implemented")}},{key:"supervisorDisconnect",value:function(e){throw new Error("Not implemented")}},{key:"supervisorBargeIn",value:function(e){throw new Error("Not implemented")}}])}(),le=function(){return C((function e(){N(this,e)}),[{key:"init",value:function(e){throw new Error("Not implemented")}},{key:"getTelephonyConnector",value:function(){throw new Error("Not implemented")}},{key:"onAgentWorkEvent",value:function(e){throw new Error("Not implemented")}},{key:"setAgentStatus",value:function(e,t,E){throw new Error("Not implemented")}},{key:"getAgentStatus",value:function(){this.logMessageToVendor(o.LOG_LEVEL.INFO,"getAgentStatus API is NOT Implemented")}},{key:"logout",value:function(){throw new Error("Not implemented")}},{key:"handleMessage",value:function(e){throw new Error("Not implemented")}},{key:"downloadLogs",value:function(e){h()}},{key:"logMessageToVendor",value:function(e,t,E){}},{key:"getContacts",value:function(e,t){throw new Error("Not implemented")}},{key:"getAudioDevices",value:function(){throw new Error("Not implemented")}},{key:"getSharedCapabilities",value:function(){throw new Error("Not implemented")}}])}(),ce=function(){return C((function e(){N(this,e)}),null,[{key:"validateString",value:function(t){if("string"!=typeof t)throw new Error("Invalid argument. Expecting a string but got ".concat(e(t)));return this}},{key:"validateNumber",value:function(t){if("number"!=typeof t)throw new Error("Invalid argument. Expecting a number but got ".concat(e(t)));return this}},{key:"validateBoolean",value:function(t){if("boolean"!=typeof t)throw new Error("Invalid argument. Expecting a boolean but got ".concat(e(t)));return this}},{key:"validateEnum",value:function(e,t){if(!new RegExp(t.join("|"),"i").test(e))throw new Error("Invalid argument. Expecting a value from ".concat(JSON.stringify(t)," but got ").concat(e));return this}},{key:"validateDate",value:function(t){if(!(t instanceof Date))throw new Error("Invalid argument. Expecting a Date object but got ".concat(e(t)));return this}},{key:"validateClassObject",value:function(t,E){if(!(t instanceof E))throw new Error("Invalid className. Expecting object of class ".concat(E," but got ").concat(e(t)));return this}},{key:"validateClassObjects",value:function(t){for(var E=!1,a=arguments.length,n=new Array(a>1?a-1:0),r=1;r<a;r++)n[r-1]=arguments[r];for(var _=0;_<n.length;_++)try{this.validateClassObject(t,n[_]),E=!0;break}catch(e){}if(!E)throw new Error("Invalid className. Expecting object matching a class name in ".concat(n," but got ").concat(e(t)));return this}}])}(),Ce=C((function e(t){var E=t.workItemId,a=t.workId,n=t.workEvent;N(this,e),ce.validateEnum(n,Object.values(o.WORK_EVENT)),this.workEvent=n,this.workItemId=E,this.workId=a})),Ne=C((function e(t){var E=t.statusId,a=t.statusApiName,n=t.statusName;N(this,e),ce.validateString(E),a&&ce.validateString(a),n&&ce.validateString(n),this.statusId=E,this.statusApiName=a,this.statusName=n})),Oe=C((function e(t){var E=t.statusId,a=t.statusType,n=t.statusName;N(this,e),E&&ce.validateString(E),a&&ce.validateString(a),n&&ce.validateString(n),this.statusId=E,this.statusType=a,this.statusName=n})),Re=C((function e(t){var E=t.newVendorStateInfo,a=t.oldVendorStateInfo;N(this,e),ce.validateClassObject(E,Oe),ce.validateString(E.statusName),a&&ce.validateClassObject(a,Oe),this.newVendorStateInfo=E,this.oldVendorStateInfo=a})),Se=C((function e(t){var E=t.callId,a=t.voiceCallId,n=t.callType,r=t.from,_=t.to,T=t.supervisorName,i=t.isBargedIn,o=t.connectionId;N(this,e),ce.validateString(E),this.callId=E,this.voiceCallId=a,this.callType=n,this.from=r,this.to=_,this.supervisorName=T,this.isBargedIn=i,this.connectionId=o||E})),Ie=C((function e(t){var E=t.callId,a=t.stats,n=t.isAudioStatsCompleted;N(this,e),E&&(ce.validateString(E),this.callId=E),a&&(ce.validateClassObject(a,Array),a.forEach((function(e){return ce.validateClassObject(e,ue)})),this.stats=a),n&&(ce.validateBoolean(n),this.isAudioStatsCompleted=n)})),ue=C((function e(t){var E=t.inputChannelStats,a=t.outputChannelStats;N(this,e),E&&ce.validateClassObject(E,Pe),a&&ce.validateClassObject(a,Pe),this.inputChannelStats=E,this.outputChannelStats=a})),Pe=C((function e(t){var E=t.packetsCount,a=t.packetsLost,n=t.jitterBufferMillis,r=t.roundTripTimeMillis;N(this,e),E=null==E||E<0?0:E,a=null==a||a<0?0:a,n=null==n||n<0?0:n,r=null==r||r<0?0:r,this.statsCount=0,this.packetsCount=E,this.packetsLost=a,this.jitterBufferMillis=n,this.roundTripTimeMillis=r})),de=C((function e(t){var E=t.call;N(this,e),ce.validateClassObject(E,se),this.call=E})),Le=function(e){function t(e){var E=e.calls;return N(this,t),v(this,t,[{calls:E}])}return S(t,e),C(t)}(z),pe=C((function e(t){var E=t.success,a=void 0!==E&&E,n=t.showLogin,r=void 0!==n&&n,_=t.loginFrameHeight,T=void 0===_?350:_;N(this,e),this.success=a,this.showLogin=r,this.loginFrameHeight=T})),De=C((function e(t){if(N(this,e),t){var E=t.contains,a=void 0===E?null:E,n=t.limit,r=void 0===n?50:n,_=t.offset,T=void 0===_?0:_,i=t.types,s=void 0===i?[]:i;a&&ce.validateString(a),ce.validateNumber(r),ce.validateNumber(T);var A,l=function(e,t){var E="undefined"!=typeof Symbol&&e[Symbol.iterator]||e["@@iterator"];if(!E){if(Array.isArray(e)||(E=function(e,t){if(e){if("string"==typeof e)return V(e,t);var E={}.toString.call(e).slice(8,-1);return"Object"===E&&e.constructor&&(E=e.constructor.name),"Map"===E||"Set"===E?Array.from(e):"Arguments"===E||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(E)?V(e,t):void 0}}(e))||t&&e&&"number"==typeof e.length){E&&(e=E);var a=0,n=function(){};return{s:n,n:function(){return a>=e.length?{done:!0}:{done:!1,value:e[a++]}},e:function(e){throw e},f:n}}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}var r,_=!0,T=!1;return{s:function(){E=E.call(e)},n:function(){var e=E.next();return _=e.done,e},e:function(e){T=!0,r=e},f:function(){try{_||null==E.return||E.return()}finally{if(T)throw r}}}}(s);try{for(l.s();!(A=l.n()).done;)A.value,ce.validateEnum(s,Object.values(o.CONTACTS_FILTER_TYPES))}catch(e){l.e(e)}finally{l.f()}this.contains=a,this.limit=r,this.offset=T,this.types=s}})),he=C((function e(t){var E=t.agentWorkId,a=t.workItemId;if(N(this,e),E&&(ce.validateString(E),this.agentWorkId=E),a&&(ce.validateString(a),this.workItemId=a),!E&&!a)throw new Error("You must pass at least one of agent work id or work item (voice call or messaging session) id")})),Ve=!1;function ve(e){var t=function(e){var t=Y[e];return{packetsCount:t.packetsCount/t.statsCount,packetsLost:t.packetsLost/t.statsCount,jitterBufferMillis:t.jitterBufferMillis/t.statsCount,roundTripTimeMillis:t.roundTripTimeMillis/t.statsCount}}(e),E=t.roundTripTimeMillis+2*t.jitterBufferMillis+10,a=0;return a=E<160?93.2-E/40:93.2-(E-120)/10,1+.035*(a-=t.packetsLost/t.packetsCount*2.5)+7e-6*a*(a-60)*(100-a)}function fe(){if(Ve&&Y){var e=ve("inputChannelStats"),t=ve("outputChannelStats");return Y=null,isNaN(t)&&isNaN(e)?0:isNaN(t)?e:isNaN(e)?t:Math.min(e,t)}}function Ge(){Y=new ue({inputChannelStats:new Pe({packetsCount:0,packetsLost:0,jitterBufferMillis:0,roundTripTimeMillis:0}),outputChannelStats:new Pe({packetsCount:0,packetsLost:0,jitterBufferMillis:0,roundTripTimeMillis:0})})}function be(e){return e&&e.type?e.type:e}function Ye(t){if(t){if("function"==typeof t)return;if("object"===e(t)){var E=Array.isArray(t),a=E?[]:{};if(E)t.forEach((function(e){a.push(Ye(e))}));else for(var n in t)"phoneNumber"!==n&&"number"!==n&&"name"!==n&&"callAttributes"!==n&&"/reqHvcc/reqTelephonyIntegrationCertificate"!==n&&(a[n]=Ye(t[n]));return a}}return t}function Ue(e){return e&&e.message?e.message:e}function ge(e,t,E){var a=Ye(t);D({eventType:e,payload:t},E?o.LOG_LEVEL.ERROR:o.LOG_LEVEL.INFO,o.LOG_SOURCE.SYSTEM),U.postMessage({type:o.SHARED_MESSAGE_TYPE.LOG,payload:{eventType:e,payload:a,isError:E}})}function ye(e,t){var E=!(arguments.length>2&&void 0!==arguments[2])||arguments[2];U.postMessage({type:o.SHARED_MESSAGE_TYPE.TELEPHONY_EVENT_DISPATCHED,payload:{telephonyEventType:e,telephonyEventPayload:t}}),E&&ge(e,t,!1)}function me(e,t,E){console.error("SCV dispatched error ".concat(e," for eventType ").concat(E),t),ye(o.SHARED_EVENT_TYPE.ERROR,{message:e},!1),ge(E,{errorType:e,error:t},!0)}function He(e,t){var E={customError:{labelName:e.labelName,namespace:e.namespace,message:e.message}};console.error("SCV dispatched custom error for eventType ".concat(t),E),ye(o.SHARED_EVENT_TYPE.ERROR,E,!1),ge(t,{errorType:o.SHARED_ERROR_TYPE.CUSTOM_ERROR,error:e},!0)}function Me(e,t){console.info("SCV info message dispatched for eventType ".concat(e," with payload ").concat(JSON.stringify(t))),ye(o.SHARED_EVENT_TYPE.INFO,{message:e},!1),ge(e,t,!1)}function ke(){return we.apply(this,arguments)}function we(){return(we=_(i().mark((function e(){var t,E,a,r,_,T,s,A,l;return i().wrap((function(e){for(;;)switch(e.prev=e.next){case 0:return e.prev=0,e.next=3,g.getTelephonyConnector();case 3:return E=e.sent,e.next=6,E.getAgentConfig();case 6:return a=e.sent,e.next=9,g.getSharedCapabilities();case 9:return r=e.sent,e.next=12,E.getVoiceCapabilities();case 12:return _=e.sent,ce.validateClassObject(a,W),ce.validateClassObject(_,j),_.supportsMos&&(Ve=!0),e.next=18,E.getActiveCalls();case 18:T=e.sent,ce.validateClassObject(T,B),s=T.activeCalls,A=o.SHARED_MESSAGE_TYPE.CONNECTOR_READY,l={agentConfig:n(n({},o.AGENT_CONFIG_TYPE.PHONES,a.phones),o.AGENT_CONFIG_TYPE.SELECTED_PHONE,a.selectedPhone),capabilities:(t={},n(n(n(n(n(n(n(n(n(n(t,o.SHARED_CAPABILITIES_TYPE.DEBUG_ENABLED,r.debugEnabled),o.SHARED_CAPABILITIES_TYPE.CONTACT_SEARCH,r.hasContactSearch),o.SHARED_CAPABILITIES_TYPE.VENDOR_PROVIDED_AVAILABILITY,r.hasAgentAvailability),o.SHARED_CAPABILITIES_TYPE.VENDOR_PROVIDED_QUEUE_WAIT_TIME,r.hasQueueWaitTime),o.SHARED_CAPABILITIES_TYPE.TRANSFER_TO_OMNI_FLOW,r.hasTransferToOmniFlow),o.SHARED_CAPABILITIES_TYPE.PENDING_STATUS_CHANGE,r.hasPendingStatusChange),o.SHARED_CAPABILITIES_TYPE.SFDC_PENDING_STATE,r.hasSFDCPendingState),o.SHARED_CAPABILITIES_TYPE.AUTO_ACCEPT_ENABLED,r.hasAutoAcceptEnabled),o.VOICE_CAPABILITIES_TYPE.MUTE,_.hasMute),o.VOICE_CAPABILITIES_TYPE.RECORD,_.hasRecord),n(n(n(n(n(n(n(n(n(n(t,o.VOICE_CAPABILITIES_TYPE.MERGE,_.hasMerge),o.VOICE_CAPABILITIES_TYPE.SWAP,_.hasSwap),o.VOICE_CAPABILITIES_TYPE.BLIND_TRANSFER,_.hasBlindTransfer),o.VOICE_CAPABILITIES_TYPE.SIGNED_RECORDING_URL,_.hasSignedRecordingUrl),o.VOICE_CAPABILITIES_TYPE.SUPERVISOR_LISTEN_IN,_.hasSupervisorListenIn),o.VOICE_CAPABILITIES_TYPE.SUPERVISOR_BARGE_IN,_.hasSupervisorBargeIn),o.VOICE_CAPABILITIES_TYPE.MOS,_.supportsMos),o.VOICE_CAPABILITIES_TYPE.PHONEBOOK,_.hasPhoneBook),o.VOICE_CAPABILITIES_TYPE.HAS_GET_EXTERNAL_SPEAKER,_.hasGetExternalSpeakerDeviceSetting),o.VOICE_CAPABILITIES_TYPE.HAS_SET_EXTERNAL_SPEAKER,_.hasSetExternalSpeakerDeviceSetting),n(n(n(n(n(n(t,o.VOICE_CAPABILITIES_TYPE.HAS_GET_EXTERNAL_MICROPHONE,_.hasGetExternalMicrophoneDeviceSetting),o.VOICE_CAPABILITIES_TYPE.HAS_SET_EXTERNAL_MICROPHONE,_.hasSetExternalMicrophoneDeviceSetting),o.VOICE_CAPABILITIES_TYPE.CAN_CONSULT,_.canConsult),o.VOICE_CAPABILITIES_TYPE.DIAL_PAD,_.isDialPadDisabled),o.VOICE_CAPABILITIES_TYPE.HAS_HID_SUPPORT,_.isHidSupported),o.VOICE_CAPABILITIES_TYPE.PHONEBOOK_DISABLE,_.isPhoneBookDisabled)),callInProgress:s.length>0?s[0]:null},U.postMessage({type:A,payload:l}),ge(A,l,!1),e.next=31;break;case 27:e.prev=27,e.t0=e.catch(0),U.postMessage({type:o.SHARED_MESSAGE_TYPE.CONNECTOR_READY,payload:{}}),ge(o.SHARED_MESSAGE_TYPE.CONNECTOR_READY,{},!1);case 31:case"end":return e.stop()}}),e,null,[[0,27]])})))).apply(this,arguments)}function Be(e){return xe.apply(this,arguments)}function xe(){return(xe=_(i().mark((function e(t){var E,a,n,r,_,T,s,A,l,c,C,N,O,R,S,I,u,P,d,L,D,h,V,v,f,G,b,Y,U,m,M,k,w,F,j,W,K,q,Q,Z,te,Te,oe,se,Ae,le,Ce,Ne,Re,Se,Ie,ue,Pe,pe,De,he,Ve,ve,fe,Ye,ke,we,Be,xe,Fe,je,We,Ke,qe,Qe,Xe,$e,ze,Ze,et,tt,Et,at,nt,rt,_t,Tt,it,ot;return i().wrap((function(e){for(;;)switch(e.prev=e.next){case 0:(E=t.data.type)!==o.SHARED_MESSAGE_TYPE.LOG&&ge(E,t.data,!1),e.t0=E,e.next=e.t0===o.VOICE_MESSAGE_TYPE.ACCEPT_CALL?5:e.t0===o.VOICE_MESSAGE_TYPE.DECLINE_CALL?32:e.t0===o.VOICE_MESSAGE_TYPE.END_CALL?48:e.t0===o.VOICE_MESSAGE_TYPE.MUTE?69:e.t0===o.VOICE_MESSAGE_TYPE.UNMUTE?83:e.t0===o.VOICE_MESSAGE_TYPE.HOLD?97:e.t0===o.VOICE_MESSAGE_TYPE.RESUME?121:e.t0===o.SHARED_MESSAGE_TYPE.SET_AGENT_STATUS?145:e.t0===o.SHARED_MESSAGE_TYPE.GET_AGENT_STATUS?171:e.t0===o.VOICE_MESSAGE_TYPE.DIAL?183:e.t0===o.VOICE_MESSAGE_TYPE.SEND_DIGITS?214:e.t0===o.VOICE_MESSAGE_TYPE.GET_PHONE_CONTACTS?226:e.t0===o.SHARED_MESSAGE_TYPE.GET_CONTACTS?242:e.t0===o.VOICE_MESSAGE_TYPE.SWAP_PARTICIPANTS?255:e.t0===o.VOICE_MESSAGE_TYPE.CONFERENCE?269:e.t0===o.VOICE_MESSAGE_TYPE.ADD_PARTICIPANT?283:e.t0===o.VOICE_MESSAGE_TYPE.PAUSE_RECORDING?309:e.t0===o.VOICE_MESSAGE_TYPE.RESUME_RECORDING?323:e.t0===o.SHARED_MESSAGE_TYPE.LOGOUT?337:e.t0===o.SHARED_MESSAGE_TYPE.MESSAGE?350:e.t0===o.VOICE_MESSAGE_TYPE.WRAP_UP_CALL?352:e.t0===o.VOICE_MESSAGE_TYPE.AGENT_AVAILABLE?357:e.t0===o.VOICE_MESSAGE_TYPE.SET_AGENT_CONFIG?399:e.t0===o.VOICE_MESSAGE_TYPE.GET_AUDIO_DEVICES?415:e.t0===o.VOICE_MESSAGE_TYPE.GET_SIGNED_RECORDING_URL?430:e.t0===o.SHARED_MESSAGE_TYPE.DOWNLOAD_VENDOR_LOGS?448:e.t0===o.SHARED_MESSAGE_TYPE.LOG?450:e.t0===o.VOICE_MESSAGE_TYPE.SUPERVISE_CALL?453:e.t0===o.VOICE_MESSAGE_TYPE.SUPERVISOR_DISCONNECT?473:e.t0===o.VOICE_MESSAGE_TYPE.SUPERVISOR_BARGE_IN?489:e.t0===o.SHARED_MESSAGE_TYPE.AGENT_WORK_EVENT?504:507;break;case 5:if(e.prev=5,!t.data.call||!t.data.call.callType||t.data.call.callType.toLowerCase()!==o.CALL_TYPE.OUTBOUND.toLowerCase()&&t.data.call.callType.toLowerCase()!==o.CALL_TYPE.DIALED_CALLBACK.toLowerCase()){e.next=8;break}return e.abrupt("return");case 8:return Ge(),e.next=11,g.getTelephonyConnector();case 11:if(a=e.sent,!y){e.next=19;break}return e.next=15,a.supervisorDisconnect();case 15:n=e.sent,ce.validateClassObject(n,Le),y=!1,ye(o.VOICE_EVENT_TYPE.SUPERVISOR_HANGUP,n.calls);case 19:return e.next=21,a.acceptCall(t.data.call);case 21:r=e.sent,ce.validateClassObject(r,$),ye((_=r.call).callType.toLowerCase()===o.CALL_TYPE.CALLBACK.toLowerCase()?o.VOICE_EVENT_TYPE.CALL_STARTED:o.VOICE_EVENT_TYPE.CALL_CONNECTED,_),e.next=31;break;case 27:e.prev=27,e.t1=e.catch(5),y=!1,e.t1 instanceof H?He(e.t1,o.VOICE_MESSAGE_TYPE.ACCEPT_CALL):Me(o.INFO_TYPE.CAN_NOT_ACCEPT_THE_CALL,{messagetype:o.VOICE_MESSAGE_TYPE.ACCEPT_CALL,additionalInfo:e.t1});case 31:return e.abrupt("break",508);case 32:return e.prev=32,e.next=35,g.getTelephonyConnector();case 35:return T=e.sent,e.next=38,T.declineCall(t.data.call);case 38:s=e.sent,ce.validateClassObject(s,$),A=s.call,ye(o.VOICE_EVENT_TYPE.HANGUP,A),e.next=47;break;case 44:e.prev=44,e.t2=e.catch(32),e.t2 instanceof H?He(e.t2,o.VOICE_MESSAGE_TYPE.DECLINE_CALL):me(o.VOICE_ERROR_TYPE.CAN_NOT_DECLINE_THE_CALL,e.t2,o.VOICE_MESSAGE_TYPE.DECLINE_CALL);case 47:return e.abrupt("break",508);case 48:return e.prev=48,e.next=51,g.getTelephonyConnector();case 51:return l=e.sent,e.next=54,l.endCall(t.data.call,t.data.agentStatus);case 54:return c=e.sent,ce.validateClassObject(c,z),e.next=58,l.getActiveCalls();case 58:C=e.sent,ce.validateClassObject(C,B),N=C.activeCalls,O=c.calls,0===N.length?ye(o.VOICE_EVENT_TYPE.HANGUP,O):ye(o.VOICE_EVENT_TYPE.PARTICIPANT_REMOVED,O.length>0&&O[0]),e.next=68;break;case 65:e.prev=65,e.t3=e.catch(48),e.t3 instanceof H?He(e.t3,o.VOICE_MESSAGE_TYPE.END_CALL):me(o.VOICE_ERROR_TYPE.CAN_NOT_END_THE_CALL,e.t3,o.VOICE_MESSAGE_TYPE.END_CALL);case 68:return e.abrupt("break",508);case 69:return e.prev=69,e.next=72,g.getTelephonyConnector();case 72:return R=e.sent,e.next=75,R.mute(t.data.call);case 75:S=e.sent,Je({eventType:o.VOICE_EVENT_TYPE.MUTE_TOGGLE,payload:S}),e.next=82;break;case 79:e.prev=79,e.t4=e.catch(69),e.t4 instanceof H?He(e.t4,o.VOICE_MESSAGE_TYPE.MUTE):me(o.VOICE_ERROR_TYPE.CAN_NOT_MUTE_CALL,e.t4,o.VOICE_MESSAGE_TYPE.MUTE);case 82:return e.abrupt("break",508);case 83:return e.prev=83,e.next=86,g.getTelephonyConnector();case 86:return I=e.sent,e.next=89,I.unmute(t.data.call);case 89:u=e.sent,Je({eventType:o.VOICE_EVENT_TYPE.MUTE_TOGGLE,payload:u}),e.next=96;break;case 93:e.prev=93,e.t5=e.catch(83),e.t5 instanceof H?He(e.t5,o.VOICE_MESSAGE_TYPE.UNMUTE):me(o.VOICE_ERROR_TYPE.CAN_NOT_UNMUTE_CALL,e.t5,o.VOICE_MESSAGE_TYPE.UNMUTE);case 96:return e.abrupt("break",508);case 97:return e.prev=97,e.next=100,g.getTelephonyConnector();case 100:return P=e.sent,e.next=103,P.hold(t.data.call);case 103:d=e.sent,Je({eventType:o.VOICE_EVENT_TYPE.HOLD_TOGGLE,payload:d}),e.next=120;break;case 107:if(e.prev=107,e.t6=e.catch(97),!(e.t6 instanceof H)){e.next=113;break}He(e.t6,o.VOICE_MESSAGE_TYPE.HOLD),e.next=120;break;case 113:e.t7=be(e.t6),e.next=e.t7===o.VOICE_ERROR_TYPE.INVALID_PARTICIPANT?116:118;break;case 116:return me(o.VOICE_ERROR_TYPE.INVALID_PARTICIPANT,Ue(e.t6),o.VOICE_MESSAGE_TYPE.HOLD),e.abrupt("break",120);case 118:return me(o.VOICE_ERROR_TYPE.CAN_NOT_HOLD_CALL,Ue(e.t6),o.VOICE_MESSAGE_TYPE.HOLD),e.abrupt("break",120);case 120:return e.abrupt("break",508);case 121:return e.prev=121,e.next=124,g.getTelephonyConnector();case 124:return L=e.sent,e.next=127,L.resume(t.data.call);case 127:D=e.sent,Je({eventType:o.VOICE_EVENT_TYPE.HOLD_TOGGLE,payload:D}),e.next=144;break;case 131:if(e.prev=131,e.t8=e.catch(121),!(e.t8 instanceof H)){e.next=137;break}He(e.t8,o.VOICE_MESSAGE_TYPE.RESUME),e.next=144;break;case 137:e.t9=be(e.t8),e.next=e.t9===o.VOICE_ERROR_TYPE.INVALID_PARTICIPANT?140:142;break;case 140:return me(o.VOICE_ERROR_TYPE.INVALID_PARTICIPANT,Ue(e.t8),o.VOICE_MESSAGE_TYPE.RESUME),e.abrupt("break",144);case 142:return me(o.VOICE_ERROR_TYPE.CAN_NOT_RESUME_CALL,Ue(e.t8),o.VOICE_MESSAGE_TYPE.RESUME),e.abrupt("break",144);case 144:return e.abrupt("break",508);case 145:return e.prev=145,h=t.data.statusInfo||{},V=t.data.enqueueNextState||!1,e.next=150,g.setAgentStatus(t.data.agentStatus,h,V);case 150:v=e.sent,ce.validateClassObject(v,ae,ne),f=v.success,G=v.isStatusSyncNeeded,ye(o.SHARED_EVENT_TYPE.SET_AGENT_STATUS_RESULT,void 0!==G?{success:f,isStatusSyncNeeded:G}:{success:f}),e.next=170;break;case 156:if(e.prev=156,e.t10=e.catch(145),!(e.t10 instanceof H)){e.next=162;break}He(e.t10,o.SHARED_MESSAGE_TYPE.SET_AGENT_STATUS),e.next=170;break;case 162:t.data.statusInfo&&ye(o.SHARED_EVENT_TYPE.SET_AGENT_STATUS_RESULT,{success:!1}),e.t11=be(e.t10),e.next=e.t11===o.SHARED_ERROR_TYPE.INVALID_AGENT_STATUS?166:168;break;case 166:return me(o.SHARED_ERROR_TYPE.INVALID_AGENT_STATUS,Ue(e.t10),o.SHARED_MESSAGE_TYPE.SET_AGENT_STATUS),e.abrupt("break",170);case 168:return me(o.SHARED_ERROR_TYPE.CAN_NOT_SET_AGENT_STATUS,Ue(e.t10),o.SHARED_MESSAGE_TYPE.SET_AGENT_STATUS),e.abrupt("break",170);case 170:return e.abrupt("break",508);case 171:return e.prev=171,e.next=174,g.getAgentStatus();case 174:b=e.sent,ce.validateClassObject(b,Oe),ye(o.SHARED_EVENT_TYPE.GET_AGENT_STATUS_RESULT,b),e.next=182;break;case 179:e.prev=179,e.t12=e.catch(171),e.t12 instanceof H?He(e.t12,o.SHARED_MESSAGE_TYPE.GET_AGENT_STATUS):me(o.SHARED_ERROR_TYPE.CAN_NOT_GET_AGENT_STATUS,Ue(e.t12),o.SHARED_MESSAGE_TYPE.GET_AGENT_STATUS);case 182:return e.abrupt("break",508);case 183:return e.prev=183,e.next=186,g.getTelephonyConnector();case 186:return Y=e.sent,U=t.data.params&&t.data.params.indexOf(o.DIAL_OPTIONS.CALLBACK)>=0,m=t.data.params&&t.data.params.indexOf(o.DIAL_OPTIONS.CONSULT)>=0,e.next=191,Y.dial(new ie(t.data.contact),new Ee({isCallback:U,isConsultCall:m}));case 191:M=e.sent,ce.validateClassObject(M,$),k=M.call,o.CALL_TYPE.DIALED_CALLBACK.toLowerCase()===k.callType.toLowerCase()&&U?ye(o.VOICE_EVENT_TYPE.QUEUED_CALL_STARTED,k):ye(o.VOICE_EVENT_TYPE.CALL_STARTED,k),e.next=213;break;case 197:if(e.prev=197,e.t13=e.catch(183),ye(o.VOICE_EVENT_TYPE.CALL_FAILED),!(e.t13 instanceof H)){e.next=204;break}He(e.t13,o.VOICE_MESSAGE_TYPE.DIAL),e.next=213;break;case 204:e.t14=be(e.t13),e.next=e.t14===o.VOICE_ERROR_TYPE.INVALID_DESTINATION?207:e.t14===o.SHARED_ERROR_TYPE.GENERIC_ERROR?209:211;break;case 207:return me(o.VOICE_ERROR_TYPE.INVALID_DESTINATION,Ue(e.t13),o.VOICE_MESSAGE_TYPE.DIAL),e.abrupt("break",213);case 209:return me(o.SHARED_ERROR_TYPE.GENERIC_ERROR,Ue(e.t13),o.VOICE_MESSAGE_TYPE.DIAL),e.abrupt("break",213);case 211:return me(o.VOICE_ERROR_TYPE.CAN_NOT_START_THE_CALL,Ue(e.t13),o.VOICE_MESSAGE_TYPE.DIAL),e.abrupt("break",213);case 213:return e.abrupt("break",508);case 214:return e.prev=214,e.next=217,g.getTelephonyConnector();case 217:return w=e.sent,e.next=220,w.sendDigits(t.data.digits);case 220:e.next=225;break;case 222:e.prev=222,e.t15=e.catch(214),ge(o.VOICE_MESSAGE_TYPE.SEND_DIGITS,t.data.digits,!0);case 225:return e.abrupt("break",508);case 226:return e.prev=226,e.next=229,g.getTelephonyConnector();case 229:return F=e.sent,e.next=232,F.getPhoneContacts(t.data.filter);case 232:j=e.sent,ce.validateClassObject(j,J),W=j.contacts.map((function(e){return{id:e.id,type:e.type,name:e.name,listType:e.listType,phoneNumber:e.phoneNumber,prefix:e.prefix,extension:e.extension,endpointARN:e.endpointARN,queue:e.queue,availability:e.availability,queueWaitTime:e.queueWaitTime,recordId:e.recordId,description:e.description}})),ye(o.VOICE_EVENT_TYPE.PHONE_CONTACTS,{contacts:W,contactTypes:j.contactTypes}),e.next=241;break;case 238:e.prev=238,e.t16=e.catch(226),e.t16 instanceof H?He(e.t16,o.VOICE_MESSAGE_TYPE.GET_PHONE_CONTACTS):me(o.VOICE_ERROR_TYPE.CAN_NOT_GET_PHONE_CONTACTS,e.t16,o.VOICE_MESSAGE_TYPE.GET_PHONE_CONTACTS);case 241:return e.abrupt("break",508);case 242:return e.prev=242,e.next=245,g.getContacts(t.data.filter,t.data.workItemId);case 245:K=e.sent,ce.validateClassObject(K,X),q=K.contacts.map((function(e){return{id:e.id,type:e.type,name:e.name,listType:e.listType,phoneNumber:e.phoneNumber,prefix:e.prefix,extension:e.extension,endpointARN:e.endpointARN,queue:e.queue,availability:e.availability,queueWaitTime:e.queueWaitTime,recordId:e.recordId,description:e.description}})),ye(o.SHARED_EVENT_TYPE.GET_CONTACTS_RESULT,{contacts:q,contactTypes:K.contactTypes}),e.next=254;break;case 251:e.prev=251,e.t17=e.catch(242),He(e.t17,o.SHARED_MESSAGE_TYPE.GET_CONTACTS);case 254:return e.abrupt("break",508);case 255:return e.prev=255,e.next=258,g.getTelephonyConnector();case 258:return Q=e.sent,e.next=261,Q.swap(t.data.callToHold,t.data.callToResume);case 261:Z=e.sent,Je({eventType:o.VOICE_EVENT_TYPE.PARTICIPANTS_SWAPPED,payload:Z}),e.next=268;break;case 265:e.prev=265,e.t18=e.catch(255),e.t18 instanceof H?He(e.t18,o.VOICE_MESSAGE_TYPE.SWAP_PARTICIPANTS):me(o.VOICE_ERROR_TYPE.CAN_NOT_SWAP_PARTICIPANTS,e.t18,o.VOICE_MESSAGE_TYPE.SWAP_PARTICIPANTS);case 268:return e.abrupt("break",508);case 269:return e.prev=269,e.next=272,g.getTelephonyConnector();case 272:return te=e.sent,e.next=275,te.conference(t.data.calls);case 275:Te=e.sent,Je({eventType:o.VOICE_EVENT_TYPE.PARTICIPANTS_CONFERENCED,payload:Te}),e.next=282;break;case 279:e.prev=279,e.t19=e.catch(269),e.t19 instanceof H?He(e.t19,o.VOICE_MESSAGE_TYPE.CONFERENCE):me(o.VOICE_ERROR_TYPE.CAN_NOT_CONFERENCE,e.t19,o.VOICE_MESSAGE_TYPE.CONFERENCE);case 282:return e.abrupt("break",508);case 283:return e.prev=283,e.next=286,g.getTelephonyConnector();case 286:return oe=e.sent,e.next=289,oe.addParticipant(new ie(t.data.contact),t.data.call,t.data.isBlindTransfer);case 289:se=e.sent,Je({eventType:o.VOICE_EVENT_TYPE.PARTICIPANT_ADDED,payload:se}),t.data.isBlindTransfer&&ye(o.VOICE_EVENT_TYPE.HANGUP,t.data.call),e.next=308;break;case 294:if(e.prev=294,e.t20=e.catch(283),ye(o.VOICE_EVENT_TYPE.PARTICIPANT_REMOVED,{reason:o.SHARED_EVENT_TYPE.ERROR.toLowerCase()}),!(e.t20 instanceof H)){e.next=301;break}He(e.t20,o.VOICE_MESSAGE_TYPE.ADD_PARTICIPANT),e.next=308;break;case 301:e.t21=be(e.t20),e.next=e.t21===o.VOICE_ERROR_TYPE.INVALID_DESTINATION?304:306;break;case 304:return me(o.VOICE_ERROR_TYPE.INVALID_DESTINATION,Ue(e.t20),o.VOICE_MESSAGE_TYPE.ADD_PARTICIPANT),e.abrupt("break",308);case 306:return me(o.VOICE_ERROR_TYPE.CAN_NOT_ADD_PARTICIPANT,Ue(e.t20),o.VOICE_MESSAGE_TYPE.ADD_PARTICIPANT),e.abrupt("break",308);case 308:return e.abrupt("break",508);case 309:return e.prev=309,e.next=312,g.getTelephonyConnector();case 312:return Ae=e.sent,e.next=315,Ae.pauseRecording(t.data.call);case 315:le=e.sent,Je({eventType:o.VOICE_EVENT_TYPE.RECORDING_TOGGLE,payload:le}),e.next=322;break;case 319:e.prev=319,e.t22=e.catch(309),e.t22 instanceof H?He(e.t22,o.VOICE_MESSAGE_TYPE.PAUSE_RECORDING):me(o.VOICE_ERROR_TYPE.CAN_NOT_PAUSE_RECORDING,e.t22,o.VOICE_MESSAGE_TYPE.PAUSE_RECORDING);case 322:return e.abrupt("break",508);case 323:return e.prev=323,e.next=326,g.getTelephonyConnector();case 326:return Ce=e.sent,e.next=329,Ce.resumeRecording(t.data.call);case 329:Ne=e.sent,Je({eventType:o.VOICE_EVENT_TYPE.RECORDING_TOGGLE,payload:Ne}),e.next=336;break;case 333:e.prev=333,e.t23=e.catch(323),e.t23 instanceof H?He(e.t23,o.VOICE_MESSAGE_TYPE.RESUME_RECORDING):me(o.VOICE_ERROR_TYPE.CAN_NOT_RESUME_RECORDING,e.t23,o.VOICE_MESSAGE_TYPE.RESUME_RECORDING);case 336:return e.abrupt("break",508);case 337:return e.prev=337,e.next=340,g.logout();case 340:Re=e.sent,ce.validateClassObject(Re,_e),Se=Re.success,Ie=Re.loginFrameHeight,ye(o.SHARED_EVENT_TYPE.LOGOUT_RESULT,{success:Se,loginFrameHeight:Ie}),e.next=349;break;case 346:e.prev=346,e.t24=e.catch(337),e.t24 instanceof H?He(e.t24,o.SHARED_MESSAGE_TYPE.LOGOUT):me(o.SHARED_ERROR_TYPE.CAN_NOT_LOG_OUT,e.t24,o.SHARED_MESSAGE_TYPE.LOGOUT);case 349:return e.abrupt("break",508);case 350:return g.handleMessage(t.data.message),e.abrupt("break",508);case 352:return e.next=354,g.getTelephonyConnector();case 354:return e.sent.wrapUpCall(t.data.call),e.abrupt("break",508);case 357:if(!t.data||!t.data.isAvailable){e.next=398;break}return e.next=360,g.getTelephonyConnector();case 360:return ue=e.sent,e.next=363,ue.getActiveCalls();case 363:Pe=e.sent,ce.validateClassObject(Pe,B),pe=Pe.activeCalls,e.t25=i().keys(pe);case 367:if((e.t26=e.t25()).done){e.next=398;break}if(De=e.t26.value,he=pe[De],Ve=!he.callInfo||he.callInfo.isReplayable,ve=he.callAttributes&&he.callAttributes.participantType===o.PARTICIPANT_TYPE.SUPERVISOR,fe=ve&&he.callAttributes&&he.callAttributes.hasSupervisorBargedIn,!Ve){e.next=396;break}he.isReplayedCall=!0,e.t27=he.state,e.next=e.t27===o.CALL_STATE.CONNECTED?378:e.t27===o.CALL_STATE.RINGING?385:e.t27===o.CALL_STATE.TRANSFERRING?391:e.t27===o.CALL_STATE.TRANSFERRED?393:395;break;case 378:if(!ve){e.next=383;break}return y=!0,ye(o.VOICE_EVENT_TYPE.SUPERVISOR_CALL_CONNECTED,he),fe&&ye(o.VOICE_EVENT_TYPE.SUPERVISOR_BARGED_IN,he),e.abrupt("break",396);case 383:return ye(o.VOICE_EVENT_TYPE.CALL_CONNECTED,he),e.abrupt("break",396);case 385:if(!ve){e.next=389;break}return y=!0,ye(o.VOICE_EVENT_TYPE.SUPERVISOR_CALL_STARTED,he),e.abrupt("break",396);case 389:return ye(o.VOICE_EVENT_TYPE.CALL_STARTED,he),e.abrupt("break",396);case 391:return ye(o.VOICE_EVENT_TYPE.PARTICIPANT_ADDED,{phoneNumber:he.contact.phoneNumber,contact:he.contact,callInfo:he.callInfo,callAttributes:he.callAttributes,initialCallHasEnded:he.callAttributes.initialCallHasEnded,callId:he.callId,connectionId:he.connectionId}),e.abrupt("break",396);case 393:return ye(o.VOICE_EVENT_TYPE.PARTICIPANT_CONNECTED,{phoneNumber:he.contact.phoneNumber,contact:he.contact,callInfo:he.callInfo,callAttributes:he.callAttributes,initialCallHasEnded:he.callAttributes.initialCallHasEnded,callId:he.callId,connectionId:he.connectionId}),e.abrupt("break",396);case 395:return e.abrupt("break",396);case 396:e.next=367;break;case 398:return e.abrupt("break",508);case 399:return e.prev=399,e.next=402,g.getTelephonyConnector();case 402:return Ye=e.sent,e.next=405,Ye.setAgentConfig(t.data.config);case 405:ke=e.sent,ce.validateClassObjects(ke,ae,re),ke instanceof re&&ke.setIsSystemEvent(!!t.data.config.isSystemEvent),ye(o.VOICE_EVENT_TYPE.AGENT_CONFIG_UPDATED,ke),e.next=414;break;case 411:e.prev=411,e.t28=e.catch(399),e.t28 instanceof H?He(e.t28,o.VOICE_MESSAGE_TYPE.SET_AGENT_CONFIG):me(be(e.t28)===o.VOICE_ERROR_TYPE.CAN_NOT_UPDATE_PHONE_NUMBER?o.VOICE_ERROR_TYPE.CAN_NOT_UPDATE_PHONE_NUMBER:o.VOICE_ERROR_TYPE.CAN_NOT_SET_AGENT_CONFIG,Ue(e.t28),o.VOICE_MESSAGE_TYPE.SET_AGENT_CONFIG);case 414:return e.abrupt("break",508);case 415:return e.prev=415,e.next=418,g.getTelephonyConnector();case 418:return we=e.sent,e.next=421,we.getAudioDevices();case 421:Be=e.sent,ce.validateClassObject(Be,x),ye(o.VOICE_EVENT_TYPE.GET_AUDIO_DEVICES,Be),e.next=429;break;case 426:e.prev=426,e.t29=e.catch(415),me(o.VOICE_ERROR_TYPE.CAN_NOT_GET_AUDIO_DEVICES,Ue(e.t29),o.VOICE_MESSAGE_TYPE.GET_AUDIO_DEVICES);case 429:return e.abrupt("break",508);case 430:return e.prev=430,xe=t.data,Fe=xe.recordingUrl,je=xe.vendorCallKey,We=xe.callId,e.next=434,g.getTelephonyConnector();case 434:return Ke=e.sent,e.next=437,Ke.getSignedRecordingUrl(Fe,je,We);case 437:qe=e.sent,ce.validateClassObject(qe,ee),ye(o.VOICE_EVENT_TYPE.SIGNED_RECORDING_URL,qe),e.next=447;break;case 442:e.prev=442,e.t30=e.catch(430),Qe=new ee({success:!1}),ye(o.VOICE_EVENT_TYPE.SIGNED_RECORDING_URL,Qe,!1),ge(o.VOICE_MESSAGE_TYPE.GET_SIGNED_RECORDING_URL,Qe,!0);case 447:return e.abrupt("break",508);case 448:return g.downloadLogs(JSON.parse(JSON.stringify(p))),e.abrupt("break",508);case 450:return Xe=t.data,$e=Xe.logLevel,ze=Xe.logMessage,Ze=Xe.payload,g.logMessageToVendor($e,ze,Ze),e.abrupt("break",508);case 453:return e.prev=453,y=!0,e.next=457,g.getTelephonyConnector();case 457:return et=e.sent,e.next=460,et.superviseCall(t.data.call);case 460:return tt=e.sent,ce.validateClassObject(tt,de),e.next=464,et.getAgentConfig();case 464:e.sent.selectedPhone.type===o.PHONE_TYPE.SOFT_PHONE?ye(o.VOICE_EVENT_TYPE.SUPERVISOR_CALL_CONNECTED,tt.call):ye(o.VOICE_EVENT_TYPE.SUPERVISOR_CALL_STARTED,tt.call),e.next=472;break;case 468:e.prev=468,e.t31=e.catch(453),y=!1,e.t31 instanceof H?He(e.t31,o.VOICE_MESSAGE_TYPE.SUPERVISE_CALL):me(o.VOICE_ERROR_TYPE.CAN_NOT_SUPERVISE_CALL,e.t31,o.VOICE_MESSAGE_TYPE.SUPERVISE_CALL);case 472:return e.abrupt("break",508);case 473:return e.prev=473,e.next=476,g.getTelephonyConnector();case 476:return Et=e.sent,e.next=479,Et.supervisorDisconnect(t.data.call);case 479:at=e.sent,ce.validateClassObject(at,Le),y=!1,ye(o.VOICE_EVENT_TYPE.SUPERVISOR_HANGUP,at.calls),e.next=488;break;case 485:e.prev=485,e.t32=e.catch(473),e.t32 instanceof H?He(e.t32,o.VOICE_MESSAGE_TYPE.SUPERVISOR_DISCONNECT):me(o.VOICE_ERROR_TYPE.CAN_NOT_DISCONNECT_SUPERVISOR,e.t32,o.VOICE_MESSAGE_TYPE.SUPERVISOR_DISCONNECT);case 488:return e.abrupt("break",508);case 489:return e.prev=489,e.next=492,g.getTelephonyConnector();case 492:return nt=e.sent,e.next=495,nt.supervisorBargeIn(t.data.call);case 495:rt=e.sent,ce.validateClassObject(rt,de),ye(o.VOICE_EVENT_TYPE.SUPERVISOR_BARGED_IN,rt.call),e.next=503;break;case 500:e.prev=500,e.t33=e.catch(489),e.t33 instanceof H?He(e.t33,o.VOICE_MESSAGE_TYPE.SUPERVISOR_BARGE_IN):me(o.VOICE_ERROR_TYPE.CAN_NOT_BARGE_IN_SUPERVISOR,e.t33,o.VOICE_MESSAGE_TYPE.SUPERVISOR_BARGE_IN);case 503:return e.abrupt("break",508);case 504:return _t=t.data.agentWork,Tt=_t.workItemId,it=_t.workId,ot=_t.workEvent,g.onAgentWorkEvent({workItemId:Tt,workId:it,workEvent:ot}),e.abrupt("break",508);case 507:return e.abrupt("break",508);case 508:case"end":return e.stop()}}),e,null,[[5,27],[32,44],[48,65],[69,79],[83,93],[97,107],[121,131],[145,156],[171,179],[183,197],[214,222],[226,238],[242,251],[255,265],[269,279],[283,294],[309,319],[323,333],[337,346],[399,411],[415,426],[430,442],[453,468],[473,485],[489,500]])})))).apply(this,arguments)}function Fe(e){return je.apply(this,arguments)}function je(){return(je=_(i().mark((function e(t){var E,a,n,r;return i().wrap((function(e){for(;;)switch(e.prev=e.next){case 0:e.t0=t.data.type,e.next=e.t0===o.SHARED_MESSAGE_TYPE.SETUP_CONNECTOR?3:33;break;case 3:if(E=/^https:\/\/[\w-.]+(lightning\.[\w]+\.soma\.force\.com|\.lightning\.force\.com|\.lightning\.pc-rnd\.force\.com|\.stm\.force\.com|\.vf\.force\.com|\.salesforce\.com|\.my\.salesforce-sites\.com|\.lightning\.localhost\.[\w]+\.force.com|\.lightning\.force-com\.[\w.-]+\.crm\.dev|\.pc-rnd\.(salesforce|crmforce)\.mil)$/,a=new URL(t.origin),n=a.protocol+"//"+a.hostname,!E.test(n)){e.next=31;break}return(U=t.ports[0]).onmessage=Be,ge(o.SHARED_MESSAGE_TYPE.SETUP_CONNECTOR,We(t.data.connectorConfig),!1),e.prev=10,e.next=13,g.init(t.data.connectorConfig);case 13:r=e.sent,ce.validateClassObject(r,te),r.showStorageAccess?ye(o.SHARED_EVENT_TYPE.SHOW_STORAGE_ACCESS,{success:!0}):r.showLogin?ye(o.SHARED_EVENT_TYPE.SHOW_LOGIN,{loginFrameHeight:r.loginFrameHeight}):r.isSilentLogin?ye(o.SHARED_EVENT_TYPE.SHOW_LOGIN,{isSilentLogin:r.isSilentLogin}):ke(),e.next=31;break;case 18:if(e.prev=18,e.t1=e.catch(10),!(e.t1 instanceof H)){e.next=24;break}He(e.t1,o.SHARED_MESSAGE_TYPE.SETUP_CONNECTOR),e.next=31;break;case 24:e.t2=be(e.t1),e.next=e.t2===o.VOICE_ERROR_TYPE.INVALID_PARAMS?27:29;break;case 27:return me(o.VOICE_ERROR_TYPE.INVALID_PARAMS,Ue(e.t1),o.SHARED_MESSAGE_TYPE.SETUP_CONNECTOR),e.abrupt("break",31);case 29:return me(o.SHARED_ERROR_TYPE.CAN_NOT_LOG_IN,Ue(e.t1),o.SHARED_MESSAGE_TYPE.SETUP_CONNECTOR),e.abrupt("break",31);case 31:return window.removeEventListener("message",Fe),e.abrupt("break",34);case 33:return e.abrupt("break",34);case 34:case"end":return e.stop()}}),e,null,[[10,18]])})))).apply(this,arguments)}function We(e){e=e||{};var t={};return s.forEach((function(E){e.hasOwnProperty(E)&&(t[E]=e[E])})),A.forEach((function(E){Object.keys(e).forEach((function(a){a.startsWith(E)&&!l.includes(a)&&(t[a]=e[a])}))})),t}function Ke(e,t,E,a){try{return ce.validateClassObject(e,t),!0}catch(e){return E&&me(E,e,a),!1}}function qe(e){g=e,window.addEventListener("message",Fe)}function Qe(e){ge(e.eventType,e.payload,e.isError)}function Xe(e){var t=e.eventType,E=e.error;if(E instanceof H)He(E,t);else switch(t){case o.SHARED_EVENT_TYPE.LOGIN_RESULT:me(o.SHARED_ERROR_TYPE.CAN_NOT_LOG_IN,E,o.SHARED_EVENT_TYPE.LOGIN_RESULT);break;case o.SHARED_EVENT_TYPE.LOGOUT_RESULT:me(o.SHARED_ERROR_TYPE.CAN_NOT_LOG_OUT,E,o.SHARED_EVENT_TYPE.LOGOUT_RESULT);break;case o.VOICE_EVENT_TYPE.CALL_STARTED:me(o.VOICE_ERROR_TYPE.CAN_NOT_START_THE_CALL,E,o.VOICE_EVENT_TYPE.CALL_STARTED);break;case o.VOICE_EVENT_TYPE.QUEUED_CALL_STARTED:me(o.VOICE_ERROR_TYPE.CAN_NOT_START_THE_CALL,E,o.VOICE_EVENT_TYPE.QUEUED_CALL_STARTED);break;case o.VOICE_EVENT_TYPE.CALL_CONNECTED:me(o.VOICE_ERROR_TYPE.CAN_NOT_START_THE_CALL,E,o.VOICE_EVENT_TYPE.CALL_CONNECTED);break;case o.VOICE_EVENT_TYPE.HANGUP:me(o.VOICE_ERROR_TYPE.CAN_NOT_END_THE_CALL,E,o.VOICE_EVENT_TYPE.HANGUP);break;case o.VOICE_EVENT_TYPE.PARTICIPANT_ADDED:me(be(E)===o.VOICE_ERROR_TYPE.INVALID_PARTICIPANT?o.VOICE_ERROR_TYPE.INVALID_PARTICIPANT:o.VOICE_ERROR_TYPE.CAN_NOT_ADD_PARTICIPANT,E,o.VOICE_EVENT_TYPE.PARTICIPANT_ADDED);break;case o.VOICE_EVENT_TYPE.PARTICIPANT_CONNECTED:me(o.VOICE_ERROR_TYPE.CAN_NOT_CONNECT_PARTICIPANT,E,o.VOICE_EVENT_TYPE.PARTICIPANT_CONNECTED);break;case o.VOICE_EVENT_TYPE.PARTICIPANT_REMOVED:me(o.VOICE_ERROR_TYPE.CAN_NOT_HANGUP_PARTICIPANT,E,o.VOICE_EVENT_TYPE.PARTICIPANT_REMOVED);break;case o.VOICE_EVENT_TYPE.MUTE_TOGGLE:me(o.VOICE_ERROR_TYPE.CAN_NOT_TOGGLE_MUTE,E,o.VOICE_EVENT_TYPE.MUTE_TOGGLE);break;case o.VOICE_EVENT_TYPE.HOLD_TOGGLE:me(be(E)===o.VOICE_ERROR_TYPE.INVALID_PARTICIPANT?o.VOICE_ERROR_TYPE.INVALID_PARTICIPANT:o.VOICE_ERROR_TYPE.CAN_NOT_TOGGLE_HOLD,E,o.VOICE_EVENT_TYPE.HOLD_TOGGLE);break;case o.VOICE_EVENT_TYPE.RECORDING_TOGGLE:me(o.VOICE_ERROR_TYPE.CAN_NOT_TOGGLE_RECORD,E,o.VOICE_EVENT_TYPE.RECORDING_TOGGLE);break;case o.VOICE_EVENT_TYPE.PARTICIPANTS_SWAPPED:me(o.VOICE_ERROR_TYPE.CAN_NOT_SWAP_PARTICIPANTS,E,o.VOICE_EVENT_TYPE.PARTICIPANTS_SWAPPED);break;case o.VOICE_EVENT_TYPE.PARTICIPANTS_CONFERENCED:me(o.VOICE_ERROR_TYPE.CAN_NOT_CONFERENCE,E,o.VOICE_EVENT_TYPE.PARTICIPANTS_CONFERENCED);break;case o.VOICE_EVENT_TYPE.AGENT_ERROR:me(o.VOICE_ERROR_TYPE.AGENT_ERROR,E,o.VOICE_EVENT_TYPE.AGENT_ERROR);break;case o.VOICE_EVENT_TYPE.SOFTPHONE_ERROR:switch(be(E)){case o.VOICE_ERROR_TYPE.UNSUPPORTED_BROWSER:case o.VOICE_ERROR_TYPE.MICROPHONE_NOT_SHARED:case o.VOICE_ERROR_TYPE.USER_BUSY_ERROR:case o.VOICE_ERROR_TYPE.WEBRTC_ERROR:me(be(E),E,o.VOICE_EVENT_TYPE.SOFTPHONE_ERROR);break;default:me(o.SHARED_ERROR_TYPE.GENERIC_ERROR,E,o.VOICE_EVENT_TYPE.SOFTPHONE_ERROR)}break;case o.VOICE_EVENT_TYPE.CALL_UPDATED:me(o.VOICE_ERROR_TYPE.CAN_NOT_UPDATE_CALL,E,o.VOICE_EVENT_TYPE.CALL_UPDATED);break;default:console.error("Unhandled error scenario with arguments ",arguments)}}function Je(e){return $e.apply(this,arguments)}function $e(){return($e=_(i().mark((function e(t){var E,a,n,r,_,T,s,A,l,c,C,N,O,R,S,I,u,P,d,L,p,D,h,V,v,f,G,b,U,m,H,M,k,x,F,j,W,K,X,J,ee,te,Ee;return i().wrap((function(e){for(;;)switch(e.prev=e.next){case 0:E=t.eventType,a=t.payload,n=t.registerLog,r=void 0===n||n,e.t0=E,e.next=e.t0===o.SHARED_EVENT_TYPE.LOGIN_RESULT?4:e.t0===o.SHARED_EVENT_TYPE.LOGOUT_RESULT?6:e.t0===o.VOICE_EVENT_TYPE.CALL_STARTED?8:e.t0===o.VOICE_EVENT_TYPE.QUEUED_CALL_STARTED?10:e.t0===o.VOICE_EVENT_TYPE.CALL_CONNECTED?12:e.t0===o.VOICE_EVENT_TYPE.HANGUP?28:e.t0===o.VOICE_EVENT_TYPE.PARTICIPANT_ADDED?30:e.t0===o.VOICE_EVENT_TYPE.PARTICIPANT_CONNECTED?32:e.t0===o.VOICE_EVENT_TYPE.PARTICIPANT_REMOVED?34:e.t0===o.SHARED_EVENT_TYPE.MESSAGE?44:e.t0===o.VOICE_EVENT_TYPE.AFTER_CALL_WORK_STARTED?46:e.t0===o.VOICE_EVENT_TYPE.WRAP_UP_ENDED?48:e.t0===o.SHARED_EVENT_TYPE.REMOTE_CONTROLLER?50:e.t0===o.VOICE_EVENT_TYPE.MUTE_TOGGLE?52:e.t0===o.VOICE_EVENT_TYPE.HOLD_TOGGLE?54:e.t0===o.VOICE_EVENT_TYPE.RECORDING_TOGGLE?57:e.t0===o.VOICE_EVENT_TYPE.PARTICIPANTS_SWAPPED?60:e.t0===o.VOICE_EVENT_TYPE.PARTICIPANTS_CONFERENCED?62:e.t0===o.VOICE_EVENT_TYPE.CALL_UPDATED?64:e.t0===o.VOICE_EVENT_TYPE.UPDATE_AUDIO_STATS?66:e.t0===o.VOICE_EVENT_TYPE.SUPERVISOR_BARGED_IN?68:e.t0===o.VOICE_EVENT_TYPE.CALL_BARGED_IN?70:e.t0===o.VOICE_EVENT_TYPE.SUPERVISOR_CALL_STARTED?72:e.t0===o.VOICE_EVENT_TYPE.SUPERVISOR_CALL_CONNECTED?74:e.t0===o.VOICE_EVENT_TYPE.SUPERVISOR_HANGUP?76:e.t0===o.SHARED_EVENT_TYPE.SET_AGENT_STATUS?78:e.t0===o.VOICE_EVENT_TYPE.SHOW_TRANSFER_VIEW?80:e.t0===o.SHARED_EVENT_TYPE.STORAGE_ACCESS_RESULT?82:e.t0===o.SHARED_EVENT_TYPE.AFTER_CONVERSATION_WORK_STARTED?84:e.t0===o.SHARED_EVENT_TYPE.AFTER_CONVERSATION_WORK_ENDED?86:e.t0===o.SHARED_EVENT_TYPE.GET_AGENT_STATUS?88:e.t0===o.SHARED_EVENT_TYPE.STATE_CHANGE?90:92;break;case 4:return Ke(a,ae,o.SHARED_ERROR_TYPE.CAN_NOT_LOG_IN,o.SHARED_EVENT_TYPE.LOGIN_RESULT)&&(ye(o.SHARED_EVENT_TYPE.LOGIN_RESULT,a,r),a.success&&ke()),e.abrupt("break",92);case 6:return Ke(a,_e,o.SHARED_ERROR_TYPE.CAN_NOT_LOG_OUT,o.SHARED_EVENT_TYPE.LOGOUT_RESULT)&&ye(o.SHARED_EVENT_TYPE.LOGOUT_RESULT,{success:a.success,loginFrameHeight:a.loginFrameHeight},r),e.abrupt("break",92);case 8:return Ke(a,$,o.VOICE_ERROR_TYPE.CAN_NOT_START_THE_CALL,o.VOICE_EVENT_TYPE.CALL_STARTED)&&ye(o.VOICE_EVENT_TYPE.CALL_STARTED,a.call,!0),e.abrupt("break",92);case 10:return Ke(a,$,o.VOICE_ERROR_TYPE.CAN_NOT_START_THE_CALL,o.VOICE_EVENT_TYPE.QUEUED_CALL_STARTED)&&ye(o.VOICE_EVENT_TYPE.QUEUED_CALL_STARTED,a.call,!0),e.abrupt("break",92);case 12:if(!Ke(a,$,o.VOICE_ERROR_TYPE.CAN_NOT_START_THE_CALL,o.VOICE_EVENT_TYPE.CALL_CONNECTED)){e.next=27;break}if(Ge(),!y){e.next=26;break}return e.next=17,g.getTelephonyConnector();case 17:return _=e.sent,e.next=20,_.supervisorDisconnect();case 20:return T=e.sent,ce.validateClassObject(T,Le),y=!1,ye(o.VOICE_EVENT_TYPE.SUPERVISOR_HANGUP,T,!0),ye(o.VOICE_EVENT_TYPE.CALL_CONNECTED,a.call,!0),e.abrupt("break",92);case 26:ye(o.VOICE_EVENT_TYPE.CALL_CONNECTED,a.call,!0);case 27:return e.abrupt("break",92);case 28:return Ke(a,z,o.VOICE_ERROR_TYPE.CAN_NOT_END_THE_CALL,o.VOICE_EVENT_TYPE.HANGUP)&&ye(o.VOICE_EVENT_TYPE.HANGUP,a.calls,!0),e.abrupt("break",92);case 30:return Ke(a,Q,o.VOICE_ERROR_TYPE.CAN_NOT_ADD_PARTICIPANT,o.VOICE_EVENT_TYPE.PARTICIPANT_ADDED)&&(s=a.contact,A=a.initialCallHasEnded,l=a.callInfo,c=a.callAttributes,C=a.phoneNumber,N=a.callId,O=a.connectionId,ye(o.VOICE_EVENT_TYPE.PARTICIPANT_ADDED,{contact:s,initialCallHasEnded:A,callInfo:l,callAttributes:c,phoneNumber:C,callId:N,connectionId:O},!0)),e.abrupt("break",92);case 32:return Ke(a,Q,o.VOICE_ERROR_TYPE.CAN_NOT_CONNECT_PARTICIPANT,o.VOICE_EVENT_TYPE.PARTICIPANT_CONNECTED)&&(R=a.initialCallHasEnded,S=a.callInfo,I=a.callAttributes,u=a.phoneNumber,P=a.callId,d=a.contact,L=a.connectionId,ye(o.VOICE_EVENT_TYPE.PARTICIPANT_CONNECTED,{initialCallHasEnded:R,callInfo:S,callAttributes:I,phoneNumber:u,callId:P,contact:d,connectionId:L},!0)),e.abrupt("break",92);case 34:if(!Ke(a,$,o.VOICE_ERROR_TYPE.CAN_NOT_HANGUP_PARTICIPANT,o.VOICE_EVENT_TYPE.PARTICIPANT_REMOVED)){e.next=43;break}return p=a.call,e.next=38,g.getTelephonyConnector();case 38:return D=e.sent,e.next=41,D.getActiveCalls();case 41:Ke(h=e.sent,B)&&(0===(V=h.activeCalls).length?ye(o.VOICE_EVENT_TYPE.HANGUP,p,!0):p&&p.callAttributes&&p.callType!==o.CALL_TYPE.CONSULT&&p.callAttributes.participantType===o.PARTICIPANT_TYPE.INITIAL_CALLER?ye(Object.values(V).filter((function(e){return e.callType===o.CALL_TYPE.ADD_PARTICIPANT})).pop().state===o.CALL_STATE.TRANSFERRING?o.VOICE_EVENT_TYPE.PARTICIPANT_ADDED:o.VOICE_EVENT_TYPE.PARTICIPANT_CONNECTED,{initialCallHasEnded:!0},!0):ye(o.VOICE_EVENT_TYPE.PARTICIPANT_REMOVED,{callId:p?p.callId:null,connectionId:p?p.connectionId:null,reason:p?p.reason:null},!0));case 43:return e.abrupt("break",92);case 44:return ye(o.SHARED_EVENT_TYPE.MESSAGE,a,r),e.abrupt("break",92);case 46:return ye(o.VOICE_EVENT_TYPE.AFTER_CALL_WORK_STARTED,a,r),e.abrupt("break",92);case 48:return ye(o.VOICE_EVENT_TYPE.WRAP_UP_ENDED,a,r),e.abrupt("break",92);case 50:return Be(a),e.abrupt("break",92);case 52:return Ke(a,w,o.VOICE_ERROR_TYPE.CAN_NOT_TOGGLE_MUTE,o.VOICE_EVENT_TYPE.MUTE_TOGGLE)&&ye(o.VOICE_EVENT_TYPE.MUTE_TOGGLE,a,r),e.abrupt("break",92);case 54:return v=a.isThirdPartyOnHold,f=a.isCustomerOnHold,G=a.calls,Ke(a,Z,o.VOICE_ERROR_TYPE.CAN_NOT_TOGGLE_HOLD,o.VOICE_EVENT_TYPE.HOLD_TOGGLE)&&ye(o.VOICE_EVENT_TYPE.HOLD_TOGGLE,{isThirdPartyOnHold:v,isCustomerOnHold:f,calls:G},r),e.abrupt("break",92);case 57:return b=a.isRecordingPaused,U=a.contactId,m=a.initialContactId,H=a.instanceId,M=a.region,Ke(a,q,o.VOICE_ERROR_TYPE.CAN_NOT_TOGGLE_RECORD,o.VOICE_EVENT_TYPE.RECORDING_TOGGLE)&&ye(o.VOICE_EVENT_TYPE.RECORDING_TOGGLE,{isRecordingPaused:b,contactId:U,initialContactId:m,instanceId:H,region:M},r),e.abrupt("break",92);case 60:return Ke(a,Z,o.VOICE_ERROR_TYPE.CAN_NOT_SWAP_PARTICIPANTS,o.VOICE_EVENT_TYPE.PARTICIPANTS_SWAPPED)&&(k=a.isThirdPartyOnHold,x=a.isCustomerOnHold,F=a.calls,ye(o.VOICE_EVENT_TYPE.HOLD_TOGGLE,{isThirdPartyOnHold:k,isCustomerOnHold:x,calls:F},!0)),e.abrupt("break",92);case 62:return Ke(a,Z,o.VOICE_ERROR_TYPE.CAN_NOT_CONFERENCE,o.VOICE_EVENT_TYPE.PARTICIPANTS_CONFERENCED)&&(j=a.isThirdPartyOnHold,W=a.isCustomerOnHold,K=a.calls,X=a.isCallMerged,ye(o.VOICE_EVENT_TYPE.HOLD_TOGGLE,{isThirdPartyOnHold:j,isCustomerOnHold:W,isCallMerged:X,calls:K},!0)),e.abrupt("break",92);case 64:return Ke(a,$,o.VOICE_ERROR_TYPE.CAN_NOT_UPDATE_CALL,o.VOICE_EVENT_TYPE.CALL_UPDATED)&&ye(o.VOICE_EVENT_TYPE.CALL_UPDATED,a,r),e.abrupt("break",92);case 66:return Ke(a,Ie)&&(a.stats&&(i=a.stats,Y&&i.forEach((function(e){e.inputChannelStats&&(Y.inputChannelStats.statsCount++,Y.inputChannelStats.packetsCount+=0|e.inputChannelStats.packetsCount,Y.inputChannelStats.packetsLost+=0|e.inputChannelStats.packetsLost,Y.inputChannelStats.jitterBufferMillis+=0|e.inputChannelStats.jitterBufferMillis,Y.inputChannelStats.roundTripTimeMillis+=0|e.inputChannelStats.roundTripTimeMillis),e.outputChannelStats&&(Y.outputChannelStats.statsCount++,Y.outputChannelStats.packetsCount+=0|e.outputChannelStats.packetsCount,Y.outputChannelStats.packetsLost+=0|e.outputChannelStats.packetsLost,Y.outputChannelStats.jitterBufferMillis+=0|e.outputChannelStats.jitterBufferMillis,Y.outputChannelStats.roundTripTimeMillis+=0|e.outputChannelStats.roundTripTimeMillis)})),J=a.callId?{stats:a.stats,callId:a.callId}:{stats:a.stats},ye(o.VOICE_EVENT_TYPE.AUDIO_STATS,{audioStats:J},r)),a.isAudioStatsCompleted&&a.callId&&(ee=a.callId,te=fe(),ye(o.VOICE_EVENT_TYPE.UPDATE_AUDIO_STATS_COMPLETED,{callId:ee,mos:te},r))),e.abrupt("break",92);case 68:return Ke(a,de,o.VOICE_ERROR_TYPE.CAN_NOT_BARGE_IN_SUPERVISOR,o.VOICE_EVENT_TYPE.SUPERVISOR_BARGED_IN)&&ye(o.VOICE_EVENT_TYPE.SUPERVISOR_BARGED_IN,a.call,!0),e.abrupt("break",92);case 70:return Ke(a,Se,o.SHARED_ERROR_TYPE.GENERIC_ERROR,o.VOICE_EVENT_TYPE.CALL_BARGED_IN)&&ye(o.VOICE_EVENT_TYPE.CALL_BARGED_IN,a,!0),e.abrupt("break",92);case 72:return Ke(a,de,o.VOICE_ERROR_TYPE.CAN_NOT_SUPERVISE_CALL,o.VOICE_EVENT_TYPE.SUPERVISOR_CALL_STARTED)&&(y=!0,ye(o.VOICE_EVENT_TYPE.SUPERVISOR_CALL_STARTED,a.call,!0)),e.abrupt("break",92);case 74:return Ke(a,de,o.VOICE_ERROR_TYPE.CAN_NOT_SUPERVISE_CALL,o.VOICE_EVENT_TYPE.SUPERVISOR_CALL_CONNECTED)&&(y=!0,ye(o.VOICE_EVENT_TYPE.SUPERVISOR_CALL_CONNECTED,a.call,!0)),e.abrupt("break",92);case 76:return Ke(a,Le,o.VOICE_ERROR_TYPE.CAN_NOT_DISCONNECT_SUPERVISOR,o.VOICE_EVENT_TYPE.SUPERVISOR_HANGUP)&&(y=!1,ye(o.VOICE_EVENT_TYPE.SUPERVISOR_HANGUP,a.calls,!0)),e.abrupt("break",92);case 78:return Ke(a,Ne,o.SHARED_ERROR_TYPE.CAN_NOT_SET_AGENT_STATUS,o.SHARED_EVENT_TYPE.SET_AGENT_STATUS)&&(Ee=a.statusId,ye(o.SHARED_EVENT_TYPE.SET_AGENT_STATUS,{statusId:Ee},r)),e.abrupt("break",92);case 80:return ye(o.VOICE_EVENT_TYPE.SHOW_TRANSFER_VIEW,a),e.abrupt("break",92);case 82:return Ke(a,pe,o.SHARED_ERROR_TYPE.INVALID_STORAGE_ACCESS_RESULT,o.SHARED_EVENT_TYPE.STORAGE_ACCESS_RESULT)&&(ye(o.SHARED_EVENT_TYPE.STORAGE_ACCESS_RESULT,a),a.success&&(a.showLogin?ye(o.SHARED_EVENT_TYPE.SHOW_LOGIN,{loginFrameHeight:a.loginFrameHeight},r):ke())),e.abrupt("break",92);case 84:return Ke(a,he,o.SHARED_ERROR_TYPE.INVALID_ACW_INFO,o.SHARED_EVENT_TYPE.AFTER_CONVERSATION_WORK_STARTED)&&ye(o.SHARED_EVENT_TYPE.AFTER_CONVERSATION_WORK_STARTED,a,r),e.abrupt("break",92);case 86:return Ke(a,he,o.SHARED_ERROR_TYPE.INVALID_ACW_INFO,o.SHARED_EVENT_TYPE.AFTER_CONVERSATION_WORK_ENDED)&&ye(o.SHARED_EVENT_TYPE.AFTER_CONVERSATION_WORK_ENDED,a,r),e.abrupt("break",92);case 88:return Ke(a,Oe,o.SHARED_ERROR_TYPE.CAN_NOT_GET_AGENT_STATUS,o.SHARED_EVENT_TYPE.GET_AGENT_STATUS)&&ye(o.SHARED_EVENT_TYPE.GET_AGENT_STATUS,a,r),e.abrupt("break",92);case 90:return Ke(a,Re,o.SHARED_ERROR_TYPE.INVALID_STATE_CHANGE_RESULT,o.SHARED_EVENT_TYPE.STATE_CHANGE)&&ye(o.SHARED_EVENT_TYPE.STATE_CHANGE,a),e.abrupt("break",92);case 92:case"end":return e.stop()}var i}),e)})))).apply(this,arguments)}})(),a})()));
+//# sourceMappingURL=scv-connector-base.js.map
+
+/***/ }),
+
+/***/ "./node_modules/socket.io-parser/dist/binary.js":
+/*!******************************************************!*\
+  !*** ./node_modules/socket.io-parser/dist/binary.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.reconstructPacket = exports.deconstructPacket = void 0;
+const is_binary_1 = __webpack_require__(/*! ./is-binary */ "./node_modules/socket.io-parser/dist/is-binary.js");
+/**
+ * Replaces every Buffer | ArrayBuffer | Blob | File in packet with a numbered placeholder.
+ *
+ * @param {Object} packet - socket.io event packet
+ * @return {Object} with deconstructed packet and list of buffers
+ * @public
+ */
+function deconstructPacket(packet) {
+    const buffers = [];
+    const packetData = packet.data;
+    const pack = packet;
+    pack.data = _deconstructPacket(packetData, buffers);
+    pack.attachments = buffers.length; // number of binary 'attachments'
+    return { packet: pack, buffers: buffers };
+}
+exports.deconstructPacket = deconstructPacket;
+function _deconstructPacket(data, buffers) {
+    if (!data)
+        return data;
+    if (is_binary_1.isBinary(data)) {
+        const placeholder = { _placeholder: true, num: buffers.length };
+        buffers.push(data);
+        return placeholder;
+    }
+    else if (Array.isArray(data)) {
+        const newData = new Array(data.length);
+        for (let i = 0; i < data.length; i++) {
+            newData[i] = _deconstructPacket(data[i], buffers);
+        }
+        return newData;
+    }
+    else if (typeof data === "object" && !(data instanceof Date)) {
+        const newData = {};
+        for (const key in data) {
+            if (data.hasOwnProperty(key)) {
+                newData[key] = _deconstructPacket(data[key], buffers);
+            }
+        }
+        return newData;
+    }
+    return data;
+}
+/**
+ * Reconstructs a binary packet from its placeholder packet and buffers
+ *
+ * @param {Object} packet - event packet with placeholders
+ * @param {Array} buffers - binary buffers to put in placeholder positions
+ * @return {Object} reconstructed packet
+ * @public
+ */
+function reconstructPacket(packet, buffers) {
+    packet.data = _reconstructPacket(packet.data, buffers);
+    packet.attachments = undefined; // no longer useful
+    return packet;
+}
+exports.reconstructPacket = reconstructPacket;
+function _reconstructPacket(data, buffers) {
+    if (!data)
+        return data;
+    if (data && data._placeholder === true) {
+        const isIndexValid = typeof data.num === "number" &&
+            data.num >= 0 &&
+            data.num < buffers.length;
+        if (isIndexValid) {
+            return buffers[data.num]; // appropriate buffer (should be natural order anyway)
+        }
+        else {
+            throw new Error("illegal attachments");
+        }
+    }
+    else if (Array.isArray(data)) {
+        for (let i = 0; i < data.length; i++) {
+            data[i] = _reconstructPacket(data[i], buffers);
+        }
+    }
+    else if (typeof data === "object") {
+        for (const key in data) {
+            if (data.hasOwnProperty(key)) {
+                data[key] = _reconstructPacket(data[key], buffers);
+            }
+        }
+    }
+    return data;
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/socket.io-parser/dist/index.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/socket.io-parser/dist/index.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Decoder = exports.Encoder = exports.PacketType = exports.protocol = void 0;
+const Emitter = __webpack_require__(/*! component-emitter */ "./node_modules/component-emitter/index.js");
+const binary_1 = __webpack_require__(/*! ./binary */ "./node_modules/socket.io-parser/dist/binary.js");
+const is_binary_1 = __webpack_require__(/*! ./is-binary */ "./node_modules/socket.io-parser/dist/is-binary.js");
+const debug = __webpack_require__(/*! debug */ "./node_modules/debug/src/browser.js")("socket.io-parser");
+/**
+ * Protocol version.
+ *
+ * @public
+ */
+exports.protocol = 5;
+var PacketType;
+(function (PacketType) {
+    PacketType[PacketType["CONNECT"] = 0] = "CONNECT";
+    PacketType[PacketType["DISCONNECT"] = 1] = "DISCONNECT";
+    PacketType[PacketType["EVENT"] = 2] = "EVENT";
+    PacketType[PacketType["ACK"] = 3] = "ACK";
+    PacketType[PacketType["CONNECT_ERROR"] = 4] = "CONNECT_ERROR";
+    PacketType[PacketType["BINARY_EVENT"] = 5] = "BINARY_EVENT";
+    PacketType[PacketType["BINARY_ACK"] = 6] = "BINARY_ACK";
+})(PacketType = exports.PacketType || (exports.PacketType = {}));
+/**
+ * A socket.io Encoder instance
+ */
+class Encoder {
+    /**
+     * Encode a packet as a single string if non-binary, or as a
+     * buffer sequence, depending on packet type.
+     *
+     * @param {Object} obj - packet object
+     */
+    encode(obj) {
+        debug("encoding packet %j", obj);
+        if (obj.type === PacketType.EVENT || obj.type === PacketType.ACK) {
+            if (is_binary_1.hasBinary(obj)) {
+                obj.type =
+                    obj.type === PacketType.EVENT
+                        ? PacketType.BINARY_EVENT
+                        : PacketType.BINARY_ACK;
+                return this.encodeAsBinary(obj);
+            }
+        }
+        return [this.encodeAsString(obj)];
+    }
+    /**
+     * Encode packet as string.
+     */
+    encodeAsString(obj) {
+        // first is type
+        let str = "" + obj.type;
+        // attachments if we have them
+        if (obj.type === PacketType.BINARY_EVENT ||
+            obj.type === PacketType.BINARY_ACK) {
+            str += obj.attachments + "-";
+        }
+        // if we have a namespace other than `/`
+        // we append it followed by a comma `,`
+        if (obj.nsp && "/" !== obj.nsp) {
+            str += obj.nsp + ",";
+        }
+        // immediately followed by the id
+        if (null != obj.id) {
+            str += obj.id;
+        }
+        // json data
+        if (null != obj.data) {
+            str += JSON.stringify(obj.data);
+        }
+        debug("encoded %j as %s", obj, str);
+        return str;
+    }
+    /**
+     * Encode packet as 'buffer sequence' by removing blobs, and
+     * deconstructing packet into object with placeholders and
+     * a list of buffers.
+     */
+    encodeAsBinary(obj) {
+        const deconstruction = binary_1.deconstructPacket(obj);
+        const pack = this.encodeAsString(deconstruction.packet);
+        const buffers = deconstruction.buffers;
+        buffers.unshift(pack); // add packet info to beginning of data list
+        return buffers; // write all the buffers
+    }
+}
+exports.Encoder = Encoder;
+/**
+ * A socket.io Decoder instance
+ *
+ * @return {Object} decoder
+ */
+class Decoder extends Emitter {
+    constructor() {
+        super();
+    }
+    /**
+     * Decodes an encoded packet string into packet JSON.
+     *
+     * @param {String} obj - encoded packet
+     */
+    add(obj) {
+        let packet;
+        if (typeof obj === "string") {
+            if (this.reconstructor) {
+                throw new Error("got plaintext data when reconstructing a packet");
+            }
+            packet = this.decodeString(obj);
+            if (packet.type === PacketType.BINARY_EVENT ||
+                packet.type === PacketType.BINARY_ACK) {
+                // binary packet's json
+                this.reconstructor = new BinaryReconstructor(packet);
+                // no attachments, labeled binary but no binary data to follow
+                if (packet.attachments === 0) {
+                    super.emit("decoded", packet);
+                }
+            }
+            else {
+                // non-binary full packet
+                super.emit("decoded", packet);
+            }
+        }
+        else if (is_binary_1.isBinary(obj) || obj.base64) {
+            // raw binary data
+            if (!this.reconstructor) {
+                throw new Error("got binary data when not reconstructing a packet");
+            }
+            else {
+                packet = this.reconstructor.takeBinaryData(obj);
+                if (packet) {
+                    // received final buffer
+                    this.reconstructor = null;
+                    super.emit("decoded", packet);
+                }
+            }
+        }
+        else {
+            throw new Error("Unknown type: " + obj);
+        }
+    }
+    /**
+     * Decode a packet String (JSON data)
+     *
+     * @param {String} str
+     * @return {Object} packet
+     */
+    decodeString(str) {
+        let i = 0;
+        // look up type
+        const p = {
+            type: Number(str.charAt(0)),
+        };
+        if (PacketType[p.type] === undefined) {
+            throw new Error("unknown packet type " + p.type);
+        }
+        // look up attachments if type binary
+        if (p.type === PacketType.BINARY_EVENT ||
+            p.type === PacketType.BINARY_ACK) {
+            const start = i + 1;
+            while (str.charAt(++i) !== "-" && i != str.length) { }
+            const buf = str.substring(start, i);
+            if (buf != Number(buf) || str.charAt(i) !== "-") {
+                throw new Error("Illegal attachments");
+            }
+            p.attachments = Number(buf);
+        }
+        // look up namespace (if any)
+        if ("/" === str.charAt(i + 1)) {
+            const start = i + 1;
+            while (++i) {
+                const c = str.charAt(i);
+                if ("," === c)
+                    break;
+                if (i === str.length)
+                    break;
+            }
+            p.nsp = str.substring(start, i);
+        }
+        else {
+            p.nsp = "/";
+        }
+        // look up id
+        const next = str.charAt(i + 1);
+        if ("" !== next && Number(next) == next) {
+            const start = i + 1;
+            while (++i) {
+                const c = str.charAt(i);
+                if (null == c || Number(c) != c) {
+                    --i;
+                    break;
+                }
+                if (i === str.length)
+                    break;
+            }
+            p.id = Number(str.substring(start, i + 1));
+        }
+        // look up json data
+        if (str.charAt(++i)) {
+            const payload = tryParse(str.substr(i));
+            if (Decoder.isPayloadValid(p.type, payload)) {
+                p.data = payload;
+            }
+            else {
+                throw new Error("invalid payload");
+            }
+        }
+        debug("decoded %s as %j", str, p);
+        return p;
+    }
+    static isPayloadValid(type, payload) {
+        switch (type) {
+            case PacketType.CONNECT:
+                return typeof payload === "object";
+            case PacketType.DISCONNECT:
+                return payload === undefined;
+            case PacketType.CONNECT_ERROR:
+                return typeof payload === "string" || typeof payload === "object";
+            case PacketType.EVENT:
+            case PacketType.BINARY_EVENT:
+                return Array.isArray(payload) && payload.length > 0;
+            case PacketType.ACK:
+            case PacketType.BINARY_ACK:
+                return Array.isArray(payload);
+        }
+    }
+    /**
+     * Deallocates a parser's resources
+     */
+    destroy() {
+        if (this.reconstructor) {
+            this.reconstructor.finishedReconstruction();
+        }
+    }
+}
+exports.Decoder = Decoder;
+function tryParse(str) {
+    try {
+        return JSON.parse(str);
+    }
+    catch (e) {
+        return false;
+    }
+}
+/**
+ * A manager of a binary event's 'buffer sequence'. Should
+ * be constructed whenever a packet of type BINARY_EVENT is
+ * decoded.
+ *
+ * @param {Object} packet
+ * @return {BinaryReconstructor} initialized reconstructor
+ */
+class BinaryReconstructor {
+    constructor(packet) {
+        this.packet = packet;
+        this.buffers = [];
+        this.reconPack = packet;
+    }
+    /**
+     * Method to be called when binary data received from connection
+     * after a BINARY_EVENT packet.
+     *
+     * @param {Buffer | ArrayBuffer} binData - the raw binary data received
+     * @return {null | Object} returns null if more binary data is expected or
+     *   a reconstructed packet object if all buffers have been received.
+     */
+    takeBinaryData(binData) {
+        this.buffers.push(binData);
+        if (this.buffers.length === this.reconPack.attachments) {
+            // done with buffer list
+            const packet = binary_1.reconstructPacket(this.reconPack, this.buffers);
+            this.finishedReconstruction();
+            return packet;
+        }
+        return null;
+    }
+    /**
+     * Cleans up binary packet reconstruction variables.
+     */
+    finishedReconstruction() {
+        this.reconPack = null;
+        this.buffers = [];
+    }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/socket.io-parser/dist/is-binary.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/socket.io-parser/dist/is-binary.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.hasBinary = exports.isBinary = void 0;
+const withNativeArrayBuffer = typeof ArrayBuffer === "function";
+const isView = (obj) => {
+    return typeof ArrayBuffer.isView === "function"
+        ? ArrayBuffer.isView(obj)
+        : obj.buffer instanceof ArrayBuffer;
+};
+const toString = Object.prototype.toString;
+const withNativeBlob = typeof Blob === "function" ||
+    (typeof Blob !== "undefined" &&
+        toString.call(Blob) === "[object BlobConstructor]");
+const withNativeFile = typeof File === "function" ||
+    (typeof File !== "undefined" &&
+        toString.call(File) === "[object FileConstructor]");
+/**
+ * Returns true if obj is a Buffer, an ArrayBuffer, a Blob or a File.
+ *
+ * @private
+ */
+function isBinary(obj) {
+    return ((withNativeArrayBuffer && (obj instanceof ArrayBuffer || isView(obj))) ||
+        (withNativeBlob && obj instanceof Blob) ||
+        (withNativeFile && obj instanceof File));
+}
+exports.isBinary = isBinary;
+function hasBinary(obj, toJSON) {
+    if (!obj || typeof obj !== "object") {
+        return false;
+    }
+    if (Array.isArray(obj)) {
+        for (let i = 0, l = obj.length; i < l; i++) {
+            if (hasBinary(obj[i])) {
+                return true;
+            }
+        }
+        return false;
+    }
+    if (isBinary(obj)) {
+        return true;
+    }
+    if (obj.toJSON &&
+        typeof obj.toJSON === "function" &&
+        arguments.length === 1) {
+        return hasBinary(obj.toJSON(), true);
+    }
+    for (const key in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, key) && hasBinary(obj[key])) {
+            return true;
+        }
+    }
+    return false;
+}
+exports.hasBinary = hasBinary;
+
+
+/***/ }),
+
+/***/ "./node_modules/yeast/index.js":
+/*!*************************************!*\
+  !*** ./node_modules/yeast/index.js ***!
+  \*************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+var alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_'.split('')
+  , length = 64
+  , map = {}
+  , seed = 0
+  , i = 0
+  , prev;
+
+/**
+ * Return a string representing the specified number.
+ *
+ * @param {Number} num The number to convert.
+ * @returns {String} The string representation of the number.
+ * @api public
+ */
+function encode(num) {
+  var encoded = '';
+
+  do {
+    encoded = alphabet[num % length] + encoded;
+    num = Math.floor(num / length);
+  } while (num > 0);
+
+  return encoded;
+}
+
+/**
+ * Return the integer value specified by the given string.
+ *
+ * @param {String} str The string to convert.
+ * @returns {Number} The integer value represented by the string.
+ * @api public
+ */
+function decode(str) {
+  var decoded = 0;
+
+  for (i = 0; i < str.length; i++) {
+    decoded = decoded * length + map[str.charAt(i)];
+  }
+
+  return decoded;
+}
+
+/**
+ * Yeast: A tiny growing id generator.
+ *
+ * @returns {String} A unique id.
+ * @api public
+ */
+function yeast() {
+  var now = encode(+new Date());
+
+  if (now !== prev) return seed = 0, prev = now;
+  return now +'.'+ encode(seed++);
+}
+
+//
+// Map each character to its index.
+//
+for (; i < length; i++) map[alphabet[i]] = i;
+
+//
+// Expose the `yeast`, `encode` and `decode` functions.
+//
+yeast.encode = encode;
+yeast.decode = decode;
+module.exports = yeast;
+
+
+/***/ }),
+
+/***/ "./src/byo-ott-app/index.js":
+/*!**********************************!*\
+  !*** ./src/byo-ott-app/index.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   initializeBYOOTTAppController: () => (/* binding */ initializeBYOOTTAppController)
+/* harmony export */ });
+/* harmony import */ var _common_constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../common/constants */ "./src/common/constants.js");
+/* harmony import */ var scv_connector_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! scv-connector-base */ "./node_modules/scv-connector-base/dist/scv-connector-base.js");
+/* harmony import */ var scv_connector_base__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(scv_connector_base__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var events__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! events */ "./node_modules/events/events.js");
+/* harmony import */ var events__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(events__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/wrapper.mjs");
+/* eslint-disable no-unused-vars */
+
+
+
+
+
+class ConnectorEventEmitter extends events__WEBPACK_IMPORTED_MODULE_2__.EventEmitter {}
+const eventEmitter = new ConnectorEventEmitter();
+
+function initializeBYOOTTAppController(connector) {
+    connector.sdk.eventEmitter.on('event', async (event) => {
+        if (event && event.data) {
+            try {
+                switch (event.data.type) {
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].GET_AGENT_CONFIG: {
+                        const { agentConfig, contactCenterChannels, agentId, userPresenceStatuses, isSCVMultipartyAllowed } = connector.sdk.state;
+                        connector.sdk.messageUser(event.fromUsername, 
+                                                  _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].AGENT_CONFIG,
+                                                 {
+                                                    type: _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].AGENT_CONFIG,
+                                                    value: agentConfig,
+                                                    userPresenceStatuses,
+                                                    contactCenterChannels,
+                                                    referrer: `${document.referrer}`,
+                                                    agentId,
+                                                    isSCVMultipartyAllowed
+                                                 })
+                    }
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].SET_AGENT_CONFIG: {
+                        connector.sdk.updateAgentConfig({
+                            selectedPhone: event.data.value.selectedPhone
+                         });
+                    }
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].SET_AGENT_STATUS: {
+                        connector.sdk.publishSetAgentStatus(event.data.statusId);
+                    }
+                    break;
+                }
+            } catch (error) {
+                const eventType = event.data.eventType;
+                connector.sdk.messageUser(event.fromUsername, _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].ERROR,
+                {
+                    type: _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].ERROR,
+                    error: `${error.message} (Event: ${eventType || event.data.type})`
+                })
+                console.error(`Error occured when published event ${eventType} from the hardphone simulator: ${error.message}`);
+                if (connector.sdk.state.publishHardphoneErrors) {
+                    (0,scv_connector_base__WEBPACK_IMPORTED_MODULE_1__.publishError)({ eventType, error });
+                }
+            }
+        }
+    });
+}
+
+
+
+
+/***/ }),
+
+/***/ "./src/common/constants.js":
+/*!*********************************!*\
+  !*** ./src/common/constants.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   FILTER_TYPES_TO_CONTACT_TYPES: () => (/* binding */ FILTER_TYPES_TO_CONTACT_TYPES),
+/* harmony export */   USER_MESSAGE: () => (/* binding */ USER_MESSAGE),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var scv_connector_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! scv-connector-base */ "./node_modules/scv-connector-base/dist/scv-connector-base.js");
+/* harmony import */ var scv_connector_base__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(scv_connector_base__WEBPACK_IMPORTED_MODULE_0__);
+/*
+ * Copyright (c) 2021, salesforce.com, inc.
+ * All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause
+ * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+    LOGIN_SUBMIT: 'LOGIN_SUBMIT',
+    SHOW_LOGIN_PAGE: 'SHOW_LOGIN_PAGE',
+    GET_SHOW_LOGIN_PAGE: 'GET_SHOW_LOGIN_PAGE',
+    SET_SHOW_LOGIN_PAGE: 'SET_SHOW_LOGIN_PAGE',
+    AGENT_CONFIG: 'AGENT_CONFIG',
+    AGENT_WORK_EVENT:'AGENT_WORK_EVENT',
+    CAPABILITIES: 'CAPABILITIES',
+    GET_AGENT_CONFIG: 'GET_AGENT_CONFIG',
+    SET_AGENT_CONFIG: 'SET_AGENT_CONFIG',
+    GET_CAPABILITIES: 'GET_CAPABILITIES',
+    SET_CAPABILITIES: 'SET_CAPABILITIES',
+    SET_CONTACT_TYPES: 'SET_CONTACT_TYPES',
+    START_OUTBOUND_CALL: 'START_OUTBOUND_CALL',
+    START_INBOUND_CALL: 'START_INBOUND_CALL',
+    CONNECT_PARTICIPANT: 'CONNECT_PARTICIPANT',
+    REMOVE_PARTICIPANT: 'REMOVE_PARTICIPANT',
+    REMOVE_SUPERVISOR: 'REMOVE_SUPERVISOR',
+    CONNECT_SUPERVISOR: 'CONNECT_SUPERVISOR',
+    CONNECT_CALL: 'CONNECT_CALL',
+    AGENT_HANGUP: 'AGENT_HANGUP',
+    END_CALL: 'END_CALL',
+    CONSULT: 'CONSULT',
+    HARDPHONE_EVENT: 'HARDPHONE_EVENT',
+    SET_AGENT_STATUS: 'SET_AGENT_STATUS',
+    GET_PHONE_CONTACTS: 'GET_PHONE_CONTACTS',
+    GET_ACTIVE_CALLS: 'GET_ACTIVE_CALLS',
+    CALL_INFO_UPDATED: 'CALL_INFO_UPDATED',
+    ACTIVE_CALLS: 'ACTIVE_CALLS',
+    SOFTPHONE_LOGOUT: 'SOFTPHONE_LOGOUT',
+    CREATE_TRANSCRIPTION: 'SEND_TRANSCRIPTION',
+    INBOUND_CALL_TYPE: 'inbound',
+    MESSAGE_FROM_CONNECTOR:'MESSAGE_FROM_CONNECTOR',
+    MESSAGE_TO_CONNECTOR:'MESSAGE_TO_CONNECTOR',
+    SENDER_TYPE: {
+        END_USER: 'END_USER',
+        HUMAN_AGENT: 'HUMAN_AGENT',
+        VIRTUAL_AGENT: 'VIRTUAL_AGENT',
+        SUPERVISOR: 'SUPERVISOR',
+        EXTERNAL_USER: 'EXTERNAL_USER'
+    },
+    PARTICIPANT_TYPE: {
+        ...scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE
+    },
+    CALL_TYPE: {
+        ...scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_TYPE
+    },
+    CALL_CONTROL: {
+        ACCEPT_CALL: 'ACCEPT_CALL',
+        DECLINE_CALL: 'DECLINE_CALL',
+        MUTE: 'MUTE',
+        HOLD: 'HOLD',
+        SWAP_PARTICIPANTS: 'SWAP_PARTICIPANTS',
+        ADD_PARTICIPANT: 'ADD_PARTICIPANT',
+        CONFERENCE: 'CONFERENCE',
+        RECORD: 'RECORD'
+    },
+    HANGUP_REASON: {
+        PHONE_CALL_ERROR: "error",
+        PHONE_CALL_ENDED: "ended"
+    },
+    SEND_RECORDING: 'SEND_RECORDING',
+    SEND_VOICE_MAIL: 'SEND_VOICE_MAIL',
+    SEND_REALTIME_CONVERSATION_EVENTS: 'SEND_REALTIME_CONVERSATION_EVENTS',
+    LOGIN_RESULT: 'LOGIN_RESULT',
+    LOGOUT_RESULT: 'LOGOUT_RESULT',
+    CALL_CONNECTED: 'CALL_CONNECTED',
+    THROW_ERROR: 'THROW_ERROR',
+    CUSTOM_ERROR: 'CUSTOM_ERROR',
+    ERROR: 'ERROR',
+    PARTICIPANT_CONNECTED: 'PARTICIPANT_CONNECTED',
+    PARTICIPANT_REMOVED: 'PARTICIPANT_REMOVED',
+    MESSAGE: 'MESSAGE',
+    REMOTE_CONTROLLER: 'REMOTE_CONTROLLER',
+    SHARED_EVENT_TYPE: { 
+        ...scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.SHARED_EVENT_TYPE 
+    },
+    VOICE_EVENT_TYPE: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.VOICE_EVENT_TYPE,
+    AGENT_ERROR_STATUS: {
+        DECLINED_BY_AGENT: "DeclinedByAgent",
+        FAILED_TO_CONNECT_AGENT: "FailedToConnectAgent",
+        MISSED_BY_AGENT: "MissedByAgent"
+    },
+    REQUEST_CALLBACK : 'REQUEST_CALLBACK',
+    PUSH_DIALER : 'PUSH_DIALER',
+    PROGRESSIVE_DIALER: 'PROGRESSIVE_DIALER',
+    CTR_SYNC: 'CTR_SYNC',
+    CTR_SYNC_RESULT: 'CTR_SYNC_RESULT',
+    SEND_AUDIO_STATS: 'SEND_AUDIO_STATS',
+    CONTACT_TYPE : {
+        ...scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CONTACT_TYPE
+    },
+    CALL_UPDATED: 'CALL_UPDATED'
+});
+const USER_MESSAGE = {
+    CALL_STARTED: "CALL_STARTED",
+    INTERNAL_CALL_STARTED: "INTERNAL_CALL_STARTED",
+    PARTICIPANT_CONNECTED: "PARTICIPANT_CONNECTED",
+    CALL_BARGED_IN: "CALL_BARGED_IN",
+    CALL_DESTROYED: "CALL_DESTROYED",
+    AGENT_WORK_NOTIFICATION: "AGENT_WORK_NOTIFICATION",
+    MUTE: "MUTE",
+    UNMUTE: "UNMUTE",
+    MERGE: "MERGE"
+}
+
+const FILTER_TYPES_TO_CONTACT_TYPES = {
+    [scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CONTACTS_FILTER_TYPES.AGENT]: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CONTACT_TYPE.AGENT,
+    [scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CONTACTS_FILTER_TYPES.CONTACT]: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CONTACT_TYPE.PHONENUMBER,
+    [scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CONTACTS_FILTER_TYPES.DIRECTORY]: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CONTACT_TYPE.PHONEBOOK,
+    [scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CONTACTS_FILTER_TYPES.QUEUE]: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CONTACT_TYPE.QUEUE
+};
+
+
+/***/ }),
+
+/***/ "./src/hid/hidDeviceHandler.js":
+/*!*************************************!*\
+  !*** ./src/hid/hidDeviceHandler.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   hidDeviceHandler: () => (/* binding */ hidDeviceHandler)
+/* harmony export */ });
+/* harmony import */ var _hidDeviceParserFactory__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./hidDeviceParserFactory */ "./src/hid/hidDeviceParserFactory.js");
+/*
+    Save the hid information received from Salesforce via setAgentConfig
+    Based on the device type, parse the data and call respective call actions
+ */
+
+
+async function hidDeviceHandler(config, sdk){
+    const devices = await navigator.hid.getDevices();
+    if(devices && devices.length > 0) {
+        //Filter the device based on the config info passed
+        const device = devices.find(d => d.vendorId === config?.hidDeviceInfo?.vendorId &&
+            d.productId === config?.hidDeviceInfo?.productId);
+
+        if (device) {
+            //fetch hid device specific parser using factory
+            const parser = (0,_hidDeviceParserFactory__WEBPACK_IMPORTED_MODULE_0__.getHIDParser)(device);
+            //Open the device to receive the input report
+            await device.open().then(() => {
+                device.oninputreport = e => {
+                    parser.parseInputReport(e, sdk);
+                }
+            });
+        }
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/hid/hidDeviceParser.js":
+/*!************************************!*\
+  !*** ./src/hid/hidDeviceParser.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   HIDParser: () => (/* binding */ HIDParser)
+/* harmony export */ });
+class HIDParser {
+    parseInputReport(event, sdk) {
+        throw new Error("This method should be overridden by subclasses.");
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/hid/hidDeviceParserFactory.js":
+/*!*******************************************!*\
+  !*** ./src/hid/hidDeviceParserFactory.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getHIDParser: () => (/* binding */ getHIDParser)
+/* harmony export */ });
+/* harmony import */ var _plantronicsHIDDeviceParser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./plantronicsHIDDeviceParser */ "./src/hid/plantronicsHIDDeviceParser.js");
+/* harmony import */ var _jabraHIDDeviceParser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./jabraHIDDeviceParser */ "./src/hid/jabraHIDDeviceParser.js");
+
+
+
+function getHIDParser(device) {
+    switch(device.productName) {
+        case "Plantronics Blackwire 5220 Series":
+            return new _plantronicsHIDDeviceParser__WEBPACK_IMPORTED_MODULE_0__.PlantronicsHIDDeviceParser();
+        case "Jabra EVOLVE LINK MS":
+            return new _jabraHIDDeviceParser__WEBPACK_IMPORTED_MODULE_1__.JabraHIDDeviceParser();
+        // Add more device types here
+        default:
+            throw new Error("Unsupported HID device");
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/hid/jabraHIDDeviceParser.js":
+/*!*****************************************!*\
+  !*** ./src/hid/jabraHIDDeviceParser.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   JabraHIDDeviceParser: () => (/* binding */ JabraHIDDeviceParser)
+/* harmony export */ });
+/* harmony import */ var _hidDeviceParser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./hidDeviceParser */ "./src/hid/hidDeviceParser.js");
+/* harmony import */ var scv_connector_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! scv-connector-base */ "./node_modules/scv-connector-base/dist/scv-connector-base.js");
+/* harmony import */ var scv_connector_base__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(scv_connector_base__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+let acceptHangupCalbuffer = [1, 0, 1, 0];
+let buffer = [];
+let activeCall = null;
+let callInfo = null;
+class JabraHIDDeviceParser extends _hidDeviceParser__WEBPACK_IMPORTED_MODULE_0__.HIDParser {
+    async parseInputReport(event, sdk) {
+        const {data} = event;
+
+        //An integer received from the Jabra HID device
+        const action = data.getUint8(0);
+        const activeCalls = await sdk.getActiveCalls();
+
+        if (activeCalls.activeCalls.length !== 0) {
+            activeCall = activeCalls.activeCalls[0];
+            callInfo = activeCall.callInfo;
+            //set this to send signal to salesforce that the source of action is HID
+            callInfo.isHIDCall = true;
+            buffer.push(action);
+            if (this.compareAcceptHangupCalbuffer(buffer)) {
+                buffer = [];
+                await this.performAction("acceptOrHangupCall", sdk);
+            }
+        }
+    }
+
+    //process action based on the action number received from HID device
+    async performAction(action, sdk) {
+        switch (action) {
+            case "acceptOrHangupCall": //1,0,1,0
+                if (activeCall.state === scv_connector_base__WEBPACK_IMPORTED_MODULE_1__.Constants.CALL_STATE.RINGING && activeCall.callType === "inbound") {
+                    sdk.log("answer call triggered using HID: ", activeCall);
+                    sdk.connectCall(callInfo);
+                } else {
+                    sdk.log("hangup call triggered using HID: ", activeCall);
+                    sdk.hangup(scv_connector_base__WEBPACK_IMPORTED_MODULE_1__.Constants.HANGUP_REASON.PHONE_CALL_ENDED);
+                }
+                break;
+        }
+    }
+
+    //Check if valid input signal [1,0,1,0] received from Jabra HID device
+    compareAcceptHangupCalbuffer(buffer) {
+        if (buffer.length === 4) {
+            return buffer.every((val, index) => val === acceptHangupCalbuffer[index]);
+        }
+        return false;
+    }
+}
+
+/***/ }),
+
+/***/ "./src/hid/plantronicsHIDDeviceParser.js":
+/*!***********************************************!*\
+  !*** ./src/hid/plantronicsHIDDeviceParser.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   PlantronicsHIDDeviceParser: () => (/* binding */ PlantronicsHIDDeviceParser)
+/* harmony export */ });
+/* harmony import */ var _hidDeviceParser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./hidDeviceParser */ "./src/hid/hidDeviceParser.js");
+/* harmony import */ var scv_connector_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! scv-connector-base */ "./node_modules/scv-connector-base/dist/scv-connector-base.js");
+/* harmony import */ var scv_connector_base__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(scv_connector_base__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+let buffer = [];
+let muteToggleSignal = false;
+let activeCall = null;
+let callInfo = null;
+class PlantronicsHIDDeviceParser extends _hidDeviceParser__WEBPACK_IMPORTED_MODULE_0__.HIDParser {
+    async parseInputReport(event, sdk) {
+        const {data} = event;
+
+        //An integer received from the Plantronics HID device
+        const action = data.getUint8(0);
+        const activeCalls = await sdk.getActiveCalls();
+
+        if (activeCalls.activeCalls.length !== 0) {
+            activeCall = activeCalls.activeCalls[0];
+            callInfo = activeCall.callInfo;
+            //set this to send signal to salesforce that the source of action is HID
+            callInfo.isHIDCall = true;
+
+            /**
+             * Mute/unmute - Action signal toggles between 1,0 and 3,2
+             * accept/hangup - Action signal toggles between 2 and 0
+             * Since 1,0 contains 0 and 3,2 contains 2, it will collide with accept/hangup signal of 0 or 2.
+             * Hence, maintaining buffer and muteToggleSignal to differentiate 0 or 2 coming from mute/unmute(1,0 or 3,2)
+             * and not accept/hangup
+             */
+            if (action === 1 || action === 3) {
+                //set buffer and muteToggleSignal to club it with the second signal 0 or 2 that will come
+                muteToggleSignal = true;
+                buffer = [action];
+            } else if (action === 2 || action === 0) {
+                //mute action for signal 1,0 or 3,2 emitted through the device, here buffer was set when 1 or 3 received
+                if (muteToggleSignal && buffer.length === 1) {
+                    await this.performAction("muteToggle", sdk);
+                    //reset buffer and muteToggleSignal if mute/unmute signal
+                    buffer = [];
+                    muteToggleSignal = false;
+                } else {
+                    //answer or hangup call action for signal 2 or 0 emitted through the device
+                    await this.performAction("acceptOrHangupCall", sdk);
+                }
+            }
+        }
+    }
+
+    //process action based on the action number received from HID device
+    async performAction(action, sdk) {
+        switch (action) {
+            case "muteToggle": //1,0 or 3,2
+                if(callInfo.isMuted) {
+                    const payload = await sdk.unmute(activeCall);
+                    sdk.log("unmute call triggered using HID: ", activeCall);
+                    (0,scv_connector_base__WEBPACK_IMPORTED_MODULE_1__.publishEvent)({eventType: scv_connector_base__WEBPACK_IMPORTED_MODULE_1__.Constants.VOICE_EVENT_TYPE.MUTE_TOGGLE, payload});
+                } else {
+                    const payload = await sdk.mute(activeCall);
+                    sdk.log("mute call triggered using HID: ", activeCall);
+                    (0,scv_connector_base__WEBPACK_IMPORTED_MODULE_1__.publishEvent)({eventType: scv_connector_base__WEBPACK_IMPORTED_MODULE_1__.Constants.VOICE_EVENT_TYPE.MUTE_TOGGLE, payload});
+                }
+                break;
+            case "acceptOrHangupCall": //2 or 0
+                if (activeCall.state === scv_connector_base__WEBPACK_IMPORTED_MODULE_1__.Constants.CALL_STATE.RINGING && activeCall.callType === "inbound") {
+                    sdk.log("answer call triggered using HID: ", activeCall);
+                    sdk.connectCall(callInfo);
+                } else {
+                    sdk.log("hangup call triggered using HID: ", activeCall);
+                    sdk.hangup(scv_connector_base__WEBPACK_IMPORTED_MODULE_1__.Constants.HANGUP_REASON.PHONE_CALL_ENDED);
+                }
+        }
+    }
+}
+
+/***/ }),
+
+/***/ "./src/main/connector.js":
+/*!*******************************!*\
+  !*** ./src/main/connector.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Connector: () => (/* binding */ Connector),
+/* harmony export */   PhoneConnector: () => (/* binding */ PhoneConnector)
+/* harmony export */ });
+/* harmony import */ var scv_connector_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! scv-connector-base */ "./node_modules/scv-connector-base/dist/scv-connector-base.js");
+/* harmony import */ var scv_connector_base__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(scv_connector_base__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _vendor_sdk__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./vendor-sdk */ "./src/main/vendor-sdk.js");
+/*
+ * Copyright (c) 2021, salesforce.com, inc.
+ * All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause
+ * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
+/** 
+ * Salesforce Service Cloud Voice Demo Connector
+ * @author dlouvton
+ */
+
+/** @module connector **/
+
+
+
+/** 
+ * Class representing a Service Cloud Voice Demo Telephony Connector
+ */
+class PhoneConnector extends scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.TelephonyConnector {
+    /**
+     * Create a Telephony Connector instance.
+     * @param {object} sdk - Telephony SDK
+     */
+    constructor(sdk) {
+        super();
+        this.sdk = sdk;
+    }
+    /**
+     * Called when the connector is loaded, to request the active calls
+     */
+    getActiveCalls() {
+        return this.sdk.getActiveCalls();
+    }
+    /**
+     * Called when call is accepted on the omni widget
+     * @param {PhoneCall} call
+     */
+    acceptCall(call) {
+        return this.sdk.acceptCall(call);
+    }
+    /**
+     * Called when call is declined
+     * @param {PhoneCall} call
+     */
+    declineCall(call) {
+        // TODO: Update core to pass call on declineCall
+        return this.sdk.declineCall(call ? call : { callAttributes: { participantType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.INITIAL_CALLER }});
+    }
+    /**
+     * Called when agent hangs up or when a participant (customer or third party) is
+     * removed by the agent.
+     * @param {PhoneCall} call
+     * @param {string} agentStatus
+     */
+    endCall(call, agentStatus) {
+        return this.sdk.endCall(call, agentStatus);
+    }
+    /**
+     * Called when call is muted from the sfdc call controls
+     * @param {PhoneCall} call
+     */
+    mute(call) {
+        return this.sdk.mute(call);
+    }
+    /**
+     * Called when call is unmuted from the sfdc call controls
+     * @param {PhoneCall} call
+     */
+    unmute(call) {
+        return this.sdk.unmute(call)
+    }
+    /**
+     * Called when customer/third party call is put on hold by the agent
+     * @param {PhoneCall} call call
+     */
+    hold(call) {
+        return this.sdk.hold(call)
+    }
+    /**
+     * Called when call is resumed (off hold for either customer/third party) from
+     * the sfdc call controls
+     * @param {PhoneCall} call call
+     */
+    resume(call) {
+        return this.sdk.resume(call);
+    }
+    /**
+     * Called when recording is paused from the sfdc call controls
+     * @param {PhoneCall} call
+     */
+    pauseRecording(call) {
+        return this.sdk.pauseRecording(call);
+    }
+    /**
+     * Called when recording is resumed from the sfdc call controls
+     * @param {PhoneCall} call
+     */
+    resumeRecording(call) {
+        return this.sdk.resumeRecording(call);
+    }
+    /**
+     * Called when participants on a call are swapped
+     * @param {PhoneCall} call1 first call to be swapped
+     * @param {PhoneCall} call2 second call to be swapped
+     */
+    swap(call1, call2) {
+        return this.sdk.swapCalls(call1, call2);
+    }
+    /**
+     * Called when participants are joined for a conference
+     * @param {PhoneCall[]} calls
+     */
+    conference(calls) {
+        return this.sdk.conference(calls);
+    }
+    /**
+     * Called when an outbound call is made 
+     * @param {Contact} contact
+     * @param {DialOptions} dialOptions
+     */
+    dial(contact, dialOptions) {
+        return this.sdk.dial(contact, {}, false, dialOptions && dialOptions.isCallback, dialOptions && dialOptions.isConsultCall);
+    }
+    /**
+     * Called when an agent sends digits on the existing call @digits: a string of
+     * digits to send to the existing connected call.
+     * @param {string} digits digits
+     */
+    sendDigits(digits) {
+        return this.sdk.sendDigits(digits);
+    }
+    /**
+     * Called when speed dial is clicked in order to request the vendor to get the agent phone contacts
+     * @param {Object} filter
+     */
+    getPhoneContacts(filter) {
+        return this.sdk.getPhoneContacts(filter);
+    }
+    /**
+     * add participant to the call through either an address or a free form Phone Number.
+     * @param {Contact} contact
+     * @param {PhoneCall} call
+     * @param {Boolean} isBlindTransfer
+     */
+    addParticipant(contact, call, isBlindTransfer) {
+        return this.sdk.addParticipant(contact, call, isBlindTransfer);
+    }
+    /**
+     * Called when connector is ready to get the agent configuration
+     */
+    getAgentConfig() {
+        return this.sdk.getAgentConfig();
+    }
+
+    /**
+    * Used to set the agent config, including the selected phone type and number
+    */
+    setAgentConfig(config) {
+        return this.sdk.setAgentConfig(config);
+    }
+     /**
+     * Called when connector is ready to get the voice vendor or agent capabilities
+     */
+    getVoiceCapabilities() {
+        return this.sdk.getVoiceCapabilities();
+    }
+    /**
+    * Used to set the vendor or agent capabilities
+    */
+    setCapabilities(capabilities) {
+        return this.sdk.setCapabilities(capabilities);
+    }
+
+    /**
+    * Used to finish wrap-up
+    */
+    wrapUpCall() {
+        this.sdk.endWrapup();
+    }
+
+     /**
+     * Get the signed recording url
+     * @param {String} recordingUrl
+     * @param {String} vendorCallKey
+     * @param {String} callId
+     * @returns {Promise<SignedRecordingUrlResult>} 
+     */
+    getSignedRecordingUrl(recordingUrl, vendorCallKey, callId) {
+        return this.sdk.getSignedRecordingUrl(recordingUrl, vendorCallKey, callId);
+    }
+
+    superviseCall(parentCall){
+        console.log("superviseCall", parentCall);
+        return this.sdk.superviseCall(parentCall);  
+    }
+
+    supervisorDisconnect(parentCall){
+        console.log("supervisorDisconnect", parentCall); 
+        return this.sdk.supervisorDisconnect(parentCall);
+    }
+
+    supervisorBargeIn(parentCall){
+        console.log("supervisorBargeIn", parentCall); 
+        return this.sdk.supervisorBargeIn(parentCall);
+    }
+}
+
+
+/** 
+ * Class representing a Service Cloud Voice Demo Common Connector 
+ */
+class Connector extends scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.VendorConnector {
+    /**
+     * Create a Connector instance.
+     * @param {object} state - Vendor SDK state
+     */
+    constructor(state) {
+        super();
+        this.sdk = new _vendor_sdk__WEBPACK_IMPORTED_MODULE_1__.Sdk(state);
+        this.telephonyConnector = new PhoneConnector(this.sdk);
+    }
+    /**
+     * Returns the Telephony Connector (if implemented)
+     */
+    getTelephonyConnector() {
+        return this.telephonyConnector;
+    }
+    /**
+     * Called by SFDC to initialize the connector
+     * @param {object} callCenterConfig - SFDC Contact Center Settings
+     */
+    init(callCenterConfig) {
+        return this.sdk.init(callCenterConfig);
+    }
+
+    /**
+     * Called when agent sets their status/presence (i.e. when changing from
+     * Available to Offline) 
+     * @param {string} agentStatus agent status, Constants.AGENT_STATUS.ONLINE or Constants.AGENT_STATUS.OFFLINE
+     * @param {AgentStatusInfo} agentStatusInfo object contains statusId, statusApiName and statusName
+     * @param {boolean} enqueueNextState true if the state should be enqueued, which will update the agent's status after a call ends
+     */
+    setAgentStatus(agentStatus, agentStatusInfo, enqueueNextState) {
+        return this.sdk.setAgentStatus(agentStatus, agentStatusInfo, enqueueNextState)
+    }
+    /**
+     * Sends non-voice agent work events to vendor such as work accepted, declined, etc
+     * @param {AgentWork} agentWork
+     * 
+     */
+    onAgentWorkEvent(agentWork) {
+        return this.sdk.onAgentWorkEvent(agentWork);
+    }
+    /**
+     * logout from the telephony system.
+     */
+    logout() {
+        return this.sdk.omniLogout();
+    }
+    
+    /**
+    * Delegate Message received from sfdc component to sdk
+    * @param {object} message - Message
+    */
+    handleMessage(message) {
+        return this.sdk.handleMessage(message);
+    }
+    /**
+     * Called when transfer is clicked in order to request the vendor to get the agent contacts
+     * @param {Object} filter
+     * @param {string} workItemId
+     */
+    getContacts(filter, workItemId) {
+        return this.sdk.getContacts(filter, workItemId);
+    }
+        /**
+     * Called when connector is ready to get the shared vendor or agent capabilities
+     */
+    getSharedCapabilities() {
+        return this.sdk.getSharedCapabilities();
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/main/vendor-sdk.js":
+/*!********************************!*\
+  !*** ./src/main/vendor-sdk.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Sdk: () => (/* binding */ Sdk)
+/* harmony export */ });
+/* harmony import */ var scv_connector_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! scv-connector-base */ "./node_modules/scv-connector-base/dist/scv-connector-base.js");
+/* harmony import */ var scv_connector_base__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(scv_connector_base__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/wrapper.mjs");
+/* harmony import */ var _common_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../common/constants */ "./src/common/constants.js");
+/* harmony import */ var events__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! events */ "./node_modules/events/events.js");
+/* harmony import */ var events__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(events__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _hid_hidDeviceHandler__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../hid/hidDeviceHandler */ "./src/hid/hidDeviceHandler.js");
+/*
+ * Copyright (c) 2021, salesforce.com, inc.
+ * All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause
+ * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
+
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-console */
+
+/* 
+ * Sample Telephony Vendor SDK 
+ * @author dlouvton
+ */
+
+/** @module vendor-sdk **/
+
+
+
+
+
+/**
+ * Class representing a Phone Call
+ */
+class Call extends scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.PhoneCall {
+
+     /**
+     * Create a Call.
+     * @param {string} callType - Outbound, Inbound or Transfer
+     * @param {Contact} contact - Contact associated with this Call
+     * @param {string} callAttributes - call attributes 
+     * @param {string} callInfo - call info 
+     */
+    constructor(callType, contact, callAttributes, callInfo, callId) {
+        const state = scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_STATE.RINGING;
+        callAttributes.initialCallHasEnded = false;
+        callAttributes.isOnHold = callInfo && callInfo.isOnHold;
+        callId = callId || Math.random().toString(36).substring(7);
+        if (callAttributes.participantType === scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.INITIAL_CALLER) {
+            callInfo.parentCallId = callId;
+        }
+        super({ callId, callType, contact, state, callAttributes, phoneNumber: contact && contact.phoneNumber, callInfo }); 
+    }
+
+    /**
+     * set callId of parent call
+     */
+    set parentCallId(parentCallId) {
+        this.callInfo.parentCallId = parentCallId;
+    }
+}
+
+class ContactCenterAdditionalSettings {
+    /**
+     * Create an object that includes all the additional data retrieved from core and to be rendered dynamically
+     */
+    constructor() {
+        this.userId;
+        this.scrtUrl;
+        this.orgId;
+        this.instanceUrl;
+        this.authorizationContext;
+        this.customPlatformEvent;
+        this.customEventPayloadField;
+        this.customEventTypeField;
+        this.routingOwner;
+        this.channelAddressIdentifier;
+    }
+}
+
+class ConnectorEventEmitter extends events__WEBPACK_IMPORTED_MODULE_3__.EventEmitter {}
+const eventEmitter = new ConnectorEventEmitter();
+
+/** 
+ * Class representing a Softphone SDK
+ */
+class Sdk {
+    /**
+     * Create a Softphone SDK instance.
+     * @param {object} state - SDK state
+     */
+    constructor(state = { 
+        isLoginRequired: true, 
+        agentConfig: JSON.parse(localStorage.getItem('agentConfig')) || {
+            phones : [ "SOFT_PHONE", "DESK_PHONE"],
+            selectedPhone : {type:"SOFT_PHONE"}
+        },
+        updateRemoveTransferCallParticipantVariant: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.REMOVE_PARTICIPANT_VARIANT.ALWAYS,
+        capabilities: JSON.parse(localStorage.getItem('capabilities')) || {
+            hasMute: true,
+            hasRecord: true,
+            hasMerge: true,
+            hasSwap: true,
+            hasSignedRecordingUrl: false,
+            debugEnabled: true,
+            signedRecordingUrl: '',
+            signedRecordingDuration: null,
+            hasContactSearch: true,
+            hasAgentAvailability: true,
+            hasQueueWaitTime: true,
+            supportsMos : false,
+            hasSupervisorListenIn: true,
+            hasSupervisorBargeIn: true,
+            hasBlindTransfer : true,
+            hasTransferToOmniFlow : true,
+            hasPendingStatusChange: true,
+            hasPhoneBook : false,
+            canConsult : true,
+            isDialPadDisabled: false,
+            isPhoneBookDisabled: false,
+            isHidSupported: false,
+            hasSetExternalMicrophoneDeviceSetting: false,
+            hasSetExternalSpeakerDeviceSetting: false
+        },
+        agentId: null,
+        userFullName: null,
+        activeCalls: this.getActiveCallsObj(),
+        destroyedCalls: [],
+        agentStatus: "Available",
+        publishHardphoneErrors: true,
+        agentAvailable: false,
+        messagingContacts: this.getAllMessagingContacts(20),
+        phoneContacts: this.getAllPhoneContacts(20),
+        onlineUsers: [],
+        activeConferenceCalls: [],
+        callInfoObj: {},
+        userFullNames : {},
+        userPresenceStatuses: null,
+        isMultipartyAllowed: null,
+        isConsultAllowed: null,
+        contactCenterChannels: null,
+        delayMs: 0, //Delay in milliseconds before resolving a promise
+        contactTypes: JSON.parse(localStorage.getItem('contactTypes')) || 
+            [ scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CONTACT_TYPE.AGENT, scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CONTACT_TYPE.QUEUE, scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CONTACT_TYPE.PHONEBOOK, scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CONTACT_TYPE.PHONENUMBER ],
+        contactCenterAdditionalSettings: new ContactCenterAdditionalSettings(),
+        flowConfig : null
+    }){
+        this.state = {...state, 
+            showLoginPage: !!JSON.parse(localStorage.getItem('showLoginPage')),
+            throwError: !!JSON.parse(localStorage.getItem('throwError'))
+        };
+        this.eventEmitter = eventEmitter;
+    }
+    /**
+     * Get a call from the active calls stored on localStorage)
+     */
+    getCall(call) {
+        if (!this.hasActiveCalls()){
+            throw new Error("Couldn't find an active call", call);
+        }
+        if (call.callId) {
+            const callByCallId = this.state.activeCalls[call.callId];
+            if (!callByCallId) {
+                throw new Error("Couldn't find an active call for callId " + call.callId);
+            }
+            return callByCallId;
+        }
+        if (call.callAttributes && call.callAttributes.isConsultCall) {
+            const consultCall = Object.values(this.state.activeCalls).filter((obj) => obj['callAttributes']['isConsultCall'] === true).pop();
+            if (!consultCall) {
+                throw new Error("Couldn't find an active consult call " + call.callAttributes.participantType);
+            }
+            return consultCall;
+        } 
+        if (call.callAttributes && call.callAttributes.participantType) {
+            // During a consult call in list there can be 2 Initial callers, so we do shift() to get the first non-consult one
+            const callByParticipant = Object.values(this.state.activeCalls).filter((obj) => obj['callAttributes']['participantType'] === call.callAttributes.participantType).shift();
+            if (!callByParticipant) {
+                throw new Error("Couldn't find an active call for participant " + call.callAttributes.participantType);
+            }
+            return callByParticipant;
+        }
+        if (call.contact && call.contact.id) {
+            const callByContactId = Object.values(this.state.activeCalls).filter((obj) => obj['contact']['id'] === call.contact.id).pop();
+            if (!callByContactId) {
+                return null;
+            }
+            return callByContactId;
+        }
+        if (call.callInfo && call.callInfo.renderContactId) {
+            const callByRenderContactId =  Object.values(this.state.activeCalls).filter((obj) => obj['callInfo']['renderContactId'] === call.callInfo.renderContactId).pop();
+            if (!callByRenderContactId) {
+                return null;
+            }
+            return callByRenderContactId;
+        }
+        throw new Error("Call is not defined or invalid.", call);
+    }
+    /**
+     * Add a call to the active calls (persisted on localStorage)
+     */
+    addCall(call) {
+        if (call instanceof Call || call instanceof  scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.PhoneCall) {
+            this.state.activeCalls[call.callId] = call;
+        } else {
+            // Have noticed that `call` object comes in as an object instead of Call class OR PhoneCall class . So converting it into the PhoneCall class.
+            let callObj = new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.PhoneCall({});
+            Object.assign(callObj, {callId : call.callId, callType : call.callType, contact : call.contact, state :  call.state,
+                callAttributes : call.callAttributes, phoneNumber : call.contact && call.contact.phoneNumber, callInfo : call.callInfo});
+            this.state.activeCalls[call.callId] = callObj;
+        }
+        localStorage.setItem('activeCalls', JSON.stringify(this.state.activeCalls));
+    }
+
+    /**
+     * Message a user (via websocket)
+     * if toUsername is null, the message is broadcasted to all users
+     */
+    messageUser(toUsername, messageType, data){
+        const socket = (0,socket_io_client__WEBPACK_IMPORTED_MODULE_1__.io)();
+        const fromUsername = this.state.agentId;
+        socket.emit("message", { fromUsername, toUsername, messageType, data });
+    }
+    /**
+     * Notify users about your presence (via websocket)
+     */
+    toggleAgentPresence(isAvailable){
+        const socket = (0,socket_io_client__WEBPACK_IMPORTED_MODULE_1__.io)();
+        const username = this.state.agentId;
+        const fullName = this.state.userFullName;
+        const userId = this.state.userId;
+        socket.emit("presence", { isAvailable, username , fullName, userId});
+    }
+    
+    /**
+     * Get the primary call
+     * @returns {Call} - The primary call
+     */    
+    getPrimaryCall() {
+        let primaryCall;
+        try {
+            primaryCall = this.getCall({ callAttributes: { participantType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.INITIAL_CALLER }});
+        } catch (e) {
+            try {
+                primaryCall = this.getCall({ callAttributes: { participantType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.SUPERVISOR }});
+            } catch (e) {
+                try {
+                    primaryCall = this.getCall({callAttributes: { isConsultCall: true }});
+                } catch (e) {
+                    return this.getActiveCallsList()[0];
+                }
+            }
+        }
+        return primaryCall;
+    }
+
+    /**
+     * for multiparty - update a call with a value to callInfo. 
+     * otherwise, Update the Main Call Info (with the initial caller or supervisor)
+     * @param call - PhoneCall object if null use INITIAL_CALLER or SUPERVISOR
+     * @param value - call.callInfo.value to update 
+     */
+    updateCallInfo(value, call) {
+        let activeCall;
+        try {
+            activeCall = this.getCall({...(call || {}), callAttributes: { participantType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.INITIAL_CALLER }});
+        } catch(e) {
+            activeCall = this.getCall({ callAttributes: { participantType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.SUPERVISOR }});
+        }
+        Object.assign(activeCall.callInfo, value);
+        this.addCall(activeCall);
+        return activeCall;
+    }
+
+    /*
+    * This method is for demo purposes. Enables/disables the show login page for testing
+    */
+    showLoginPage(enable) {
+        localStorage.setItem('showLoginPage', enable);
+        this.state.showLoginPage = enable;
+    }
+
+    setAgentConfig(config) {
+        if (!config) {
+            return;
+        }
+
+        if (config.selectedPhone && Object.keys(config.selectedPhone).length > 0) {
+            this.state.agentConfig.selectedPhone = config.selectedPhone;
+        }
+        if (config.hidDeviceInfo && Object.keys(config.hidDeviceInfo).length > 0) {
+            this.state.agentConfig.hidDeviceInfo = config.hidDeviceInfo;
+        }
+        localStorage.setItem('agentConfig', JSON.stringify(this.state.agentConfig));
+        if(config.hidDeviceInfo !== undefined) {
+            (0,_hid_hidDeviceHandler__WEBPACK_IMPORTED_MODULE_4__.hidDeviceHandler)(config, this);
+        }
+        return this.executeAsync("setAgentConfig", new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.SetAgentConfigResult({
+            success: true
+        }));
+    }
+
+    /*
+    * Update Agent Config used only for Voice call simulator
+    */
+   updateAgentConfig(agentConfig) {
+       this.state.agentConfig.selectedPhone = agentConfig.selectedPhone;
+       localStorage.setItem('agentConfig', JSON.stringify(this.state.agentConfig));
+    }
+
+    setCapabilities() {
+        localStorage.setItem('capabilities', JSON.stringify(this.state.capabilities));
+        return this.executeAsync("setCapabilities", new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.GenericResult({ success: true }));
+    }
+
+    /*
+    * Update Capabilities used only for Voice call simulator
+    */
+    updateCapabilities(capabilities) {
+        this.state.capabilities.hasSignedRecordingUrl = capabilities.hasSignedRecordingUrl;
+        this.state.capabilities.signedRecordingUrl = capabilities.signedRecordingUrl;
+        this.state.capabilities.signedRecordingDuration = capabilities.signedRecordingDuration;
+        this.state.capabilities.hasMute = capabilities.hasMute;
+        this.state.capabilities.hasRecord = capabilities.hasRecord;
+        this.state.capabilities.hasSwap = capabilities.hasSwap;
+        this.state.capabilities.hasMerge = capabilities.hasMerge;
+        this.state.capabilities.hasContactSearch = capabilities.hasContactSearch;
+        this.state.capabilities.supportsMos = capabilities.supportsMos;
+        this.state.capabilities.hasAgentAvailability = capabilities.hasAgentAvailability;
+        this.state.capabilities.hasQueueWaitTime = capabilities.hasQueueWaitTime;
+        this.state.capabilities.hasSupervisorListenIn = capabilities.hasSupervisorListenIn;
+        this.state.capabilities.hasSupervisorBargeIn = capabilities.hasSupervisorBargeIn;
+        this.state.capabilities.hasBlindTransfer = capabilities.hasBlindTransfer;
+        this.state.capabilities.hasTransferToOmniFlow = capabilities.hasTransferToOmniFlow;
+        this.state.capabilities.debugEnabled = capabilities.debugEnabled;
+        this.state.capabilities.hasPendingStatusChange = capabilities.hasPendingStatusChange;
+        this.state.capabilities.hasPhoneBook = capabilities.hasPhoneBook;
+        this.state.capabilities.canConsult = capabilities.canConsult;
+        this.state.capabilities.isDialPadDisabled = capabilities.isDialPadDisabled;
+        this.state.capabilities.isPhoneBookDisabled = capabilities.isPhoneBookDisabled;
+        this.state.capabilities.isHidSupported = capabilities.isHidSupported;
+        this.state.capabilities.hasSetExternalMicrophoneDeviceSetting = capabilities.hasSetExternalMicrophoneDeviceSetting;
+        this.state.capabilities.hasSetExternalSpeakerDeviceSetting = capabilities.hasSetExternalSpeakerDeviceSetting;
+        localStorage.setItem('capabilities', JSON.stringify(this.state.capabilities));
+    }
+
+    /*
+    * Update contact types for add participant for voice call simulator
+    */
+   updateContactTypes(contactTypes) {
+       this.state.contactTypes = contactTypes;
+       localStorage.setItem('contactTypes', JSON.stringify(this.state.contactTypes));
+   }
+
+    /*
+    * This method is for demo purposes. Enables/disables throwing sdk errors for testing
+    */
+   throwError(enable) {
+        localStorage.setItem('throwError', enable);
+        this.state.throwError = enable;
+    }
+
+    /*
+    * This method is for demo purposes. Enables throwing custom errors for testing
+    */
+    customErrorChanged(value) {
+        localStorage.setItem('customError', value);
+        this.state.customError = value;
+    }
+
+    /*
+    * This method simulates the vendor sending a login result
+    */
+    subsystemLoginResult(success) {
+        this.state.agentAvailable = success;
+        (0,scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.publishEvent)({ eventType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.SHARED_EVENT_TYPE.LOGIN_RESULT, payload: new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.GenericResult({
+            success: (this.state.showLoginPage && success)
+        })});
+    }
+
+    /**
+     * log a message
+     */
+    log(...args) {
+        if(this.state.capabilities.debugEnabled) {
+            const message = args.map(arg => (typeof arg === 'string' ? arg : JSON.stringify(arg))).join(' ');
+            (0,scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.log)({ message }, scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.LOG_LEVEL.INFO);
+            return;
+        }
+        Function.apply.call(console.log, console, ["[sdk]", ...args]);
+    }
+
+    /** 
+        filter contacts
+    */
+    filterContacts(contacts, filter) {
+        if (!filter) {
+            return contacts;
+        }
+        let result = contacts;
+        if (filter.contains) {
+            result = result.filter(obj => Object.keys(obj).some(key => obj[key] && obj[key].toLowerCase().includes(filter.contains.toLowerCase())));
+        }
+        let contactTypes = filter.types || [filter.type && filter.type.toUpperCase()] || 0;
+        contactTypes.forEach(type => {
+            const value = _common_constants__WEBPACK_IMPORTED_MODULE_2__.FILTER_TYPES_TO_CONTACT_TYPES[type] || type;
+            const key = _common_constants__WEBPACK_IMPORTED_MODULE_2__.FILTER_TYPES_TO_CONTACT_TYPES[type] ? "type" : "availability";
+            result = result.filter(obj =>  obj[key] === value);
+        });
+        const startIndex = filter.offset ? filter.offset : 0; 
+        const endIndex = filter.limit ? startIndex + filter.limit : result.length;
+        return result.slice(startIndex, endIndex);  
+    }
+
+    /**
+     * @returns {unknown[]}
+     */
+    getActiveCallsList() {
+        return Object.values(this.state.activeCalls);
+    }
+
+    /**
+     * retrieve the call object from attributes. Logic is not perfect and breaks the Multiparty flow,
+     * so separating it in order to not create regression.
+     * @param call
+     * @returns {*[]}
+     */
+    getCallsToDestroy(call) {
+        let callsToDestroy = [];
+        if (call.callAttributes && call.callAttributes.participantType === scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.AGENT) {
+            //TODO: Revisit this logic.
+            try {
+                const customerCall = this.getCall({ callAttributes: { participantType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.INITIAL_CALLER }});
+                callsToDestroy.push(customerCall);
+            } catch(e) {
+                //noop
+            }
+            try {
+                const thirdPartyCall = this.getCall({ callAttributes: { participantType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.THIRD_PARTY }});
+                callsToDestroy.push(thirdPartyCall);
+            } catch(e) {
+                //noop
+            }
+            if (callsToDestroy.length === 0) {
+                callsToDestroy.push(this.getCall(call));
+            }
+        } else {
+            callsToDestroy.push(this.getCall(call));
+        }
+        return callsToDestroy;
+    }
+    /**
+     * destroy one or more calls
+     * @param call
+     * @param {string} reason - reason
+     */
+    destroyCalls(call, reason) {
+        let callsToDestroy = [];
+        if (this.state.isMultipartyAllowed) {
+            if(call.callId) {
+                callsToDestroy.push(call);
+            } else {
+                callsToDestroy.push(this.getCall(call));
+            }
+        } else {
+            callsToDestroy = this.getCallsToDestroy(call);
+        }
+        return this.processCallsToDestroy(callsToDestroy, reason);
+    }
+
+    processCallsToDestroy(callsToDestroy, reason) {
+        callsToDestroy.forEach((callToDestroy) => {
+            const state = scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_STATE.ENDED;
+            callToDestroy.state = state;
+            callToDestroy.reason = reason;
+            if (!this.state.isMultipartyAllowed && this.shouldMessageOtherUser(callToDestroy)) {
+                this.messageUser(null, _common_constants__WEBPACK_IMPORTED_MODULE_2__.USER_MESSAGE.CALL_DESTROYED, {callId: callToDestroy.callId, reason: reason});
+            }
+            this.state.destroyedCalls.push(callToDestroy);
+            delete this.state.activeCalls[callToDestroy.callId];
+        })
+        localStorage.setItem("activeCalls", JSON.stringify(this.state.activeCalls));
+        this.state.agentAvailable = Object.keys(this.state.activeCalls).length === 0;
+        return callsToDestroy;
+    }
+
+    shouldMessageOtherUser(callToDestroy) {
+        return callToDestroy.callType === scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_TYPE.INTERNAL_CALL.toLocaleLowerCase();
+    }
+
+    /**
+     * destroy specified call
+     * @param {string} reason - reason
+     */
+    destroyCall(call, reason) {
+        return this.destroyCalls(call, reason).pop();
+    }
+    /**
+     * perform sso on a container element
+     * @param {object} callCenterConfig - Call Center configuration
+     */
+
+    async init(callCenterConfig) {
+
+        let url = "http://localhost:8000";
+        let options = {
+                "method": "get",
+                "mode": "no-cors"
+            };
+          fetch(url, options)
+            .then((response) => {
+                console.log('Manish response', response);
+            })
+            .catch((error) => {
+                console.log('Mansih error', error);
+            });
+
+        const username = this.state.agentId = callCenterConfig['userName'];
+        this.state.userFullName = callCenterConfig['userFullName'];
+        this.state.userId = callCenterConfig['userId'];
+        this.state.userPresenceStatuses = callCenterConfig['userPresenceStatuses'];
+        this.state.contactCenterChannels = callCenterConfig['contactCenterChannels'];
+        this.state.isMultipartyAllowed = callCenterConfig['isSCVMultipartyAllowed'];
+        this.state.isConsultAllowed = callCenterConfig['isSCVMultipartyConsultAllowed'];
+        
+        // Only fetch when there're messaging channels. Voice doesn't need these information
+        if (callCenterConfig['messagingChannel'] && callCenterConfig['messagingChannel'].length !== 0) {
+            let IS_LOCAL_CONFIG = await this.fetchServer("/is-local-config", 'GET');
+            if(!IS_LOCAL_CONFIG){
+                try {
+                    this.readCallCenterConfigAndSetState(callCenterConfig);
+                } catch (e) {
+                    return Promise.reject("Failed to configure tenant information");
+                }
+            }
+        }
+
+        const socket = (0,socket_io_client__WEBPACK_IMPORTED_MODULE_1__.io)();
+
+        socket.on('onlineUsers', onlineUsers => {
+            this.state.onlineUsers = onlineUsers.users;
+            this.state.userFullNames = new Map(JSON.parse(onlineUsers.userNames));
+        });
+
+        socket.on('connect', () => {
+            socket.emit('join', { username, id: this.state.userId });
+        });
+
+        socket.on('message', message => {
+            this.handleSocketMessage(message);
+        });
+
+        const tenantInfo = {
+            scrtBaseUrl: callCenterConfig['scrtUrl'],
+            orgId: callCenterConfig['organizationId'],
+            callCenterName: callCenterConfig['/reqGeneralInfo/reqInternalName']
+        };
+
+        return fetch('/api/configureTenantInfo', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(tenantInfo)
+        }).then(response => response.json())
+          .then((data) => {
+            if (data.success) {
+                this.toggleAgentPresence(true);
+                this.state.agentAvailable = !this.state.showLoginPage;
+                return this.executeAsync('ssoLogin', this.state.showLoginPage ?
+                new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.InitResult({ showLogin: true, loginFrameHeight: 350 }) :
+                new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.InitResult({}));
+            } else {
+                return Promise.reject("Failed to configure tenant information");
+            }
+        });
+    }
+
+    fetchServer(endpoint, method, body) {
+        return fetch(`/api/fetchServer`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ ...body, method: method, endpoint: endpoint })
+        }).then(response => response.json()).then((result) => {
+            return result;
+        })
+    }
+    /**
+     * This function:
+     * (1) retrieve setting from /getsettings,
+     * (2) use setting.channelAddressIdentifier to select the conversationChannelDefinition we are looking for,
+     * (3) update this.state data (ConversationDefinitionChannel, MessagingChannel, Domain)
+     * (4) fetch back to current setting by calling /setcallcenterconfig endpoint.
+     * @param {*} callCenterConfig 
+     */
+
+    readCallCenterConfigAndSetState(callCenterConfig) {
+        this.fetchServer("/getsettings",'GET').then((setting) => {
+            if (setting) {
+                //HINT: setting.channelAddressIdentifier needs to be specified by user 
+                this.state.channelAddressIdentifier = setting.channelAddressIdentifier;
+                this.state.contactCenterAdditionalSettings.userId = callCenterConfig['userId'];
+                this.state.contactCenterAdditionalSettings.scrtUrl = callCenterConfig['scrtUrl'];
+                this.state.contactCenterAdditionalSettings.orgId = callCenterConfig['organizationId'];
+                let domain = callCenterConfig['domain']
+                this.state.contactCenterAdditionalSettings.instanceUrl = domain; 
+                if (callCenterConfig['messagingChannel']){
+                    Object.keys(callCenterConfig['messagingChannel']).forEach(mckey =>{
+                        let mc = callCenterConfig['messagingChannel'][mckey];
+                        if (mc['ChannelAddressIdentifier'] === this.state.channelAddressIdentifier) {
+                            let cdId = mc['ChannelDefinitionId'];
+                            Object.keys(callCenterConfig['conversationChannelDefinition']).forEach(ccdkey => {
+                                let ccd = callCenterConfig['conversationChannelDefinition'][ccdkey];
+                                if (ccd['Id'] === cdId) {
+                                    this.state.contactCenterAdditionalSettings.authorizationContext = ccd['DeveloperName'];
+                                    this.state.contactCenterAdditionalSettings.customPlatformEvent = ccd['CustomPlatformEvent'];
+                                    this.state.contactCenterAdditionalSettings.customEventPayloadField = ccd['CustomEventPayloadField'];
+                                    this.state.contactCenterAdditionalSettings.customEventTypeField = ccd['CustomEventTypeField'];
+                                    this.state.contactCenterAdditionalSettings.routingOwner = ccd['RoutingOwner'];
+                                }
+                            })
+                        }
+                    })
+                }
+                this.fetchContactCenterConfigToEnv();
+            } else {
+            return new Error("Couldn't fetch settings from /getsettings");
+            }
+        });
+    }
+    /**
+     * Fetch CCD and domain state data to process
+     * @returns 
+     */
+    async fetchContactCenterConfigToEnv() {
+        const formData = {
+            "authorizationContext": this.state.contactCenterAdditionalSettings.authorizationContext,
+            "userId": this.state.contactCenterAdditionalSettings.userId,
+            "userName": this.state.agentId,
+            "customEventPayloadField": this.state.contactCenterAdditionalSettings.customEventPayloadField,
+            "customPlatformEvent": this.state.contactCenterAdditionalSettings.customPlatformEvent,
+            "customEventTypeField": this.state.contactCenterAdditionalSettings.customEventTypeField,
+            "routingOwner": this.state.contactCenterAdditionalSettings.routingOwner,
+            "instanceUrl": this.state.contactCenterAdditionalSettings.instanceUrl,
+            "scrtUrl": this.state.contactCenterAdditionalSettings.scrtUrl,
+            "orgId": this.state.contactCenterAdditionalSettings.orgId,
+        };
+
+        return await this.fetchServer("/setcallcenterconfig", 'POST', formData)
+            .then((data) => {
+            if (data.status === 200) {
+                console.log(data);
+            } else {
+                return new Error("Couldn't fetch settings to /setcallcenterconfig");
+            }
+        });
+    }
+
+    /**
+     * handle socket message event
+     */
+    handleSocketMessage(message) {
+        if (message.messageType) {
+            switch(message.messageType){
+                case _common_constants__WEBPACK_IMPORTED_MODULE_2__.USER_MESSAGE.CALL_STARTED:
+                    this.startTransferOrConsultCall(message);
+                    break;
+                case _common_constants__WEBPACK_IMPORTED_MODULE_2__.USER_MESSAGE.INTERNAL_CALL_STARTED:
+                    this.startInternalCall(message);
+                    break;
+                case _common_constants__WEBPACK_IMPORTED_MODULE_2__.USER_MESSAGE.PARTICIPANT_CONNECTED:
+                    if (message.fromUsername !== this.state.agentId && !this.isSupervisorListeningIn()) {
+                        this.connectParticipant(message.data.callInfo, message.data.callType, message.data.call);
+                    }
+                    break;
+                case _common_constants__WEBPACK_IMPORTED_MODULE_2__.USER_MESSAGE.CALL_BARGED_IN:
+                    this.publishCallBargedInEventToAgents(message.data);
+                    break;
+                case _common_constants__WEBPACK_IMPORTED_MODULE_2__.USER_MESSAGE.CALL_DESTROYED:
+                    if (!this.isSupervisorListeningIn()) {
+                        this.processCallDestroyed(message.data);
+                    }
+                    break;
+                case _common_constants__WEBPACK_IMPORTED_MODULE_2__.USER_MESSAGE.MUTE:
+                    if (message.fromUsername !== this.state.agentId) {
+                        this.processBroadcastMute(message.data, true);
+                    }
+                    break;
+                case _common_constants__WEBPACK_IMPORTED_MODULE_2__.USER_MESSAGE.UNMUTE:
+                    if (message.fromUsername !== this.state.agentId) {
+                        this.processBroadcastMute(message.data, false);
+                    }
+                    break;
+                case _common_constants__WEBPACK_IMPORTED_MODULE_2__.USER_MESSAGE.MERGE:
+                    // Dont merge if there are no active calls
+                    if (!this.hasActiveCalls()) {
+                        return;
+                    }
+
+                    // Don't merge the supervisor if the supervisor is actively listening into a call
+                    if (message.fromUsername !== this.state.agentId && message.data.consultCall && !this.isSupervisorListeningIn()) {
+                        this.state.activeConferenceCalls = message.data.activeConferenceCalls;
+                        let primaryCall;
+                        let activeCallList = this.getActiveCallsList();
+
+                        // goal is to find the primary call and change its participantType / receiverContact before merging
+                        if (activeCallList.length === 1 && this.hasConsultCall(activeCallList)) {
+                            // if we are merging activeCalls into consult user, then currently there is no primary call ID
+                            // and the consult user will have only 1 call. and that is as good as a primary call
+                            primaryCall = activeCallList[0];
+                        } else {
+                            // if we are merging consult call into multiparty group user, then they will have a primary call
+                            primaryCall = this.getPrimaryCall();
+                        }
+
+                        // update the correct participanttype in the MPC
+                        let elem = this.state.activeConferenceCalls.find(({callId}) => callId === primaryCall.callId);
+                        if (elem) {
+                            elem.callAttributes.participantType = scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.INITIAL_CALLER;
+                            elem.receiverContact = elem.receiverContact || this.state.activeCalls[primaryCall.callId].receiverContact;
+                        }
+                        if (message.data.consultCall.callId === primaryCall.callId) {
+                            message.data.consultCall.callAttributes.participantType = scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.INITIAL_CALLER;
+                        }
+                        message.data.consultCall.contact = new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Contact({id: message.fromUsername});
+                        message.data.consultCall.callInfo.renderContactId = message.fromUsername;
+
+                        this.mergeConsultCall(message.data.consultCall);
+                        this.updateConferenceUsers(true);
+                    }
+                    break;
+                default:
+                    this.log("Could not handle message "+message.messageType, message)
+            }
+        } else if (message.data && message.data.type) {
+            // bubble event to the event emitter for remote event handling
+            this.eventEmitter.emit('event', message);
+        }
+    }
+
+    /**
+     * This method updates the callInfo object for the connected Agent
+     * on page load, config changes etc.
+     * This callInfo object is then used by the agents when making the call.
+     * @param message
+     */
+    updateCallInfoObj(message) {
+        this.state.callInfoObj = message.data.callInfo;
+        localStorage.setItem('callInfo', JSON.stringify(this.state.callInfoObj));
+    }
+
+    generateCallId() {
+        return Math.random().toString(36).substring(7);
+    }
+
+    startTransferOrConsultCall(message) {
+        const isConsultCall = message.data.isConsultCall;
+        let flowConfig = message.data.flowConfig || { isUnifiedRoutingEnabled: false };
+        flowConfig.isTransferFlow = true;
+        const callInfo = message.data.callInfo || {};
+        callInfo.callStateTimestamp = message.data.callInfo?.callStateTimestamp ? new Date(message.data.callInfo.callStateTimestamp) : new Date();
+        const call = new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.PhoneCall({
+            callType: isConsultCall ? scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_TYPE.CONSULT : scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_TYPE.TRANSFER,
+            phoneNumber: message.data.phoneNumber,
+            callId: message.data.callId || this.generateCallId(),
+            callAttributes: new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.PhoneCallAttributes({
+                participantType: isConsultCall ? scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.THIRD_PARTY : scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.INITIAL_CALLER,
+                voiceCallId: message.data.voiceCallId,
+                parentId: message.data.callAttributes?.parentId,
+                isConsultCall
+            }),
+            state: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_STATE.RINGING  // Explicitly set initial state to RINGING
+        });
+        
+        const renderContact = callInfo.renderContact || message.data.renderContact;
+        call.callInfo = Object.assign(callInfo, JSON.parse(localStorage.getItem('callInfo')));
+
+        if (!this.state.isMultipartyAllowed) {
+            call.callInfo.isOnHold = false;
+        }
+        if (renderContact) {
+            call.contact = new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Contact(renderContact);
+            call.toContact = this.getCurrentUserContact();
+        }
+        call.callInfo.renderContactId = message.fromUsername;
+        this.addCall(call);
+        //When Unified Routing is enabled, we need to invoke OmniFlow, otherwise regular flow to publish CALL_STARTED event.
+        if(flowConfig?.isUnifiedRoutingEnabled) {
+            //this.executeOmniFlowForUnifiedRouting(message.data, flowConfig);
+        } else {
+            let callResult = new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.CallResult({call});
+            (0,scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.publishEvent)({ eventType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.VOICE_EVENT_TYPE.CALL_STARTED, payload: callResult});
+        }
+        if (this.state.isMultipartyAllowed && !isConsultCall) {
+            this.state.activeConferenceCalls = message.data.activeConferenceCalls;
+        }
+    }
+
+    startInternalCall(message) {
+        const currContact = new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Contact({
+            phoneNumber : message.data.contact.phoneNumber,
+            id : message.data.contact.id,
+            type : message.data.contact.type,
+            name : message.data.contact.name
+        });
+        const call = new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.PhoneCall({
+            callType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_TYPE.INTERNAL_CALL,
+            phoneNumber: message.data.contact.phoneNumber,
+            callId: message.data.callId,
+            contact: currContact,
+            callInfo: new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.CallInfo({isOnHold:false, renderContactId: message.data.renderContact.name}),
+            callAttributes: new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.PhoneCallAttributes({participantType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.AGENT })
+        });
+        this.addCall(call);
+        let callResult = new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.CallResult({call});
+        (0,scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.publishEvent)({ eventType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.VOICE_EVENT_TYPE.CALL_STARTED, payload: callResult});
+    }
+
+
+    updateConferenceUsers(updateActiveCallToo) {
+        if (this.state.isMultipartyAllowed) {
+            if (this.state.activeConferenceCalls.length > 0) {
+                setTimeout(()=> {
+                    this.state.activeConferenceCalls.forEach(call => {
+                        const activeCall = this.state.activeCalls[call.callId];
+                        if (updateActiveCallToo || !activeCall) {
+                            const callAttributes = activeCall ? activeCall.callAttributes : { isAutoMergeOn: true };
+                            let callInfo = this.state.isMultipartyAllowed
+                                ? Object.assign(call.callInfo, JSON.parse(localStorage.getItem('callInfo')))
+                                : call.callInfo || {};
+                            callInfo.callStateTimestamp = callInfo.callStateTimestamp
+                                ? new Date(callInfo.callStateTimestamp)
+                                : new Date();
+                            if (activeCall) {
+                                call.contact = activeCall.contact;
+                                callInfo.renderContactId = activeCall.callInfo.renderContactId;
+                            }
+                            const useContact = call.contact;
+                            const newCall = new Call(
+                                scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_TYPE.ADD_PARTICIPANT,
+                                new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Contact(useContact),
+                                new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.PhoneCallAttributes({
+                                    participantType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.THIRD_PARTY,
+                                    ...callAttributes
+                                }),
+                                new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.CallInfo(callInfo),
+                                call.callId
+                            );
+                            newCall.fromContact = call.fromContact;
+                            newCall.toContact = call.toContact;
+                            this.addCall(newCall);
+                            this.connectParticipant(null, null, newCall);
+                        }
+                    });
+                    this.state.activeConferenceCalls = [];
+                },1000);
+            }
+        }
+    }
+
+    processCallDestroyed(messageData) {
+        if (messageData.callId) {
+            let callToDestroy = null;
+            try {
+                callToDestroy = this.getCall({ callId : messageData.callId});
+            } catch(e) {
+                //noop
+            }
+            if (callToDestroy) {
+                if (this.state.isMultipartyAllowed) {
+                    if (messageData.target === this.state.agentId) {
+                        if (callToDestroy.callType === scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_TYPE.CONSULT.toString()) {
+                            let destroyedCall = this.destroyCalls(callToDestroy, messageData.reason);
+                            let payload = new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.CallResult({call: destroyedCall.pop()});
+                            (0,scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.publishEvent)({ eventType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.VOICE_EVENT_TYPE.PARTICIPANT_REMOVED, payload });
+                        } else {
+                            this.hangupMultiParty(callToDestroy, messageData.reason, null);
+                        }
+                    } else {
+                        let primaryCall;
+                        try {
+                            primaryCall = this.getPrimaryCall();
+                        } catch (e) {
+                            //noop
+                        }
+                        let destroyedCall = this.processEndCall(callToDestroy, null, messageData.reason, false);
+                        let payload = new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.CallResult({call: destroyedCall.pop()});
+                        // If the ending call is the agent's primary call, update the callInfo to it's parent node
+                        (0,scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.publishEvent)({ eventType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.VOICE_EVENT_TYPE.PARTICIPANT_REMOVED, payload });
+                        // this.destroyCalls(callToDestroy, messageData.reason);
+                        if (primaryCall && primaryCall.callInfo && primaryCall.callInfo.renderContactId && messageData.target === primaryCall.callInfo.renderContactId) {
+                            (0,scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.publishEvent)({eventType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.VOICE_EVENT_TYPE.PARTICIPANT_CONNECTED, 
+                                            payload: new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.ParticipantResult({
+                                                callId: primaryCall.callId,
+                                                contact: new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Contact(payload.call.contact),
+                                                phoneNumber: payload.call.contact && payload.call.contact.phoneNumber,
+                                                callInfo: new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.CallInfo(payload.call.callInfo),
+                                                initialCallHasEnded: payload.call.callAttributes && payload.call.callAttributes.initialCallHasEnded
+                                            })})
+                        }
+                    }
+                } else {
+                    this.hangup(messageData.reason);
+                }
+            }
+        }
+    }
+    /**
+     * simulate logout from the telephony sub system
+     */
+    subsystemLogout() {
+        (0,scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.publishEvent)({ eventType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.SHARED_EVENT_TYPE.LOGOUT_RESULT, payload: new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.LogoutResult({
+            success: !this.state.throwError,
+            loginFrameHeight: 350
+        })});
+    }
+
+    /**
+     * perform logout from Omni
+     */
+    omniLogout() {
+        return this.executeAsync("SubsystemLogout", new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.LogoutResult({
+            success: true,
+            loginFrameHeight: 350
+        }));
+    }
+
+    /**
+     * request the agent contacts when transfer is clicked 
+     * @param {Object} filter
+     * @param {string} workItemId
+     */
+    getContacts(filter, workItemId) {
+        let contacts = this.filterContacts(this.state.messagingContacts, filter) ;
+        return this.executeAsync("getContacts", new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.ContactsResult({
+            contacts
+        }));
+    }
+
+    /**
+     * execute an async action and return a promise
+     * @param {string} action
+     * @param {object} payload
+     * @param {number} delay Delay in milliseconds before resolving the promise
+     * @return {Promise}
+     */
+    executeAsync(action, payload) {
+        this.log(`Executing action - ${action}`, payload);
+        if (this.state.throwError) {
+            if (this.state.customError) {
+                const obj = this.state.customError.split('.');
+                return Promise.reject(new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.CustomError({ namespace: obj[0], labelName: obj[1]  }));
+            } else {
+                return Promise.reject('demo error');
+            }
+        }
+        switch (action) {
+            case "mute":
+            case "unmute":
+                if (!this.state.capabilities.hasMute) {
+                    return Promise.reject(new Error('Mute is not supported'));
+                }
+            break;
+            case "conference":
+                if (!this.state.capabilities.hasMerge) {
+                    return Promise.reject(new Error('Conference is not supported'));
+                }
+            break;
+            case "swapCalls":
+                if (!this.state.capabilities.hasSwap) {
+                    return Promise.reject(new Error('Swap Calls is not supported'));
+                }
+            break;
+            case "pauseRecording":
+            case "resumeRecording":
+                if (!this.state.capabilities.hasRecord) {
+                    return Promise.reject(new Error('Recording is not supported'));
+                }
+            break;
+            case "getSignedRecordingUrl":
+                if (!this.state.capabilities.hasSignedRecordingUrl || !this.state.capabilities.signedRecordingUrl) {
+                    return Promise.reject(new Error('Signed recording url is not supported'));
+                }
+            break;
+            case "onAgentWorkEvent":
+                /* Pause and unpause work will be received here but nothing yet implemented */
+                switch (payload.workEvent) {
+                    case scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.WORK_EVENT.PAUSED:
+                        /* implementation for pause work */
+                        return Promise.resolve(payload);
+                    case scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.WORK_EVENT.UNPAUSED:
+                        /* implementation for unpause work */
+                        return Promise.resolve(payload);
+                    case scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.WORK_EVENT.ACCEPTED:
+                        console.log('Agent accepted the work', payload);
+                        return Promise.resolve(payload);
+                    case scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.WORK_EVENT.DECLINED:
+                        console.log('Agent declined the work', payload);
+                        return Promise.resolve(payload);
+                }
+            break;
+        }
+
+        if (this.state.delayMs === 0) {
+            return Promise.resolve(payload)
+        }
+
+        return this.delay(this.state.delayMs).then(() => {
+            return Promise.resolve(payload)
+        });
+    }
+
+    delay(t, v) {
+        return new Promise(resolve => {
+            setTimeout(resolve.bind(null, v), t)
+        });
+    }
+
+    getCurrentUserContact() {
+        return new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Contact({
+            phoneNumber: this.state.agentId,
+            id: this.state.agentId,
+            type: this.state.type,
+            name: this.state.userFullName
+        });
+    }
+
+    /**
+     * start a call
+     * @param {Contact} contact ToContact
+     * @param {Object} callInfo (callInfo.isSoftphoneCall is false if dialing from a desk phone)
+     * @param {Boolean} fireCallStarted boolean to indicate whether to fire the call started event
+     * @param {Boolean} isCallback boolean providing hint from click-to-dial whether this is a callback.
+     * @param {Boolean} isConsultCall boolean to check if it is a consult call
+     */
+    dial(contact, callInfo, fireCallStarted, isCallback, isConsultCall) {
+        if (!isConsultCall && this.hasActiveCalls(scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.INITIAL_CALLER)) {
+            return Promise.reject(new Error(`Agent is not available for an outbound call`));
+        }
+        
+        callInfo = {
+            ...callInfo,
+            isOnHold: callInfo?.isOnHold ?? false,
+            callStateTimestamp: new Date(),
+            renderContactId: contact.id,
+        };
+        
+        const callAttributes = {
+            participantType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.INITIAL_CALLER,
+            parentId: isConsultCall
+                ? this.getPrimaryCall().callId // send primary callId to createConsultConversation
+                : null,
+            ...(isConsultCall && { isConsultCall }),
+        };
+
+        let callType = scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_TYPE.OUTBOUND.toLowerCase();
+        if (isConsultCall) {
+            callType = scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_TYPE.CONSULT;
+        } else if (isCallback) {
+            callType = scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_TYPE.DIALED_CALLBACK;
+        } else if (contact.type === scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CONTACT_TYPE.AGENT) {
+            callType = scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_TYPE.INTERNAL_CALL.toLowerCase();
+        } 
+
+        const call = new Call(callType, contact, callAttributes, new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.CallInfo(callInfo));
+        call.fromContact = this.getCurrentUserContact();
+        this.addCall(call);
+        const callResult = new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.CallResult({ call });
+
+        if (!callInfo.isSoftphoneCall && fireCallStarted ) {
+            (0,scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.publishEvent)({ eventType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.VOICE_EVENT_TYPE.CALL_STARTED, payload: callResult });
+        }
+        
+        this.state.agentAvailable = false;
+        if (this.state.onlineUsers.includes(contact.id) && contact.type === scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CONTACT_TYPE.AGENT) {
+            const renderContact = this.getCurrentUserContact();
+            const fromContact = new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Contact(renderContact);
+            const toContact = new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Contact(contact);
+            this.messageUser(contact.id, isConsultCall ? _common_constants__WEBPACK_IMPORTED_MODULE_2__.USER_MESSAGE.CALL_STARTED : _common_constants__WEBPACK_IMPORTED_MODULE_2__.USER_MESSAGE.INTERNAL_CALL_STARTED, {phoneNumber: contact.phoneNumber, callId: call.callId, contact, renderContact: renderContact, fromContact, toContact, isConsultCall, callAttributes});
+        }
+        
+        return this.executeAsync('dial', callResult);
+    }
+    /**
+     * start a call
+     * @param {string} phoneNumber - The phone number associcated with this contact
+     * @param {string} callInfo
+     */
+    startInboundCall(phoneNumber, callInfo, flowConfig) {
+        callInfo = callInfo || { isOnHold: false };
+        flowConfig = flowConfig || { isUnifiedRoutingEnabled: false };
+        callInfo.callStateTimestamp = new Date();
+        if (!this.state.agentAvailable) {
+            const message = `Agent is not available for a inbound call from phoneNumber - ${phoneNumber}`;
+            this.log(message);
+            return Promise.reject(new Error(message));
+        }
+        let callAttributes = { participantType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.INITIAL_CALLER };
+        const id = Math.random().toString(36).substring(5);
+        let contact = new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Contact({ phoneNumber, id, name: 'Customer '+ id });
+        return this.createVoiceCall(undefined, scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_TYPE.INBOUND, phoneNumber, callInfo && callInfo.additionalFields).then((data) => {
+            callAttributes.voiceCallId = data.voiceCallId;
+            const call = new Call(scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_TYPE.INBOUND.toLowerCase(), contact, callAttributes, new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.CallInfo(callInfo), data.vendorCallKey || this.generateCallId());
+            call.fromContact = contact;
+            call.toContact = this.getCurrentUserContact();
+            //delete call.toContact;
+            this.addCall(call);
+            const callResult = new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.CallResult({
+                call
+            });
+            //When Unified Routing is enabled, we need to invoke OmniFlow, otherwise regular flow to publish CALL_STARTED event.
+            if(flowConfig?.isUnifiedRoutingEnabled) {
+                if (this.state.flowConfig == null) {
+                    this.state.flowConfig = { ...flowConfig };
+                } else {
+                    Object.assign(this.state.flowConfig, flowConfig);
+                }
+                console.log('Inside isUnifiedRoutingEnabled ' + flowConfig.isUnifiedRoutingEnabled);
+                var response = this.executeOmniFlowForUnifiedRouting(data, flowConfig);
+                console.log('response From execute onmi flow' + response);
+            } else {
+                console.log('Non UnifiedRouting flow');
+                (0,scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.publishEvent)({ eventType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.VOICE_EVENT_TYPE.CALL_STARTED, payload: callResult });
+            }
+            return this.executeAsync('startInboundCall', callResult);
+        });
+    }
+
+    getAllPhoneContacts(numOfContactsPerType) {
+        let contacts = [];
+        for (let i=1; i<=numOfContactsPerType; i++) {
+            contacts = contacts.concat(new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Contact ({
+                id: 'id'+i,
+                type: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CONTACT_TYPE.AGENT,
+                name : ["Agent Name "]+i,
+                phoneNumber: "555555444"+i,
+                availability: this.getRandomAvailability()
+            }))
+        }
+        for (let i=numOfContactsPerType+1; i<=numOfContactsPerType*2; i++) {
+            contacts = contacts.concat(new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Contact ({
+                id: 'id'+i,
+                type: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CONTACT_TYPE.QUEUE,
+                name : "Queue Name "+i,
+                queue: "Queue"+i,
+                queueWaitTime: (Math.random() * 400).toString()
+            }))
+        }
+        for (let i=numOfContactsPerType*2+1; i<=numOfContactsPerType*3; i++) {
+            contacts = contacts.concat(new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Contact ({
+                id: 'id'+i,
+                type: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CONTACT_TYPE.PHONEBOOK,
+                name : "Phonebook Entry "+i,
+                phoneNumber: "55566644"+i
+            }))
+        }
+        for (let i=numOfContactsPerType*3+1; i<=numOfContactsPerType*4; i++) {
+            contacts = contacts.concat(new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Contact ({
+                id: 'id'+i,
+                type: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CONTACT_TYPE.PHONENUMBER,
+                name : "Phone Number "+i,
+                phoneNumber: "5557774"+i
+            }))
+        }
+        for (let i=numOfContactsPerType*4+1; i<=numOfContactsPerType*5; i++) {
+            contacts = contacts.concat(new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Contact ({
+                endpointARN: 'arn'+i,
+                type: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CONTACT_TYPE.PHONENUMBER,
+                name : ["ARN "]+i,
+                phoneNumber: "5555554"+i
+            }))
+        }
+        return contacts;
+    }
+
+    getAllMessagingContacts(numOfContactsPerType) {
+        let contacts = [];
+        let contactListTypeMap = {
+            0: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CONTACT_LIST_TYPE.ALL,
+            1: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CONTACT_LIST_TYPE.CONFERENCE,
+            2: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CONTACT_LIST_TYPE.TRANSFER
+        };
+        for (let i=1; i<=numOfContactsPerType; i++) {
+            contacts = contacts.concat(new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Contact ({
+                id: 'id'+i,
+                type: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CONTACT_TYPE.AGENT,
+                name : ["Agent Name "]+i,
+                availability: this.getRandomAvailability(),
+                listType: contactListTypeMap[i%3]
+            }))
+        }
+        for (let i=numOfContactsPerType+1; i<=numOfContactsPerType*2; i++) {
+            contacts = contacts.concat(new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Contact ({
+                id: 'id'+i,
+                type: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CONTACT_TYPE.QUEUE,
+                name : "Queue Name "+i,
+                queue: "Queue"+i,
+                queueWaitTime: (Math.random() * 400).toString(),
+                listType: contactListTypeMap[i%3]
+            }))
+        }
+        for (let i=numOfContactsPerType*2+1; i<=numOfContactsPerType*3; i++) {
+            contacts = contacts.concat(new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Contact ({
+                id: 'id'+i,
+                type: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CONTACT_TYPE.PHONENUMBER,
+                name : "External Contact "+i,
+                phoneNumber: "55566644"+i,
+                listType: contactListTypeMap[i%3]
+            }))
+        }
+        return contacts;
+    }
+
+    getRandomAvailability() {
+        const randomAvailabilityMap = {
+            0: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.AGENT_AVAILABILITY.AVAILABLE,
+            1: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.AGENT_AVAILABILITY.BUSY,
+            2: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.AGENT_AVAILABILITY.OFFLINE,
+        }
+        return randomAvailabilityMap[Math.floor(Math.random()*3)];
+    }
+
+    getActiveCallsObj() {
+        const activeCalls = JSON.parse(localStorage.getItem('activeCalls')) || {};
+        Object.keys(activeCalls).forEach(callId => {
+            if (activeCalls[callId].contact) {
+                activeCalls[callId].contact = new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Contact(activeCalls[callId].contact);
+            } 
+            if (activeCalls[callId].toContact) {
+                activeCalls[callId].toContact = new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Contact(activeCalls[callId].toContact);
+            }
+            if (activeCalls[callId].fromContact) {
+                activeCalls[callId].fromContact = new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Contact(activeCalls[callId].fromContact);
+            }
+            activeCalls[callId].callInfo.callStateTimestamp = activeCalls[callId].callInfo.callStateTimestamp ? new Date(activeCalls[callId].callInfo.callStateTimestamp) : new Date();
+            activeCalls[callId].callInfo = new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.CallInfo(activeCalls[callId].callInfo);
+            activeCalls[callId].callAttributes = new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.PhoneCallAttributes(activeCalls[callId].callAttributes);
+            activeCalls[callId] = new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.PhoneCall(activeCalls[callId]);
+        });
+        return activeCalls;
+    }
+
+    hasActiveCalls(participantType) {
+        if (!participantType) {
+            return this.state.activeCalls && Object.keys(this.state.activeCalls).length > 0;
+        }
+        return Object.values(this.state.activeCalls).filter((obj) => obj['callAttributes']['participantType'] === participantType).length > 0;
+    }
+
+    /**
+     * get agent  configs, for example if mute or recording is supported, phones supported for agent
+     */
+    getAgentConfig() {
+        return this.executeAsync("getAgentConfig", new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.AgentConfigResult({
+            phones: this.state.agentConfig.phones,
+            selectedPhone: new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Phone (this.state.agentConfig.selectedPhone)
+        }));
+    }
+
+    /**
+     * get agent  configs, for example if mute or recording is supported, phones supported for agent
+     */
+    getSharedCapabilities() {
+        return this.executeAsync("getSharedCapabilities", new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.SharedCapabilitiesResult({
+            hasContactSearch: this.state.capabilities.hasContactSearch,
+            hasAgentAvailability: this.state.capabilities.hasAgentAvailability,
+            hasQueueWaitTime: this.state.capabilities.hasQueueWaitTime,
+            debugEnabled: this.state.capabilities.debugEnabled,
+            hasTransferToOmniFlow: this.state.capabilities.hasTransferToOmniFlow,
+            hasPendingStatusChange: this.state.capabilities.hasPendingStatusChange,
+            hasSFDCPendingState: this.state.capabilities.hasSFDCPendingState
+        }));
+    }
+
+    /**
+     * get agent  configs, for example if mute or recording is supported, phones supported for agent
+     */
+    getVoiceCapabilities() {
+        return this.executeAsync("getVoiceCapabilities", new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.VoiceCapabilitiesResult({
+            hasMute: this.state.capabilities.hasMute,
+            hasMerge: this.state.capabilities.hasMerge,
+            hasRecord: this.state.capabilities.hasRecord,
+            hasSwap:  this.state.capabilities.hasSwap,
+            hasSignedRecordingUrl: this.state.capabilities.hasSignedRecordingUrl,
+            supportsMos: this.state.capabilities.supportsMos,
+            hasSupervisorListenIn: this.state.capabilities.hasSupervisorListenIn,
+            hasSupervisorBargeIn: this.state.capabilities.hasSupervisorBargeIn,
+            hasBlindTransfer: this.state.capabilities.hasBlindTransfer,
+            hasPhoneBook : this.state.capabilities.hasPhoneBook,
+            canConsult : this.state.capabilities.canConsult,
+            signedRecordingUrl: '',
+            signedRecordingDuration: null,
+            isDialPadDisabled: this.state.capabilities.isDialPadDisabled,
+            isPhoneBookDisabled: this.state.capabilities.isPhoneBookDisabled,
+            isHidSupported: this.state.capabilities.isHidSupported,
+            hasSetExternalMicrophoneDeviceSetting: this.state.capabilities.hasSetExternalMicrophoneDeviceSetting,
+            hasSetExternalSpeakerDeviceSetting: this.state.capabilities.hasSetExternalSpeakerDeviceSetting
+        }));
+    }
+
+     /**
+     * get all active calls
+     */
+    getActiveCalls() {
+        try {
+            const activeCalls = this.getActiveCallsObj();
+            const result = Object.values(activeCalls);
+            return this.executeAsync('getActiveCalls', new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.ActiveCallsResult({ activeCalls: result }));
+        } catch (e) {
+            return Promise.reject('Error getting active calls. '+ e); 
+        }
+        
+    }
+
+    /**
+     * accept the  call
+     * @param {PhoneCall} call
+     */
+    acceptCall(call){
+        let callResult = null;
+        if (!this.state.throwError) {
+            let callToAccept = this.getCall(call);
+            const receiverContact = new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Contact({
+                phoneNumber: this.state.agentId, 
+                id: this.state.agentId, 
+                name: this.state.userFullName
+            })
+            callToAccept.receiverContact = receiverContact;
+            callToAccept.toContact = this.getCurrentUserContact();
+            /* If it's not internal call , contact is the source of truth of which participant we are rendering*/
+            if (callToAccept.callType === 'internalcall') {
+                /* If it's an internal call, contact will be ourself. We render the initiator's name passed from startInternalCall */
+                callToAccept.contact.name = callToAccept.callInfo.renderContactId;
+            }
+            const currType = callToAccept.callType.toLowerCase();
+            const state = ((
+                currType === scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_TYPE.CALLBACK.toLowerCase() ||
+                currType === scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_TYPE.INTERNAL_CALL.toLowerCase()) &&
+            callToAccept.state !== scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_STATE.CONNECTED) ?
+            scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_STATE.RINGING : scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_STATE.CONNECTED;
+            
+            callToAccept.state = state;
+            // callToAccept.callAttributes.state = state;
+            this.log("acceptCall", callToAccept);
+            this.addCall(callToAccept);
+            this.state.agentAvailable = false;
+            if (currType === scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_TYPE.TRANSFER.toLowerCase() || 
+                currType === scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_TYPE.CONSULT.toLowerCase()) {
+                this.messageUser(null, _common_constants__WEBPACK_IMPORTED_MODULE_2__.USER_MESSAGE.PARTICIPANT_CONNECTED, { 
+                    callInfo: callToAccept.callInfo, 
+                    callType: currType, 
+                    call: callToAccept
+                });
+            }
+            callResult = new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.CallResult({ call: callToAccept });
+            this.updateConferenceUsers(false);
+        }
+        return this.executeAsync("acceptCall", callResult);
+    }
+
+    /**
+     * decline call
+     * @param {PhoneCall} call
+     */
+    declineCall(call) {
+        this.log("declineCall", call);
+        const destroyedCall = this.destroyCall(this.getCall(call), scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.HANGUP_REASON.PHONE_CALL_ENDED);
+        this.state.activeConferenceCalls = [];
+        this.state.agentAvailable = true;
+        return this.executeAsync("declineCall", new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.CallResult({ call: destroyedCall }));
+    }
+    /**
+     * end call
+     * @param {PhoneCall} call
+     * @param {string} agentErrorStatus
+     */
+    endCall(call, agentErrorStatus) {
+        this.log("endCall", call, agentErrorStatus);
+        let destroyedCalls = this.processEndCall(call, agentErrorStatus, scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.HANGUP_REASON.PHONE_CALL_ENDED, true);
+        return this.executeAsync("endCall", new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.HangupResult({ calls: destroyedCalls }));
+    }
+
+    /**
+     *
+     * @param call
+     * @param agentErrorStatus
+     * @param reason
+     * @param messageUsers
+     */
+    processEndCall(call, agentErrorStatus, reason, messageUsers) {
+        let destroyedCalls = [];
+        if (!this.state.throwError) {
+            if (this.state.isMultipartyAllowed) {
+                let callObj = {};
+                if (call.callId) {
+                    callObj = this.getCall(call);
+                    if (callObj.callAttributes &&
+                        callObj.callAttributes?.participantType === scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.INITIAL_CALLER &&
+                        (!callObj.contact || (this.state.agentId === callObj.contact.id))) {
+                        destroyedCalls = this.hangupMultiParty(callObj, reason, agentErrorStatus);
+                    } else if (callObj.callType?.toLowerCase() === scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_TYPE.CONSULT.toString().toLowerCase() &&
+                        callObj.callAttributes?.participantType.toLowerCase() === scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.THIRD_PARTY.toString().toLowerCase()) {
+                        destroyedCalls = this.hangupMultiParty(callObj, reason, agentErrorStatus);
+                    } else {
+                        destroyedCalls = this.destroyCalls(callObj, reason);
+                        this.beginWrapup(destroyedCalls[0]);
+                    }
+                } else {
+                    const consultCall = Object.values(this.state.activeCalls).filter((obj) => obj.callAttributes?.isConsultCall === true)[0];
+                    if (consultCall) {
+                        callObj = consultCall;
+                    } else {
+                        callObj = this.getCall({callAttributes: { participantType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.INITIAL_CALLER }});
+                    }
+                    destroyedCalls = this.hangupMultiParty(callObj, reason, agentErrorStatus);
+                }
+
+                if(messageUsers) {
+                    this.messageUser(null, _common_constants__WEBPACK_IMPORTED_MODULE_2__.USER_MESSAGE.CALL_DESTROYED, {callId: callObj.callId, reason: reason, target: call.callId ? callObj.callInfo.renderContactId : this.state.agentId});
+                }
+             } else {
+                destroyedCalls = this.destroyCalls(call, reason);
+                this.beginWrapup(destroyedCalls[0]);
+            }
+        }
+        this.state.agentAvailable = Object.keys(this.state.activeCalls).length === 0;
+        return destroyedCalls;
+    }
+    /**
+     * Mute
+     */
+    mute(call) {
+        const isMuted = true;
+        return this.processMute(call, isMuted)
+    }
+
+    /**
+     * Unmute
+     */
+    unmute(call) {
+        const isMuted = false;
+        return this.processMute(call, isMuted)
+    }
+
+    /**
+     * Process mute and unmute initiated my myself
+     * @param {*} call 
+     * @param {*} isMuted 
+     * @returns 
+     */
+    processMute(call, isMuted) {
+        const isGlobal = call ? call.isGlobal : false;
+        const isSupervisor = call && call.isSupervisor;
+        call = this.updateCallInfo({ isMuted }, call);
+        const targetIsPrimaryCaller = this.getPrimaryCall().callId === call.callId;
+        /* Find the muting target
+         * (1) Muting myself? Check call.isGlobal passed from core. True while clicking on global action, false while clicking on entry mute.
+         * (2) Muting my primary call (but not me)? Check call.contact.id for primary call initiator's info
+         * (3) Muting someone else: Read the renderContactId
+        */
+        const target = isGlobal ? this.state.agentId : (targetIsPrimaryCaller && call.contact) ? (call.contact.id ? call.contact.id : call.contact.phoneNumber) : call.callInfo.renderContactId;
+        /* Setting target in call.callAttribute and it will be broadcasted to other agents */
+        call.callAttributes.target = target;
+        /* Broadcast the mute message to all the users */
+        const userMessage = isMuted ? _common_constants__WEBPACK_IMPORTED_MODULE_2__.USER_MESSAGE.MUTE : _common_constants__WEBPACK_IMPORTED_MODULE_2__.USER_MESSAGE.UNMUTE;
+        if (this.state.isMultipartyAllowed && isSupervisor === false) {
+            this.messageUser(null, userMessage, call, isMuted);
+        }
+        return this.executeAsync("mute", new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.MuteToggleResult({ isMuted,  call, isGlobal }));
+    }
+    /**
+     * Process broadcast mute and unmute
+     */
+    async processBroadcastMute(call, isMuted) {
+        /* Read the target param passed in call attribute by the mute initiator */
+        const target = call.callAttributes.target;
+        /* Find the target call to mute
+         * (1) Muting myself? Check isGlobal
+         * (2) Muting my primary call (but not me)? Check if the target is primary call contact id
+         * (3) Muting someone else? Find that call through renderContactId
+         * In (1) (2) we return the same call, only difference is isGlobal
+         */
+        const isGlobal = this.state.agentId === target;
+        const callForTarget = this.getCall({callInfo: {renderContactId: target}})
+        const targetIsPrimaryCaller = this.getPrimaryCall().contact.id === target;
+        let targetCall = ( isGlobal || targetIsPrimaryCaller ) ? this.getPrimaryCall() : callForTarget;
+        targetCall = this.updateCallInfo({ isMuted }, targetCall);
+        let payload = await this.executeAsync("mute", new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.MuteToggleResult({ isMuted, call:targetCall, isGlobal }));
+        (0,scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.publishEvent)({ eventType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.VOICE_EVENT_TYPE.MUTE_TOGGLE, payload });
+    }
+
+    /**
+     * hold the call
+     * @param {PhoneCall} call
+     */
+    hold(call) {
+        // TODO - send HOLD_TOGGLE to all participants in MP
+        this.updateHoldState(call, true);
+        return this.executeAsync("hold", new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.HoldToggleResult({
+            isThirdPartyOnHold: this.isOnHold({ callAttributes: { participantType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.THIRD_PARTY }}),
+            isCustomerOnHold: this.isOnHold({ callAttributes: { participantType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.INITIAL_CALLER }}),
+            calls: this.state.activeCalls
+        }));
+    }
+
+    /**
+     * resume the call
+     * @param {PhoneCall} call
+     */
+    resume(call) {
+        this.updateHoldState(call, false);
+        return this.executeAsync("resume", new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.HoldToggleResult({
+            isThirdPartyOnHold: this.isOnHold({ callAttributes: { participantType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.THIRD_PARTY }}),
+            isCustomerOnHold: this.isOnHold({ callAttributes: { participantType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.INITIAL_CALLER }}),
+            calls: this.state.activeCalls
+        }));
+    }
+    /**
+     * pause recording for the call
+     * @param {PhoneCall} call
+     */
+    pauseRecording(call) {
+        const isRecordingPaused = true;
+        call = call || this.getCall({callAttributes: { participantType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.INITIAL_CALLER }});
+        if (this.isConsultCall(call)) {
+            call = this.getCall({ callAttributes: { isConsultCall : true }});
+        } 
+        return this.executeAsync("pauseRecording", new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.RecordingToggleResult({ isRecordingPaused, contactId : call.callId }, this.updateCallInfo({ isRecordingPaused }, call)));
+    }
+    /**
+     * resume recording for the call
+     * @param {PhoneCall} call
+     */
+    resumeRecording(call) {
+        const isRecordingPaused = false;
+        call = call || this.getCall({callAttributes: { participantType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.INITIAL_CALLER }});
+        if (this.isConsultCall(call)) {
+            call = this.getCall({ callAttributes: { isConsultCall : true }});
+        }
+        return this.executeAsync("resumeRecording", new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.RecordingToggleResult({ isRecordingPaused, contactId : call.callId }, this.updateCallInfo({ isRecordingPaused }, call)));
+    }
+    /**
+    * Supervise a call
+    * @param {SuperviseCallResult} SuperviseCallResult
+    */
+    superviseCall(parentCall) {
+        if (this.hasActiveCalls()) {
+            return Promise.reject(new Error(`Agent is not available to supervise a call`));
+        }
+        const call = new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.PhoneCall({
+            callType: parentCall.callType,
+            contact: new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Contact({ phoneNumber: parentCall.callType === scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_TYPE.INBOUND ? parentCall.from : parentCall.to }),
+            callId: parentCall.callId,
+            callInfo: new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.CallInfo({ initialCallId : parentCall.callId, callStateTimestamp: new Date() }),
+            callAttributes: { voiceCallId: parentCall.voiceCallId, participantType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.SUPERVISOR },
+            state: this.state.agentConfig.selectedPhone.type === scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PHONE_TYPE.SOFT_PHONE ? scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_STATE.CONNECTED : scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_STATE.RINGING
+        })
+        this.addCall(call);
+        return this.executeAsync("superviseCall", new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.SuperviseCallResult({ call }));
+    }
+    /**
+    * Disconnect from a Supervised call
+    * @param {SupervisorHangupResult} SupervisorHangupResult
+    */
+    supervisorDisconnect(supervisedCall) {
+        let calls;
+        if (!this.state.throwError) {
+            calls = this.destroyCalls({callAttributes: { participantType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.SUPERVISOR }});
+        }
+        return this.executeAsync("supervisorDisconnect", new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.SupervisorHangupResult({ calls }));
+    }
+
+    /**
+    * Barge in into a call as a supervisor
+    * @param {SuperviseCallResult} SuperviseCallResult
+    */
+    supervisorBargeIn(supervisedCall) {
+        const call = this.getCall({callAttributes: { participantType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.SUPERVISOR }});
+        call.callAttributes.hasSupervisorBargedIn = supervisedCall.isBargedIn = true;
+        supervisedCall.supervisorName = this.state.userFullName;
+        this.addCall(call);
+        this.messageUser(null, _common_constants__WEBPACK_IMPORTED_MODULE_2__.USER_MESSAGE.CALL_BARGED_IN, supervisedCall);
+        return this.executeAsync("supervisorBargeIn", new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.SuperviseCallResult({ call }));
+    }
+
+    /**
+     * Return true if a call is on hold. If the call does not exist return undefined
+     * @param {PhoneCall} call
+     * @return true if a call is on hold
+     */
+    isOnHold(call) {
+        try {
+            return this.getCall(call).callAttributes.isOnHold;
+        } catch(e) {
+            return undefined;
+        }
+    }
+    /**
+     * @param {PhoneCall} activeCall call object or call index
+     * @param {boolean} onHold
+     */
+    updateHoldState(activeCall, onHold) {
+        const call = this.getCall(activeCall);
+        call.callAttributes.isOnHold = onHold;
+        call.callInfo.isOnHold = onHold;
+        this.addCall(call);
+    }
+    /**
+     * swap calls
+     * @param {PhoneCall} call1 first call to be swapped
+     * @param {PhoneCall} call2 second call to be swapped
+     */
+    swapCalls(call1, call2) {
+        const activeCall1 = this.getCall(call1);
+        const activeCall2 = this.getCall(call2);
+        this.updateHoldState(call1, !activeCall1.callAttributes.isOnHold);
+        this.updateHoldState(call2, !activeCall2.callAttributes.isOnHold);
+        return this.executeAsync("swapCalls", new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.HoldToggleResult({
+            isThirdPartyOnHold: this.isOnHold(call1),
+            isCustomerOnHold: this.isOnHold(call2),
+            calls: this.state.activeCalls
+        }));
+    }
+    
+    /**
+     * join calls
+     * @param {PhoneCall[]} calls to be joined
+     */
+    conference(callArray) {
+        const calls = callArray || Object.values(this.state.activeCalls);
+        let holdToggleResult;
+        // there is a transfer call to merge or consult call to merge
+        if (this.state.isMultipartyAllowed && (this.hasConsultCall(calls) || Object.keys(this.state.activeCalls).length === 2)) {
+            let callToMerge;
+            try {
+                callToMerge = this.getCall({ callAttributes: { isConsultCall : true }});
+            } catch(error) {
+                callToMerge = this.getCall({ callAttributes: { participantType : scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.THIRD_PARTY }});
+            }
+
+            if (callToMerge) {
+                this.mergeConsultCall(callToMerge);
+                // change consult call participantType
+                callToMerge.callAttributes.participantType = scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.THIRD_PARTY;
+                this.messageUser(null, _common_constants__WEBPACK_IMPORTED_MODULE_2__.USER_MESSAGE.MERGE, { consultCall: callToMerge, activeConferenceCalls: Object.values(this.state.activeCalls) });
+            }
+            // When call is merged and primary call is on Hold, we should resume the primary call
+            let primaryCall = this.getPrimaryCall();
+            this.updateHoldState(primaryCall, false);
+        } else {
+            calls.forEach((call) => {
+                this.updateHoldState(call, false);
+            });
+        }
+
+        //TODO: update HoldToggleResult for Consult
+        holdToggleResult = new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.HoldToggleResult({
+            isThirdPartyOnHold: false,
+            isCustomerOnHold: false
+        });
+
+        if (this.state.isMultipartyAllowed) {
+            holdToggleResult.calls = this.state.activeCalls;
+            holdToggleResult.isCallMerged = true;
+        }
+
+        return this.executeAsync("conference", holdToggleResult);
+    }
+
+    hasConsultCall(calls) {
+        return (
+            this.state.isConsultAllowed &&
+            this.state.capabilities.canConsult &&
+            calls?.some(call => call?.callAttributes?.isConsultCall === true)
+        );
+    }
+
+    mergeConsultCall(consultCall) {
+        consultCall.callAttributes.isConsultCall = false;
+        consultCall.callType = scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_TYPE.ADD_PARTICIPANT;
+        consultCall.callAttributes.isAutoMergeOn = true;
+        consultCall.reason = scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.HANGUP_REASON.PHONE_CALL_ENDED;
+        let callToUpdate = this.state.activeCalls[consultCall.callId];
+        if (callToUpdate) {
+            let params = {
+                callAttributes: {
+                    isConsultCall: false,
+                    isAutoMergeOn: true,
+                    isOnHold: false,
+                    participantType: consultCall.callAttributes.participantType
+                },
+                callInfo: {
+                    isOnHold: false
+                },
+                callType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_TYPE.ADD_PARTICIPANT,
+                reason: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.HANGUP_REASON.PHONE_CALL_ENDED,
+            }
+            for (const key in params) {
+                callToUpdate[key] = typeof params[key] === 'object' ? Object.assign({}, callToUpdate[key], params[key]) : params[key];
+            }
+        } else {
+            this.addCall(consultCall);
+            this.updateHoldState(consultCall, false);
+        }
+    }
+
+    /**
+     * set agent status
+     * @param {string} agentStatus agent status, Constants.AGENT_STATUS.ONLINE or Constants.AGENT_STATUS.OFFLINE
+     * @param {AgentStatusInfo} agentStatusInfo object contains statusId, statusApiName and statusName
+     * @param {boolean} enqueueNextState true if the state should be enqueued, which will update the agent's status after a call ends
+     */
+    setAgentStatus(agentStatus, agentStatusInfo, enqueueNextState) {
+        this.agentStatus = agentStatus;
+        this.toggleAgentPresence(!(agentStatus === scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.AGENT_STATUS.OFFLINE));
+        return this.executeAsync("setAgentStatus", new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.GenericResult({
+            success: true
+        }));
+    }
+    /**
+     * send digits to the active call
+     * @param {string} digits - digits to be sent (i.e. 123#)
+     */
+    sendDigits(digits) {
+        return this.executeAsync("sendDigits");
+    }
+    /**
+     * Get Agent Phone Book Contacts
+     */
+    getPhoneContacts(filter) {
+        let onlineContacts = [];
+        this.state.onlineUsers.forEach((user) => {
+            if (this.state.agentId !== user) {
+                onlineContacts = onlineContacts.concat(new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Contact({
+                    id: user,
+                    type: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CONTACT_TYPE.AGENT,
+                    name : this.state.userFullNames.get(user),
+                    availability: "AVAILABLE",
+                    phoneNumber: user
+                }))
+            }
+        })
+        let contacts = this.filterContacts(onlineContacts.concat(this.state.phoneContacts), filter) ;
+        return this.executeAsync("getPhoneContacts", new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.PhoneContactsResult({
+            contacts, contactTypes: this.state.contactTypes
+        }));
+    }
+    /**
+     * add participant to call through a new contact
+     * @param {Contact} contact - new contact
+     * @param {PhoneCall} call - call to be transferred
+     * @param {boolean} isBlindTransfer - True if blind transfering a call and hanging up upon transfer
+     */
+    async addParticipant(contact, call, isBlindTransfer) {
+        const parentCall = this.getCall(call);
+        const isAutoMergeOn = call.callAttributes?.isAutoMergeOn;
+        const callAttributes = {
+            ...parentCall.callAttributes,
+            isAutoMergeOn,
+            isBlindTransfer,
+        };
+        const initiatorContact = new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Contact({
+            phoneNumber: this.state.agentId, 
+            id: this.state.agentId, 
+            type: this.state.type,
+            name: this.state.userFullName
+        })
+        let isExternalTransfer;
+        let callInfo = { ...(parentCall.callInfo ? new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.CallInfo(parentCall.callInfo) : {}), 
+            renderContact: initiatorContact, renderContactId: contact.id};
+        if (callInfo.isExternalTransfer !== undefined) {
+            isExternalTransfer = callInfo.isExternalTransfer;
+        } else if(contact) {
+            isExternalTransfer = !!contact.phoneNumber;
+        }
+        callInfo.isExternalTransfer = isExternalTransfer;
+        callInfo.callStateTimestamp = new Date();
+        callInfo.initialCallId = parentCall.callId;
+        let additionalFields = callInfo.additionalFields ? callInfo.additionalFields : parentCall.callInfo && parentCall.callInfo.additionalFields;
+        let transferCall = await this.createVoiceCall(parentCall.callId, scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_TYPE.TRANSFER, parentCall.phoneNumber, additionalFields);
+        let transferTo = contact.id;
+        if(contact.type === scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CONTACT_TYPE.FLOW) {
+            let routingInstruction = await this.executeOmniFlow(transferCall, contact.id);
+            transferTo = routingInstruction.agent || routingInstruction.queue;
+        }
+        if (!contact.id) {
+            contact.id = Math.random().toString(36).substring(5);
+        }
+
+        //newTransferVendorkey is created so that we dont have generate vendor key for transfer call everytime.
+        let newTransferVendorkey = transferCall.vendorCallKey || this.generateCallId();
+
+        /*
+         executeOmniFlow API is required for Unified routing. Adding it here will take care of warm & Blind transfer.
+         */
+        if(this.state?.flowConfig?.isUnifiedRoutingEnabled) {
+            let callInfoData = {
+                transferTo,
+                voiceCallId : newTransferVendorkey
+            };
+            let flowConfigData = {
+                dialedNumber : this.state.flowConfig.dialedNumber
+            };
+            await this.executeOmniFlowForUnifiedRouting(callInfoData,flowConfigData);
+        }
+        
+        if (isBlindTransfer) {
+            if (this.state.onlineUsers.includes(transferTo)) {
+                this.messageUser(transferTo, _common_constants__WEBPACK_IMPORTED_MODULE_2__.USER_MESSAGE.CALL_STARTED, {phoneNumber: parentCall.phoneNumber, callId: newTransferVendorkey, voiceCallId: transferCall.voiceCallId});
+            } else{
+                //Only for unified routing - Transfer to queue use case is supported in demo connector
+                if(this.state?.flowConfig?.isUnifiedRoutingEnabled) {
+                    // to handle Transfer to queue use case
+                    this.messageUser(null, _common_constants__WEBPACK_IMPORTED_MODULE_2__.USER_MESSAGE.CALL_STARTED, {
+                        phoneNumber: parentCall.phoneNumber,
+                        callId: newTransferVendorkey,
+                        voiceCallId: transferCall.voiceCallId,
+                        flowConfig: this.state.flowConfig
+                    });
+                }
+            }
+            const destroyedCall = this.destroyCall(call, scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.HANGUP_REASON.PHONE_CALL_ENDED);
+            this.log("addParticipant - cold transfer (destroyed call)", destroyedCall);
+            this.beginWrapup(destroyedCall);
+            return this.executeAsync("addParticipant", new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.ParticipantResult({
+                contact: contact,
+                phoneNumber: contact.phoneNumber,
+                callInfo: new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.CallInfo(callInfo),
+                callAttributes,
+                initialCallHasEnded: true,
+                callId: call.callId
+            }));
+        }
+
+        callAttributes.isOnHold = parentCall.callInfo.isOnHold = !this.state.isMultipartyAllowed && !isAutoMergeOn; //FIXME: remove callAttributes.isOnHold in core, we don't need isOnHold in two places
+        callInfo.isOnHold = false;
+
+        const parentVoiceCallId = callAttributes.voiceCallId;
+        if (this.state.isMultipartyAllowed) {
+            callInfo = Object.assign(
+                callInfo,
+                JSON.parse(localStorage.getItem('callInfo')),
+                {
+                    isRecordingPaused : parentCall.callInfo ? parentCall.callInfo.isRecordingPaused : false
+                }
+            );
+        }
+        const newCall = new Call(scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_TYPE.ADD_PARTICIPANT, contact, { participantType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.THIRD_PARTY, voiceCallId: parentVoiceCallId, isAutoMergeOn }, new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.CallInfo(callInfo), transferCall.vendorCallKey || this.generateCallId());
+        newCall.parentCallId = parentCall.callId;
+        newCall.callAttributes.isOnHold = false; // same FIXME
+        newCall.state = scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_STATE.TRANSFERRING;
+        newCall.fromContact = initiatorContact;
+
+        this.log("addParticipant to parent voiceCall " + parentVoiceCallId, newCall);
+        this.addCall(parentCall);
+        if (this.state.onlineUsers.includes(transferTo)) {
+            this.messageUser(transferTo, _common_constants__WEBPACK_IMPORTED_MODULE_2__.USER_MESSAGE.CALL_STARTED, {phoneNumber: this.state.userFullName, callInfo, contact, initiatorContact, callId: newCall.callId, voiceCallId: transferCall.voiceCallId, activeConferenceCalls: isAutoMergeOn ? Object.values(this.state.activeCalls) : [], flowConfig: this.state.flowConfig });
+        }else{
+            if(this.state?.flowConfig?.isUnifiedRoutingEnabled) {
+                // to handle Transfer to queue use case
+                this.messageUser(null, _common_constants__WEBPACK_IMPORTED_MODULE_2__.USER_MESSAGE.CALL_STARTED, {
+                    phoneNumber: this.state.userFullName,
+                    callInfo,
+                    contact,
+                    initiatorContact,
+                    callId: newCall.callId,
+                    voiceCallId: transferCall.voiceCallId,
+                    activeConferenceCalls: isAutoMergeOn ? Object.values(this.state.activeCalls) : [],
+                    flowConfig: this.state.flowConfig
+                });
+            }
+        }
+        this.addCall(newCall);
+        return this.executeAsync("addParticipant", new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.ParticipantResult({
+            contact: contact,
+            phoneNumber: contact.phoneNumber,
+            callInfo: new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.CallInfo(callInfo),
+            callAttributes,
+            initialCallHasEnded: callAttributes.initialCallHasEnded,
+            callId: newCall.callId
+        }));
+    }
+
+    onAgentWorkEvent(agentWork) {
+        this.messageUser(null, _common_constants__WEBPACK_IMPORTED_MODULE_2__.USER_MESSAGE.AGENT_WORK_NOTIFICATION, agentWork);
+        return this.executeAsync("onAgentWorkEvent", agentWork);
+    }
+
+    executeOmniFlow(call, flowName) {
+        return  fetch('/api/executeOmniFlow', {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ flowName:flowName, voiceCallId:call.vendorCallKey || this.generateCallId()})
+        }).then(response => response.json()).then((payload) => {
+            return payload;
+        }).catch((err) => {
+            return Promise.reject(err);
+        });
+    }
+
+    //This is a new method where we are passing all the flowInput parameters.
+    executeOmniFlowForUnifiedRouting(call, flowConfig) {
+        var dialedNumber = flowConfig.dialedNumber;
+        var flowDevName = flowConfig.flowDevName;
+        var fallbackQueue = flowConfig.fallbackQueue;
+        let requestObject = {
+            dialedNumber: dialedNumber,
+            voiceCallId:call.voiceCallId,
+            fallbackQueue: fallbackQueue
+        };
+        if(call?.transferTo){
+            requestObject.transferTarget = call.transferTo;
+        }
+        if (flowConfig?.isTransferFlow) {
+            requestObject.flowDevName = flowDevName;
+        } else {
+            requestObject.flowName = flowDevName;
+        }
+
+        return  fetch('/api/executeOmniFlow', {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestObject)
+        }).then(response => response.json()).then((payload) => {
+            return payload;
+        }).catch((err) => {
+            console.log('ERR ',err);
+            return Promise.reject(err);
+        });
+    }
+/*
+
+
+
+*/ 
+    /**
+     * Create a Voice call
+     */
+     createVoiceCall(parentCallId, callType, caller, additionalFields) {
+        let url = '/api/createVoiceCall?caller=' + caller + '&type=' +  callType  + (parentCallId ? '&parentCallId=' + parentCallId : '') + (additionalFields  ? '&additionalFields=' + additionalFields : ''); // Consider passing the call attributes through the body if there are issues with special characters in the string 
+        return  fetch(url, {
+            headers: {
+                'Strict-Transport-Security': 'max-age=31536000'
+            }
+        }).then(response => response.json())
+        .then((data) => {
+            if (!data.voiceCallId){
+                this.log("Could not contact Service Cloud Real ,Time. VoiceCall will be created by Salesforce Service Degradation Service.")
+            }
+            return data;
+        }).catch((err) => {
+            return Promise.reject(err);
+        });
+    }
+    /**
+     * connect a participant
+     */
+    connectParticipant(callInfo, callType, call) {
+        // Verify if this participant is newly joined.
+        if (!this.hasActiveCalls()) {
+            return; //need to have at least an initial call to connect a participant
+        }
+
+        // avoid connecting consult call to an agent who did not initiate the conversation
+        if (call?.callType === scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_TYPE.CONSULT &&
+            Object.keys(this.state.activeCalls).indexOf(call.callId) === -1) {
+            return;
+        }
+
+        let receiverContact;
+        if (call) {
+            if (call.receiverContact) {
+                call.callInfo.renderContactId = call.receiverContact.id;
+                receiverContact = call.receiverContact;
+            } else {
+                if (call.contact && call.contact.id) {
+                    call.callInfo.renderContactId = call.contact.id;
+                } else if (call.contact && call.contact.phoneNumber) {
+                    call.callInfo.renderContactId = call.contact.phoneNumber;
+                }
+            }
+        }
+
+        if (this.state.isMultipartyAllowed && call && !this.state.activeCalls[call.callId]) {
+            call.callType = scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_TYPE.ADD_PARTICIPANT;
+            call.callAttributes.participantType = scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.THIRD_PARTY;
+            this.addCall(call);
+        }
+        if (callType === scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_TYPE.INTERNAL_CALL.toLowerCase()) {
+            call = this.getCall({...(call || {}), callAttributes: { participantType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.INITIAL_CALLER }});
+            call.state = scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_STATE.CONNECTED;
+        } else if (callType === scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_TYPE.CONSULT.toLowerCase()) {
+            call = this.getCall({...(call || {}),callAttributes: { participantType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.THIRD_PARTY }});
+            call.state = scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_STATE.CONNECTED;
+        } else {
+            call = this.getCall({...(call || {}),callAttributes: { participantType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.THIRD_PARTY }});
+            call.state = scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_STATE.TRANSFERRED;
+        }      
+        this.log("connectParticipant", call);
+        this.addCall(call);
+        if (!callType) {
+            callType = call.callType.toLowerCase();
+        }
+        if (callType !==  scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_TYPE.INTERNAL_CALL.toLowerCase() && callType !==  scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_TYPE.CONSULT.toLowerCase()) {
+            let publishedCallInfo = call.callInfo || {};
+            publishedCallInfo.callStateTimestamp = publishedCallInfo.callStateTimestamp ? new Date(publishedCallInfo.callStateTimestamp) : new Date();
+            (0,scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.publishEvent)({eventType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.VOICE_EVENT_TYPE.PARTICIPANT_CONNECTED, payload: new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.ParticipantResult({
+                contact: receiverContact ? receiverContact : call.contact,
+                phoneNumber: call.contact && call.contact.phoneNumber,
+                callAttributes: call.callAttributes,
+                callInfo: new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.CallInfo(publishedCallInfo),
+                initialCallHasEnded: call.callAttributes && call.callAttributes.initialCallHasEnded,
+                callId: call.callId
+            })});
+        } else {
+            (0,scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.publishEvent)({eventType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.VOICE_EVENT_TYPE.CALL_CONNECTED, payload: new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.CallResult({call})});
+        }
+    }
+    /**
+     * connect the last added supervisor
+     */
+    connectSupervisor() {
+        const call = this.getCall({callAttributes: { participantType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.SUPERVISOR }});
+        call.state = scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_STATE.CONNECTED;
+        this.log("connectSupervisor", call);
+        this.addCall(call);
+        (0,scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.publishEvent)({ eventType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.VOICE_EVENT_TYPE.SUPERVISOR_CALL_CONNECTED, payload: new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.SuperviseCallResult({ call })});
+    }
+
+    /**
+     * Simulate removing the participantType from the conversation
+     * @param {PARTICIPANT_TYPE} participantType need to be removed
+     * @param call
+     */
+    removeParticipant(participantType, call) {
+        call = this.getCall({...(call || {}), callAttributes: { participantType: participantType }});
+        const reason = scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.HANGUP_REASON.PHONE_CALL_ENDED;
+        const destroyedCall = this.destroyCall(call, reason);
+        this.log("removeParticipant", call);
+        if (this.state.isMultipartyAllowed) {
+            this.messageUser(null, _common_constants__WEBPACK_IMPORTED_MODULE_2__.USER_MESSAGE.CALL_DESTROYED, {callId: call.callId, reason: reason});
+        }
+        this.state.agentAvailable = Object.keys(this.state.activeCalls).length === 0;
+        this.beginWrapup(destroyedCall);
+        
+        const payload = new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.CallResult({ call: destroyedCall });
+        (0,scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.publishEvent)({ eventType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.VOICE_EVENT_TYPE.PARTICIPANT_REMOVED, payload });
+        return this.executeAsync("removeParticipant", payload);
+    }
+
+    removeSupervisor() {
+        const call = this.getCall({callAttributes: { participantType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.SUPERVISOR }});
+        const destroyedCall = this.destroyCall(call);
+        this.log("removeSupervisor", call);
+        const payload = new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.SupervisorHangupResult({ calls: destroyedCall });
+        (0,scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.publishEvent)({ eventType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.VOICE_EVENT_TYPE.SUPERVISOR_HANGUP, payload });
+        return this.executeAsync("removeSupervisor", payload);
+    }
+
+    /**
+     * Simulate connecting caller
+     */
+    connectCall(callInfo, callToConnect) {
+        const call = callToConnect || this.getCall({callAttributes: { participantType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.INITIAL_CALLER }});
+        call.state = scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_STATE.CONNECTED;
+        call.callInfo = Object.assign(call.callInfo, callInfo);
+        // call.callAttributes.state = Constants.CALL_STATE.CONNECTED;
+        this.addCall(call);
+        this.log("connectCall", call);
+        (0,scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.publishEvent)({ eventType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.VOICE_EVENT_TYPE.CALL_CONNECTED, payload: new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.CallResult({ call })});
+    }
+    /**
+     * Simulate hanging up the phone from the agent (either decline or end the call from hardphone)
+     */
+    hangup(reason, agentErrorStatus) {
+        let destroyedCalls = this.destroyCalls({callAttributes: { participantType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.AGENT }}, reason);
+        destroyedCalls.map((call) => {
+            call.callInfo.isSoftphoneCall = false;
+            call.agentStatus = agentErrorStatus;
+            call.reason = reason;
+            return call;
+        });
+        this.state.agentAvailable = Object.keys(this.state.activeCalls).length === 0;
+        (0,scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.publishEvent)({ eventType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.VOICE_EVENT_TYPE.HANGUP, payload: new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.HangupResult({ calls: destroyedCalls })});
+        this.beginWrapup(destroyedCalls[0]);
+        return this.executeAsync("hangup", destroyedCalls);
+    }
+
+    /**
+     * Hang up user's call in a multiparty
+     * @param call
+     * @param reason
+     * @param agentErrorStatus
+     * @returns {?[]}
+     */
+    hangupMultiParty(call, reason, agentErrorStatus) {
+        let destroyedCalls = this.getActiveCallsList();
+        this.processCallsToDestroy(destroyedCalls, reason);
+        destroyedCalls.map((call) => {
+            call.callInfo.isSoftphoneCall = false;
+            call.agentStatus = agentErrorStatus;
+            call.reason = reason;
+            return call;
+        });
+        this.state.agentAvailable = Object.keys(this.state.activeCalls).length === 0;
+        (0,scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.publishEvent)({ eventType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.VOICE_EVENT_TYPE.HANGUP, payload: new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.HangupResult({ calls: [call] })});
+        this.beginWrapup(call);
+        return destroyedCalls;
+    }
+
+    isConsultCall(call) {
+        return this.state.isConsultAllowed && this.state.capabilities.canConsult &&
+            (call?.callAttributes?.isConsultCall === true || call?.callType?.toLowerCase() === scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_TYPE.CONSULT.toLowerCase()) ;
+    }
+
+    initiateHangupMultiParty(reason, agentErrorStatus) {
+        let call;
+        try {
+            call = this.getCall({ callAttributes: { participantType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.INITIAL_CALLER }});
+        } catch (e) {
+            call = this.getCall({ callAttributes: { participantType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.THIRD_PARTY }});
+        } 
+        this.hangupMultiParty(call, reason, agentErrorStatus);
+        this.messageUser(null, _common_constants__WEBPACK_IMPORTED_MODULE_2__.USER_MESSAGE.CALL_DESTROYED, {callId: call.callId, reason: reason});
+    }
+
+    /**
+     * begin after call wrap-up
+     * @param {PhoneCall} call - call to begin wrap-up
+     * 
+     * The implementation publishes AFTER_CALL_WORK_STARTED inside a setTimeout to 
+     * give demo connector enough time to finish executing HANGUP/END_CALL code/events. 
+     */
+    beginWrapup(call) {
+        setTimeout(()=> {
+            if (this.state.agentAvailable) {
+                (0,scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.publishEvent)({ eventType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.VOICE_EVENT_TYPE.AFTER_CALL_WORK_STARTED, payload: { callId: call.callId }});
+            }
+        },0);
+    }
+
+    /**
+     * 
+     * end after call wrap-up
+     */
+    endWrapup() {
+        this.log("endWrapup");
+    }
+
+    /**
+     * send  message to Voice Call Record Home
+     * @param {object} message - Message
+     */
+    publishMessage(message) {
+        this.log("publishMessage", message);
+        (0,scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.publishEvent)({ eventType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.SHARED_EVENT_TYPE.MESSAGE, payload: message });
+    }
+    /**
+     * Handle  message received from sfdc component
+     * @param {object} message - Message
+     */
+    handleMessage(message) {
+        const requestBroadcastChannel = new BroadcastChannel('rc-request');
+        requestBroadcastChannel.postMessage({type: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.SHARED_EVENT_TYPE.MESSAGE, payload: message});
+        this.log("handleMessage", message);
+    }
+
+    getSignedRecordingUrl(recordingUrl, vendorCallKey, callId) {
+        return this.executeAsync("getSignedRecordingUrl", new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.SignedRecordingUrlResult({
+            success: this.state.capabilities.hasSignedRecordingUrl,
+            url: this.state.capabilities.signedRecordingUrl,
+            duration: parseInt(this.state.capabilities.signedRecordingDuration),
+            callId
+        }));
+    }
+
+    /**
+     * Simulate callback
+     */
+    requestCallback(payload) {
+        const { phoneNumber } = payload;
+        const callInfo = new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.CallInfo({ callStateTimestamp: new Date() });
+        const call = new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.PhoneCall({ callId: this.generateCallId(),
+            phoneNumber,
+            callInfo,
+            callType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_TYPE.CALLBACK.toLowerCase(),
+            contact: new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Contact({ phoneNumber }),
+            callAttributes: { participantType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.INITIAL_CALLER } });
+        this.addCall(call);
+        (0,scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.publishEvent)({ eventType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.VOICE_EVENT_TYPE.QUEUED_CALL_STARTED, payload: new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.CallResult({ call })});
+    }
+
+    /**
+     * Simulate preview call
+     */
+    previewCall(payload) {
+        const { phoneNumber } = payload;
+        const callInfo = new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.CallInfo({ callStateTimestamp: new Date() });
+        const call = new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.PhoneCall({ callId: this.generateCallId(),
+            phoneNumber,
+            callInfo,
+            callType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.CALL_TYPE.OUTBOUND.toLowerCase(),
+            contact: new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Contact({ phoneNumber }),
+            callAttributes: { participantType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.INITIAL_CALLER, dialerType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.DIALER_TYPE.OUTBOUND_PREVIEW } });
+        this.addCall(call);
+        (0,scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.publishEvent)({ eventType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.VOICE_EVENT_TYPE.PREVIEW_CALL_STARTED, payload: new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.CallResult({ call })});
+    }
+
+    /**
+     * Simulate update Audio Stats for MOS
+     */
+    updateAudioStats(audioStats) {
+        this.log("updateAudioStats", audioStats);
+        let statsArray = [];
+        audioStats.stats.forEach(stats => {
+            let inputChannelStats;
+            let outputChannelStats;
+            if (stats.inputChannelStats) {
+                inputChannelStats = new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.StatsInfo(stats.inputChannelStats);
+            }
+            if (stats.outputChannelStats) {
+                outputChannelStats = new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.StatsInfo(stats.outputChannelStats);
+            }
+            statsArray.push(new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.AudioStatsElement({inputChannelStats, outputChannelStats}));
+        });
+        const payload = new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.AudioStats({stats: statsArray, callId: audioStats.callId, isAudioStatsCompleted: audioStats.isAudioStatsCompleted});
+        (0,scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.publishEvent)({ eventType: scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.VOICE_EVENT_TYPE.UPDATE_AUDIO_STATS, payload: payload });
+    }
+
+    /**
+     * cache the value of remove participant variant for the third party transfer participant
+     * This allows disabling the remove participant button during the dialing phase of a transfer call. 
+     */
+    updateRemoveTransferCallParticipantVariant(variant) {
+        this.state.updateRemoveTransferCallParticipantVariant = variant;
+    }
+
+    publishSetAgentStatus(statusId) {
+        (0,scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.publishEvent)({ eventType: "SET_AGENT_STATUS", payload: new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.AgentStatusInfo({statusId}) });
+    }
+
+    publishCallBargedInEventToAgents(parentCall) {
+        (0,scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.publishEvent)({ eventType: "CALL_BARGED_IN", payload: new scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.SupervisedCallInfo(parentCall)});
+    }
+
+    isSupervisorListeningIn() {
+        return this.state.capabilities.hasSupervisorListenIn && Object.values(this.state.activeCalls || {}).some(
+            (obj) => obj?.callAttributes?.participantType === scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.Constants.PARTICIPANT_TYPE.SUPERVISOR
+        );
+    }
+
+    /**
+     * CTR Sync functionality to update VoiceCall record to completed state
+     */
+    async ctrSync(voiceCallId) {
+        if (!voiceCallId) {
+            return { success: false, message: "Voice Call ID is required" };
+        }
+
+        try {
+            // First, verify that all participants have hung up
+            const callState = await this.verifyCallState();
+            if (!callState.allParticipantsHungUp) {
+                return { 
+                    success: false, 
+                    message: "Cannot sync CTR: Not all participants have hung up" 
+                };
+            }
+
+            // Use the existing voice call update API from the API documentation
+            const response = await fetch('/api/updateVoiceCall', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    voiceCallId: voiceCallId,
+                    endTime: new Date().toISOString(),
+                    isActiveCall: false
+                })
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                if (result.success) {
+                    return { success: true, message: "Voice call updated successfully" };
+                } else {
+                    return { success: false, message: "Voice call update failed" };
+                }
+            } else {
+                return { success: false, message: `Voice call update failed with status ${response.status}` };
+            }
+        } catch (error) {
+            return { success: false, message: `Voice call update failed: ${error.message}` };
+        }
+    }
+
+    /**
+     * Verify that all participants associated with a call have hung up
+     */
+    async verifyCallState() {
+        // Simple check: if there are no active calls, then all participants have hung up
+        const hasActiveCalls = Object.keys(this.state.activeCalls).length > 0;
+        
+        if (hasActiveCalls) {
+            return { allParticipantsHungUp: false };
+        }
+        
+        return { allParticipantsHungUp: true };
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/remote-control/index.js":
+/*!*************************************!*\
+  !*** ./src/remote-control/index.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   initializeRemoteController: () => (/* binding */ initializeRemoteController)
+/* harmony export */ });
+/* harmony import */ var _common_constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../common/constants */ "./src/common/constants.js");
+/* harmony import */ var scv_connector_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! scv-connector-base */ "./node_modules/scv-connector-base/dist/scv-connector-base.js");
+/* harmony import */ var scv_connector_base__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(scv_connector_base__WEBPACK_IMPORTED_MODULE_1__);
+/*
+ * Copyright (c) 2021, salesforce.com, inc.
+ * All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause
+ * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
+
+
+
+
+function  initializeRemoteController(connector) {
+    connector.sdk.eventEmitter.on('event', async (event) => {
+        if (event && event.data) {
+            try {
+                let call;
+                let callResult;
+                switch (event.data.type) {
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].LOGIN_SUBMIT: {
+                        connector.sdk.subsystemLoginResult(event.data.success);
+                    }
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].GET_SHOW_LOGIN_PAGE: {
+                        const { showLoginPage } = connector.sdk.state;
+                        connector.sdk.messageUser(event.fromUsername, 
+                                                  _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].SHOW_LOGIN_PAGE, 
+                                                  {
+                                                        type: _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].SHOW_LOGIN_PAGE,
+                                                        value: showLoginPage
+                                                  })
+                    }
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].GET_AGENT_CONFIG: {
+                        const { agentConfig, contactCenterChannels, agentId, userPresenceStatuses, isMultipartyAllowed, isConsultAllowed } = connector.sdk.state;
+                        connector.sdk.messageUser(event.fromUsername, 
+                                                  _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].AGENT_CONFIG,
+                                                 {
+                                                    type: _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].AGENT_CONFIG,
+                                                    value: agentConfig,
+                                                    userPresenceStatuses,
+                                                    contactCenterChannels,
+                                                    referrer: `${document.referrer}`,
+                                                    agentId,
+                                                    isMultipartyAllowed,
+                                                    isConsultAllowed
+                                                 })
+                    }
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].GET_CAPABILITIES: {
+                        const { capabilities, agentId } = connector.sdk.state;
+                        connector.sdk.messageUser(event.fromUsername, 
+                                                  _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].CAPABILITIES,
+                                                 {
+                                                    type: _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].CAPABILITIES,
+                                                    value: capabilities,
+                                                    referrer: `${document.referrer}`,
+                                                    agentId: agentId
+                                                 })
+                    }
+                        break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].CALL_INFO_UPDATED:
+                        connector.sdk.updateCallInfoObj(event);
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].GET_ACTIVE_CALLS: {
+                        connector.sdk.messageUser(event.fromUsername,
+                                                 _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].ACTIVE_CALLS,
+                                                 {
+                                                    type: _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].ACTIVE_CALLS,
+                                                    value: Object.values(connector.sdk.getActiveCallsObj())
+                                                 })
+                    }
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].THROW_ERROR: {
+                        connector.sdk.throwError(event.data.value)
+                    }
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].CUSTOM_ERROR: {
+                        connector.sdk.customErrorChanged(event.data.value)
+                    }
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].SET_SHOW_LOGIN_PAGE: {
+                        connector.sdk.showLoginPage(event.data.value);
+                    }
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].SET_AGENT_CONFIG: {
+                        connector.sdk.updateAgentConfig({
+                            selectedPhone: event.data.value.selectedPhone
+                         });
+                    }
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].SET_CAPABILITIES: {
+                        connector.sdk.updateCapabilities({
+                            hasMute: event.data.value.hasMute,
+                            hasRecord: event.data.value.hasRecord,
+                            hasSwap: event.data.value.hasSwap,
+                            hasMerge: event.data.value.hasMerge,
+                            hasContactSearch: event.data.value.hasContactSearch,
+                            hasSignedRecordingUrl: event.data.value.hasSignedRecordingUrl,
+                            signedRecordingUrl: event.data.value.signedRecordingUrl,
+                            signedRecordingDuration: event.data.value.signedRecordingDuration,
+                            supportsMos: event.data.value.supportsMos,
+                            hasSupervisorListenIn: event.data.value.hasSupervisorListenIn,
+                            hasSupervisorBargeIn: event.data.value.hasSupervisorBargeIn,
+                            hasBlindTransfer: event.data.value.hasBlindTransfer,
+                            hasPhoneBook: event.data.value.hasPhoneBook,
+                            debugEnabled: event.data.value.debugEnabled,
+                            hasAgentAvailability: event.data.value.hasAgentAvailability,
+                            hasQueueWaitTime: event.data.value.hasQueueWaitTime,
+                            hasTransferToOmniFlow: event.data.value.hasTransferToOmniFlow,
+                            hasPendingStatusChange: event.data.value.hasPendingStatusChange,
+                            canConsult: event.data.value.canConsult,
+                            isDialPadDisabled: event.data.value.isDialPadDisabled,
+                            isPhoneBookDisabled: event.data.value.isPhoneBookDisabled,
+                            isHidSupported: event.data.value.isHidSupported,
+                            hasSetExternalMicrophoneDeviceSetting: event.data.value.hasSetExternalMicrophoneDeviceSetting,
+                            hasSetExternalSpeakerDeviceSetting: event.data.value.hasSetExternalSpeakerDeviceSetting
+                        });
+                    }
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].SET_CONTACT_TYPES: {
+                        connector.sdk.updateContactTypes(event.data.contactTypes);
+                    }
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].START_OUTBOUND_CALL: {
+                        await connector.sdk.dial(new scv_connector_base__WEBPACK_IMPORTED_MODULE_1__.Contact({ phoneNumber: event.data.phoneNumber}), event.data.callInfo, true);
+                    }
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].CONSULT: {
+                        await connector.sdk.dial(new scv_connector_base__WEBPACK_IMPORTED_MODULE_1__.Contact(event.data.contact), event.data.callInfo, true, false, true);
+                    }
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].START_INBOUND_CALL:
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].PROGRESSIVE_DIALER:
+                        await connector.sdk.startInboundCall(event.data.phoneNumber, event.data.callInfo, event.data.flowConfig);
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].CONNECT_PARTICIPANT: {
+                        connector.sdk.connectParticipant(null, null, event.data.call);
+                    }
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].SET_AGENT_STATUS: {
+                        connector.sdk.publishSetAgentStatus(event.data.statusId);
+                    }
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].CONNECT_SUPERVISOR: {
+                        connector.sdk.connectSupervisor();
+                    }
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].REMOVE_PARTICIPANT:
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].END_CALL: {
+                        connector.sdk.removeParticipant(event.data.participantType, event.data.call);
+                    }
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].REMOVE_SUPERVISOR: {
+                        connector.sdk.removeSupervisor();
+                    }
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].CONNECT_CALL: {
+                        connector.sdk.connectCall(event.data.callInfo);
+                    }
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].AGENT_HANGUP: {
+                        const { isMultipartyAllowed } = connector.sdk.state;
+                        if ( isMultipartyAllowed ) {
+                            connector.sdk.initiateHangupMultiParty(event.data.reason, event.data.agentErrorStatus);
+                        } else {
+                            connector.sdk.hangup(event.data.reason, event.data.agentErrorStatus);
+                        }
+                    }
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].SOFTPHONE_LOGOUT: {
+                        connector.sdk.subsystemLogout();
+                    }
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].CREATE_TRANSCRIPTION: {
+                        fetch('/api/createTranscription', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(event.data)
+                        }).then((payload) => {
+                            connector.sdk.log(`Create transcript returned with ${payload.success}`);
+                        }).catch((err) => {
+                            connector.sdk.log(`Create transcript failed - ${err}`);
+                        });
+                    }
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].SEND_VOICE_MAIL: {
+                        fetch('/api/sendVoiceMail', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(event.data.voiceMailDetails)
+                        }).then((payload) => {
+                            connector.sdk.log(`Store recording link returned with ${payload.success}`);
+                        }).catch((err) => {
+                            connector.sdk.log(`Store recording link failed - ${err}`);
+                        });
+                    }
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].SEND_REALTIME_CONVERSATION_EVENTS: {
+                        fetch('/api/sendRealtimeConversationEvents', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(event.data.sendRealtimeConversationEventsDetails)
+                        }).then((payload) => {
+                            connector.sdk.log(`sendRealtimeConversationEvents returned with ${payload.success}`);
+                        }).catch((err) => {
+                            connector.sdk.log(`sendRealtimeConversationEvents failed - ${err}`);
+                        });
+                    }
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].SEND_RECORDING: {
+                        fetch('/api/updateVoiceCall', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(event.data.recordingInfo)
+                        }).then((payload) => {
+                            connector.sdk.log(`Store recording link returned with ${payload.success}`);
+                        }).catch((err) => {
+                            connector.sdk.log(`Store recording link failed - ${err}`);
+                        });
+                    }
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].MESSAGE_FROM_CONNECTOR:{
+                        await connector.sdk.publishMessage(event.data.message);
+                    }
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].REQUEST_CALLBACK: {
+                        connector.sdk.requestCallback(event.data.payload);
+                    }
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].PUSH_DIALER: {
+                        connector.sdk.previewCall(event.data.payload);
+                    }
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].SEND_AUDIO_STATS: {
+                        await connector.sdk.updateAudioStats(event.data.audioStats);
+                    }
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].CTR_SYNC: {
+                        try {
+                            const result = await connector.sdk.ctrSync(event.data.voiceCallId);
+                            connector.sdk.messageUser(event.fromUsername, 
+                                                      _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].CTR_SYNC_RESULT, 
+                                                      {
+                                                        type: _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].CTR_SYNC_RESULT,
+                                                        success: result.success,
+                                                        message: result.message
+                                                      });
+                        } catch (error) {
+                            connector.sdk.messageUser(event.fromUsername, 
+                                                      _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].CTR_SYNC_RESULT, 
+                                                      {
+                                                        type: _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].CTR_SYNC_RESULT,
+                                                        success: false,
+                                                        message: error.message
+                                                      });
+                        }
+                    }
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].REMOVE_TRANSFER_PARTICIPANT_VARIANT: {
+                        connector.sdk.updateRemoveTransferCallParticipantVariant(event.data.variant);
+                    }
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].HARDPHONE_EVENT: {
+                        const eventType = event.data.eventType;
+                        const payload = event.data.payload;
+                        let result;
+                        switch (eventType) {
+                            case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].VOICE_EVENT_TYPE.MUTE_TOGGLE: {
+                                if (payload.isMuted) {
+                                    result = await connector.sdk.mute(payload.call);
+                                } else {
+                                    result = await connector.sdk.unmute(payload.call);
+                                }
+                            }
+                            break;
+                            case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].VOICE_EVENT_TYPE.HOLD_TOGGLE: {
+                                if (payload.isCustomerOnHold) {
+                                    result = await connector.sdk.hold(payload.call);
+                                } else {
+                                    result = await connector.sdk.resume(payload.call);
+                                }
+                            }
+                            break;
+                            case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].VOICE_EVENT_TYPE.RECORDING_TOGGLE: {
+                                //TODO: pass call to pauseRecording/resumeRecording
+                                if (payload.isRecordingPaused) {
+                                    result = await connector.sdk.pauseRecording(payload.call);
+                                } else {
+                                    result = await connector.sdk.resumeRecording(payload.call);
+                                }
+                            }
+                            break;
+                            case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].VOICE_EVENT_TYPE.PARTICIPANT_ADDED: {
+                                result = await connector.sdk.addParticipant(new scv_connector_base__WEBPACK_IMPORTED_MODULE_1__.Contact(payload.contact), payload.call);
+                            }
+                            break;
+                            case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].VOICE_EVENT_TYPE.PARTICIPANTS_SWAPPED: {
+                                result = await connector.sdk.swapCalls(payload.call, payload.thirdPartyCall);
+                            }
+                            break;
+                            case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].VOICE_EVENT_TYPE.PARTICIPANTS_CONFERENCED: {
+                                result = await connector.sdk.conference(payload);
+                            }
+                            break;
+                        }
+                        (0,scv_connector_base__WEBPACK_IMPORTED_MODULE_1__.publishEvent)({ eventType, payload: result });
+                    }
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].SHARED_EVENT_TYPE.AFTER_CONVERSATION_WORK_STARTED:
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].SHARED_EVENT_TYPE.AFTER_CONVERSATION_WORK_ENDED:
+                        (0,scv_connector_base__WEBPACK_IMPORTED_MODULE_1__.publishEvent)({eventType: event.data.type, payload: new scv_connector_base__WEBPACK_IMPORTED_MODULE_1__.ACWInfo(event.data.acwInfo)});
+                    break;
+                    case _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].CALL_UPDATED:
+                        call = new scv_connector_base__WEBPACK_IMPORTED_MODULE_1__.PhoneCall({
+                            callInfo: new scv_connector_base__WEBPACK_IMPORTED_MODULE_1__.CallInfo(event.data.payload)
+                        })
+                        callResult = new scv_connector_base__WEBPACK_IMPORTED_MODULE_1__.CallResult({call});
+                        (0,scv_connector_base__WEBPACK_IMPORTED_MODULE_1__.publishEvent)({
+                            eventType: event.data.eventType, payload: callResult
+                        });
+                        break;
+                    default:
+                        (0,scv_connector_base__WEBPACK_IMPORTED_MODULE_1__.publishEvent)({eventType: event.data.type});
+                    break;
+                }
+            } catch (error) {
+                const eventType = event.data.eventType;
+                connector.sdk.messageUser(event.fromUsername, 
+                                          _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].ERROR, 
+                                         {
+                                            type: _common_constants__WEBPACK_IMPORTED_MODULE_0__["default"].ERROR,
+                                            error: `${error.message} (Event: ${eventType || event.data.type})`
+                                         })
+                console.error(`Error occured when published event ${eventType} from the hardphone simulator: ${error.message}`);
+                if (connector.sdk && connector.sdk.state.publishHardphoneErrors) {
+                    (0,scv_connector_base__WEBPACK_IMPORTED_MODULE_1__.publishError)({ eventType, error });
+                }
+            }
+        }
+    });
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/socket.io-client/build/index.js":
+/*!******************************************************!*\
+  !*** ./node_modules/socket.io-client/build/index.js ***!
+  \******************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.io = exports.Socket = exports.Manager = exports.protocol = void 0;
+const url_1 = __webpack_require__(/*! ./url */ "./node_modules/socket.io-client/build/url.js");
+const manager_1 = __webpack_require__(/*! ./manager */ "./node_modules/socket.io-client/build/manager.js");
+const debug = __webpack_require__(/*! debug */ "./node_modules/debug/src/browser.js")("socket.io-client");
+/**
+ * Module exports.
+ */
+module.exports = exports = lookup;
+/**
+ * Managers cache.
+ */
+const cache = (exports.managers = {});
+function lookup(uri, opts) {
+    if (typeof uri === "object") {
+        opts = uri;
+        uri = undefined;
+    }
+    opts = opts || {};
+    const parsed = (0, url_1.url)(uri, opts.path || "/socket.io");
+    const source = parsed.source;
+    const id = parsed.id;
+    const path = parsed.path;
+    const sameNamespace = cache[id] && path in cache[id]["nsps"];
+    const newConnection = opts.forceNew ||
+        opts["force new connection"] ||
+        false === opts.multiplex ||
+        sameNamespace;
+    let io;
+    if (newConnection) {
+        debug("ignoring socket cache for %s", source);
+        io = new manager_1.Manager(source, opts);
+    }
+    else {
+        if (!cache[id]) {
+            debug("new io instance for %s", source);
+            cache[id] = new manager_1.Manager(source, opts);
+        }
+        io = cache[id];
+    }
+    if (parsed.query && !opts.query) {
+        opts.query = parsed.queryKey;
+    }
+    return io.socket(parsed.path, opts);
+}
+exports.io = lookup;
+/**
+ * Protocol version.
+ *
+ * @public
+ */
+var socket_io_parser_1 = __webpack_require__(/*! socket.io-parser */ "./node_modules/socket.io-parser/dist/index.js");
+Object.defineProperty(exports, "protocol", ({ enumerable: true, get: function () { return socket_io_parser_1.protocol; } }));
+/**
+ * `connect`.
+ *
+ * @param {String} uri
+ * @public
+ */
+exports.connect = lookup;
+/**
+ * Expose constructors for standalone build.
+ *
+ * @public
+ */
+var manager_2 = __webpack_require__(/*! ./manager */ "./node_modules/socket.io-client/build/manager.js");
+Object.defineProperty(exports, "Manager", ({ enumerable: true, get: function () { return manager_2.Manager; } }));
+var socket_1 = __webpack_require__(/*! ./socket */ "./node_modules/socket.io-client/build/socket.js");
+Object.defineProperty(exports, "Socket", ({ enumerable: true, get: function () { return socket_1.Socket; } }));
+exports["default"] = lookup;
+
+
+/***/ }),
+
+/***/ "./node_modules/socket.io-client/build/manager.js":
+/*!********************************************************!*\
+  !*** ./node_modules/socket.io-client/build/manager.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Manager = void 0;
+const eio = __webpack_require__(/*! engine.io-client */ "./node_modules/engine.io-client/lib/index.js");
+const util_1 = __webpack_require__(/*! engine.io-client/lib/util */ "./node_modules/engine.io-client/lib/util.js");
+const socket_1 = __webpack_require__(/*! ./socket */ "./node_modules/socket.io-client/build/socket.js");
+const parser = __webpack_require__(/*! socket.io-parser */ "./node_modules/socket.io-parser/dist/index.js");
+const on_1 = __webpack_require__(/*! ./on */ "./node_modules/socket.io-client/build/on.js");
+const Backoff = __webpack_require__(/*! backo2 */ "./node_modules/backo2/index.js");
+const typed_events_1 = __webpack_require__(/*! ./typed-events */ "./node_modules/socket.io-client/build/typed-events.js");
+const debug = __webpack_require__(/*! debug */ "./node_modules/debug/src/browser.js")("socket.io-client:manager");
+class Manager extends typed_events_1.StrictEventEmitter {
+    constructor(uri, opts) {
+        var _a;
+        super();
+        this.nsps = {};
+        this.subs = [];
+        if (uri && "object" === typeof uri) {
+            opts = uri;
+            uri = undefined;
+        }
+        opts = opts || {};
+        opts.path = opts.path || "/socket.io";
+        this.opts = opts;
+        (0, util_1.installTimerFunctions)(this, opts);
+        this.reconnection(opts.reconnection !== false);
+        this.reconnectionAttempts(opts.reconnectionAttempts || Infinity);
+        this.reconnectionDelay(opts.reconnectionDelay || 1000);
+        this.reconnectionDelayMax(opts.reconnectionDelayMax || 5000);
+        this.randomizationFactor((_a = opts.randomizationFactor) !== null && _a !== void 0 ? _a : 0.5);
+        this.backoff = new Backoff({
+            min: this.reconnectionDelay(),
+            max: this.reconnectionDelayMax(),
+            jitter: this.randomizationFactor(),
+        });
+        this.timeout(null == opts.timeout ? 20000 : opts.timeout);
+        this._readyState = "closed";
+        this.uri = uri;
+        const _parser = opts.parser || parser;
+        this.encoder = new _parser.Encoder();
+        this.decoder = new _parser.Decoder();
+        this._autoConnect = opts.autoConnect !== false;
+        if (this._autoConnect)
+            this.open();
+    }
+    reconnection(v) {
+        if (!arguments.length)
+            return this._reconnection;
+        this._reconnection = !!v;
+        return this;
+    }
+    reconnectionAttempts(v) {
+        if (v === undefined)
+            return this._reconnectionAttempts;
+        this._reconnectionAttempts = v;
+        return this;
+    }
+    reconnectionDelay(v) {
+        var _a;
+        if (v === undefined)
+            return this._reconnectionDelay;
+        this._reconnectionDelay = v;
+        (_a = this.backoff) === null || _a === void 0 ? void 0 : _a.setMin(v);
+        return this;
+    }
+    randomizationFactor(v) {
+        var _a;
+        if (v === undefined)
+            return this._randomizationFactor;
+        this._randomizationFactor = v;
+        (_a = this.backoff) === null || _a === void 0 ? void 0 : _a.setJitter(v);
+        return this;
+    }
+    reconnectionDelayMax(v) {
+        var _a;
+        if (v === undefined)
+            return this._reconnectionDelayMax;
+        this._reconnectionDelayMax = v;
+        (_a = this.backoff) === null || _a === void 0 ? void 0 : _a.setMax(v);
+        return this;
+    }
+    timeout(v) {
+        if (!arguments.length)
+            return this._timeout;
+        this._timeout = v;
+        return this;
+    }
+    /**
+     * Starts trying to reconnect if reconnection is enabled and we have not
+     * started reconnecting yet
+     *
+     * @private
+     */
+    maybeReconnectOnOpen() {
+        // Only try to reconnect if it's the first time we're connecting
+        if (!this._reconnecting &&
+            this._reconnection &&
+            this.backoff.attempts === 0) {
+            // keeps reconnection from firing twice for the same reconnection loop
+            this.reconnect();
+        }
+    }
+    /**
+     * Sets the current transport `socket`.
+     *
+     * @param {Function} fn - optional, callback
+     * @return self
+     * @public
+     */
+    open(fn) {
+        debug("readyState %s", this._readyState);
+        if (~this._readyState.indexOf("open"))
+            return this;
+        debug("opening %s", this.uri);
+        this.engine = eio(this.uri, this.opts);
+        const socket = this.engine;
+        const self = this;
+        this._readyState = "opening";
+        this.skipReconnect = false;
+        // emit `open`
+        const openSubDestroy = (0, on_1.on)(socket, "open", function () {
+            self.onopen();
+            fn && fn();
+        });
+        // emit `error`
+        const errorSub = (0, on_1.on)(socket, "error", (err) => {
+            debug("error");
+            self.cleanup();
+            self._readyState = "closed";
+            this.emitReserved("error", err);
+            if (fn) {
+                fn(err);
+            }
+            else {
+                // Only do this if there is no fn to handle the error
+                self.maybeReconnectOnOpen();
+            }
+        });
+        if (false !== this._timeout) {
+            const timeout = this._timeout;
+            debug("connect attempt will timeout after %d", timeout);
+            if (timeout === 0) {
+                openSubDestroy(); // prevents a race condition with the 'open' event
+            }
+            // set timer
+            const timer = this.setTimeoutFn(() => {
+                debug("connect attempt timed out after %d", timeout);
+                openSubDestroy();
+                socket.close();
+                socket.emit("error", new Error("timeout"));
+            }, timeout);
+            if (this.opts.autoUnref) {
+                timer.unref();
+            }
+            this.subs.push(function subDestroy() {
+                clearTimeout(timer);
+            });
+        }
+        this.subs.push(openSubDestroy);
+        this.subs.push(errorSub);
+        return this;
+    }
+    /**
+     * Alias for open()
+     *
+     * @return self
+     * @public
+     */
+    connect(fn) {
+        return this.open(fn);
+    }
+    /**
+     * Called upon transport open.
+     *
+     * @private
+     */
+    onopen() {
+        debug("open");
+        // clear old subs
+        this.cleanup();
+        // mark as open
+        this._readyState = "open";
+        this.emitReserved("open");
+        // add new subs
+        const socket = this.engine;
+        this.subs.push((0, on_1.on)(socket, "ping", this.onping.bind(this)), (0, on_1.on)(socket, "data", this.ondata.bind(this)), (0, on_1.on)(socket, "error", this.onerror.bind(this)), (0, on_1.on)(socket, "close", this.onclose.bind(this)), (0, on_1.on)(this.decoder, "decoded", this.ondecoded.bind(this)));
+    }
+    /**
+     * Called upon a ping.
+     *
+     * @private
+     */
+    onping() {
+        this.emitReserved("ping");
+    }
+    /**
+     * Called with data.
+     *
+     * @private
+     */
+    ondata(data) {
+        this.decoder.add(data);
+    }
+    /**
+     * Called when parser fully decodes a packet.
+     *
+     * @private
+     */
+    ondecoded(packet) {
+        this.emitReserved("packet", packet);
+    }
+    /**
+     * Called upon socket error.
+     *
+     * @private
+     */
+    onerror(err) {
+        debug("error", err);
+        this.emitReserved("error", err);
+    }
+    /**
+     * Creates a new socket for the given `nsp`.
+     *
+     * @return {Socket}
+     * @public
+     */
+    socket(nsp, opts) {
+        let socket = this.nsps[nsp];
+        if (!socket) {
+            socket = new socket_1.Socket(this, nsp, opts);
+            this.nsps[nsp] = socket;
+        }
+        return socket;
+    }
+    /**
+     * Called upon a socket close.
+     *
+     * @param socket
+     * @private
+     */
+    _destroy(socket) {
+        const nsps = Object.keys(this.nsps);
+        for (const nsp of nsps) {
+            const socket = this.nsps[nsp];
+            if (socket.active) {
+                debug("socket %s is still active, skipping close", nsp);
+                return;
+            }
+        }
+        this._close();
+    }
+    /**
+     * Writes a packet.
+     *
+     * @param packet
+     * @private
+     */
+    _packet(packet) {
+        debug("writing packet %j", packet);
+        const encodedPackets = this.encoder.encode(packet);
+        for (let i = 0; i < encodedPackets.length; i++) {
+            this.engine.write(encodedPackets[i], packet.options);
+        }
+    }
+    /**
+     * Clean up transport subscriptions and packet buffer.
+     *
+     * @private
+     */
+    cleanup() {
+        debug("cleanup");
+        this.subs.forEach((subDestroy) => subDestroy());
+        this.subs.length = 0;
+        this.decoder.destroy();
+    }
+    /**
+     * Close the current socket.
+     *
+     * @private
+     */
+    _close() {
+        debug("disconnect");
+        this.skipReconnect = true;
+        this._reconnecting = false;
+        if ("opening" === this._readyState) {
+            // `onclose` will not fire because
+            // an open event never happened
+            this.cleanup();
+        }
+        this.backoff.reset();
+        this._readyState = "closed";
+        if (this.engine)
+            this.engine.close();
+    }
+    /**
+     * Alias for close()
+     *
+     * @private
+     */
+    disconnect() {
+        return this._close();
+    }
+    /**
+     * Called upon engine close.
+     *
+     * @private
+     */
+    onclose(reason) {
+        debug("onclose");
+        this.cleanup();
+        this.backoff.reset();
+        this._readyState = "closed";
+        this.emitReserved("close", reason);
+        if (this._reconnection && !this.skipReconnect) {
+            this.reconnect();
+        }
+    }
+    /**
+     * Attempt a reconnection.
+     *
+     * @private
+     */
+    reconnect() {
+        if (this._reconnecting || this.skipReconnect)
+            return this;
+        const self = this;
+        if (this.backoff.attempts >= this._reconnectionAttempts) {
+            debug("reconnect failed");
+            this.backoff.reset();
+            this.emitReserved("reconnect_failed");
+            this._reconnecting = false;
+        }
+        else {
+            const delay = this.backoff.duration();
+            debug("will wait %dms before reconnect attempt", delay);
+            this._reconnecting = true;
+            const timer = this.setTimeoutFn(() => {
+                if (self.skipReconnect)
+                    return;
+                debug("attempting reconnect");
+                this.emitReserved("reconnect_attempt", self.backoff.attempts);
+                // check again for the case socket closed in above events
+                if (self.skipReconnect)
+                    return;
+                self.open((err) => {
+                    if (err) {
+                        debug("reconnect attempt error");
+                        self._reconnecting = false;
+                        self.reconnect();
+                        this.emitReserved("reconnect_error", err);
+                    }
+                    else {
+                        debug("reconnect success");
+                        self.onreconnect();
+                    }
+                });
+            }, delay);
+            if (this.opts.autoUnref) {
+                timer.unref();
+            }
+            this.subs.push(function subDestroy() {
+                clearTimeout(timer);
+            });
+        }
+    }
+    /**
+     * Called upon successful reconnect.
+     *
+     * @private
+     */
+    onreconnect() {
+        const attempt = this.backoff.attempts;
+        this._reconnecting = false;
+        this.backoff.reset();
+        this.emitReserved("reconnect", attempt);
+    }
+}
+exports.Manager = Manager;
+
+
+/***/ }),
+
+/***/ "./node_modules/socket.io-client/build/on.js":
+/*!***************************************************!*\
+  !*** ./node_modules/socket.io-client/build/on.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.on = void 0;
+function on(obj, ev, fn) {
+    obj.on(ev, fn);
+    return function subDestroy() {
+        obj.off(ev, fn);
+    };
+}
+exports.on = on;
+
+
+/***/ }),
+
+/***/ "./node_modules/socket.io-client/build/socket.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/socket.io-client/build/socket.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Socket = void 0;
+const socket_io_parser_1 = __webpack_require__(/*! socket.io-parser */ "./node_modules/socket.io-parser/dist/index.js");
+const on_1 = __webpack_require__(/*! ./on */ "./node_modules/socket.io-client/build/on.js");
+const typed_events_1 = __webpack_require__(/*! ./typed-events */ "./node_modules/socket.io-client/build/typed-events.js");
+const debug = __webpack_require__(/*! debug */ "./node_modules/debug/src/browser.js")("socket.io-client:socket");
+/**
+ * Internal events.
+ * These events can't be emitted by the user.
+ */
+const RESERVED_EVENTS = Object.freeze({
+    connect: 1,
+    connect_error: 1,
+    disconnect: 1,
+    disconnecting: 1,
+    // EventEmitter reserved events: https://nodejs.org/api/events.html#events_event_newlistener
+    newListener: 1,
+    removeListener: 1,
+});
+class Socket extends typed_events_1.StrictEventEmitter {
+    /**
+     * `Socket` constructor.
+     *
+     * @public
+     */
+    constructor(io, nsp, opts) {
+        super();
+        this.connected = false;
+        this.disconnected = true;
+        this.receiveBuffer = [];
+        this.sendBuffer = [];
+        this.ids = 0;
+        this.acks = {};
+        this.flags = {};
+        this.io = io;
+        this.nsp = nsp;
+        if (opts && opts.auth) {
+            this.auth = opts.auth;
+        }
+        if (this.io._autoConnect)
+            this.open();
+    }
+    /**
+     * Subscribe to open, close and packet events
+     *
+     * @private
+     */
+    subEvents() {
+        if (this.subs)
+            return;
+        const io = this.io;
+        this.subs = [
+            (0, on_1.on)(io, "open", this.onopen.bind(this)),
+            (0, on_1.on)(io, "packet", this.onpacket.bind(this)),
+            (0, on_1.on)(io, "error", this.onerror.bind(this)),
+            (0, on_1.on)(io, "close", this.onclose.bind(this)),
+        ];
+    }
+    /**
+     * Whether the Socket will try to reconnect when its Manager connects or reconnects
+     */
+    get active() {
+        return !!this.subs;
+    }
+    /**
+     * "Opens" the socket.
+     *
+     * @public
+     */
+    connect() {
+        if (this.connected)
+            return this;
+        this.subEvents();
+        if (!this.io["_reconnecting"])
+            this.io.open(); // ensure open
+        if ("open" === this.io._readyState)
+            this.onopen();
+        return this;
+    }
+    /**
+     * Alias for connect()
+     */
+    open() {
+        return this.connect();
+    }
+    /**
+     * Sends a `message` event.
+     *
+     * @return self
+     * @public
+     */
+    send(...args) {
+        args.unshift("message");
+        this.emit.apply(this, args);
+        return this;
+    }
+    /**
+     * Override `emit`.
+     * If the event is in `events`, it's emitted normally.
+     *
+     * @return self
+     * @public
+     */
+    emit(ev, ...args) {
+        if (RESERVED_EVENTS.hasOwnProperty(ev)) {
+            throw new Error('"' + ev + '" is a reserved event name');
+        }
+        args.unshift(ev);
+        const packet = {
+            type: socket_io_parser_1.PacketType.EVENT,
+            data: args,
+        };
+        packet.options = {};
+        packet.options.compress = this.flags.compress !== false;
+        // event ack callback
+        if ("function" === typeof args[args.length - 1]) {
+            debug("emitting packet with ack id %d", this.ids);
+            this.acks[this.ids] = args.pop();
+            packet.id = this.ids++;
+        }
+        const isTransportWritable = this.io.engine &&
+            this.io.engine.transport &&
+            this.io.engine.transport.writable;
+        const discardPacket = this.flags.volatile && (!isTransportWritable || !this.connected);
+        if (discardPacket) {
+            debug("discard packet as the transport is not currently writable");
+        }
+        else if (this.connected) {
+            this.packet(packet);
+        }
+        else {
+            this.sendBuffer.push(packet);
+        }
+        this.flags = {};
+        return this;
+    }
+    /**
+     * Sends a packet.
+     *
+     * @param packet
+     * @private
+     */
+    packet(packet) {
+        packet.nsp = this.nsp;
+        this.io._packet(packet);
+    }
+    /**
+     * Called upon engine `open`.
+     *
+     * @private
+     */
+    onopen() {
+        debug("transport is open - connecting");
+        if (typeof this.auth == "function") {
+            this.auth((data) => {
+                this.packet({ type: socket_io_parser_1.PacketType.CONNECT, data });
+            });
+        }
+        else {
+            this.packet({ type: socket_io_parser_1.PacketType.CONNECT, data: this.auth });
+        }
+    }
+    /**
+     * Called upon engine or manager `error`.
+     *
+     * @param err
+     * @private
+     */
+    onerror(err) {
+        if (!this.connected) {
+            this.emitReserved("connect_error", err);
+        }
+    }
+    /**
+     * Called upon engine `close`.
+     *
+     * @param reason
+     * @private
+     */
+    onclose(reason) {
+        debug("close (%s)", reason);
+        this.connected = false;
+        this.disconnected = true;
+        delete this.id;
+        this.emitReserved("disconnect", reason);
+    }
+    /**
+     * Called with socket packet.
+     *
+     * @param packet
+     * @private
+     */
+    onpacket(packet) {
+        const sameNamespace = packet.nsp === this.nsp;
+        if (!sameNamespace)
+            return;
+        switch (packet.type) {
+            case socket_io_parser_1.PacketType.CONNECT:
+                if (packet.data && packet.data.sid) {
+                    const id = packet.data.sid;
+                    this.onconnect(id);
+                }
+                else {
+                    this.emitReserved("connect_error", new Error("It seems you are trying to reach a Socket.IO server in v2.x with a v3.x client, but they are not compatible (more information here: https://socket.io/docs/v3/migrating-from-2-x-to-3-0/)"));
+                }
+                break;
+            case socket_io_parser_1.PacketType.EVENT:
+                this.onevent(packet);
+                break;
+            case socket_io_parser_1.PacketType.BINARY_EVENT:
+                this.onevent(packet);
+                break;
+            case socket_io_parser_1.PacketType.ACK:
+                this.onack(packet);
+                break;
+            case socket_io_parser_1.PacketType.BINARY_ACK:
+                this.onack(packet);
+                break;
+            case socket_io_parser_1.PacketType.DISCONNECT:
+                this.ondisconnect();
+                break;
+            case socket_io_parser_1.PacketType.CONNECT_ERROR:
+                const err = new Error(packet.data.message);
+                // @ts-ignore
+                err.data = packet.data.data;
+                this.emitReserved("connect_error", err);
+                break;
+        }
+    }
+    /**
+     * Called upon a server event.
+     *
+     * @param packet
+     * @private
+     */
+    onevent(packet) {
+        const args = packet.data || [];
+        debug("emitting event %j", args);
+        if (null != packet.id) {
+            debug("attaching ack callback to event");
+            args.push(this.ack(packet.id));
+        }
+        if (this.connected) {
+            this.emitEvent(args);
+        }
+        else {
+            this.receiveBuffer.push(Object.freeze(args));
+        }
+    }
+    emitEvent(args) {
+        if (this._anyListeners && this._anyListeners.length) {
+            const listeners = this._anyListeners.slice();
+            for (const listener of listeners) {
+                listener.apply(this, args);
+            }
+        }
+        super.emit.apply(this, args);
+    }
+    /**
+     * Produces an ack callback to emit with an event.
+     *
+     * @private
+     */
+    ack(id) {
+        const self = this;
+        let sent = false;
+        return function (...args) {
+            // prevent double callbacks
+            if (sent)
+                return;
+            sent = true;
+            debug("sending ack %j", args);
+            self.packet({
+                type: socket_io_parser_1.PacketType.ACK,
+                id: id,
+                data: args,
+            });
+        };
+    }
+    /**
+     * Called upon a server acknowlegement.
+     *
+     * @param packet
+     * @private
+     */
+    onack(packet) {
+        const ack = this.acks[packet.id];
+        if ("function" === typeof ack) {
+            debug("calling ack %s with %j", packet.id, packet.data);
+            ack.apply(this, packet.data);
+            delete this.acks[packet.id];
+        }
+        else {
+            debug("bad ack %s", packet.id);
+        }
+    }
+    /**
+     * Called upon server connect.
+     *
+     * @private
+     */
+    onconnect(id) {
+        debug("socket connected with id %s", id);
+        this.id = id;
+        this.connected = true;
+        this.disconnected = false;
+        this.emitBuffered();
+        this.emitReserved("connect");
+    }
+    /**
+     * Emit buffered events (received and emitted).
+     *
+     * @private
+     */
+    emitBuffered() {
+        this.receiveBuffer.forEach((args) => this.emitEvent(args));
+        this.receiveBuffer = [];
+        this.sendBuffer.forEach((packet) => this.packet(packet));
+        this.sendBuffer = [];
+    }
+    /**
+     * Called upon server disconnect.
+     *
+     * @private
+     */
+    ondisconnect() {
+        debug("server disconnect (%s)", this.nsp);
+        this.destroy();
+        this.onclose("io server disconnect");
+    }
+    /**
+     * Called upon forced client/server side disconnections,
+     * this method ensures the manager stops tracking us and
+     * that reconnections don't get triggered for this.
+     *
+     * @private
+     */
+    destroy() {
+        if (this.subs) {
+            // clean subscriptions to avoid reconnections
+            this.subs.forEach((subDestroy) => subDestroy());
+            this.subs = undefined;
+        }
+        this.io["_destroy"](this);
+    }
+    /**
+     * Disconnects the socket manually.
+     *
+     * @return self
+     * @public
+     */
+    disconnect() {
+        if (this.connected) {
+            debug("performing disconnect (%s)", this.nsp);
+            this.packet({ type: socket_io_parser_1.PacketType.DISCONNECT });
+        }
+        // remove socket from pool
+        this.destroy();
+        if (this.connected) {
+            // fire events
+            this.onclose("io client disconnect");
+        }
+        return this;
+    }
+    /**
+     * Alias for disconnect()
+     *
+     * @return self
+     * @public
+     */
+    close() {
+        return this.disconnect();
+    }
+    /**
+     * Sets the compress flag.
+     *
+     * @param compress - if `true`, compresses the sending data
+     * @return self
+     * @public
+     */
+    compress(compress) {
+        this.flags.compress = compress;
+        return this;
+    }
+    /**
+     * Sets a modifier for a subsequent event emission that the event message will be dropped when this socket is not
+     * ready to send messages.
+     *
+     * @returns self
+     * @public
+     */
+    get volatile() {
+        this.flags.volatile = true;
+        return this;
+    }
+    /**
+     * Adds a listener that will be fired when any event is emitted. The event name is passed as the first argument to the
+     * callback.
+     *
+     * @param listener
+     * @public
+     */
+    onAny(listener) {
+        this._anyListeners = this._anyListeners || [];
+        this._anyListeners.push(listener);
+        return this;
+    }
+    /**
+     * Adds a listener that will be fired when any event is emitted. The event name is passed as the first argument to the
+     * callback. The listener is added to the beginning of the listeners array.
+     *
+     * @param listener
+     * @public
+     */
+    prependAny(listener) {
+        this._anyListeners = this._anyListeners || [];
+        this._anyListeners.unshift(listener);
+        return this;
+    }
+    /**
+     * Removes the listener that will be fired when any event is emitted.
+     *
+     * @param listener
+     * @public
+     */
+    offAny(listener) {
+        if (!this._anyListeners) {
+            return this;
+        }
+        if (listener) {
+            const listeners = this._anyListeners;
+            for (let i = 0; i < listeners.length; i++) {
+                if (listener === listeners[i]) {
+                    listeners.splice(i, 1);
+                    return this;
+                }
+            }
+        }
+        else {
+            this._anyListeners = [];
+        }
+        return this;
+    }
+    /**
+     * Returns an array of listeners that are listening for any event that is specified. This array can be manipulated,
+     * e.g. to remove listeners.
+     *
+     * @public
+     */
+    listenersAny() {
+        return this._anyListeners || [];
+    }
+}
+exports.Socket = Socket;
+
+
+/***/ }),
+
+/***/ "./node_modules/socket.io-client/build/typed-events.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/socket.io-client/build/typed-events.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.StrictEventEmitter = void 0;
+const Emitter = __webpack_require__(/*! component-emitter */ "./node_modules/component-emitter/index.js");
+/**
+ * Strictly typed version of an `EventEmitter`. A `TypedEventEmitter` takes type
+ * parameters for mappings of event names to event data types, and strictly
+ * types method calls to the `EventEmitter` according to these event maps.
+ *
+ * @typeParam ListenEvents - `EventsMap` of user-defined events that can be
+ * listened to with `on` or `once`
+ * @typeParam EmitEvents - `EventsMap` of user-defined events that can be
+ * emitted with `emit`
+ * @typeParam ReservedEvents - `EventsMap` of reserved events, that can be
+ * emitted by socket.io with `emitReserved`, and can be listened to with
+ * `listen`.
+ */
+class StrictEventEmitter extends Emitter {
+    /**
+     * Adds the `listener` function as an event listener for `ev`.
+     *
+     * @param ev Name of the event
+     * @param listener Callback function
+     */
+    on(ev, listener) {
+        super.on(ev, listener);
+        return this;
+    }
+    /**
+     * Adds a one-time `listener` function as an event listener for `ev`.
+     *
+     * @param ev Name of the event
+     * @param listener Callback function
+     */
+    once(ev, listener) {
+        super.once(ev, listener);
+        return this;
+    }
+    /**
+     * Emits an event.
+     *
+     * @param ev Name of the event
+     * @param args Values to send to listeners of this event
+     */
+    emit(ev, ...args) {
+        super.emit(ev, ...args);
+        return this;
+    }
+    /**
+     * Emits a reserved event.
+     *
+     * This method is `protected`, so that only a class extending
+     * `StrictEventEmitter` can emit its own reserved events.
+     *
+     * @param ev Reserved event name
+     * @param args Arguments to emit along with the event
+     */
+    emitReserved(ev, ...args) {
+        super.emit(ev, ...args);
+        return this;
+    }
+    /**
+     * Returns the listeners listening to an event.
+     *
+     * @param event Event name
+     * @returns Array of listeners subscribed to `event`
+     */
+    listeners(event) {
+        return super.listeners(event);
+    }
+}
+exports.StrictEventEmitter = StrictEventEmitter;
+
+
+/***/ }),
+
+/***/ "./node_modules/socket.io-client/build/url.js":
+/*!****************************************************!*\
+  !*** ./node_modules/socket.io-client/build/url.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.url = void 0;
+const parseuri = __webpack_require__(/*! parseuri */ "./node_modules/parseuri/index.js");
+const debug = __webpack_require__(/*! debug */ "./node_modules/debug/src/browser.js")("socket.io-client:url");
+/**
+ * URL parser.
+ *
+ * @param uri - url
+ * @param path - the request path of the connection
+ * @param loc - An object meant to mimic window.location.
+ *        Defaults to window.location.
+ * @public
+ */
+function url(uri, path = "", loc) {
+    let obj = uri;
+    // default to window.location
+    loc = loc || (typeof location !== "undefined" && location);
+    if (null == uri)
+        uri = loc.protocol + "//" + loc.host;
+    // relative path support
+    if (typeof uri === "string") {
+        if ("/" === uri.charAt(0)) {
+            if ("/" === uri.charAt(1)) {
+                uri = loc.protocol + uri;
+            }
+            else {
+                uri = loc.host + uri;
+            }
+        }
+        if (!/^(https?|wss?):\/\//.test(uri)) {
+            debug("protocol-less url %s", uri);
+            if ("undefined" !== typeof loc) {
+                uri = loc.protocol + "//" + uri;
+            }
+            else {
+                uri = "https://" + uri;
+            }
+        }
+        // parse
+        debug("parse %s", uri);
+        obj = parseuri(uri);
+    }
+    // make sure we treat `localhost:80` and `localhost` equally
+    if (!obj.port) {
+        if (/^(http|ws)$/.test(obj.protocol)) {
+            obj.port = "80";
+        }
+        else if (/^(http|ws)s$/.test(obj.protocol)) {
+            obj.port = "443";
+        }
+    }
+    obj.path = obj.path || "/";
+    const ipv6 = obj.host.indexOf(":") !== -1;
+    const host = ipv6 ? "[" + obj.host + "]" : obj.host;
+    // define unique id
+    obj.id = obj.protocol + "://" + host + ":" + obj.port + path;
+    // define href
+    obj.href =
+        obj.protocol +
+            "://" +
+            host +
+            (loc && loc.port === obj.port ? "" : ":" + obj.port);
+    return obj;
+}
+exports.url = url;
+
+
+/***/ }),
+
+/***/ "./node_modules/socket.io-client/wrapper.mjs":
+/*!***************************************************!*\
+  !*** ./node_modules/socket.io-client/wrapper.mjs ***!
+  \***************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Manager: () => (/* binding */ Manager),
+/* harmony export */   Socket: () => (/* binding */ Socket),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   io: () => (/* reexport default export from named module */ _build_index_js__WEBPACK_IMPORTED_MODULE_0__)
+/* harmony export */ });
+/* harmony import */ var _build_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./build/index.js */ "./node_modules/socket.io-client/build/index.js");
+
+
+const Manager = _build_index_js__WEBPACK_IMPORTED_MODULE_0__.Manager;
+const Socket = _build_index_js__WEBPACK_IMPORTED_MODULE_0__.Socket;
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_build_index_js__WEBPACK_IMPORTED_MODULE_0__);
+
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+(() => {
+"use strict";
+/*!***************************!*\
+  !*** ./src/main/index.js ***!
+  \***************************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var scv_connector_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! scv-connector-base */ "./node_modules/scv-connector-base/dist/scv-connector-base.js");
+/* harmony import */ var scv_connector_base__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(scv_connector_base__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _connector__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./connector */ "./src/main/connector.js");
+/* harmony import */ var _remote_control_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../remote-control/index */ "./src/remote-control/index.js");
+/* harmony import */ var _byo_ott_app_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../byo-ott-app/index */ "./src/byo-ott-app/index.js");
+/*
+ * Copyright (c) 2021, salesforce.com, inc.
+ * All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause
+ * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
+
+
+
+
+
+
+const connector = new _connector__WEBPACK_IMPORTED_MODULE_1__.Connector();
+window.addEventListener('load', () => {
+    (0,scv_connector_base__WEBPACK_IMPORTED_MODULE_0__.initializeConnector)(connector);
+    (0,_remote_control_index__WEBPACK_IMPORTED_MODULE_2__.initializeRemoteController)(connector);
+    (0,_byo_ott_app_index__WEBPACK_IMPORTED_MODULE_3__.initializeBYOOTTAppController)(connector);
+});
+
+})();
+
+/******/ })()
+;
 //# sourceMappingURL=main.bundle.js.map
