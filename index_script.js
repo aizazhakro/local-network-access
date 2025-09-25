@@ -1,10 +1,9 @@
-const resultList = document.getElementById("fetch-results-list");
-  
+
 function appendResult(url, result) {
     const text = `${url}: ${result}`;
     const item = document.createElement("li");
     item.appendChild(document.createTextNode(text));
-    resultList.appendChild(item);
+    document.getElementById("fetch-results-list").appendChild(item);
 }
 
 function testFetch() {
